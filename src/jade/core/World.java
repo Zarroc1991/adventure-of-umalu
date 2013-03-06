@@ -19,7 +19,7 @@ public abstract class World extends Messenger
 {
     private int width;
     private int height;
-    private Tile[][] grid;
+    public Tile[][] grid;
     private Set<Actor> register;
     private List<Class<? extends Actor>> drawOrder;
     private List<Class<? extends Actor>> actOrder;
@@ -573,7 +573,7 @@ public abstract class World extends Messenger
         register.remove(actor);
     }
 
-    private class Tile
+    public class Tile
     {
         public boolean passable;
         public ColoredChar face;
@@ -584,6 +584,11 @@ public abstract class World extends Messenger
             passable = true;
             face = ColoredChar.create('.');
             actors = new HashSet<Actor>();
+        }
+		
+		// Set contents of File
+		public void setFace(ColoredChar c ){
+        	face=c;
         }
     }
 }
