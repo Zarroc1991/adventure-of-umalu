@@ -19,14 +19,14 @@ public class Rogue {
 			path = System.getProperty("user.dir").concat("/rogue/system/start.txt");
 		} else {
 			// Should work okay with relative Paths
-			path = new String("rogue/system/start.txt");
+			path = new String("rogue/system/start.txtBlubb");
 		}
         	TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
         	term.registerTile("dungeon.png", 5, 59, ColoredChar.create('#'));
         	term.registerTile("dungeon.png", 3, 60, ColoredChar.create('.'));
         	term.registerTile("dungeon.png", 5, 20, ColoredChar.create('@'));
         	term.registerTile("dungeon.png", 14, 30, ColoredChar.create('D', Color.red));
-        
+        System.out.println(path);
 		Player player = new Player(term);
 		World world = new SplashScreen("rogue/system/start.txt", term);
 		term.clearBuffer();
