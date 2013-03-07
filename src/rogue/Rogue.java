@@ -26,8 +26,10 @@ public class Rogue {
         	term.registerTile("dungeon.png", 3, 60, ColoredChar.create('.'));
         	term.registerTile("dungeon.png", 5, 20, ColoredChar.create('@'));
         	term.registerTile("dungeon.png", 14, 30, ColoredChar.create('D', Color.red));
-        System.out.println(path);
-		Player player = new Player(term);
+        System.out.println(System.getProperty("os.name").equalsIgnoreCase("windows 7"));
+        System.out.println(System.getProperty("os.name").equalsIgnoreCase("win"));
+        System.out.println(System.getProperty("os.name"));
+        Player player = new Player(term);
 		World world = new SplashScreen("rogue/system/start.txt", term);
 		term.clearBuffer();
 		// Draw Splashscreen
