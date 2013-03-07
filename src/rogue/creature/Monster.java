@@ -7,9 +7,18 @@ import jade.util.datatype.Direction;
 
 public class Monster extends Creature
 {
+    private String name;
     public Monster(ColoredChar face)
     {
         super(face);
+    }
+    public Monster(ColoredChar face, String name)
+    {
+        super(face);
+        this.name = name;
+    }
+    public String name(){
+        return name;
     }
 
     @Override
