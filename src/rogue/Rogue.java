@@ -13,10 +13,10 @@ public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
 		// Get current Operating System
 		String path;
-		if (System.getProperty("os.name").equalsIgnoreCase("win")) {
+		if (System.getProperty("os.name").indexOf("win") >= 0) {
 			System.out.println("Windows Operating System found");
 			// We're running Windows, create an absolute Path
-			path = System.getProperty("user.dir").concat("/rogue/system/start.txt");
+			path = System.getProperty("user.dir").concat("src\\rogue\\system\\start.txt);
 		} else {
 			// Should work okay with relative Paths
 			path = new String("rogue/system/start.txt");
