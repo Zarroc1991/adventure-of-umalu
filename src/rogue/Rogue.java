@@ -18,7 +18,7 @@ public class Rogue {
         term.registerTile("dungeon.png", 14, 30, ColoredChar.create('D', Color.red));
         
 		Player player = new Player(term);
-		World world = new SplashScreen("rogue/system/start.txt");
+		World world = new SplashScreen("rogue/system/start.txt", term);
 		term.clearBuffer();
 		// Draw Splashscreen
 		for (int x = 0; x < world.width(); x++)
