@@ -10,12 +10,22 @@ import rogue.system.SplashScreen;
 import rogue.level.Level;
 
 public class Rogue {
-    public static void main(String[] args) throws InterruptedException {
-        TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
-        term.registerTile("dungeon.png", 5, 59, ColoredChar.create('#'));
-        term.registerTile("dungeon.png", 3, 60, ColoredChar.create('.'));
-        term.registerTile("dungeon.png", 5, 20, ColoredChar.create('@'));
-        term.registerTile("dungeon.png", 14, 30, ColoredChar.create('D', Color.red));
+	public static void main(String[] args) throws InterruptedException {
+		// Get current Operating System
+		String path;
+		if (System.getProperty("os.name").equalsIgnoreCase("win")) {
+			System.out.println("Windows Operating System found");
+			// We're running Windows, create an absolute Path
+			path = System.getProperty("user.dir").concat("/rogue/system/start.txt");
+		} else {
+			// Should work okay with relative Paths
+			path = new String("rogue/system/start.txt");
+		}
+        	TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
+        	term.registerTile("dungeon.png", 5, 59, ColoredChar.create('#'));
+        	term.registerTile("dungeon.png", 3, 60, ColoredChar.create('.'));
+        	term.registerTile("dungeon.png", 5, 20, ColoredChar.create('@'));
+        	term.registerTile("dungeon.png", 14, 30, ColoredChar.create('D', Color.red));
         
 		Player player = new Player(term);
 		World world = new SplashScreen("rogue/system/start.txt", term);

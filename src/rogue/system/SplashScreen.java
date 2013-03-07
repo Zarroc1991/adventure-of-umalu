@@ -31,8 +31,8 @@ public class SplashScreen extends World {
 				int i;
 				for (i=0; i < line.length(); i++) {
 					// Put character on Screen
-					//grid[i][MAXHEIGHT-lineNumber].setFace(ColoredChar.create(line.charAt(i)));
-					term.bufferChar(MAXHEIGHT-lineNumber,i,ColoredChar.create(line.charAt(i)));
+					grid[i][MAXHEIGHT-lineNumber].setFace(ColoredChar.create(line.charAt(i)));
+					//term.bufferChar(MAXHEIGHT-lineNumber,i,ColoredChar.create(line.charAt(i)));
 				}
 				// Fill Rest of the Screen with Whitespaces
 				while (i<MAXWIDTH) {
