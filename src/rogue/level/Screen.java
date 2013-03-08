@@ -54,7 +54,7 @@ public class Screen {
             term.refreshScreen();
             
         } catch (IOException ex) {
-            System.out.println("IoEx");
+            System.out.println("!IoException");
             System.exit(1);
         }// catch (FileNotFoundException ex) {
           //  System.out.println("file not found");
