@@ -79,35 +79,39 @@ public enum Direction
     {
         switch(key)
         {
-            case '6':
-            case 'l':
-                return EAST;
-            case '4':
-            case 'h':
-                return WEST;
-            case '8':
-            case 'k':
-                return NORTH;
-            case '2':
-            case 'j':
-                return SOUTH;
-            case '3':
-            case 'n':
-                return SOUTHEAST;
-            case '1':
-            case 'b':
-                return SOUTHWEST;
-            case '9':
-            case 'u':
-                return NORTHEAST;
-            case '7':
-            case 'y':
-                return NORTHWEST;
-            case '5':
-            case '.':
-                return ORIGIN;
-            default:
-                return null;
+		case '6':
+		case 'd':
+		case 'l':
+                	return EAST;
+		case '4':
+		case 'a':
+           	case 'h':
+           		 return WEST;
+           	case '8':
+		case 'w':
+           	case 'k':
+           		return NORTH;
+           	case '2':
+		case 's':
+           	case 'j':
+         		return SOUTH;
+           	case '3':
+           	case 'n':
+          		return SOUTHEAST;
+           	case '1':
+           	case 'b':
+           		return SOUTHWEST;
+           	case '9':
+           	case 'u':
+           		return NORTHEAST;
+           	case '7':
+           	case 'y':
+           		return NORTHWEST;
+           	case '5':
+           	case '.':
+           	   	return ORIGIN;
+           	default:
+           	   	return null;
         }
     }
 }
