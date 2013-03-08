@@ -2,7 +2,6 @@ package rogue.system;
 
 import jade.core.World;
 import jade.util.datatype.ColoredChar;
-import jade.ui.TiledTermPanel;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,7 +16,7 @@ public class SplashScreen extends World {
 	 *
 	 * @param file Path to file.
 	 */
-	public SplashScreen(String filePath, TiledTermPanel term) { 
+	public SplashScreen(String filePath) { 
 		super(MAXWIDTH, MAXHEIGHT);// TODO Make this code dynamic to filesize
 		// Prepare to open File
 		try {
@@ -32,7 +31,6 @@ public class SplashScreen extends World {
 				for (i=0; i < line.length(); i++) {
 					// Put character on Screen
 					grid[i][MAXHEIGHT-lineNumber].setFace(ColoredChar.create(line.charAt(i)));
-					//term.bufferChar(MAXHEIGHT-lineNumber,i,ColoredChar.create(line.charAt(i)));
 				}
 				// Fill Rest of the Screen with Whitespaces
 				while (i<MAXWIDTH) {

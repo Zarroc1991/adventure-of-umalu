@@ -1,5 +1,6 @@
 package rogue.creature;
 
+import jade.core.Actor;
 import java.util.Collection;
 import jade.fov.RayCaster;
 import jade.fov.ViewField;
@@ -8,6 +9,7 @@ import jade.ui.Terminal;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Coordinate;
 import jade.util.datatype.Direction;
+
 
 public class Player extends Creature implements Camera
 {
@@ -33,14 +35,15 @@ public class Player extends Creature implements Camera
                 case 'q':
                     expire();
                     break;
-		case 'l':
-		    System.out.println("Geschaeftsprozessmodelle");
-		    // Do not break; here, otherwise we can't move left!
                 default:
                     Direction dir = Direction.keyToDir(key);
-                    if(dir != null)
+                    if(dir != null){
+                        Collection<Monster> actorlist = world().getActorsAt(Monster.class, x()+dir.dx(), y()+dir.dy());
+                        if(!actorlist.isEmpty()){
+                            fight((Monster) actorlist.toArray()[0]);
+                        }
                         move(dir);
-                    break;
+                    }break;
             }
         }
         catch(InterruptedException e)
@@ -53,5 +56,10 @@ public class Player extends Creature implements Camera
     public Collection<Coordinate> getViewField()
     {
         return fov.getViewField(world(), pos(), 5);
+    }
+
+    private void fight(Monster opponent) {
+        System.out.println("Du kÃÂ¤mpfst gegen " + opponent.name());
+
     }
 }
