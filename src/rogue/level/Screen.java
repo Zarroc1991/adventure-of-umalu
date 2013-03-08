@@ -43,7 +43,7 @@ public class Screen {
                 line= br.readLine();
                 lineNumber++;
             }
-            System.out.println(lineNumber);
+            
             while(lineNumber<world.height()){
                 for (int i = 0; i < world.width(); i++) {
                     term.bufferChar(i, lineNumber,ColoredChar.create(' '));
