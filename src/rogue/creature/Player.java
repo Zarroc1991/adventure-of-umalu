@@ -59,7 +59,11 @@ public class Player extends Creature implements Camera
     }
 
     private void fight(Monster opponent) {
+<<<<<<< HEAD
         System.out.println("Du kÃÂ¤mpfst gegen " + opponent.name());
+=======
+        System.out.println("Du kämpfst gegen " + opponent.name());
+>>>>>>> upstream/master
 
     }
 }

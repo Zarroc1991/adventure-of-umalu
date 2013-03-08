@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author alle
  */
 public class Screen {
-   public static void ShowFile(String filePath, TiledTermPanel term, World world){
+   public static void showFile(String filePath, TiledTermPanel term, World world){
         try {
             FileReader fr = new FileReader(filePath);
             BufferedReader br = new BufferedReader(fr);
@@ -54,7 +54,9 @@ public class Screen {
             term.refreshScreen();
             
         } catch (IOException ex) {
-            System.out.println("IoEx");
+
+            System.out.println("!IoException");
+            ex.printStackTrace();
             System.exit(1);
         }// catch (FileNotFoundException ex) {
           //  System.out.println("file not found");
