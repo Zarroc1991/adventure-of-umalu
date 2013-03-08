@@ -57,8 +57,10 @@ public abstract class World extends Messenger
     public void tick()
     {
         for(Class<? extends Actor> cls : actOrder)
-            for(Actor actor : getActors(cls))
+            for(Actor actor : getActors(cls)){
                 actor.act();
+
+            }
 
         removeExpired();
     }

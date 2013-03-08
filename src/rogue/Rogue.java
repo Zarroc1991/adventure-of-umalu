@@ -1,10 +1,13 @@
 package rogue;
 
+import jade.core.Actor;
 import jade.core.World;
+import jade.core.World.Tile;
 import jade.ui.TiledTermPanel;
 import jade.util.datatype.ColoredChar;
 import java.awt.Color;
 import java.util.Collection;
+import rogue.creature.Dragon;
 import rogue.creature.Monster;
 import rogue.creature.Player;
 import rogue.level.Level;
@@ -13,6 +16,8 @@ import rogue.system.Path;
 
 public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
+		final int hpCycle=10;
+		int roundsToHpUp = hpCycle;
 		// Get current Operating System
         	TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
         	term.registerTile("dungeon.png", 5, 59, ColoredChar.create('#'));
@@ -26,9 +31,20 @@ public class Rogue {
         	//Screen.showFile(normalizePath("src\\rogue\\system\\start.txt","rogue/system/start.txt"), term, world);
 		Screen.showFile(Path.generateAbsolutePath("rogue/system/start.txt"),term,world);
         	term.getKey();
-        	world.addActor(new Monster(ColoredChar.create('D', Color.red),"roter Drache"));
+        	//world.addActor(new Monster(ColoredChar.create('D', Color.red),"roter Drache"));
+		world.addActor(new Dragon(ColoredChar.create('D',Color.red),"roter Drache"));
         	term.registerCamera(player, 5, 5);
 		while(!player.expired()) {
+			/*Collection<Monster> monsters = world.getActorsAt(Monster.class, player.pos());
+			if(!monsters.isEmpty()){
+			    player.expire();
+			    continue;
+			}*/
+			if (roundsToHpUp == 0) {
+				player.regainHitpoint();
+				roundsToHpUp = hpCycle;
+			}
+			roundsToHpUp--;
 			Collection<Monster> monsters = world.getActorsAt(Monster.class, player.pos());
 			if(!monsters.isEmpty()){
 				player.expire();
@@ -49,5 +65,4 @@ public class Rogue {
 		System.exit(0);
 
 	}
-
 }
