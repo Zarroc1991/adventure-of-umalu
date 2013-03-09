@@ -17,6 +17,7 @@ public class Player extends Creature implements Camera {
 	private ViewField fov;
 	private static final int maxHitpoints =15;
 	private int strength;
+	private String name;
 
 	/**
 	 * Creates a new Player Object
@@ -32,6 +33,24 @@ public class Player extends Creature implements Camera {
 		// Initialise Hitpoints on Max
 		hitpoints = maxHitpoints;
 		strength = 5;
+	}
+	
+	/**
+	 * Sets Charactername. Should be only called on character Creation.
+	 *
+	 * @param name New Name of Character
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * Returns Charactername.
+	 *
+	 * @return Name of Character
+	 */
+	public String getName() {
+		return name;
 	}
 
 	@Override

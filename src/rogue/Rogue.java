@@ -13,6 +13,7 @@ import rogue.creature.Player;
 import rogue.level.Level;
 import rogue.level.Screen;
 import rogue.system.Path;
+import rogue.system.CharacterCreation;
 
 public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
@@ -30,6 +31,9 @@ public class Rogue {
         	Player player = new Player(term);
 		// Generate a new World
         	World world = new Level(69, 24, player);
+		player.setName(CharacterCreation.getCharacterName(term, world));
+		Screen.printLine(player.getName(),term,world);
+		term.getKey();
 		// Show Splashscreen for Start
 		Screen.showFile(Path.generateAbsolutePath("rogue/system/start.txt"),term,world);
 		
