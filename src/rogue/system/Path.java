@@ -9,7 +9,8 @@ package rogue.system;
 public class Path {
 
 	/**
-	 * Generates an absolute Pathstring from a given relative Path. Automatically adds src folder if not given in working directory.
+	 * Generates an absolute Pathstring from a given relative Path.
+	 * Automatically adds src folder if not given in working directory.
 	 *
 	 * @param path Relative Path in Form "[folder]/[path]".
 	 * @return Absolute Path in current Workingdirectory
@@ -17,11 +18,14 @@ public class Path {
 	public static String generatePath(String path) {
 		// What OS is running?
 		if (isWin()) {
-			System.out.println("Windows Operating System found");
-			// We're running Windows, create an absolute Path
+			// Delete me later
+			System.out.println("Windows Operating System detected");
+			// We're running Windows, create an absolute Path, but replace all / with \
+			// to make Paths Windows Compatible
 			return generateAbsolutePath(path.replaceAll("/","\\"));
 		} else {
-			// Should work okay with relative Paths
+			// Found any other Operating System, so we just need to generate an
+			// absolute Path
 			return generateAbsolutePath(path);
 		}
 	}
@@ -35,24 +39,45 @@ public class Path {
 		return (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0);
 	}
 
+	/**
+	 * Checks, if given Path already includes src/ Folder.
+	 * Needed, because eclipse started instances, don't include src/ in user.dir while
+	 * Command line started instances do
+	 * 
+	 * @param path Path to be checked
+	 * @return True, if path already includes src Folder
+	 */
 	public static boolean pathEndsWithSourceFolder(String path) {
 		return (path.endsWith("/src") || path.endsWith("\\src"));
 	}
 
+	/**
+	 * Creates an Absolute Path to path
+	 *
+	 * @param path Path to which absolute path should be created
+	 * @return Absolute Path
+	 */
 	public static String generateAbsolutePath(String path) {
+		// Get current working directory
 		String currentDirectory = System.getProperty("user.dir");
+
+		// Are we running Windows?
 		if (isWin()) {
-			if (pathEndsWithSourceFolder(currentDirectory)) {
+			// Check if src is already included
+			if (pathEndsWithSourceFolder(currentDirectory)) { 
+				// Yes, so we just need to add our target Path
 				return currentDirectory.concat("\\").concat(path);
 			} else {
+				// No, so include src/ Folder
 				return currentDirectory.concat("\\src\\").concat(path);
 			}
 
 		} else {
 			if (pathEndsWithSourceFolder(currentDirectory)) {
+				// Yes, add target path only
 				return currentDirectory.concat("/").concat(path);
-
 			} else {
+				// No, include src/ Folder
 				return currentDirectory.concat("/src/").concat(path);
 			}
 		}

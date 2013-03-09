@@ -16,6 +16,7 @@ import rogue.system.Path;
 
 public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
+		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
 		// How many rounds for next healing+
 		final int hpCycle=10;
 		int roundsToHpUp = hpCycle;
