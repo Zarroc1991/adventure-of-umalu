@@ -47,7 +47,7 @@ public class Rogue {
 		// Play Game
 		while(!player.expired()) { // Player is still living?
 
-			// ?
+			// ? TODO Delete this Block if it is not needed anymore
 			/*Collection<Monster> monsters = world.getActorsAt(Monster.class, player.pos());
 			if(!monsters.isEmpty()){
 			    player.expire();
