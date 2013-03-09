@@ -63,7 +63,7 @@ public class Screen {
 			// Redraw Window
 			term.refreshScreen();
 		
-		} catch (IOException ex) { // Something went wrong while reading the File
+		} catch (IOException e) { // Something went wrong while reading the File
 			System.out.println("!IoException");
 			e.printStackTrace();
 			System.exit(1);
