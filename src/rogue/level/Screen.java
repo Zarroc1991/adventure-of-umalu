@@ -16,50 +16,62 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author alle
+ * Used to print Stuff in Terminal.
+ * @author 
  */
 public class Screen {
-   public static void showFile(String filePath, TiledTermPanel term, World world){
-        try {
-            FileReader fr = new FileReader(filePath);
-            BufferedReader br = new BufferedReader(fr);
-            //int lineNumber = MAXHEIGHT;
-            String line = br.readLine();
-            int lineNumber = 0;
-            while(line!=null){
-                int i;
-                for (i=0; i < line.length(); i++) {
-                    // Put character on Screen
-                    
-                    char c = line.charAt(i);
-                    //System.out.println(c);
-                    term.bufferChar(i,lineNumber,ColoredChar.create(c));
-                }
-                while(i<world.width()){
-                    term.bufferChar(i, lineNumber,ColoredChar.create(' '));
-                    i++;
-                }
-                line= br.readLine();
-                lineNumber++;
-            }
-            
-            while(lineNumber<world.height()){
-                for (int i = 0; i < world.width(); i++) {
-                    term.bufferChar(i, lineNumber,ColoredChar.create(' '));
-
-                }
-                lineNumber++;
-            }
-            term.refreshScreen();
-            
-        } catch (IOException ex) {
-            System.out.println("!IoException");
-            System.exit(1);
-        }// catch (FileNotFoundException ex) {
-          //  System.out.println("file not found");
-          //  System.exit(1);
-        //}
-   }
-
+	public static void showFile(String filePath, TiledTermPanel term, World world){
+		try {
+			// Prepare File for reading (open it)
+			FileReader fr = new FileReader(filePath);
+			BufferedReader br = new BufferedReader(fr);
+			//int lineNumber = MAXHEIGHT; // TODO Delete this line, when it is not needed anymore
+			
+			// Read first line
+			String line = br.readLine();
+			// Count read Lines
+			int lineNumber = 0;
+			// Go through whole file
+			while(line!=null){
+				int i;
+				for (i=0; i < line.length(); i++) {
+					// Read Character at Position i in current line
+					char c = line.charAt(i);
+					//System.out.println(c); // TODO Delete this line, when it is not needed anymore
+					//Put Character on Screen
+					term.bufferChar(i,lineNumber,ColoredChar.create(c));
+				}
+				// Fill rest of Line with Whitespaces
+				while(i<world.width()){
+					term.bufferChar(i, lineNumber,ColoredChar.create(' '));
+					i++;
+				}
+				// Read next line
+				line= br.readLine();
+				// Increment Linecounter
+				lineNumber++;
+			}
+			// Fill rest of Lines with Whitespaces
+			while(lineNumber<world.height()){
+				// Put Whitespaces in Columns
+				for (int i = 0; i < world.width(); i++) {
+					 term.bufferChar(i, lineNumber,ColoredChar.create(' '));
+				}
+				// Go to next Line
+				lineNumber++;
+			}
+			// Redraw Window
+			term.refreshScreen();
+		
+		} catch (IOException ex) { // Something went wrong while reading the File
+			System.out.println("!IoException");
+			e.printStackTrace();
+			System.exit(1);
+		}
+		// catch (FileNotFoundException ex) { TODO Delete this Block if it is not needed anymore
+		  //  System.out.println("file not found");
+		  //  System.exit(1);
+		//}
+	}
+	
 }
