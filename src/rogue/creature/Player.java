@@ -9,8 +9,9 @@ import jade.ui.Terminal;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Coordinate;
 import jade.util.datatype.Direction;
+import rogue.level.Screen;
 import java.util.Random;
-
+import java.lang.InterruptedException;
 
 public class Player extends Creature implements Camera {
 	private Terminal term;
@@ -34,7 +35,7 @@ public class Player extends Creature implements Camera {
 		hitpoints = maxHitpoints;
 		strength = 5;
 	}
-	
+
 	/**
 	 * Sets Charactername. Should be only called on character Creation.
 	 *
@@ -43,7 +44,7 @@ public class Player extends Creature implements Camera {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Returns Charactername.
 	 *
@@ -63,26 +64,26 @@ public class Player extends Creature implements Camera {
 			char key;
 			key = term.getKey();
 			switch(key) {
-			    case 'q': // User wants to quit
-				expire(); // Leave let player die, so this application quits
-				break;
-			    default: // User pressed something else
-				Direction dir = Direction.keyToDir(key); // Get direction
-				// Something useful pressed?
-				if(dir != null){ // Yes
-					// Get list of all monsters on target Coordinates
-					Collection<Monster> actorlist = world().getActorsAt(Monster.class, x()+dir.dx(), y()+dir.dy());
-					// Is there a monster on TargetL
-					if(!actorlist.isEmpty()){ // Yes
-						// Fight first monster on coordinate.
-						fight((Monster) actorlist.toArray()[0]);
-					} else {
-						// No monster there
-						move(dir);
-					
-					}
+				case 'q': // User wants to quit
+					expire(); // Leave let player die, so this application quits
 					break;
-				}
+				default: // User pressed something else
+					Direction dir = Direction.keyToDir(key); // Get direction
+					// Something useful pressed?
+					if(dir != null){ // Yes
+						// Get list of all monsters on target Coordinates
+						Collection<Monster> actorlist = world().getActorsAt(Monster.class, x()+dir.dx(), y()+dir.dy());
+						// Is there a monster on TargetL
+						if(!actorlist.isEmpty()){ // Yes
+							// Fight first monster on coordinate.
+							fight((Monster) actorlist.toArray()[0]);
+						} else {
+							// No monster there
+							move(dir);
+
+						}
+						break;
+					}
 			} 
 		} catch(InterruptedException e) { // Something has happened here
 			System.out.println("!Interrupted Exception");
@@ -117,6 +118,14 @@ public class Player extends Creature implements Camera {
 		// Print result
 		System.out.println("Du hast "+ damage + " Schaden verursacht");
 		System.out.println(opponent.name()+" hat noch " + opponent.hitpoints +" HP");
+		Screen.redrawEventLine("Du verursachst "+damage+" Schaden");
+		try {
+			term.getKey();
+
+		} catch (InterruptedException e) {
+			System.out.println("!InterruptedException");
+			e.printStackTrace();
+		}
 	}
 
 	/**

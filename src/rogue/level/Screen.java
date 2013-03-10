@@ -3,6 +3,8 @@
  * and open the template in the editor.
  */
 
+// TODO Move this File to rogue.system
+
 package rogue.level;
 
 import jade.core.World;
@@ -153,12 +155,22 @@ public class Screen {
 	}
 
 	/**
+	 * Redraw map, put Statusline below Map
 	 *
+	 * @param statusLine Statusline to be printed
 	 */
 	public static void redrawMap(String statusLine) {
 		redrawMap();
 		for (int x = 0; x < statusLine.length(); x++) {
 			lastTerminal.bufferChar(x+11,lastWorld.height(),ColoredChar.create(statusLine.charAt(x)));
+		}
+		lastTerminal.refreshScreen();
+	}
+
+	public static void redrawEventLine(String eventLine) {
+		int x;
+		for (x = 0; x < eventLine.length();x++) {
+			lastTerminal.bufferChar(x+11,lastWorld.height()+1, ColoredChar.create(eventLine.charAt(x)));
 		}
 		lastTerminal.refreshScreen();
 	}
