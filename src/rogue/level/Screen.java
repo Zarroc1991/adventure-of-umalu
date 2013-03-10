@@ -141,9 +141,11 @@ public class Screen {
 	 * @param world Used World
 	 */
 	public static void redrawMap() {
+		lastTerminal.clearBuffer(); 
 		for (int x = 0; x < lastWorld.width(); x++) {
 			for (int y = 0; y < lastWorld.height(); y++) {
-				lastTerminal.bufferChar(x+11,y,lastWorld.look(x,y));
+				//lastTerminal.bufferChar(x+11,y,lastWorld.look(x,y));
+				lastTerminal.bufferChar(x + 11, y, lastWorld.look(x, y));
 			}
 		}
 		lastTerminal.bufferCameras();
@@ -156,7 +158,8 @@ public class Screen {
 	public static void redrawMap(String statusLine) {
 		redrawMap();
 		for (int x = 0; x < statusLine.length(); x++) {
-			lastTerminal.bufferChar(x+11,lastWorld.height(),statusLine.charAt(x))
+			lastTerminal.bufferChar(x+11,lastWorld.height(),ColoredChar.create(statusLine.charAt(x)));
 		}
+		lastTerminal.refreshScreen();
 	}
 }

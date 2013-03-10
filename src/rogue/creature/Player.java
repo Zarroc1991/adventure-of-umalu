@@ -128,4 +128,8 @@ public class Player extends Creature implements Camera {
 			System.out.println("Du hast einen HP regeneriert, jetzt " + hitpoints+" HP");
 		}
 	}
+
+	public int getHitpoints() {
+		return hitpoints;
+	}
 }

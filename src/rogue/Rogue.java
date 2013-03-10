@@ -80,14 +80,18 @@ public class Rogue {
 				continue;
 			}
 
+			Screen.lastWorld = world;
+			Screen.lastTerminal = term;
+			Screen.redrawMap("HP: "+player.getHitpoints());
 			// Redraw Windowcontents now
-			term.clearBuffer();
+			/*term.clearBuffer();
 			for(int x = 0; x < world.width(); x++)
 				for(int y = 0; y < world.height(); y++)
 					term.bufferChar(x + 11, y, world.look(x, y));
 			term.bufferCameras();
-			term.refreshScreen();
-
+			term.refreshScreen();*/
+			
+			//Screen
 			// Give everyone else the chance to make his move
 			world.tick();
 		}
