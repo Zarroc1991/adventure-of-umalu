@@ -9,9 +9,28 @@ package rogue.system;
 public class SystemHelper {
 	public static boolean debug = false;
 
+	/**
+	 * Prints a message, prefixed with '> Debug', when debug option has been set
+	 *
+	 * @param message Message to be printed
+	 */
 	public static void debugMessage(String message) {
 		if (debug) {
 			System.out.println("> Debug: "+message);
+		}
+	}
+
+	/**
+	 * Reads a list of strings and sets Options in SystemHelper accordingly
+	 *
+	 * @param args List of Arguments
+	 */
+	public static void getArgs(String[] args) {
+		for (int i=0;i<args.length;i++) {
+			if (args[i].compareTo("debug") == 0) {
+				// Debugmode selected
+				SystemHelper.debug = true;
+			}
 		}
 	}
 }
