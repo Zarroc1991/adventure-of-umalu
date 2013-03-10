@@ -102,14 +102,20 @@ public class Player extends Creature implements Camera {
 
 	/**
 	 * Player fights the opponent. Causes random damage between 1 and strength
+	 *
 	 * @param opponent The opponent Monster
 	 */
+	// TODO Clean up Messages in Console, to use just a single line
 	private void fight(Monster opponent) {
 		System.out.println("Du kämpfst gegen " + opponent.name());
+		// Get a randomizer
 		Random random = new Random();
+		// Get random Damage for Attack
 		int damage = random.nextInt(strength)+1;
+		// Do Damage to Opponent
 		opponent.loseHitpoints(damage);
-		System.out.println("Du hast "+ damage + "Schaden verursacht");
+		// Print result
+		System.out.println("Du hast "+ damage + " Schaden verursacht");
 		System.out.println(opponent.name()+" hat noch " + opponent.hitpoints +" HP");
 	}
 
