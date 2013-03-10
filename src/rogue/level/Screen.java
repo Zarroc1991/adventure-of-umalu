@@ -21,6 +21,8 @@ import java.util.logging.Logger;
  * @author 
  */
 public class Screen {
+	public static World lastWorld;
+	public static TiledTermPanel lastTerminal;
 	public static void showFile(String filePath, TiledTermPanel term, World world){
 		term.clearBuffer();
 		try {
@@ -130,5 +132,31 @@ public class Screen {
 			lineNumber++;
 		}
 		term.refreshScreen();
+	}
+
+	/**
+	 * Redraws Content of Window
+	 *
+	 * @param term Canvas for Drawing
+	 * @param world Used World
+	 */
+	public static void redrawMap() {
+		for (int x = 0; x < lastWorld.width(); x++) {
+			for (int y = 0; y < lastWorld.height(); y++) {
+				lastTerminal.bufferChar(x+11,y,lastWorld.look(x,y));
+			}
+		}
+		lastTerminal.bufferCameras();
+		lastTerminal.refreshScreen();
+	}
+
+	/**
+	 *
+	 */
+	public static void redrawMap(String statusLine) {
+		redrawMap();
+		for (int x = 0; x < statusLine.length(); x++) {
+			lastTerminal.bufferChar(x+11,lastWorld.height(),statusLine.charAt(x))
+		}
 	}
 }
