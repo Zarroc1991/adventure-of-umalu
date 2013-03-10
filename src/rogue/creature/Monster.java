@@ -57,9 +57,13 @@ public class Monster extends Creature {
     // TODO Clean up Messages in Console, to use just a single line
     private void fight(Player opponent) {
         System.out.println("der " + name + "greift dich an");
+	// Create Randomizer
         Random random = new Random();
+	// Generate Damage
         int abzug = random.nextInt(strength)+1;
+	// Do Damage to Oppenent
         opponent.loseHitpoints(abzug);
+	// Print Result
         System.out.println("Du hast "+ abzug + "HP verloren");
         System.out.println("verbleibende HP:"+ opponent.hitpoints);
     }
