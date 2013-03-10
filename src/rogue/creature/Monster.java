@@ -5,11 +5,15 @@ import jade.util.Dice;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Direction;
 import java.util.Random;
+import rogue.level.Screen;
+import jade.ui.Terminal;
+import java.lang.InterruptedException;
 
 public class Monster extends Creature {
 
     private String name;
     private int maxHitpoints;
+    private Terminal term;
     public Monster(ColoredChar face) {
         super(face);
         strength = 5;
@@ -17,12 +21,13 @@ public class Monster extends Creature {
         hitpoints = maxHitpoints;
     }
 
-    public Monster(ColoredChar face, String name,int maxHitpoints, int strength) {
+    public Monster(ColoredChar face, String name,int maxHitpoints, int strength, Terminal term) {
         super(face);
         this.strength = strength;
         this.maxHitpoints= maxHitpoints;
         hitpoints = maxHitpoints;
         this.name = name;
+	this.term = term;
     }
 
     public String name() {
@@ -66,5 +71,12 @@ public class Monster extends Creature {
 	// Print Result
         System.out.println("Du hast "+ abzug + "HP verloren");
         System.out.println("verbleibende HP:"+ opponent.hitpoints);
+	Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
+	try {
+		term.getKey();
+	} catch(InterruptedException e) {
+		System.out.println("!InterruptedException");
+		e.printStackTrace();
+	}
     }
 }

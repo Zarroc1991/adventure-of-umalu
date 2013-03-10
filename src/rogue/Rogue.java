@@ -46,7 +46,7 @@ public class Rogue {
 		//world.addActor(new Monster(ColoredChar.create('D', Color.red),"roter Drache"));
 
 		// Add a Dragon so we have an enemy
-		world.addActor(new Dragon(ColoredChar.create('D',Color.red),"roter Drache"));
+		world.addActor(new Dragon(ColoredChar.create('D',Color.red),"roter Drache",term));
 		// Add Minimap to left part in Window (Size given as Parameter), focus on Player
 		term.registerCamera(player, 5, 5);
 

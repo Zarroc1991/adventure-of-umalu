@@ -6,6 +6,7 @@
 package rogue.creature;
 
 import jade.util.datatype.ColoredChar;
+import jade.ui.Terminal;
 
 /**
  *
@@ -15,8 +16,8 @@ public class Dragon extends Monster {
    /*
     * every Dragon has 100 Hitpoints and Strength 5(until now)
     */
-    public Dragon(ColoredChar face, String name) {
-        super(face,name, 100, 5 );
+    public Dragon(ColoredChar face, String name, Terminal term) {
+        super(face,name, 100, 5, term);
     }
 
 }
