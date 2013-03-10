@@ -54,8 +54,9 @@ public class Monster extends Creature {
      * fight of the Moster aganst the Player
      * causes random damage between 1 and 5
      */
+    // TODO Clean up Messages in Console, to use just a single line
     private void fight(Player opponent) {
-        System.out.println("der" + name + "greift dich an");
+        System.out.println("der " + name + "greift dich an");
         Random random = new Random();
         int abzug = random.nextInt(strength)+1;
         opponent.loseHitpoints(abzug);
