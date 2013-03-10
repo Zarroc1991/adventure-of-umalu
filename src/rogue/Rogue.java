@@ -18,14 +18,8 @@ import rogue.system.SystemHelper;
 
 public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
-		//if (args.length > 0) {
-		//	if (args[0].compareTo("debug") == 0) {
-		//		SystemHelper.debug=true;
-		//		SystemHelper.debugMessage("Test.");
-		//	}
-		//}
+		// Set System options
 		SystemHelper.getArgs(args);
-		SystemHelper.debugMessage("Test");
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
 		// How many rounds for next healing+
 		final int hpCycle=10;
@@ -67,6 +61,7 @@ public class Rogue {
 			  continue;
 			  }*/
 
+			// TODO HPup Codeblock should move to Player.act(), since it is only his stuff
 			// Finished hpCycle?
 			if (roundsToHpUp == 0) { // Yes
 				// Give Player a hitpoint
