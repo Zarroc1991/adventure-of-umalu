@@ -172,6 +172,11 @@ public class Screen {
 		for (x = 0; x < eventLine.length();x++) {
 			lastTerminal.bufferChar(x+11,lastWorld.height()+1, ColoredChar.create(eventLine.charAt(x)));
 		}
+		x += 11;
+		while (x < lastWorld.width()) {
+			lastTerminal.bufferChar(x,lastWorld.height()+1,ColoredChar.create(' '));
+			x++;
+		}
 		lastTerminal.refreshScreen();
 	}
 }
