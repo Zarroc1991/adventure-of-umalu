@@ -2,7 +2,6 @@ package rogue;
 
 import jade.core.Actor;
 import jade.core.World;
-import jade.core.World.Tile;
 import jade.ui.TiledTermPanel;
 import jade.util.datatype.ColoredChar;
 import java.awt.Color;
