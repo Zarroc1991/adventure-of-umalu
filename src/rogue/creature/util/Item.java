@@ -13,6 +13,21 @@ public class Item {
 	private String name;
 	private int goldValue;
 	private int[] modificators;
+	private int itemType;
+	private int type;
+
+	/**
+	 * Describes Item is as Helmet
+	 */
+	public static final int ITEMTYPE_HEAD = 0;
+	/**
+	 * Describes Item as Chest Armor
+	 */
+	public static final int ITEMTYPE_BODY = 1;
+	/**
+	 * Describes Item as a Weapon (Sword)
+	 */
+	public static final int ITEMTYPE_SWORD = 2;
 
 	/**
 	 * Creates a new Item Object wth given name and Goldvalue
@@ -20,9 +35,10 @@ public class Item {
 	 * @param name Name of Item
 	 * @param goldValue Goldvalue of Object
 	 */
-	public Item(String name, int goldValue) {
+	public Item(String name, int goldValue, int type) {
 		this.name = name;
 		this.goldValue = goldValue;
+		this.type = type;
 	}
 
 	/**
