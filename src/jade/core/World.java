@@ -57,8 +57,11 @@ public abstract class World extends Messenger
     public void tick()
     {
         for(Class<? extends Actor> cls : actOrder)
-            for(Actor actor : getActors(cls))
-                actor.act();
+            for(Actor actor : getActors(cls)){
+            	
+            	actor.act();
+            }
+                
 
         removeExpired();
     }
@@ -94,7 +97,7 @@ public abstract class World extends Messenger
     }
 
     /**
-     * Returns the act order for the {@code World}. This list will affect the {@code tick()} method
+     * Returns the act order for the {@code World}. This list will affect the {@code as()} method
      * by changing the priority with which {@code Actor}s will act. Note that if one class in the
      * draw order is a superclass of another in the list, any {@code Actor} of the type of the
      * subclass will act twice in the {@code tick()} method.

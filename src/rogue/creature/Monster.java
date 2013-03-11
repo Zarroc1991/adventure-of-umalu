@@ -28,8 +28,14 @@ public class Monster extends Creature {
         for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
             if (player != null) {
+            	int monsterx = x()+dir.dx();
+            	System.out.println("Monsterx"+monsterx);
+            	int monstery =y()+dir.dy();
+            	System.out.println("Monstery"+monstery);	
                 fight(player);
                 move(dir);
+                System.out.println("neue Posx"+x());
+                System.out.println("neue Posy"+y());
                 fight = true;
                 break;
 

@@ -9,6 +9,7 @@ import rogue.creature.Monster;
 import rogue.creature.Player;
 import rogue.level.Level;
 import rogue.level.Screen;
+import jade.core.Actor;
 
 
 public class Rogue {
@@ -40,6 +41,7 @@ public class Rogue {
       term.bufferCameras();
       term.refreshScreen();
       world.tick();
+      
           }
     term.clearBuffer();
     Screen.showFile(normalizePath("\\src\\rogue\\system\\end.txt","rogue/system/end.txt"), term, world);

@@ -38,11 +38,14 @@ public class Player extends Creature implements Camera
                 default:
                     Direction dir = Direction.keyToDir(key);
                     if(dir != null){
+                    	
                         Collection<Monster> actorlist = world().getActorsAt(Monster.class, x()+dir.dx(), y()+dir.dy());
                         if(!actorlist.isEmpty()){
                             fight((Monster) actorlist.toArray()[0]);
                         }
                         move(dir);
+                        System.out.println("Spielerx"+x());
+                    	System.out.println("Spielery"+y());
                     }break;
             }
         }
@@ -58,12 +61,10 @@ public class Player extends Creature implements Camera
         return fov.getViewField(world(), pos(), 5);
     }
 
-    private void fight(Monster opponent) {
-<<<<<<< HEAD
-        System.out.println("Du kÃÂ¤mpfst gegen " + opponent.name());
-=======
+    public void fight(Monster opponent) {
+      
         System.out.println("Du kämpfst gegen " + opponent.name());
->>>>>>> upstream/master
+
 
     }
 }
