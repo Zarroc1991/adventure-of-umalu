@@ -8,26 +8,34 @@ package rogue.creature.util;
 
 
 public class Item {
-	String name;
-	int value;
+	private String name;
+	private int goldValue;
+	private int[] modificators;
 
 	/**
+	 * Creates a new Item Object wth given name and Goldvalue
 	 *
+	 * @param name Name of Item
+	 * @param goldValue Goldvalue of Object
 	 */
-	public Item(String name, int value) {
+	public Item(String name, int goldValue) {
 		this.name = name;
-		this.value = value;
+		this.goldValue = goldValue;
 	}
 
 	/**
+	 * Returns Goldvalue of this item.
 	 *
+	 * @return Goldvalue of this Item
 	 */
-	public int getValue() {
-		return value;
+	public int getGoldValue() {
+		return goldValue;
 	}
 
 	/**
+	 * Returns Name of Item
 	 *
+	 * @return Name of Item
 	 */
 	public String getName() {
 		return name;

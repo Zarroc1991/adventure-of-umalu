@@ -68,7 +68,7 @@ public class Inventory {
 	public void sellItem(int index) {
 		// Riemove Item at index
 		Item soldItem = inventorySpaces.remove(index);
-		this.increaseGold(soldItem.getValue());
+		this.increaseGold(soldItem.getGoldValue());
 	}
 
 	/**
@@ -79,8 +79,8 @@ public class Inventory {
 	 * @throws NotEnoughGoldException Player has not collected Gold for this Action
 	 */
 	public void buyItem(Item item) throws NotEnoughSpaceException, NotEnoughGoldException {
-		if ((inventorySpaces.size()+1 <= maximumItems) && (item.getValue() <= gold)) {
-			decreaseGold(item.getValue());
+		if ((inventorySpaces.size()+1 <= maximumItems) && (item.getGoldValue() <= gold)) {
+			decreaseGold(item.getGoldValue());
 			this.addItem(item);
 		} else if (inventorySpaces.size()+1 > maximumItems) {
 			// User cannot carry more Items. Throw an Exception
