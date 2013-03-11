@@ -9,7 +9,7 @@ import jade.util.datatype.ColoredChar;
 import jade.ui.Terminal;
 
 /**
- *
+ * TODO Delete this Class, when it is not used anymore, as instances of Montster do the same thing right now
  * @author alle
  */
 public class Dragon extends Monster {

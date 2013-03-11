@@ -69,8 +69,8 @@ public class Monster extends Creature {
 	// Do Damage to Oppenent
         opponent.loseHitpoints(abzug);
 	// Print Result
-        System.out.println("Du hast "+ abzug + "HP verloren");
-        System.out.println("verbleibende HP:"+ opponent.hitpoints);
+        System.out.println("Du hast "+ abzug + " HP verloren");
+        System.out.println("verbleibende HP: "+ opponent.hitpoints);
 	Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
 	try {
 		term.getKey();
