@@ -22,7 +22,7 @@ public class Path {
 			System.out.println("Windows Operating System detected");
 			// We're running Windows, create an absolute Path, but replace all / with \
 			// to make Paths Windows Compatible
-			return generateAbsolutePath(path.replaceAll("/","\\"));
+			return generateAbsolutePath(path);
 		} else {
 			// Found any other Operating System, so we just need to generate an
 			// absolute Path

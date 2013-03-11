@@ -1,7 +1,7 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this template, choose Tools | Templates
+* and open the template in the editor.
+*/
 
 // TODO Move this File to rogue.system
 
@@ -19,9 +19,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+
  * Used to print Stuff in Terminal.
  * @author 
  */
+
 public class Screen {
 	public static World lastWorld;
 	public static TiledTermPanel lastTerminal;
@@ -153,6 +155,7 @@ public class Screen {
 		lastTerminal.bufferCameras();
 		lastTerminal.refreshScreen();
 	}
+
 
 	/**
 	 * Redraw map, put Statusline below Map
