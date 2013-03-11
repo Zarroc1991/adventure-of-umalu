@@ -33,7 +33,7 @@ public class Rogue {
 		// Create a new Player
 		Player player = new Player(term);
 		// Generate a new World
-		World world = new Level(69, 24, player);
+                World world = new Level(69, 24, player);
 		player.setName(CharacterCreation.getCharacterName(term, world));
 		Screen.printLine(player.getName(),term,world);
 		term.getKey();
