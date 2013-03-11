@@ -10,6 +10,10 @@ import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Coordinate;
 import jade.util.datatype.Direction;
 import rogue.level.Screen;
+import rogue.creature.util.Inventory;
+import rogue.creature.util.Item;
+import rogue.creature.util.NotEnoughGoldException;
+import rogue.creature.util.NotEnoughSpaceException;
 import java.util.Random;
 import java.lang.InterruptedException;
 
@@ -19,6 +23,7 @@ public class Player extends Creature implements Camera {
 	private static final int maxHitpoints =15;
 	private int strength;
 	private String name;
+	private Inventory inventory;
 
 	/**
 	 * Creates a new Player Object
@@ -34,6 +39,7 @@ public class Player extends Creature implements Camera {
 		// Initialise Hitpoints on Max
 		hitpoints = maxHitpoints;
 		strength = 5;
+		inventory = new Inventory(5,50);
 	}
 
 	/**
