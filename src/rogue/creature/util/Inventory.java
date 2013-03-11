@@ -4,6 +4,8 @@
  *
  * Distributed under terms of the MIT license.
  */
+package rogue.creature.util;
+
 import java.util.ArrayList;
 
 public class Inventory {
@@ -18,7 +20,7 @@ public class Inventory {
 	 * @param gold Amount of Gold character initially starts with
 	 */
 	public Inventory(int maximumItems, int gold) {
-		inventorySpaces = new ArrayList<Item>(spaces);
+		inventorySpaces = new ArrayList<Item>(maximumItems);
 		this.gold = gold;
 		this.maximumItems = maximumItems;
 	}
@@ -32,11 +34,11 @@ public class Inventory {
 	 */
 	public boolean addItem(Item item) throws NotEnoughSpaceException {
 		if (inventorySpaces.size() < maximumItems) {
-			inventorySpaces.addItem(item);
+			inventorySpaces.add(item);
 			return true;
 		} else {
-			throws new NotEnoughSpaceException();
-			return false;
+			throw new NotEnoughSpaceException();
+			//return false;
 		}
 	}
 
@@ -46,7 +48,7 @@ public class Inventory {
 	 * @param item Item to be deleted from Inventory
 	 */
 	public void removeItem(Item item) {
-		inventorySpaces.removeItem(item);
+		inventorySpaces.remove(item);
 	}
 
 	/**
@@ -79,7 +81,7 @@ public class Inventory {
 	public void buyItem(Item item) throws NotEnoughSpaceException, NotEnoughGoldException {
 		if ((inventorySpaces.size()+1 <= maximumItems) && (item.getValue() <= gold)) {
 			decreaseGold(item.getValue());
-			this.add(item);
+			this.addItem(item);
 		} else if (inventorySpaces.size()+1 > maximumItems) {
 			// User cannot carry more Items. Throw an Exception
 			throw new NotEnoughSpaceException();
@@ -109,7 +111,7 @@ public class Inventory {
 			gold -= amount;
 			return true;
 		} else {
-			throws new NotEnoughGoldException();
+			throw new NotEnoughGoldException();
 		}
 	}
 

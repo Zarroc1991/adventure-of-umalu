@@ -4,6 +4,7 @@
  *
  * Distributed under terms of the MIT license.
  */
+package rogue.creature.util;
 
 public class NotEnoughSpaceException extends Exception {
 	public NotEnoughSpaceException() {
