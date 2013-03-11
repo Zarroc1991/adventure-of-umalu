@@ -17,6 +17,7 @@ import rogue.system.SystemHelper;
 
 public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
+
 		// Set System options
 		SystemHelper.getArgs(args);
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
@@ -72,6 +73,7 @@ public class Rogue {
 			roundsToHpUp--;
 
 			// Generate a List of Monsters still on Map
+
 			Collection<Monster> monsters = world.getActorsAt(Monster.class, player.pos());
 			// Has every Monster been killed?
 			if(!monsters.isEmpty()){ // Yes
@@ -96,12 +98,16 @@ public class Rogue {
 			//Screen
 			// Give everyone else the chance to make his move
 			world.tick();
+
 		}
 		term.clearBuffer();
 		//Screen.showFile(normalizePath("src\\rogue\\system\\end.txt","rogue/system/end.txt"), term, world);
 		Screen.showFile(Path.generatePath("rogue/system/end.txt"),term, world);
+
 		term.getKey();
 		System.exit(0);
 
 	}
+
+
 }
