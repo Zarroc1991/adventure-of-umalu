@@ -6,7 +6,9 @@
  */
 package rogue.creature.util;
 
-
+/**
+ * Represents a single Item for players Inventory
+ */
 public class Item {
 	private String name;
 	private int goldValue;

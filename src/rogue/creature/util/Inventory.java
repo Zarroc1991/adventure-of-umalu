@@ -8,6 +8,9 @@ package rogue.creature.util;
 
 import java.util.ArrayList;
 
+/**
+ * Represents an Inventory for player.
+ */
 public class Inventory {
 	private ArrayList<Item> inventorySpaces;
 	private int maximumItems;

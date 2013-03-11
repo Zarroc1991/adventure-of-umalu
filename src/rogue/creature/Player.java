@@ -17,6 +17,9 @@ import rogue.creature.util.NotEnoughSpaceException;
 import java.util.Random;
 import java.lang.InterruptedException;
 
+/**
+ * Represents Player
+ */
 public class Player extends Creature implements Camera {
 	private Terminal term;
 	private ViewField fov;
