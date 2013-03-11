@@ -135,6 +135,14 @@ public class Player extends Creature implements Camera {
 		if(hitpoints<maxHitpoints){
 			hitpoints++;
 			System.out.println("Du hast einen HP regeneriert, jetzt " + hitpoints+" HP");
+			Screen.redrawEventLine("Du regenerierst einen HP.");
+			try{
+				term.getKey();
+
+			} catch (InterruptedException e) {
+				System.out.println("!IOException");
+				e.printStackTrace();
+			}
 		}
 	}
 
