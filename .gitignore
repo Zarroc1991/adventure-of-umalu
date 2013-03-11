@@ -2,5 +2,4 @@ bin/
 .DS_Store
 *.class
 *.swp
-git fetch upstream
-git merge upstream/master
+*.jar
