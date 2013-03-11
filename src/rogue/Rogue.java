@@ -33,7 +33,7 @@ public class Rogue {
 		// Create a new Player
 		Player player = new Player(term);
 		// Generate a new World
-		World world = new Level(69, 24, player);
+		World world = new Level(80, 24, player);
 		player.setName(CharacterCreation.getCharacterName(term, world));
 		Screen.printLine(player.getName(),term,world);
 		term.getKey();
@@ -49,7 +49,7 @@ public class Rogue {
 		// Add a Dragon so we have an enemy
 		world.addActor(new Dragon(ColoredChar.create('D',Color.red),"roter Drache",term));
 		// Add Minimap to left part in Window (Size given as Parameter), focus on Player
-		term.registerCamera(player, 5, 5);
+		// term.registerCamera(player, 5, 5);
 
 		// Play Game
 		while(!player.expired()) { // Player is still living?

@@ -54,6 +54,7 @@ public class Player extends Creature implements Camera {
 		return name;
 	}
 
+
 	@Override
 	/**
 	 * Ask Player to do some action (passing him the baton). Reads input and moves Character accordingly.
@@ -80,7 +81,6 @@ public class Player extends Creature implements Camera {
 						} else {
 							// No monster there
 							move(dir);
-
 						}
 						break;
 					}

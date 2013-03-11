@@ -40,9 +40,9 @@ public class Monster extends Creature {
 
         for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
-            if (player != null) {
+            if (player != null) {	
                 fight(player);
-                //move(dir); taken out, because the Monster doesnt move, when it fights
+
                 fight = true;
                 break;
 

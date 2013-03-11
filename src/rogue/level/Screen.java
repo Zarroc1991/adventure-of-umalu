@@ -149,7 +149,7 @@ public class Screen {
 		for (int x = 0; x < lastWorld.width(); x++) {
 			for (int y = 0; y < lastWorld.height(); y++) {
 				//lastTerminal.bufferChar(x+11,y,lastWorld.look(x,y));
-				lastTerminal.bufferChar(x + 11, y, lastWorld.look(x, y));
+				lastTerminal.bufferChar(x, y, lastWorld.look(x, y));
 			}
 		}
 		lastTerminal.bufferCameras();
@@ -165,15 +165,16 @@ public class Screen {
 	public static void redrawMap(String statusLine) {
 		redrawMap();
 		for (int x = 0; x < statusLine.length(); x++) {
-			lastTerminal.bufferChar(x+11,lastWorld.height(),ColoredChar.create(statusLine.charAt(x)));
+			lastTerminal.bufferChar(x,lastWorld.height(),ColoredChar.create(statusLine.charAt(x)));
 		}
 		lastTerminal.refreshScreen();
 	}
 
+
 	public static void redrawEventLine(String eventLine) {
 		int x;
 		for (x = 0; x < eventLine.length();x++) {
-			lastTerminal.bufferChar(x+11,lastWorld.height()+1, ColoredChar.create(eventLine.charAt(x)));
+			lastTerminal.bufferChar(x,lastWorld.height()+1, ColoredChar.create(eventLine.charAt(x)));
 		}
 		x += 11;
 		while (x < lastWorld.width()) {
