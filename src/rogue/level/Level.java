@@ -32,9 +32,9 @@ public class Level extends World {
 		}
 		case 1:{
 			gen = new World2();
-                                //addActor(new Troll(term));
-                                //addActor(new Orc(term));
-                                //addActor(new InvisibleZombie(term));
+                                addActor(new Troll(term));
+                                addActor(new Orc(term));
+                                addActor(new InvisibleZombie(term));
 			//addActor(new Dummy(ColoredChar.create('X',Color.blue),"Dummy",term)); //Ordnet jedem Level Monster hinzu 
 			break; 
 		}
@@ -48,6 +48,7 @@ public class Level extends World {
 		}
 		case 4:{
 			gen = new World5();
+			addActor(new Dragon(term));
 			break; 
 		}
 		}

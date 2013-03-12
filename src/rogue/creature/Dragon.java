@@ -26,6 +26,9 @@ public class Dragon extends Monster {
     public Dragon(ColoredChar face, String name, Terminal term) {
         super(face,name, 100, 5, term);
     }
+    public Dragon(Terminal term) {
+        super(ColoredChar.create('D'), "roter Drache", 100, 5, term);
+    }
     /*public void act() {
 		boolean fight = false;
 
