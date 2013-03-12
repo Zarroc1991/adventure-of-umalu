@@ -159,11 +159,16 @@ public class Player extends Creature implements Camera {
 	 * Player regains 1 Hitpoint. Method should be used every x rounds in rogue
 	 */
 	public void regainHitpoint() {
+		// Is there something to heal
 		if (hitpoints < maxHitpoints) {
+			// Gain Healthpoint back
 			hitpoints++;
+			// Print message to Console
 			System.out.println("Du hast einen HP regeneriert, jetzt " + hitpoints+" HP");
+			// Print Eventline
 			Screen.redrawEventLine("Du regenerierst einen HP.");
 			try{
+				// Wait for pressed Key
 				term.getKey();
 
 			} catch (InterruptedException e) {
@@ -181,25 +186,37 @@ public class Player extends Creature implements Camera {
 	}
 
 	/**
-	 *
+	 * Creates and prints an Inventory Screen
 	 */
 	public void showInventoryScreen() {
 		boolean loop = true;
-		while (loop) {
+		// Inventar geschlossen?
+		while (loop) { // Nein.
+			// Erstelle eine ArrayList von Strings um dort unser Inventarinterface zu puffern
 			ArrayList<String> lines = new ArrayList<String>();
+			// Erstelle eine Titelzeile
+			// TODO In die Mitte Verschieben
 			lines.add("Inventar");
+			// Zeige was der Nutzer gerade angelegt hat
 			lines.add("Du traegst: ");
+			// Lade die Liste
 			Item[] wornItems = inventory.getWornItems();
+			// Generiere den Output fuer den aktuellen Helm
 			lines.add("Kopf: "+wornItems[Item.ITEMTYPE_HEAD].getName()+" [+DMG: "+wornItems[Item.ITEMTYPE_HEAD].getDamageBonus()+", +HP: "+wornItems[Item.ITEMTYPE_HEAD].getHealthBonus()+"]");
+			// Generiere den Output fuer das aktuelle Schwert
 			lines.add("Schwert: "+wornItems[Item.ITEMTYPE_SWORD].getName()+" [+DMG: "+wornItems[Item.ITEMTYPE_HEAD].getDamageBonus()+", +HP: "+wornItems[Item.ITEMTYPE_HEAD].getHealthBonus()+"]");
+			// TODO Zeige gesamt Bonus an
+			// Zeige an, was sonst noch im Inventar liegt, aber nicht angelegt wurde (und somit keinen Bonus bringt)
 			ArrayList<Item> backpack = inventory.listBackpack();
 			lines.add("Du hast im Rucksack: ");
 			for (int i = 0;i<backpack.size();i++) {
+				// Zeige das Item an Stelle an i an
 				lines.add("("+i+") "+backpack.get(i).getName()+"[+DMG: "+backpack.get(i).getDamageBonus()+", +HP: "+backpack.get(i).getHealthBonus()+"]");
 			}
 			// TODO Add lines here.
 			Screen.putText(lines);
 			try {
+				// Erwarte eine Eingabe vom Nutzer.
 				char key = term.getKey();
 				switch (key) {
 					case 'q':
@@ -217,6 +234,7 @@ public class Player extends Creature implements Camera {
 				e.printStackTrace();
 			}
 		}
+		// Inventar verlassen, zeichne wieder die Karte.
 		Screen.redrawMap();
 	}
 }

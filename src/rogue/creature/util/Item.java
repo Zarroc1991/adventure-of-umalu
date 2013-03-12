@@ -23,11 +23,11 @@ public class Item {
 	/**
 	 * Describes Item as Chest Armor
 	 */
-	public static final int ITEMTYPE_BODY = 2;
+	public static final int ITEMTYPE_BODY = 1;
 	/**
 	 * Describes Item as a Weapon (Sword)
 	 */
-	public static final int ITEMTYPE_SWORD = 1;
+	public static final int ITEMTYPE_SWORD = 2;
 
 	/**
 	 * Creates a new Item Object wth given name and Goldvalue
@@ -36,9 +36,13 @@ public class Item {
 	 * @param goldValue Goldvalue of Object
 	 */
 	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth) {
+		// Name einfuegen
 		this.name = name;
+		// Platzhalter fuer den Fall der Faelle
 		this.goldValue = goldValue;
+		// Was fuer eine Art Item ist das?
 		this.type = type;
+		// Setze die Modifikatoren
 		this.modificators = new int[2];
 		this.modificators[0] = bonusDamage;
 		this.modificators[1] = bonusHealth;
