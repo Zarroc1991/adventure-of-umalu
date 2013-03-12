@@ -19,6 +19,6 @@ public class Level extends World
 	}
 
 	private static Generator getLevelGenerator() {
-		return new WorldReader();
+		return new Cellular();
 	}
 }
