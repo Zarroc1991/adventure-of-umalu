@@ -1,8 +1,14 @@
 package rogue.level;
 
+import java.awt.Color;
+
 import jade.core.World;
 import jade.gen.Generator;
 import jade.gen.map.*;
+import jade.ui.TiledTermPanel;
+import jade.util.datatype.ColoredChar;
+import rogue.creature.Dragon;
+import rogue.creature.Dummy;
 import rogue.creature.Player;
 public class Level extends World
 {
@@ -16,7 +22,7 @@ public class Level extends World
 		addActor(player);
 	}
 	// Zweiter Konstruktor, um ein neues Level aufzurufen 
-	public Level(int width, int height, Player player, int level) {
+	public Level(int width, int height, Player player, int level, TiledTermPanel term) {
 		super(width, height-2);
 		switch (level){											//Liste der Maps in Abhängikeit vom Level  
 		case 0:{
@@ -25,6 +31,7 @@ public class Level extends World
 		}
 		case 1:{
 			gen = new World2();
+			addActor(new Dummy(ColoredChar.create('X',Color.blue),"Dummy",term));
 			break; 
 		}
 		}

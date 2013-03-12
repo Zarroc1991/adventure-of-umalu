@@ -9,6 +9,7 @@ import jade.util.datatype.ColoredChar;
 import java.awt.Color;
 import java.util.Collection;
 import rogue.creature.Dragon;
+import rogue.creature.Dummy;
 import rogue.creature.Monster;
 import rogue.creature.Player;
 import rogue.level.Level;
@@ -57,7 +58,7 @@ public class Rogue {
 		while(!player.expired()) { // Player is still living?
 			if (player.worldchange){								//überprüft, ob einen Levelup erfolgt ist
 				world.removeActor(player);						    //entfernt Spieler aus der alten Welt
-				world = new Level(80,32, player, ++level);			//lädt das nächste Level 
+				world = new Level(80,32, player, ++level, term);		//lädt das nächste Level 
 				player.setWorld(world);								//Spieler erkennt seine Welt
 				player.worldchange=false;										
 			}

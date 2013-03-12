@@ -1,29 +1,21 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package rogue.creature;
 
 import java.util.Arrays;
-
 import jade.util.Dice;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Direction;
+import java.util.Random;
+import rogue.level.Screen;
 import jade.ui.Terminal;
+import java.lang.InterruptedException;
 
-/**
- *
- * @author alle
- */
-public class Dragon extends Monster {
-   /*
-    * every Dragon has 100 Hitpoints and Strength 5(until now)
-    */
-    public Dragon(ColoredChar face, String name, Terminal term) {
-        super(face,name, 100, 5, term);
-    }
-    public void act() {
+public class Dummy extends Monster {
+
+	public Dummy(ColoredChar face, String name, Terminal term) {
+		super(face, name, 50, 10, term);
+	}
+
+	public void act() {
 		boolean fight = false;
 
 		for (Direction dir : Arrays.asList(Direction.values())) {
@@ -43,4 +35,3 @@ public class Dragon extends Monster {
 		}
 	}
 }
-
