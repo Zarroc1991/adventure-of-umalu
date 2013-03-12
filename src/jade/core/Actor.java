@@ -102,6 +102,7 @@ public abstract class Actor extends Messenger
         world.removeFromGrid(this);
         setXY(x, y);
         world.addToGrid(this);
+        
     }
 
     /**
@@ -114,6 +115,7 @@ public abstract class Actor extends Messenger
         Guard.argumentIsNotNull(coord);
 
         setPos(coord.x(), coord.y());
+        
     }
 
     /**

@@ -170,6 +170,11 @@ public class Screen {
 		lastTerminal.refreshScreen();
 	}
 
+	/**
+	 * Puts Text in Eventline. redrawEventLine does not delete content on its own!
+	 *
+	 * @param eventLine Line to be printed.
+	 */
 	public static void redrawEventLine(String eventLine) {
 		int x;
 		for (x = 0; x < eventLine.length();x++) {

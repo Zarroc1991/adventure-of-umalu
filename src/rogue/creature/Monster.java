@@ -40,9 +40,9 @@ public class Monster extends Creature {
 
         for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
-            if (player != null) {
+            if (player != null) {	
                 fight(player);
-                //move(dir); taken out, because the Monster doesnt move, when it fights
+
                 fight = true;
                 break;
 
@@ -69,8 +69,8 @@ public class Monster extends Creature {
 	// Do Damage to Oppenent
         opponent.loseHitpoints(abzug);
 	// Print Result
-        System.out.println("Du hast "+ abzug + "HP verloren");
-        System.out.println("verbleibende HP:"+ opponent.hitpoints);
+        System.out.println("Du hast "+ abzug + " HP verloren");
+        System.out.println("verbleibende HP: "+ opponent.hitpoints);
 	Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
 	try {
 		term.getKey();

@@ -17,6 +17,7 @@ import java.util.Set;
  */
 public abstract class World extends Messenger
 {
+
 	private int width;
 	private int height;
 	private Tile[][] grid;
@@ -593,4 +594,5 @@ public abstract class World extends Messenger
 		//	face=c;
 		//}
 	}
+
 }

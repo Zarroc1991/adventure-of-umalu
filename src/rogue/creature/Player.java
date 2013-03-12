@@ -54,6 +54,7 @@ public class Player extends Creature implements Camera {
 		return name;
 	}
 
+
 	@Override
 	/**
 	 * Ask Player to do some action (passing him the baton). Reads input and moves Character accordingly.
@@ -80,7 +81,6 @@ public class Player extends Creature implements Camera {
 						} else {
 							// No monster there
 							move(dir);
-
 						}
 						break;
 					}
@@ -135,6 +135,14 @@ public class Player extends Creature implements Camera {
 		if(hitpoints<maxHitpoints){
 			hitpoints++;
 			System.out.println("Du hast einen HP regeneriert, jetzt " + hitpoints+" HP");
+			Screen.redrawEventLine("Du regenerierst einen HP.");
+			try{
+				term.getKey();
+
+			} catch (InterruptedException e) {
+				System.out.println("!IOException");
+				e.printStackTrace();
+			}
 		}
 	}
 
