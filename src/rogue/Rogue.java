@@ -55,11 +55,11 @@ public class Rogue {
   
 		// Play Game
 		while(!player.expired()) { // Player is still living?
-			if (player.worldchange){
-				world.removeActor(player);
-				world = new Level(80,24, player, new Cellular());
-				player.setWorld(world);
-				player.worldchange=false;
+			if (player.worldchange){								//überprüft, ob einen Levelup erfolgt ist
+				world.removeActor(player);						    
+				world = new Level(80,24, player, new Cellular());	//lädt neues Level 
+				player.setWorld(world);								
+				player.worldchange=false;						
 			}
 			// ? TODO Delete this Block if it is not needed anymore
 			/*Collection<Monster> monsters = world.getActorsAt(Monster.class, player.pos());

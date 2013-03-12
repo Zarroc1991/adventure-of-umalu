@@ -15,6 +15,7 @@ public class Level extends World
 		gen.generate(this);
 		addActor(player);
 	}
+	// Zweiter Konstruktor, damit wir eine World übergeben 
 	public Level(int width, int height, Player player, Generator gen) {
 		// Create a new Map, but make it 2 Rows less higher than window is, so we have some Space for
 		// Statusmessages and stuff.

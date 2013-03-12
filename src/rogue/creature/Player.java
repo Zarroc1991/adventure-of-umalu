@@ -22,7 +22,7 @@ public class Player extends Creature implements Camera {
 	private static final int maxHitpoints = 15;
 	private int strength;
 	private String name;
-    public Boolean worldchange = false; 
+    public Boolean worldchange = false;   // standardmäßig ist keine Mapänderung erfolgt
 	/**
 	 * Creates a new Player Object
 	 * 
@@ -84,8 +84,8 @@ public class Player extends Creature implements Camera {
 						fight((Monster) actorlist.toArray()[0]);
 					} else {
 						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('§')) {
-							System.out.println("Level Up");
-							worldchange= true;
+							System.out.println("Level Up");  
+							worldchange= true;					//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
 							move(dir);
 						} else {// No monster there
 
