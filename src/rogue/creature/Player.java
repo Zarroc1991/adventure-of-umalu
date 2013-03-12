@@ -19,6 +19,7 @@ import rogue.creature.util.NotEnoughSpaceException;
 import java.util.Random;
 import java.lang.InterruptedException;
 import jade.core.World;
+import java.util.ArrayList;
 
 /**
  * Represents Player
@@ -81,6 +82,9 @@ public class Player extends Creature implements Camera {
 			switch (key) {
 				case 'q': // User wants to quit
 					expire(); // Leave let player die, so this application quits
+					break;
+				case 'i': // Show Inventory
+					showInventoryScreen();
 					break;
 				default: // User pressed something else
 					Direction dir = Direction.keyToDir(key); // Get direction
@@ -180,13 +184,30 @@ public class Player extends Creature implements Camera {
 	 *
 	 */
 	public void showInventoryScreen() {
-		while (true) {
+		boolean loop = true;
+		while (loop) {
 			ArrayList<String> lines = new ArrayList<String>();
 			lines.add("Inventar");
 			// TODO Add lines here.
 			Screen.putText(lines);
-			term.getKey();
+			try {
+				char key = term.getKey();
+				switch (key) {
+					case 'q':
+					loop = false;
+					break;
+					case '0':
+					break;
+					case '1':
+					break;
+					case '2':
+					break;
+				}
+			} catch (InterruptedException e) {
+				System.out.println("!Exeception");
+				e.printStackTrace();
+			}
 		}
-
+		Screen.redrawMap();
 	}
 }
