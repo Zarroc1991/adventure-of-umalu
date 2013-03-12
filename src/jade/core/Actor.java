@@ -291,7 +291,7 @@ public abstract class Actor extends Messenger
         return holds(Actor.class);
     }
 
-    void setWorld(World world)
+    public void setWorld(World world)
     {
         this.world = world;
         for(Actor held : holds)
@@ -309,4 +309,5 @@ public abstract class Actor extends Messenger
         for(Actor held : holds)
             held.propagatePos(pos);
     }
+    
 }

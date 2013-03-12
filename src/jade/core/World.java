@@ -205,6 +205,7 @@ public abstract class World extends Messenger
 	 * @param y the y location being queried
 	 * @return an {@code Actor} of the given class located at (x, y)
 	 */
+	
 	public <T extends Actor> T getActorAt(Class<T> cls, int x, int y)
 	{
 		return Lambda.first(Lambda.filterType(grid[x][y].actors, cls));
