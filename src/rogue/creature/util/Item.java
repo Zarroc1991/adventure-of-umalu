@@ -35,10 +35,13 @@ public class Item {
 	 * @param name Name of Item
 	 * @param goldValue Goldvalue of Object
 	 */
-	public Item(String name, int goldValue, int type) {
+	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth) {
 		this.name = name;
 		this.goldValue = goldValue;
 		this.type = type;
+		this.modificators = new int[2];
+		this.modificators[0] = bonusDamage;
+		this.modificators[1] = bonusHealth;
 	}
 
 	/**
@@ -57,6 +60,14 @@ public class Item {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	public int getDamageBonus() {
+		return modificators[0];
+	}
+
+	public int getHealthBonus() {
+		return modificators[1];
 	}
 }
 

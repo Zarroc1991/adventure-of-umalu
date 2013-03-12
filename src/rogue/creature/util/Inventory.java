@@ -12,8 +12,9 @@ import java.util.ArrayList;
  * Represents an Inventory for player.
  */
 public class Inventory {
-	private ArrayList<Item> inventorySpaces;
+	private ArrayList<Item> backpackSpaces;
 	private int maximumItems;
+	private Item[] wornItems;
 	private int gold;
 
 	/**
@@ -23,7 +24,8 @@ public class Inventory {
 	 * @param gold Amount of Gold character initially starts with
 	 */
 	public Inventory(int maximumItems, int gold) {
-		inventorySpaces = new ArrayList<Item>(maximumItems);
+		backpackSpaces = new ArrayList<Item>(maximumItems);
+		wornItems = new Item[2];
 		this.gold = gold;
 		this.maximumItems = maximumItems;
 	}
@@ -36,12 +38,11 @@ public class Inventory {
 	 * @throws NotEnoughSpaceException Players inventory is already full
 	 */
 	public boolean addItem(Item item) throws NotEnoughSpaceException {
-		if (inventorySpaces.size() < maximumItems) {
-			inventorySpaces.add(item);
+		if (backpackSpaces.size() < maximumItems) {
+			backpackSpaces.add(item);
 			return true;
 		} else {
 			throw new NotEnoughSpaceException();
-			//return false;
 		}
 	}
 
@@ -51,7 +52,7 @@ public class Inventory {
 	 * @param item Item to be deleted from Inventory
 	 */
 	public void removeItem(Item item) {
-		inventorySpaces.remove(item);
+		backpackSpaces.remove(item);
 	}
 
 	/**
@@ -60,7 +61,7 @@ public class Inventory {
 	 * @param index Index from which item should be deleted
 	 */
 	public void removeItem(int index) {
-		inventorySpaces.remove(index);
+		backpackSpaces.remove(index);
 	}
 
 	/**
@@ -70,7 +71,7 @@ public class Inventory {
 	 */
 	public void sellItem(int index) {
 		// Riemove Item at index
-		Item soldItem = inventorySpaces.remove(index);
+		Item soldItem = backpackSpaces.remove(index);
 		this.increaseGold(soldItem.getGoldValue());
 	}
 
@@ -82,10 +83,10 @@ public class Inventory {
 	 * @throws NotEnoughGoldException Player has not collected Gold for this Action
 	 */
 	public void buyItem(Item item) throws NotEnoughSpaceException, NotEnoughGoldException {
-		if ((inventorySpaces.size()+1 <= maximumItems) && (item.getGoldValue() <= gold)) {
+		if ((backpackSpaces.size()+1 <= maximumItems) && (item.getGoldValue() <= gold)) {
 			decreaseGold(item.getGoldValue());
 			this.addItem(item);
-		} else if (inventorySpaces.size()+1 > maximumItems) {
+		} else if (backpackSpaces.size()+1 > maximumItems) {
 			// User cannot carry more Items. Throw an Exception
 			throw new NotEnoughSpaceException();
 		} else {
@@ -118,7 +119,16 @@ public class Inventory {
 		}
 	}
 
-	public ArrayList<Item> listInventory() {
-		return inventorySpaces;
+	/**
+	 * Returns the List of all Items in Inventory
+	 *
+	 * @return list of all items in inventory
+	 */
+	public ArrayList<Item> listBackpack() {
+		return backpackSpaces;
+	}
+
+	public int int getBonusDamageOfWornItems() {
+		int sum;
 	}
 }
