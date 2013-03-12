@@ -23,11 +23,11 @@ public class Item {
 	/**
 	 * Describes Item as Chest Armor
 	 */
-	public static final int ITEMTYPE_BODY = 1;
+	public static final int ITEMTYPE_BODY = 2;
 	/**
 	 * Describes Item as a Weapon (Sword)
 	 */
-	public static final int ITEMTYPE_SWORD = 2;
+	public static final int ITEMTYPE_SWORD = 1;
 
 	/**
 	 * Creates a new Item Object wth given name and Goldvalue

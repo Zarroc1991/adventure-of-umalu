@@ -26,7 +26,11 @@ public class Inventory {
 	 */
 	public Inventory(int maximumItems, int gold) {
 		backpackSpaces = new ArrayList<Item>(maximumItems);
-		wornItems = new Item[2];
+		wornItems = new Item[3];
+		Item standardHelmet = new Item("Standard Helm",0,Item.ITEMTYPE_HEAD,0,0);
+		Item standardSword = new Item("Standard Schwert",0,Item.ITEMTYPE_SWORD,0,0);
+		wornItems[Item.ITEMTYPE_HEAD] = standardHelmet;
+		wornItems[Item.ITEMTYPE_SWORD] = standardSword;
 		this.gold = gold;
 		this.maximumItems = maximumItems;
 	}
