@@ -24,14 +24,14 @@ public class Level extends World
 	// Zweiter Konstruktor, um ein neues Level aufzurufen 
 	public Level(int width, int height, Player player, int level, TiledTermPanel term) {
 		super(width, height-2);
-		switch (level){											//Liste der Maps in Abhängikeit vom Level  
+		switch (level){											//Ordnet jedem Level eine Map zu  
 		case 0:{
 			gen = new World1();
 			break;	
 		}
 		case 1:{
 			gen = new World2();
-			addActor(new Dummy(ColoredChar.create('X',Color.blue),"Dummy",term));
+			addActor(new Dummy(ColoredChar.create('X',Color.blue),"Dummy",term)); //Ordnet jedem Level Monster hinzu 
 			break; 
 		}
 		}
