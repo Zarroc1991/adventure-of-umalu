@@ -128,7 +128,31 @@ public class Inventory {
 		return backpackSpaces;
 	}
 
-	public int int getBonusDamageOfWornItems() {
-		int sum;
+	/**
+	 * Returns the sum of all Bonusdamage
+	 *
+	 * @return Bonusdamage for user
+	 */
+	public int getBonusDamageOfWornItems() {
+		int sum = 0;
+		for (int i=0;i<wornItems.length;i++) {
+			sum += wornItems[i].getDamageBonus();
+		}
+		return sum;
 	}
+
+	/**
+	 * Returns sum of all Bonushealth
+	 *
+	 * @return Bonushealth for user
+	 */
+	public int getHealthBonus() {
+		int sum = 0;
+		for (int i=0;i<wornItems.length;i++) {
+			sum += wornItems[i].getHealthBonus();
+		}
+		return sum;
+	}
+
+
 }
