@@ -7,12 +7,13 @@ import jade.gen.Generator;
 
 import jade.gen.map.*;
 import jade.ui.TiledTermPanel;
+
 import rogue.creature.*;
+
 import jade.util.datatype.ColoredChar;
-import rogue.creature.Dragon;
-import rogue.creature.Dummy;
-import rogue.creature.Player;
+
 public class Level extends World {
+
 	private static Generator gen = getLevelGenerator();
 
 	public Level(int width, int height, Player player) {
@@ -59,4 +60,5 @@ public class Level extends World {
 	private static Generator getLevelGenerator() {
 		return new World1();
 	}
+
 }

@@ -12,17 +12,27 @@ import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Coordinate;
 import jade.util.datatype.Direction;
 import rogue.level.Screen;
+import rogue.creature.util.Inventory;
+import rogue.creature.util.Item;
+import rogue.creature.util.NotEnoughGoldException;
+import rogue.creature.util.NotEnoughSpaceException;
 import java.util.Random;
 import java.lang.InterruptedException;
 import jade.core.World;
+import java.util.ArrayList;
 
+/**
+ * Represents Player
+ */
 public class Player extends Creature implements Camera {
 	private Terminal term;
 	private ViewField fov;
 	private static final int maxHitpoints = 15;
 	private int strength;
 	private String name;
-    public Boolean worldchange = false;   // standardmäßig ist keine Mapänderung erfolgt
+	private Inventory inventory;
+
+	public Boolean worldchange = false;   // standardmäßig ist keine Mapänderung erfolgt
 	/**
 	 * Creates a new Player Object
 	 * 
@@ -38,6 +48,7 @@ public class Player extends Creature implements Camera {
 		// Initialise Hitpoints on Max
 		hitpoints = maxHitpoints;
 		strength = 5;
+		inventory = new Inventory(5,50);
 	}
 
 	/**
@@ -69,32 +80,35 @@ public class Player extends Creature implements Camera {
 			char key;
 			key = term.getKey();
 			switch (key) {
-			case 'q': // User wants to quit
-				expire(); // Leave let player die, so this application quits
-				break;
-			default: // User pressed something else
-				Direction dir = Direction.keyToDir(key); // Get direction
-				// Something useful pressed?
-				if (dir != null) { // Yes
-					// Get list of all monsters on target Coordinates
-					Collection<Monster> actorlist = world().getActorsAt(Monster.class, x() + dir.dx(), y() + dir.dy());
-					// Is there a monster on TargetL
-					if (!actorlist.isEmpty()) { // Yes
-						// Fight first monster on coordinate.
-						fight((Monster) actorlist.toArray()[0]);
-					} else {
-						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('§')) {
-							System.out.println("Level Up");  
-							worldchange= true;					//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
-							move(dir);
-						} else {// No monster there
+				case 'q': // User wants to quit
+					expire(); // Leave let player die, so this application quits
+					break;
+				case 'i': // Show Inventory
+					showInventoryScreen();
+					break;
+				default: // User pressed something else
+					Direction dir = Direction.keyToDir(key); // Get direction
+					// Something useful pressed?
+					if (dir != null) { // Yes
+						// Get list of all monsters on target Coordinates
+						Collection<Monster> actorlist = world().getActorsAt(Monster.class, x() + dir.dx(), y() + dir.dy());
+						// Is there a monster on TargetL
+						if (!actorlist.isEmpty()) { // Yes
+							// Fight first monster on coordinate.
+							fight((Monster) actorlist.toArray()[0]);
+						} else {
+							if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('§')) {
+								System.out.println("Level Up");  
+								worldchange= true;					//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+								move(dir);
+							} else {// No monster there
 
-							move(dir);
+								move(dir);
 
-							break;
+								break;
+							}
 						}
 					}
-				}
 			}
 		} catch (InterruptedException e) { // Something has happened here
 			System.out.println("!Interrupted Exception");
@@ -159,8 +173,50 @@ public class Player extends Creature implements Camera {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public int getHitpoints() {
 		return hitpoints;
 	}
-	
+
+	/**
+	 *
+	 */
+	public void showInventoryScreen() {
+		boolean loop = true;
+		while (loop) {
+			ArrayList<String> lines = new ArrayList<String>();
+			lines.add("Inventar");
+			lines.add("Du traegst: ");
+			Item[] wornItems = inventory.getWornItems();
+			lines.add("Kopf: "+wornItems[Item.ITEMTYPE_HEAD]);
+			lines.add("Schwert: "+wornItems[Item.ITEMTYPE_HEAD]);
+			ArrayList<Item> backpack = inventory.listBackpack();
+			lines.add("Du hast im Rucksack: ");
+			for (int i = 0;i<backpack.size();i++) {
+				lines.add("("+i+") "+backpack.get(i).getName()+"[+DMG: "+backpack.get(i).getDamageBonus()+", +HP: "+backpack.get(i).getHealthBonus()+"]");
+			}
+			// TODO Add lines here.
+			Screen.putText(lines);
+			try {
+				char key = term.getKey();
+				switch (key) {
+					case 'q':
+					loop = false;
+					break;
+					case '0':
+					break;
+					case '1':
+					break;
+					case '2':
+					break;
+				}
+			} catch (InterruptedException e) {
+				System.out.println("!Exeception");
+				e.printStackTrace();
+			}
+		}
+		Screen.redrawMap();
+	}
 }

@@ -187,4 +187,8 @@ public class Screen {
 		}
 		lastTerminal.refreshScreen();
 	}
+
+	public static void putText(ArrayList<String> lines) {
+		Screen.printBlock(lines, Screen.lastTerminal, Screen.lastWorld);
+	}
 }

@@ -26,10 +26,16 @@ public class Dragon extends Monster {
     public Dragon(ColoredChar face, String name, Terminal term) {
         super(face,name, 100, 5, term);
     }
+
     public Dragon(Terminal term) {
         super(ColoredChar.create('D'), "roter Drache", 100, 5, term);
     }
-    /*public void act() {
+ 
+
+
+    @Override
+    public void act() {
+
 		boolean fight = false;
 
 		for (Direction dir : Arrays.asList(Direction.values())) {
@@ -43,29 +49,10 @@ public class Dragon extends Monster {
 			}
 		}
 
-		if (!fight) {*/
-
-    @Override
-    public void act() {
-        boolean fight = false;
-
-        for (Direction dir : Arrays.asList(Direction.values())) {
-            Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
-            if (player != null) {
-                fight(player);
-
-                fight = true;
-                break;
-
-            }
-
-        }
-
-        if (!fight) {
-
-            move(Dice.global.choose(Arrays.asList(Direction.values())));
-        }
-    }
+		if (!fight) {
+			move(Dice.global.choose(Arrays.asList(Direction.values())));
+		}
+	}
 
 }
 
