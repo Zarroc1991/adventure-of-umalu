@@ -19,7 +19,7 @@ import rogue.system.SystemHelper;
 
 public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
-
+		int level = 0; 
 		// Set System options
 		SystemHelper.getArgs(args);
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
@@ -35,7 +35,7 @@ public class Rogue {
 		// Create a new Player
 		Player player = new Player(term);
 		// Generate a new World
-		World world = new Level(80, 24, player);
+		World world = new Level(80, 32, player);
 		player.setName(CharacterCreation.getCharacterName(term, world));
 		Screen.printLine(player.getName(),term,world);
 		term.getKey();
@@ -56,10 +56,10 @@ public class Rogue {
 		// Play Game
 		while(!player.expired()) { // Player is still living?
 			if (player.worldchange){								//überprüft, ob einen Levelup erfolgt ist
-				world.removeActor(player);						    
-				world = new Level(80,24, player, new Cellular());	//lädt neues Level 
-				player.setWorld(world);								
-				player.worldchange=false;						
+				world.removeActor(player);						    //entfernt Spieler aus der alten Welt
+				world = new Level(80,32, player, level++);			//lädt das nächste Level 
+				player.setWorld(world);								//Spieler erkennt seine Welt
+				player.worldchange=false;										
 			}
 			// ? TODO Delete this Block if it is not needed anymore
 			/*Collection<Monster> monsters = world.getActorsAt(Monster.class, player.pos());
