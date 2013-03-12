@@ -154,9 +154,5 @@ public class Inventory {
 		}
 		return sum;
 	}
-
-	public void showInventoryScreen() {
-		for 
-	}
 }
 

@@ -79,32 +79,32 @@ public class Player extends Creature implements Camera {
 			char key;
 			key = term.getKey();
 			switch (key) {
-			case 'q': // User wants to quit
-				expire(); // Leave let player die, so this application quits
-				break;
-			default: // User pressed something else
-				Direction dir = Direction.keyToDir(key); // Get direction
-				// Something useful pressed?
-				if (dir != null) { // Yes
-					// Get list of all monsters on target Coordinates
-					Collection<Monster> actorlist = world().getActorsAt(Monster.class, x() + dir.dx(), y() + dir.dy());
-					// Is there a monster on TargetL
-					if (!actorlist.isEmpty()) { // Yes
-						// Fight first monster on coordinate.
-						fight((Monster) actorlist.toArray()[0]);
-					} else {
-						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('§')) {
-							System.out.println("Level Up");  
-							worldchange= true;					//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
-							move(dir);
-						} else {// No monster there
+				case 'q': // User wants to quit
+					expire(); // Leave let player die, so this application quits
+					break;
+				default: // User pressed something else
+					Direction dir = Direction.keyToDir(key); // Get direction
+					// Something useful pressed?
+					if (dir != null) { // Yes
+						// Get list of all monsters on target Coordinates
+						Collection<Monster> actorlist = world().getActorsAt(Monster.class, x() + dir.dx(), y() + dir.dy());
+						// Is there a monster on TargetL
+						if (!actorlist.isEmpty()) { // Yes
+							// Fight first monster on coordinate.
+							fight((Monster) actorlist.toArray()[0]);
+						} else {
+							if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('§')) {
+								System.out.println("Level Up");  
+								worldchange= true;					//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+								move(dir);
+							} else {// No monster there
 
-							move(dir);
+								move(dir);
 
-							break;
+								break;
+							}
 						}
 					}
-				}
 			}
 		} catch (InterruptedException e) { // Something has happened here
 			System.out.println("!Interrupted Exception");
@@ -169,8 +169,24 @@ public class Player extends Creature implements Camera {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public int getHitpoints() {
 		return hitpoints;
 	}
-	
+
+	/**
+	 *
+	 */
+	public void showInventoryScreen() {
+		while (true) {
+			ArrayList<String> lines = new ArrayList<String>();
+			lines.add("Inventar");
+			// TODO Add lines here.
+			Screen.putText(lines);
+			term.getKey();
+		}
+
+	}
 }
