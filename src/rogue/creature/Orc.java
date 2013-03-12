@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package rogue.creature;
 
 import jade.ui.Terminal;
@@ -13,31 +12,36 @@ import java.util.Arrays;
 
 /**
  *
- * A Troll is a stupid Monster. He doesnt move at al, but ist very strong, and attcs you, when you are near him
+ * An Orc ist a weak Monster
+ * he moves randomly like the Dragon and hit the Player if he can
  */
-public class Troll extends Monster{
+public class Orc extends Monster {
 
-    public Troll( Terminal term) {
-        super(ColoredChar.create('T'),"Troll",50, 10, term);
+    public Orc(Terminal term) {
+        super(ColoredChar.create('O'), "Orc", 10, 3, term);
     }
 
-
     @Override
-
-    /*
-     * A troll just checks, whether he can hit the player or not
-     */
     public void act() {
+        boolean fight = false;
+
         for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
             if (player != null) {
                 fight(player);
+
+                fight = true;
                 break;
 
             }
 
         }
 
+        if (!fight) {
 
+            move(Dice.global.choose(Arrays.asList(Direction.values())));
+        }
     }
 }
+
+

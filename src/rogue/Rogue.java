@@ -10,7 +10,9 @@ import java.awt.Color;
 import java.util.Collection;
 import rogue.creature.Dragon;
 import rogue.creature.Monster;
+import rogue.creature.Orc;
 import rogue.creature.Player;
+import rogue.creature.Troll;
 import rogue.level.Level;
 import rogue.level.Screen;
 import rogue.system.Path;
@@ -62,7 +64,13 @@ public class Rogue {
 				world.removeActor(player);						    //entfernt Spieler aus der alten Welt
 				world = new Level(80,32, player, ++level);			//l�dt das n�chste Level 
 				player.setWorld(world);								//Spieler erkennt seine Welt
-				player.worldchange=false;										
+				player.worldchange=false;
+                                for (int i = 0; i < level; i++) {
+                                world.addActor(new Troll(term));
+                                world.addActor(new Orc(term));
+
+                            }
+                                
 			}
 			// ? TODO Delete this Block if it is not needed anymore
 			/*Collection<Monster> monsters = world.getActorsAt(Monster.class, player.pos());
