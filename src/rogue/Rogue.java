@@ -9,8 +9,10 @@ import jade.util.datatype.ColoredChar;
 import java.awt.Color;
 import java.util.Collection;
 import rogue.creature.Dragon;
+
 import rogue.creature.InvisibleZombie;
 import rogue.creature.Dummy;
+
 import rogue.creature.Monster;
 import rogue.creature.Orc;
 import rogue.creature.Player;
