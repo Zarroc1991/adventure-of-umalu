@@ -10,7 +10,7 @@ public class SystemHelper {
 	public static boolean debug = false;
 
 	/**
-	 * Prints a message, prefixed with '> Debug', when debug option has been set
+	 * Prints a message to Console, prefixed with '> Debug', when debug option has been set
 	 *
 	 * @param message Message to be printed
 	 */
@@ -18,6 +18,15 @@ public class SystemHelper {
 		if (debug) {
 			System.out.println("> Debug: "+message);
 		}
+	}
+
+	/**
+	 * Prints a message to Console, prefixed with '(!) Error:'
+	 *
+	 * @param message Message to be printed
+	 */
+	public static void errorMessage(String message) {
+		System.out.println("(!) Error: "+message);
 	}
 
 	/**

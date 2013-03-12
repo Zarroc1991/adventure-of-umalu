@@ -9,7 +9,7 @@ import rogue.level.Screen;
 import jade.ui.Terminal;
 import java.lang.InterruptedException;
 
-public class Monster extends Creature {
+public abstract class Monster extends Creature {
 
     private String name;
     private int maxHitpoints;
@@ -35,8 +35,8 @@ public class Monster extends Creature {
     }
 
     @Override
-    public void act() {
-        boolean fight = false;
+    public abstract void act() ;
+      /*   boolean fight = false;
 
         for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
@@ -53,14 +53,15 @@ public class Monster extends Creature {
         if (!fight) {
 
             move(Dice.global.choose(Arrays.asList(Direction.values())));
-        }
-    }
-    /*
+        }*/
+    
+    
+     /*
      * fight of the Moster aganst the Player
      * causes random damage between 1 and 5
      */
     // TODO Clean up Messages in Console, to use just a single line
-    private void fight(Player opponent) {
+    public void fight(Player opponent) {
         System.out.println("der " + name + "greift dich an");
 	// Create Randomizer
         Random random = new Random();
