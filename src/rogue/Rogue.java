@@ -2,6 +2,8 @@ package rogue;
 
 import jade.core.Actor;
 import jade.core.World;
+import jade.gen.map.Cellular;
+import jade.gen.map.World1;
 import jade.ui.TiledTermPanel;
 import jade.util.datatype.ColoredChar;
 import java.awt.Color;
@@ -17,7 +19,7 @@ import rogue.system.SystemHelper;
 
 public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
-
+		int level = 0; 
 		// Set System options
 		SystemHelper.getArgs(args);
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
@@ -33,7 +35,7 @@ public class Rogue {
 		// Create a new Player
 		Player player = new Player(term);
 		// Generate a new World
-		World world = new Level(80, 24, player);
+		World world = new Level(80, 32, player);
 		player.setName(CharacterCreation.getCharacterName(term, world));
 		Screen.printLine(player.getName(),term,world);
 		term.getKey();
@@ -50,10 +52,15 @@ public class Rogue {
 		world.addActor(new Dragon(ColoredChar.create('D',Color.red),"roter Drache",term));
 		// Add Minimap to left part in Window (Size given as Parameter), focus on Player
 		// term.registerCamera(player, 5, 5);
-
+  
 		// Play Game
 		while(!player.expired()) { // Player is still living?
-
+			if (player.worldchange){								//überprüft, ob einen Levelup erfolgt ist
+				world.removeActor(player);						    //entfernt Spieler aus der alten Welt
+				world = new Level(80,32, player, ++level);			//lädt das nächste Level 
+				player.setWorld(world);								//Spieler erkennt seine Welt
+				player.worldchange=false;										
+			}
 			// ? TODO Delete this Block if it is not needed anymore
 			/*Collection<Monster> monsters = world.getActorsAt(Monster.class, player.pos());
 			  if(!monsters.isEmpty()){

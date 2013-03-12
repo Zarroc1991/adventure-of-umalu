@@ -4,6 +4,8 @@ import jade.core.Actor;
 import java.util.Collection;
 import jade.fov.RayCaster;
 import jade.fov.ViewField;
+import jade.gen.Generator;
+import jade.gen.map.World1;
 import jade.ui.Camera;
 import jade.ui.Terminal;
 import jade.util.datatype.ColoredChar;
@@ -12,18 +14,20 @@ import jade.util.datatype.Direction;
 import rogue.level.Screen;
 import java.util.Random;
 import java.lang.InterruptedException;
+import jade.core.World;
 
 public class Player extends Creature implements Camera {
 	private Terminal term;
 	private ViewField fov;
-	private static final int maxHitpoints =15;
+	private static final int maxHitpoints = 15;
 	private int strength;
 	private String name;
-
+    public Boolean worldchange = false;   // standardmäßig ist keine Mapänderung erfolgt
 	/**
 	 * Creates a new Player Object
-	 *
-	 * @param term Currently used Terminalobject
+	 * 
+	 * @param term
+	 *            Currently used Terminalobject
 	 */
 	public Player(Terminal term) {
 		// Put Charactersymbol on Screen
@@ -38,8 +42,9 @@ public class Player extends Creature implements Camera {
 
 	/**
 	 * Sets Charactername. Should be only called on character Creation.
-	 *
-	 * @param name New Name of Character
+	 * 
+	 * @param name
+	 *            New Name of Character
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -47,13 +52,12 @@ public class Player extends Creature implements Camera {
 
 	/**
 	 * Returns Charactername.
-	 *
+	 * 
 	 * @return Name of Character
 	 */
 	public String getName() {
 		return name;
 	}
-
 
 	@Override
 	/**
@@ -64,28 +68,35 @@ public class Player extends Creature implements Camera {
 			// Get pressed char
 			char key;
 			key = term.getKey();
-			switch(key) {
-				case 'q': // User wants to quit
-					expire(); // Leave let player die, so this application quits
-					break;
-				default: // User pressed something else
-					Direction dir = Direction.keyToDir(key); // Get direction
-					// Something useful pressed?
-					if(dir != null){ // Yes
-						// Get list of all monsters on target Coordinates
-						Collection<Monster> actorlist = world().getActorsAt(Monster.class, x()+dir.dx(), y()+dir.dy());
-						// Is there a monster on TargetL
-						if(!actorlist.isEmpty()){ // Yes
-							// Fight first monster on coordinate.
-							fight((Monster) actorlist.toArray()[0]);
-						} else {
-							// No monster there
+			switch (key) {
+			case 'q': // User wants to quit
+				expire(); // Leave let player die, so this application quits
+				break;
+			default: // User pressed something else
+				Direction dir = Direction.keyToDir(key); // Get direction
+				// Something useful pressed?
+				if (dir != null) { // Yes
+					// Get list of all monsters on target Coordinates
+					Collection<Monster> actorlist = world().getActorsAt(Monster.class, x() + dir.dx(), y() + dir.dy());
+					// Is there a monster on TargetL
+					if (!actorlist.isEmpty()) { // Yes
+						// Fight first monster on coordinate.
+						fight((Monster) actorlist.toArray()[0]);
+					} else {
+						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('§')) {
+							System.out.println("Level Up");  
+							worldchange= true;					//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
 							move(dir);
+						} else {// No monster there
+
+							move(dir);
+
+							break;
 						}
-						break;
 					}
-			} 
-		} catch(InterruptedException e) { // Something has happened here
+				}
+			}
+		} catch (InterruptedException e) { // Something has happened here
 			System.out.println("!Interrupted Exception");
 			e.printStackTrace();
 		}
@@ -103,8 +114,9 @@ public class Player extends Creature implements Camera {
 
 	/**
 	 * Player fights the opponent. Causes random damage between 1 and strength
-	 *
-	 * @param opponent The opponent Monster
+	 * 
+	 * @param opponent
+	 *            The opponent Monster
 	 */
 	// TODO Clean up Messages in Console, to use just a single line
 	private void fight(Monster opponent) {
@@ -112,13 +124,14 @@ public class Player extends Creature implements Camera {
 		// Get a randomizer
 		Random random = new Random();
 		// Get random Damage for Attack
-		int damage = random.nextInt(strength)+1;
+		int damage = random.nextInt(strength) + 1;
 		// Do Damage to Opponent
 		opponent.loseHitpoints(damage);
 		// Print result
-		System.out.println("Du hast "+ damage + " Schaden verursacht");
-		System.out.println(opponent.name()+" hat noch " + opponent.hitpoints +" HP");
-		Screen.redrawEventLine("Du verursachst "+damage+" Schaden");
+		System.out.println("Du hast " + damage + " Schaden verursacht");
+		System.out.println(opponent.name() + " hat noch " + opponent.hitpoints
+				+ " HP");
+		Screen.redrawEventLine("Du verursachst " + damage + " Schaden");
 		try {
 			term.getKey();
 
@@ -131,8 +144,8 @@ public class Player extends Creature implements Camera {
 	/**
 	 * Player regains 1 Hitpoint. Method should be used every x rounds in rogue
 	 */
-	public void regainHitpoint(){
-		if(hitpoints<maxHitpoints){
+	public void regainHitpoint() {
+		if (hitpoints < maxHitpoints) {
 			hitpoints++;
 			System.out.println("Du hast einen HP regeneriert, jetzt " + hitpoints+" HP");
 			Screen.redrawEventLine("Du regenerierst einen HP.");
@@ -149,4 +162,5 @@ public class Player extends Creature implements Camera {
 	public int getHitpoints() {
 		return hitpoints;
 	}
+	
 }
