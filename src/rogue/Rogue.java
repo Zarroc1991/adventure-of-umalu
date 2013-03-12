@@ -2,6 +2,8 @@ package rogue;
 
 import jade.core.Actor;
 import jade.core.World;
+import jade.gen.map.Cellular;
+import jade.gen.map.World1;
 import jade.ui.TiledTermPanel;
 import jade.util.datatype.ColoredChar;
 import java.awt.Color;
@@ -50,10 +52,15 @@ public class Rogue {
 		world.addActor(new Dragon(ColoredChar.create('D',Color.red),"roter Drache",term));
 		// Add Minimap to left part in Window (Size given as Parameter), focus on Player
 		// term.registerCamera(player, 5, 5);
-
+  
 		// Play Game
 		while(!player.expired()) { // Player is still living?
-
+			if (player.worldchange){
+				world.removeActor(player);
+				world = new Level(80,24, player, new Cellular());
+				player.setWorld(world);
+				player.worldchange=false;
+			}
 			// ? TODO Delete this Block if it is not needed anymore
 			/*Collection<Monster> monsters = world.getActorsAt(Monster.class, player.pos());
 			  if(!monsters.isEmpty()){
