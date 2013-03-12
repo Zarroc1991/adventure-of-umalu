@@ -34,8 +34,29 @@ public abstract class Monster extends Creature {
         return name;
     }
 
+    @Override
+    public abstract void act() ;
+      /*   boolean fight = false;
+
+        for (Direction dir : Arrays.asList(Direction.values())) {
+            Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
+            if (player != null) {	
+                fight(player);
+
+                fight = true;
+                break;
+
+            }
+
+        }
+        
+        if (!fight) {
+
+            move(Dice.global.choose(Arrays.asList(Direction.values())));
+        }*/
     
-    /*
+    
+     /*
      * fight of the Moster aganst the Player
      * causes random damage between 1 and 5
      */

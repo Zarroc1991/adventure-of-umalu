@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.util.Collection;
 import rogue.creature.Dragon;
 import rogue.creature.InvisibleZombie;
+import rogue.creature.Dummy;
 import rogue.creature.Monster;
 import rogue.creature.Orc;
 import rogue.creature.Player;
@@ -63,7 +64,7 @@ public class Rogue {
 		while(!player.expired()) { // Player is still living?
 			if (player.worldchange){								//ï¿½berprï¿½ft, ob einen Levelup erfolgt ist
 				world.removeActor(player);						    //entfernt Spieler aus der alten Welt
-				world = new Level(80,32, player, ++level, term);			//lï¿½dt das nï¿½chste Level
+				world = new Level(80,32, player, ++level, term);		//lädt das nächste Level 
 				player.setWorld(world);								//Spieler erkennt seine Welt
 				player.worldchange=false;
                                 
