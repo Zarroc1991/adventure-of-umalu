@@ -34,9 +34,8 @@ public abstract class Monster extends Creature {
         return name;
     }
 
-    
-    /*
-     * fight of the Moster aganst the Player
+
+     /* fight of the Moster aganst the Player
      * causes random damage between 1 and 5
      */
     // TODO Clean up Messages in Console, to use just a single line

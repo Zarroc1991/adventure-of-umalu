@@ -5,7 +5,11 @@
 
 package rogue.creature;
 
+import java.util.Arrays;
+
+import jade.util.Dice;
 import jade.util.datatype.ColoredChar;
+import jade.util.datatype.Direction;
 import jade.ui.Terminal;
 import jade.util.Dice;
 import jade.util.datatype.Direction;
@@ -22,28 +26,24 @@ public class Dragon extends Monster {
     public Dragon(ColoredChar face, String name, Terminal term) {
         super(face,name, 100, 5, term);
     }
-
-    @Override
     public void act() {
-        boolean fight = false;
+		boolean fight = false;
 
-        for (Direction dir : Arrays.asList(Direction.values())) {
-            Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
-            if (player != null) {
-                fight(player);
+		for (Direction dir : Arrays.asList(Direction.values())) {
+			Player player = world().getActorAt(Player.class, x() + dir.dx(),
+					y() + dir.dy());
+			if (player != null) {
+				fight(player);
 
-                fight = true;
-                break;
+				fight = true;
+				break;
+			}
+		}
 
-            }
-
-        }
-
-        if (!fight) {
-
-            move(Dice.global.choose(Arrays.asList(Direction.values())));
-        }
-    }
+		if (!fight) {
+			move(Dice.global.choose(Arrays.asList(Direction.values())));
+		}
+	}
 
 }
 

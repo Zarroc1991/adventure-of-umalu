@@ -1,11 +1,17 @@
 package rogue.level;
 
+import java.awt.Color;
+
 import jade.core.World;
 import jade.gen.Generator;
 
 import jade.gen.map.*;
 import jade.ui.TiledTermPanel;
+
 import rogue.creature.*;
+
+import jade.util.datatype.ColoredChar;
+
 public class Level extends World
 {
 	private static Generator gen = getLevelGenerator();
@@ -27,9 +33,11 @@ public class Level extends World
 		}
 		case 1:{
 			gen = new World2();
-                                addActor(new Troll(term));
-                                addActor(new Orc(term));
-                                addActor(new InvisibleZombie(term));
+                        addActor(new Troll(term));
+                        addActor(new Orc(term));
+                        addActor(new InvisibleZombie(term));
+			addActor(new Dummy(ColoredChar.create('X',Color.blue),"Dummy",term));
+
 			break; 
 		}
                     default:{gen = new World1();break;}
