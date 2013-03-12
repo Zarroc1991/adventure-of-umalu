@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class InvisibleZombie extends Monster{
 
     public InvisibleZombie( Terminal term) {
-        super(ColoredChar.create('.'), "Unsichtbarer Zombie",8 ,2, term);
+        super(null, "Unsichtbarer Zombie",8 ,2, term);
     }
 
     @Override
