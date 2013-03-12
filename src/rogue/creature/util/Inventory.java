@@ -7,6 +7,7 @@
 package rogue.creature.util;
 
 import java.util.ArrayList;
+import rogue.level.Screen;
 
 /**
  * Represents an Inventory for player.
@@ -131,7 +132,7 @@ public class Inventory {
 	/**
 	 * Returns the sum of all Bonusdamage
 	 *
-	 * @return Bonusdamage for user
+	 * @r157ggeturn Bonusdamage for user
 	 */
 	public int getBonusDamageOfWornItems() {
 		int sum = 0;
@@ -154,5 +155,8 @@ public class Inventory {
 		return sum;
 	}
 
-
+	public void showInventoryScreen() {
+		for 
+	}
 }
+
