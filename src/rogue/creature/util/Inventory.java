@@ -154,5 +154,9 @@ public class Inventory {
 		}
 		return sum;
 	}
+
+	public Item[] getWornItems() {
+		return wornItems;
+	}
 }
 

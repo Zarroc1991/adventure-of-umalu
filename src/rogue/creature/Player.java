@@ -188,6 +188,15 @@ public class Player extends Creature implements Camera {
 		while (loop) {
 			ArrayList<String> lines = new ArrayList<String>();
 			lines.add("Inventar");
+			lines.add("Du traegst: ");
+			Item[] wornItems = inventory.getWornItems();
+			lines.add("Kopf: "+wornItems[Item.ITEMTYPE_HEAD]);
+			lines.add("Schwert: "+wornItems[Item.ITEMTYPE_HEAD]);
+			ArrayList<Item> backpack = inventory.listBackpack();
+			lines.add("Du hast im Rucksack: ");
+			for (int i = 0;i<backpack.size();i++) {
+				lines.add("("+i+") "+backpack.get(i).getName()+"[+DMG: "+backpack.get(i).getDamageBonus()+", +HP: "+backpack.get(i).getHealthBonus()+"]");
+			}
 			// TODO Add lines here.
 			Screen.putText(lines);
 			try {
