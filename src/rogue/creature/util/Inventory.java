@@ -136,7 +136,7 @@ public class Inventory {
 	/**
 	 * Returns the sum of all Bonusdamage
 	 *
-	 * @r157ggeturn Bonusdamage for user
+	 * @return Bonusdamage for user
 	 */
 	public int getBonusDamageOfWornItems() {
 		int sum = 0;
