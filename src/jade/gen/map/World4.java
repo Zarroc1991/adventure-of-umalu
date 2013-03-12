@@ -6,12 +6,12 @@ import jade.util.Dice;
 
 
 // Beispiel Map World1 
-public class World3 extends NewWorld {
+public class World4 extends NewWorld {
 
 	@Override
 	//ruft generateStep aus NewWorld auf
 	protected void generateStep(World world, Dice dice) {
-		generateStep(world,dice,Path.generateAbsolutePath("maps/Map3.txt"));
+		generateStep(world,dice,Path.generateAbsolutePath("maps/Map4.txt"));
 		
 	}
 

@@ -32,6 +32,9 @@ public abstract class NewWorld extends MapGenerator {
 			ArrayList notPassable = new ArrayList();
 			notPassable.add('#');
 			notPassable.add('7');
+			notPassable.add('~');
+			notPassable.add('^');
+			notPassable.add('P');
 			while (line != null) {
 				int i;
 
@@ -50,6 +53,7 @@ public abstract class NewWorld extends MapGenerator {
 					case '~': {	c_color = ColoredChar.create('~', Color.blue);	break;}
 					case '^': {	c_color = ColoredChar.create('^', Color.darkGray);	break;}
 					case '$': {	c_color = ColoredChar.create('$', Color.yellow);	break;}
+					case 'P': {	c_color = ColoredChar.create('P', Color.green);	break;}
 					}
 					// System.out.println(c); // TODO Delete this line, when it
 					// is not needed anymore
