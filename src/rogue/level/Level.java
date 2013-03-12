@@ -27,6 +27,10 @@ public class Level extends World
 			gen = new World2();
 			break; 
 		}
+		case 2:{
+			gen = new World3();
+			break; 
+		}
 		}
 		gen.generate(this);
 		addActor(player);
