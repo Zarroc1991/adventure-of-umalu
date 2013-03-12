@@ -38,7 +38,10 @@ public class Level extends World {
 			addActor(new Dummy(ColoredChar.create('X',Color.blue),"Dummy",term)); //Ordnet jedem Level Monster hinzu 
 			break; 
 		}
-                    default:{gen = new World1();break;}
+		case 2:{
+			gen = new World3();
+			break; 
+		}
 		}
 		gen.generate(this);
 		addActor(player);
