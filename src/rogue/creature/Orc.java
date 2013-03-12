@@ -2,25 +2,23 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package rogue.creature;
 
-import jade.util.datatype.ColoredChar;
 import jade.ui.Terminal;
 import jade.util.Dice;
+import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Direction;
 import java.util.Arrays;
 
 /**
- * TODO Delete this Class, when it is not used anymore, as instances of Montster do the same thing right now
- * @author alle
+ *
+ * An Orc ist a weak Monster
+ * he moves randomly like the Dragon and hit the Player if he can
  */
-public class Dragon extends Monster {
-   /*
-    * every Dragon has 100 Hitpoints and Strength 5(until now)
-    */
-    public Dragon(ColoredChar face, String name, Terminal term) {
-        super(face,name, 100, 5, term);
+public class Orc extends Monster {
+
+    public Orc(Terminal term) {
+        super(ColoredChar.create('O'), "Orc", 10, 3, term);
     }
 
     @Override
@@ -44,6 +42,6 @@ public class Dragon extends Monster {
             move(Dice.global.choose(Arrays.asList(Direction.values())));
         }
     }
-
 }
+
 

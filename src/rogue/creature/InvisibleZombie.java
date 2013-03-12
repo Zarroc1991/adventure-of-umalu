@@ -5,22 +5,20 @@
 
 package rogue.creature;
 
-import jade.util.datatype.ColoredChar;
 import jade.ui.Terminal;
 import jade.util.Dice;
+import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Direction;
 import java.util.Arrays;
 
 /**
- * TODO Delete this Class, when it is not used anymore, as instances of Montster do the same thing right now
- * @author alle
+ *
+ * TODO: th einvisible Zombie should be invisible not just a .
  */
-public class Dragon extends Monster {
-   /*
-    * every Dragon has 100 Hitpoints and Strength 5(until now)
-    */
-    public Dragon(ColoredChar face, String name, Terminal term) {
-        super(face,name, 100, 5, term);
+public class InvisibleZombie extends Monster{
+
+    public InvisibleZombie( Terminal term) {
+        super(null, "Unsichtbarer Zombie",8 ,2, term);
     }
 
     @Override
@@ -46,4 +44,3 @@ public class Dragon extends Monster {
     }
 
 }
-
