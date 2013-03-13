@@ -8,6 +8,7 @@ package rogue.creature.util;
 
 import java.util.ArrayList;
 import rogue.level.Screen;
+import rogue.creature.util.NotEnoughSpaceException;
 import jade.ui.TiledTermPanel;
 import jade.ui.Terminal;
 
@@ -27,14 +28,21 @@ public class Inventory {
 	 * @param gold Amount of Gold character initially starts with
 	 */
 	public Inventory(int maximumItems, int gold) {
+		this.gold = gold;
+		this.maximumItems = maximumItems;
 		backpackSpaces = new ArrayList<Item>(maximumItems);
+		//Item test = 
+		try {
+			this.addItem(new Item("TestGegenstand",0,Item.ITEMTYPE_SWORD,0,0));
+		} catch (NotEnoughSpaceException e) {
+			System.out.println("Nicht genug Platz");
+			e.printStackTrace();
+		}
 		wornItems = new Item[3];
 		Item standardHelmet = new Item("Standard Helm",0,Item.ITEMTYPE_HEAD,0,0);
 		Item standardSword = new Item("Standard Schwert",0,Item.ITEMTYPE_SWORD,0,0);
 		wornItems[Item.ITEMTYPE_HEAD] = standardHelmet;
 		wornItems[Item.ITEMTYPE_SWORD] = standardSword;
-		this.gold = gold;
-		this.maximumItems = maximumItems;
 	}
 	
 	/**

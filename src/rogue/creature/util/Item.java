@@ -110,6 +110,8 @@ public class Item {
 		String result = new String();
 		if (equipped) {
 			lines.add("Derzeit angelegt.");
+		} else {
+			lines.add("Derzeit nicht angelegt");
 		}
 		char key = ' ';
 		Screen.printBlock(lines, Screen.lastTerminal, Screen.lastWorld);
@@ -140,9 +142,10 @@ public class Item {
 					warningScreen.add("Sicher das "+this.getName()+" zerstoert werden soll?");
 					warningScreen.add("<J>a");
 					warningScreen.add("<N>ein");
+					Screen.printBlock(warningScreen, Screen.lastTerminal, Screen.lastWorld);
 					try {
 						char selection = term.getKey();
-						if (selection == 'j' || selection == 'J') {
+						if (selection == 'j') {
 							inventory.removeItem(this);
 						}
 					} catch (InterruptedException e) {
