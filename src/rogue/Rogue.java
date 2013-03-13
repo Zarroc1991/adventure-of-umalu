@@ -4,10 +4,13 @@ import jade.core.Actor;
 import jade.core.World;
 import jade.gen.map.Cellular;
 import jade.gen.map.World1;
+import jade.path.AStar;
 import jade.ui.TiledTermPanel;
 import jade.util.datatype.ColoredChar;
+import jade.util.datatype.Coordinate;
 import java.awt.Color;
 import java.util.Collection;
+import java.util.List;
 import rogue.creature.Dragon;
 
 import rogue.creature.InvisibleZombie;
@@ -25,7 +28,7 @@ import rogue.system.SystemHelper;
 
 public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
-		int level = 0; 
+   		int level = 0; 
 		// Set System options
 		SystemHelper.getArgs(args);
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
@@ -43,6 +46,7 @@ public class Rogue {
 		// Generate a new World
 
 		World world = new Level(80, 32, player);
+               
 
 		player.setName(CharacterCreation.getCharacterName(term, world));
 		Screen.printLine(player.getName(),term,world);
@@ -58,7 +62,7 @@ public class Rogue {
 
 		// Add a Dragon so we have an enemy
 		world.addActor(new Dragon(ColoredChar.create('D',Color.red),"roter Drache",term));
-		// Add Minimap to left part in Window (Size given as Parameter), focus on Player
+                // Add Minimap to left part in Window (Size given as Parameter), focus on Player
 
 		// term.registerCamera(player, 5, 5);
 
