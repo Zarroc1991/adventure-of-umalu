@@ -202,9 +202,9 @@ public class Player extends Creature implements Camera {
 			// Lade die Liste
 			Item[] wornItems = inventory.getWornItems();
 			// Generiere den Output fuer den aktuellen Helm
-			lines.add("<K>Kopf: "+wornItems[Item.ITEMTYPE_HEAD].getName()+" [+DMG: "+wornItems[Item.ITEMTYPE_HEAD].getDamageBonus()+", +HP: "+wornItems[Item.ITEMTYPE_HEAD].getHealthBonus()+"]");
+			lines.add("<K>opf: "+wornItems[Item.ITEMTYPE_HEAD].getName()+" [+DMG: "+wornItems[Item.ITEMTYPE_HEAD].getDamageBonus()+", +HP: "+wornItems[Item.ITEMTYPE_HEAD].getHealthBonus()+"]");
 			// Generiere den Output fuer das aktuelle Schwert
-			lines.add("<W>Schwert: "+wornItems[Item.ITEMTYPE_SWORD].getName()+" [+DMG: "+wornItems[Item.ITEMTYPE_HEAD].getDamageBonus()+", +HP: "+wornItems[Item.ITEMTYPE_HEAD].getHealthBonus()+"]");
+			lines.add("<S>chwert: "+wornItems[Item.ITEMTYPE_SWORD].getName()+" [+DMG: "+wornItems[Item.ITEMTYPE_HEAD].getDamageBonus()+", +HP: "+wornItems[Item.ITEMTYPE_HEAD].getHealthBonus()+"]");
 			// TODO Zeige gesamt Bonus an
 			// Zeige an, was sonst noch im Inventar liegt, aber nicht angelegt wurde (und somit keinen Bonus bringt)
 			ArrayList<Item> backpack = inventory.listBackpack();
@@ -226,7 +226,7 @@ public class Player extends Creature implements Camera {
 					//wornItems[Item.ITEMTYPE_HEAD].showInfo(term,inventory);
 					inventory.showWorn(Item.ITEMTYPE_HEAD, term);
 					break;
-					case 'w':
+					case 's':
 					//wornItems[Item.ITEMTYPE_SWORD].showInfo();
 					inventory.showWorn(Item.ITEMTYPE_SWORD, term);
 					break;
