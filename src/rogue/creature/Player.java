@@ -74,6 +74,7 @@ public class Player extends Creature implements Camera {
 				break;
 			default: // User pressed something else
 				Direction dir = Direction.keyToDir(key); // Get direction
+				
 				// Something useful pressed?
 				if (dir != null) { // Yes
 					// Get list of all monsters on target Coordinates
@@ -88,7 +89,6 @@ public class Player extends Creature implements Camera {
 							worldchange= true;					//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
 							move(dir);
 						} else {// No monster there
-
 							move(dir);
 
 							break;

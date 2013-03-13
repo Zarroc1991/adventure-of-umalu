@@ -21,6 +21,8 @@ import rogue.system.SystemHelper;
 public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
 		int level = 0; 
+
+
 		// Set System options
 		SystemHelper.getArgs(args);
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
@@ -52,9 +54,9 @@ public class Rogue {
 		// Add a Dragon so we have an enemy
 		world.addActor(new Dragon(ColoredChar.create('D',Color.red),"roter Drache",term));
 		// Add Minimap to left part in Window (Size given as Parameter), focus on Player
-		// term.registerCamera(player, 5, 5);
   
 		// Play Game
+		
 		while(!player.expired()) { // Player is still living?
 			if (player.worldchange){								//überprüft, ob einen Levelup erfolgt ist
 				world.removeActor(player);						    //entfernt Spieler aus der alten Welt
@@ -68,7 +70,7 @@ public class Rogue {
 			  player.expire();
 			  continue;
 			  }*/
-
+		    term.registerCamera(player, player.x(), player.y()+1);
 			// TODO HPup Codeblock should move to Player.act(), since it is only his stuff
 			// Finished hpCycle?
 			if (roundsToHpUp == 0) { // Yes
@@ -89,7 +91,6 @@ public class Rogue {
 				player.expire();
 				continue;
 			}
-
 			Screen.lastWorld = world;
 			Screen.lastTerminal = term;
 			Screen.redrawMap("HP: "+player.getHitpoints());
