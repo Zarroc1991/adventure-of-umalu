@@ -36,6 +36,18 @@ public class Level extends World {
                 gen = new World2();
                 break;
             }
+	    case 2: {
+		gen = new World3();
+		break;
+	    }
+	    case 3: {
+		gen = new World4();
+		break;
+	    }
+	    case 4: {
+		gen = new World5();
+		break;
+	    }
             default: {
                 gen = new World1();
                 break;
