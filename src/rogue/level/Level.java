@@ -22,6 +22,7 @@ public class Level extends World {
         super(width, height - 2);
         gen.generate(this);
         addActor(player);
+
     }
     // Zweiter Konstruktor, um ein neues Level aufzurufen
 
