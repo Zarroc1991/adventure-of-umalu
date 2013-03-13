@@ -100,7 +100,7 @@ public class TiledTermPanel extends TermPanel
         super.refreshScreen();
     }
 
-    /*    @Override
+ /*      @Override
     public void bufferCamera(Camera camera)
     {
         Guard.argumentIsNotNull(camera);

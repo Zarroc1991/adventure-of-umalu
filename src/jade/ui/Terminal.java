@@ -252,7 +252,7 @@ public abstract class Terminal
         int offY = screenCenter.y() - camera.y();
         World world = camera.world();
         for(Coordinate coord : camera.getViewField())
-            bufferChar(coord.getTranslated(offX, offY), world.look(coord));
+            bufferChar(coord.getTranslated(offX, offY-1), world.look(coord));
     }
 
     /**
