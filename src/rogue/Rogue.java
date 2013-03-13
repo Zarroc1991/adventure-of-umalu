@@ -30,10 +30,10 @@ public class Rogue {
 		final int hpCycle=10;
 		int roundsToHpUp = hpCycle;
 		// Nobody knows right now, what happens here
-		term.registerTile("dungeon.png", 5, 59, ColoredChar.create('#'));
+		/*term.registerTile("dungeon.png", 5, 59, ColoredChar.create('#'));
 		term.registerTile("dungeon.png", 3, 60, ColoredChar.create('.'));
 		term.registerTile("dungeon.png", 5, 20, ColoredChar.create('@'));
-		term.registerTile("dungeon.png", 14, 30, ColoredChar.create('D', Color.red));
+		term.registerTile("dungeon.png", 14, 30, ColoredChar.create('D', Color.red));*/
 
 		// Create a new Player
 		Player player = new Player(term);
@@ -71,8 +71,8 @@ public class Rogue {
 			  player.expire();
 			  continue;
 			  }*/
-		    term.registerCamera(player, player.x(), player.y()+1);		//Kamera verfolgt den Spieler 
-			// TODO HPup Codeblock should move to Player.act(), since it is only his stuff
+		    term.registerCamera(player, player.x(), player.y()+1);		//Kamera verfolgt den Spieler
+		    // TODO HPup Codeblock should move to Player.act(), since it is only his stuff
 			// Finished hpCycle?
 			if (roundsToHpUp == 0) { // Yes
 				// Give Player a hitpoint

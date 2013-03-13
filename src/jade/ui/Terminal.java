@@ -244,7 +244,7 @@ public abstract class Terminal
      */
     public void bufferCamera(Camera camera)
     {
-        Guard.argumentIsNotNull(camera);
+    	Guard.argumentIsNotNull(camera);
         Guard.verifyState(cameraRegistered(camera));
 
         Coordinate screenCenter = cameras.get(camera);

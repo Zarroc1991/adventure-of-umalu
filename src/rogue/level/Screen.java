@@ -158,12 +158,12 @@ public class Screen {
 	 */
 	public static void redrawMap() {					
 		lastTerminal.clearBuffer();
-		for (int x = 0; x < 0; x++) {						//Karte wird nicht im Terminal geladen 
-			for (int y = 0; y < 0; y++) {
+		/*for (int x = 0; x < lastWorld.width(); x++) {						//Karte wird nicht im Terminal geladen 
+			for (int y = 0; y < lastWorld.height(); y++) {
 				// lastTerminal.bufferChar(x+11,y,lastWorld.look(x,y));
 				lastTerminal.bufferChar(x, y, lastWorld.look(x, y));
 			}
-		}
+		}*/
 		lastTerminal.bufferCameras();
 		lastTerminal.refreshScreen();
 	}
