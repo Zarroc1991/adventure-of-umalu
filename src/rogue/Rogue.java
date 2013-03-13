@@ -60,7 +60,7 @@ public class Rogue {
 		while(!player.expired()) { // Player is still living?
 			if (player.worldchange){								//überprüft, ob einen Levelup erfolgt ist
 				world.removeActor(player);						    //entfernt Spieler aus der alten Welt
-				world = new Level(80,32, player, ++level, term);		//lädt das nächste Level 
+				world = new Level(80,32, player, ++level, term);    //lädt das nächste Level 
 				player.setWorld(world);								//Spieler erkennt seine Welt
 				player.worldchange=false;										
 			}
@@ -70,7 +70,7 @@ public class Rogue {
 			  player.expire();
 			  continue;
 			  }*/
-		    term.registerCamera(player, player.x(), player.y()+1);
+		    term.registerCamera(player, player.x(), player.y()+1);		//Kamera verfolgt den Spieler 
 			// TODO HPup Codeblock should move to Player.act(), since it is only his stuff
 			// Finished hpCycle?
 			if (roundsToHpUp == 0) { // Yes

@@ -88,9 +88,15 @@ public class Player extends Creature implements Camera {
 							System.out.println("Level Up");  
 							worldchange= true;					//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
 							move(dir);
-						} else {// No monster there
+							
+							for(Coordinate coord: getViewField()){
+								world().viewable(coord.x(), coord.y());
+						}} else {// No monster there
 							move(dir);
-
+							
+							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
+								world().viewable(coord.x(), coord.y());
+							}
 							break;
 						}
 					}
@@ -109,7 +115,7 @@ public class Player extends Creature implements Camera {
 	 * @return A collection of visible Items
 	 */
 	public Collection<Coordinate> getViewField() {
-		return fov.getViewField(world(), pos(), 5);
+		return fov.getViewField(world(), pos(), 3); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
 	}
 
 	/**
