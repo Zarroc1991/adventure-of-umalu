@@ -222,6 +222,12 @@ public class Player extends Creature implements Camera {
 					case 'q':
 					loop = false;
 					break;
+					case 'k':
+					wornItems[Item.ITEMTYPE_HEAD].showInfo();
+					break;
+					case 'w':
+					wornItems[Item.ITEMTYPE_SWORD].showInfo();
+					break;
 					case '0':
 					inventory.showItem(0);
 					break;

@@ -168,5 +168,8 @@ public class Inventory {
 		return wornItems;
 	}
 
+	public void showInfo(int index) {
+		
+	}
 }
 
