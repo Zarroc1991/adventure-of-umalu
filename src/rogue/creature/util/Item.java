@@ -9,6 +9,7 @@ package rogue.creature.util;
 import jade.ui.TiledTermPanel;
 import jade.ui.Terminal;
 import java.util.ArrayList;
+import rogue.level.Screen;
 
 /**
  * Represents a single Item for players Inventory
@@ -104,13 +105,14 @@ public class Item {
 		Item item = this;
 		ArrayList<String> lines = new ArrayList<String>();
 		lines.add(item.getName());
-		lines.add("Bonus Damage: "+item.getDamageBonus());
-		lines.add("Bonus Health: "+item.getHealthBonus());
+		lines.add("Bonus Schaden: "+item.getDamageBonus());
+		lines.add("Bonus Gesundheitspunkte: "+item.getHealthBonus()); // TODO Bessere Uebersetzung finden
 		String result = new String();
 		if (equipped) {
-			System.out.println();
+			lines.add("Derzeit angelegt.");
 		}
 		char key = ' ';
+		Screen.printBlock(lines, Screen.lastTerminal, Screen.lastWorld);
 		try{
 			key = term.getKey();
 		} catch (InterruptedException e) {
@@ -136,8 +138,8 @@ public class Item {
 					warningScreen.add("WARNUNG!");
 					warningScreen.add("========");
 					warningScreen.add("Sicher das "+this.getName()+" zerstoert werden soll?");
-					warningScreen.add("(J)a");
-					warningScreen.add("(N)ein");
+					warningScreen.add("<J>a");
+					warningScreen.add("<N>ein");
 					try {
 						char selection = term.getKey();
 						if (selection == 'j' || selection == 'J') {
