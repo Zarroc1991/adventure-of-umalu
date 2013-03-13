@@ -363,7 +363,15 @@ public abstract class World extends Messenger
 
 		return grid[x][y].face;
 	}
-
+	
+	public void viewable(int x, int y){
+		Guard.argumentsInsideBounds(x, y, width, height);		//Macht etwas sichtbar 
+		grid[x][y].viewable = true ;
+	}
+	public Boolean isviewable(int x, int y){
+		Guard.argumentsInsideBounds(x, y, width, height);		//Überprüft, ob etwas sichtbar ist
+		return grid[x][y].viewable ;
+	}
 	/**
 	 * Returns the face of the tile at the provided coordinates.
 	 * @param coord the value of the position being queried
@@ -580,12 +588,14 @@ public abstract class World extends Messenger
 	private class Tile
 	{
 		public boolean passable;
+		public boolean viewable; 
 		public ColoredChar face;
 		public Set<Actor> actors;
 
-		public Tile()
+		public Tile()			
 		{
 			passable = true;
+			viewable = false; 							//jedes Tile erhält nocht die Eigenschaft der Sichtbarkeit 
 			face = ColoredChar.create('.');
 			actors = new HashSet<Actor>();
 		}

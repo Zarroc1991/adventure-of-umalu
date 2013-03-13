@@ -36,10 +36,10 @@ public class Rogue {
 		final int hpCycle=10;
 		int roundsToHpUp = hpCycle;
 		// Nobody knows right now, what happens here
-		term.registerTile("dungeon.png", 5, 59, ColoredChar.create('#'));
+		/*term.registerTile("dungeon.png", 5, 59, ColoredChar.create('#'));
 		term.registerTile("dungeon.png", 3, 60, ColoredChar.create('.'));
 		term.registerTile("dungeon.png", 5, 20, ColoredChar.create('@'));
-		term.registerTile("dungeon.png", 14, 30, ColoredChar.create('D', Color.red));
+		term.registerTile("dungeon.png", 14, 30, ColoredChar.create('D', Color.red));*/
 
 		// Create a new Player
 		Player player = new Player(term);
@@ -66,11 +66,14 @@ public class Rogue {
 
 		// term.registerCamera(player, 5, 5);
 
+		// Add Minimap to left part in Window (Size given as Parameter), focus on Player
+  
 		// Play Game
+		world.tick();
 		while(!player.expired()) { // Player is still living?
-			if (player.worldchange){								//ï¿½berprï¿½ft, ob einen Levelup erfolgt ist
+			if (player.worldchange){								//überprüft, ob einen Levelup erfolgt ist
 				world.removeActor(player);						    //entfernt Spieler aus der alten Welt
-				world = new Level(80,32, player, ++level, term);		//lädt das nächste Level 
+				world = new Level(80,32, player, ++level, term);    //lädt das nächste Level 
 				player.setWorld(world);								//Spieler erkennt seine Welt
 				player.worldchange=false;
                                 
@@ -82,8 +85,8 @@ public class Rogue {
 			  player.expire();
 			  continue;
 			  }*/
-
-			// TODO HPup Codeblock should move to Player.act(), since it is only his stuff
+		    term.registerCamera(player, player.x(), player.y()+1);		//Kamera verfolgt den Spieler
+		    // TODO HPup Codeblock should move to Player.act(), since it is only his stuff
 			// Finished hpCycle?
 			if (roundsToHpUp == 0) { // Yes
 				// Give Player a hitpoint
@@ -103,7 +106,6 @@ public class Rogue {
 				player.expire();
 				continue;
 			}
-
 			Screen.lastWorld = world;
 			Screen.lastTerminal = term;
 			Screen.redrawMap("HP: "+player.getHitpoints());
@@ -119,8 +121,8 @@ public class Rogue {
 			
 			//Screen
 			// Give everyone else the chance to make his move
+			//world.tick();
 			world.tick();
-
 		}
 		term.clearBuffer();
 		//Screen.showFile(normalizePath("src\\rogue\\system\\end.txt","rogue/system/end.txt"), term, world);
