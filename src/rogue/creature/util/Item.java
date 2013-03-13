@@ -91,17 +91,18 @@ public class Item {
 	/**
 	 * Prints Information about given Item on Screen.
 	 * 
-	 * @param index Index of Item in Backpack
+	 * @param term currently used terminal
+	 * @param inventory currently used inventory
 	 */
-	public void showItem(int index, Terminal term) {
+	public void showItem(Terminal term, Inventory inventory) {
 		Item item = backpackSpaces[index]
-		ArrayList<String> lines = new ArrayList<String>();
+			ArrayList<String> lines = new ArrayList<String>();
 		lines.add(item.getName());
 		lines.add("Bonus Damage: "+item.getDamageBonus());
 		lines.add("Bonus Health: "+item.getHealthBonus());
 		String result = new String();
-		if () {
-			
+		if (worn) {
+			System.out.println()
 		}
 		char key;
 		try{
@@ -112,8 +113,36 @@ public class Item {
 		}
 		switch (key) {
 			case 'q':
+				// Leave this screen (go back to inventory) and the inventory untouched.
+				break;
+			case 's':
+				if (!worn) {
+					// Put this Item on.
+
+				} else {
+					// Cannot put this item down without substitute right now.
+				}
+				break;
+			case 'd':
+				// Destroy item, when it is not worn
+				if (!worn) {
+					ArrayList<String> warningScreen = new ArrayList<String>();
+					warningScreen.add("WARNUNG!");
+					warningScreen.add("========");
+					warningScreen.add("Sicher das "+this.getName()+" zerstoert werden soll?")
+					warningScreen.add("(J)a");
+					warningScreen.add("(N)ein");
+					try {
+						char selection = term.getKey();
+						if (selection == 'j' || selection == 'J') {
+							inventory.removeItem(this);
+						}
+					} catch (InterruptedException e) {
+						System.out.println("!Error: InterruptedException");
+						e.printStackTrace();
+					}
+				}
+				break;
 		}
 	}
 }
-
-

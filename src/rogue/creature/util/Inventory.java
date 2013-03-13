@@ -168,8 +168,15 @@ public class Inventory {
 		return wornItems;
 	}
 
-	public void showInfo(int index) {
+	public void showInfoFromBackpack(int index) {
 		
+	}
+	
+	public void showInfoFromWorn(int place) {
+	
+	}
+	public void wearItem(Item item) {
+
 	}
 }
 
