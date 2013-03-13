@@ -137,8 +137,9 @@ public class Item {
 				// Destroy item, when it is not worn
 				if (!equipped) {
 					ArrayList<String> warningScreen = new ArrayList<String>();
-					warningScreen.add("WARNUNG!");
-					warningScreen.add("========");
+					warningScreen.add("============================");
+					warningScreen.add("=WARNUNG!=WARNUNG!=WARNUNG!=");
+					warningScreen.add("============================");
 					warningScreen.add("Sicher das "+this.getName()+" zerstoert werden soll?");
 					warningScreen.add("<J>a");
 					warningScreen.add("<N>ein");
