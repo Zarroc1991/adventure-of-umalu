@@ -56,9 +56,9 @@ public class Rogue {
 		// Add Minimap to left part in Window (Size given as Parameter), focus on Player
   
 		// Play Game
-		
+		world.tick();
 		while(!player.expired()) { // Player is still living?
-			world.tick();
+			
 			if (player.worldchange){								//überprüft, ob einen Levelup erfolgt ist
 				world.removeActor(player);						    //entfernt Spieler aus der alten Welt
 				world = new Level(80,32, player, ++level, term);    //lädt das nächste Level 
@@ -108,7 +108,7 @@ public class Rogue {
 			//Screen
 			// Give everyone else the chance to make his move
 			//world.tick();
-
+			world.tick();
 		}
 		term.clearBuffer();
 		//Screen.showFile(normalizePath("src\\rogue\\system\\end.txt","rogue/system/end.txt"), term, world);
