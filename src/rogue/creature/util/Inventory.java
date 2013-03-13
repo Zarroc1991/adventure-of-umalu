@@ -33,7 +33,7 @@ public class Inventory {
 		backpackSpaces = new ArrayList<Item>(maximumItems);
 		//Item test = 
 		try {
-			this.addItem(new Item("TestGegenstand",0,Item.ITEMTYPE_SWORD,0,0));
+			this.addItem(new Item("TestGegenstand",0,Item.ITEMTYPE_SWORD,5,10));
 		} catch (NotEnoughSpaceException e) {
 			System.out.println("Nicht genug Platz");
 			e.printStackTrace();
@@ -178,14 +178,31 @@ public class Inventory {
 		return wornItems;
 	}
 
+	/**
+	 * Calls showItem Method for worn Item
+	 *
+	 * @param index Index of Item to be shown
+	 * @param term Used Terminal
+	 */
 	public void showWorn(int index, Terminal term) {
 		wornItems[index].showItem(term, this);
 	}
 	
+	/**
+	 * Calls showItem for Item in backpack
+	 *
+	 * @param place Index of Item to be shown
+	 * @param term Used Terminal
+	 */
 	public void showInfo(int place, Terminal term) {
 		backpackSpaces.get(place).showItem(term, this);
 	}
 
+	/**
+	 * Starts to wear an unequipped Item
+	 *
+	 * @param item Item to equip
+	 */
 	public void wearItem(Item item) {
 
 	}
