@@ -203,8 +203,19 @@ public class Inventory {
 	 *
 	 * @param item Item to equip
 	 */
-	public void wearItem(Item item) {
-
+	public void equip(Item item) {
+		item.setEquipped(true);
+		Item buffer = wornItems[item.getItemType()];
+		wornItems[item.getItemType()] = item;
+		this.removeItem(item);
+		buffer.setEquipped(false);
+		try {
+			this.addItem(buffer);
+		} catch (NotEnoughSpaceException e) {
+			System.out.println("!Error Exception:");
+			e.printStackTrace();
+			System.out.println("Somethings fishy here...");
+		}
 	}
 }
 

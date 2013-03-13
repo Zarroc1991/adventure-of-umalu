@@ -77,6 +77,11 @@ public class Item {
 		return name;
 	}
 
+
+	public int getItemType() {
+		return itemType;
+	}
+
 	/**
 	 * Returns Damagebonus of this Item
 	 * 
@@ -128,7 +133,7 @@ public class Item {
 			case 's':
 				if (!equipped) {
 					// Put this Item on.
-
+					inventory.equip(this);
 				} else {
 					// Cannot put this item down without substitute right now.
 				}
@@ -156,5 +161,9 @@ public class Item {
 				}
 				break;
 		}
+	}
+
+	public void setEquipped(boolean equipped) {
+		this.equipped = equipped;
 	}
 }
