@@ -8,6 +8,8 @@ package rogue.creature.util;
 
 import java.util.ArrayList;
 import rogue.level.Screen;
+import jade.ui.TiledTermPanel;
+import jade.ui.Terminal;
 
 /**
  * Represents an Inventory for player.
@@ -168,13 +170,14 @@ public class Inventory {
 		return wornItems;
 	}
 
-	public void showInfoFromBackpack(int index) {
-		
+	public void showWorn(int index, Terminal term) {
+		wornItems[index].showItem(term, this);
 	}
 	
-	public void showInfoFromWorn(int place) {
-	
+	public void showInfo(int place, Terminal term) {
+		backpackSpaces.get(place).showItem(term, this);
 	}
+
 	public void wearItem(Item item) {
 
 	}

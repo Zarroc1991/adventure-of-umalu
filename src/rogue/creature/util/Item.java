@@ -6,6 +6,10 @@
  */
 package rogue.creature.util;
 
+import jade.ui.TiledTermPanel;
+import jade.ui.Terminal;
+import java.util.ArrayList;
+
 /**
  * Represents a single Item for players Inventory
  */
@@ -17,6 +21,7 @@ public class Item {
 	private int type;
 	private int maxDurability;
 	private int durability;
+	private boolean equipped;
 
 	/**
 	 * Describes Item is as Helmet
@@ -50,6 +55,7 @@ public class Item {
 		this.modificators = new int[2];
 		this.modificators[0] = bonusDamage;
 		this.modificators[1] = bonusHealth;
+		equipped = false;
 	}
 
 	/**
@@ -95,16 +101,16 @@ public class Item {
 	 * @param inventory currently used inventory
 	 */
 	public void showItem(Terminal term, Inventory inventory) {
-		Item item = backpackSpaces[index]
-			ArrayList<String> lines = new ArrayList<String>();
+		Item item = this;
+		ArrayList<String> lines = new ArrayList<String>();
 		lines.add(item.getName());
 		lines.add("Bonus Damage: "+item.getDamageBonus());
 		lines.add("Bonus Health: "+item.getHealthBonus());
 		String result = new String();
-		if (worn) {
-			System.out.println()
+		if (equipped) {
+			System.out.println();
 		}
-		char key;
+		char key = ' ';
 		try{
 			key = term.getKey();
 		} catch (InterruptedException e) {
@@ -116,7 +122,7 @@ public class Item {
 				// Leave this screen (go back to inventory) and the inventory untouched.
 				break;
 			case 's':
-				if (!worn) {
+				if (!equipped) {
 					// Put this Item on.
 
 				} else {
@@ -125,11 +131,11 @@ public class Item {
 				break;
 			case 'd':
 				// Destroy item, when it is not worn
-				if (!worn) {
+				if (!equipped) {
 					ArrayList<String> warningScreen = new ArrayList<String>();
 					warningScreen.add("WARNUNG!");
 					warningScreen.add("========");
-					warningScreen.add("Sicher das "+this.getName()+" zerstoert werden soll?")
+					warningScreen.add("Sicher das "+this.getName()+" zerstoert werden soll?");
 					warningScreen.add("(J)a");
 					warningScreen.add("(N)ein");
 					try {

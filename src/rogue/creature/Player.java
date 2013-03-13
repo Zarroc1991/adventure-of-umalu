@@ -223,25 +223,27 @@ public class Player extends Creature implements Camera {
 					loop = false;
 					break;
 					case 'k':
-					wornItems[Item.ITEMTYPE_HEAD].showInfo();
+					//wornItems[Item.ITEMTYPE_HEAD].showInfo(term,inventory);
+					inventory.showWorn(Item.ITEMTYPE_HEAD, term);
 					break;
 					case 'w':
-					wornItems[Item.ITEMTYPE_SWORD].showInfo();
+					//wornItems[Item.ITEMTYPE_SWORD].showInfo();
+					inventory.showWorn(Item.ITEMTYPE_SWORD, term);
 					break;
 					case '0':
-					inventory.showItem(0);
+					inventory.showInfo(0, term);
 					break;
 					case '1':
-					inventory.showItem(1);
+					inventory.showInfo(1,term);
 					break;
 					case '2':
-					inventory.showItem(2);
+					inventory.showInfo(2, term);
 					break;
 					case '3':
-					inventory.showItem(3);
+					inventory.showInfo(3, term);
 					break;
 					case '4':
-					inventory.showItem(4);
+					inventory.showInfo(4, term);
 					break;
 				}
 			} catch (InterruptedException e) {
