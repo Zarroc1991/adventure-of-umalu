@@ -159,8 +159,14 @@ public class Inventory {
 		return sum;
 	}
 
+	/**
+	 * Returns all Items currently worn by user
+	 *
+	 * @return List of all worn Items by user
+	 */
 	public Item[] getWornItems() {
 		return wornItems;
 	}
+
 }
 

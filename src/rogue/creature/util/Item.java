@@ -15,15 +15,19 @@ public class Item {
 	private int[] modificators;
 	private int itemType;
 	private int type;
+	private int maxDurability;
+	private int durability;
 
 	/**
 	 * Describes Item is as Helmet
 	 */
 	public static final int ITEMTYPE_HEAD = 0;
+
 	/**
 	 * Describes Item as Chest Armor
 	 */
 	public static final int ITEMTYPE_BODY = 1;
+
 	/**
 	 * Describes Item as a Weapon (Sword)
 	 */
@@ -66,12 +70,49 @@ public class Item {
 		return name;
 	}
 
+	/**
+	 * Returns Damagebonus of this Item
+	 * 
+	 * @return Damagebonus of this Item
+	 */
 	public int getDamageBonus() {
 		return modificators[0];
 	}
 
+	/**
+	 * Returns Healthbonus of this Item
+	 *
+	 * @return Healthbonus of this Item
+	 */
 	public int getHealthBonus() {
 		return modificators[1];
+	}
+
+	/**
+	 * Prints Information about given Item on Screen.
+	 * 
+	 * @param index Index of Item in Backpack
+	 */
+	public void showItem(int index, Terminal term) {
+		Item item = backpackSpaces[index]
+		ArrayList<String> lines = new ArrayList<String>();
+		lines.add(item.getName());
+		lines.add("Bonus Damage: "+item.getDamageBonus());
+		lines.add("Bonus Health: "+item.getHealthBonus());
+		String result = new String();
+		if () {
+			
+		}
+		char key;
+		try{
+			key = term.getKey();
+		} catch (InterruptedException e) {
+			System.out.println("!Error: ");
+			e.printStackTrace();
+		}
+		switch (key) {
+			case 'q':
+		}
 	}
 }
 
