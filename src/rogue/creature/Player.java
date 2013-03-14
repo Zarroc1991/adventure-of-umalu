@@ -103,10 +103,14 @@ public class Player extends Creature implements Camera {
 						// Fight first monster on coordinate.
 						fight((Monster) actorlist.toArray()[0]);
 					} else {
-						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('©')) {
-							System.out.println("Level Up");  
-							worldchange= true;					//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
-							move(dir);
+						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('§')) {  
+							Screen.redrawEventLine("Möchtes du diesen Raum verlassen? Drücke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+							if (term.getKey()=='j'){
+								worldchange= true;
+								move(dir);}
+							else{
+								move(0,0); 
+								}
 							
 							for(Coordinate coord: getViewField()){
 								world().viewable(coord.x(), coord.y());
@@ -128,7 +132,7 @@ public class Player extends Creature implements Camera {
 		}
 	}
 
-	@Override
+	//@Override
 	/**
 	 * Get what is visible
 	 *

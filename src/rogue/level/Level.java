@@ -60,13 +60,19 @@ public class Level extends World {
         //after the tile, so they do not land on unpassable tiles
         switch (level) {											//Liste der Maps in Abh�ngikeit vom Level  
             case 0: {
+            	
                 break;
             }
             case 1: {
-                addActor(new Troll(term));
+                addActor(new Troll(term,level));
                 addActor(new Orc(term));
+                addActor(new Rat(term));
+                addActor(new Slug_fat(term));
+                addActor(new Frog_poisonous(term));
+                addActor(new Unbeliever(term));
+                addActor(new Zombie(term));
+                addActor(new Shadow(term));
                 //addActor(new InvisibleZombie(term));
-                addActor(new Dummy(ColoredChar.create('X', Color.blue), "Dummy", term));
                 break;
             }
             case 2:{
