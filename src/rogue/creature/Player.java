@@ -130,12 +130,11 @@ public class Player extends Creature implements Camera {
 	 * @return A collection of visible Items
 	 */
 	public Collection<Coordinate> getViewField() {
-		return fov.getViewField(world(), pos(), 3); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
+		return fov.getViewFieldplayer(world(), pos().x(),pos().y(), 3); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
 	}
 
 	/**
-	 * Player fights the opponent. Causes random damage between 1 and strength
-	 * 
+	 * Player fights the opponent. Causes random damage between 1 and strength	 * 
 	 * @param opponent
 	 *            The opponent Monster
 	 */
