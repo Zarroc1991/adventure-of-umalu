@@ -98,7 +98,7 @@ public class Player extends Creature implements Camera {
 						// Fight first monster on coordinate.
 						fight((Monster) actorlist.toArray()[0]);
 					} else {
-						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('§')) {
+						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('©')) {
 							System.out.println("Level Up");  
 							worldchange= true;					//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
 							move(dir);
@@ -130,7 +130,7 @@ public class Player extends Creature implements Camera {
 	 * @return A collection of visible Items
 	 */
 	public Collection<Coordinate> getViewField() {
-		return fov.getViewFieldplayer(world(), pos().x(),pos().y(), 3); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
+		return fov.getViewFieldplayer(world(), pos().x(),pos().y(), 2); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
 	}
 
 	/**
