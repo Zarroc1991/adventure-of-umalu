@@ -17,47 +17,77 @@ public class Level extends World {
 	private static Generator gen = getLevelGenerator();
 
 
-	public Level(int width, int height, Player player) {
-		// Create a new Map, but make it 2 Rows less higher than window is, so we have some Space for
-		// Statusmessages and stuff.
-		super(width, height-2);
-		gen.generate(this);
-		addActor(player);
-	}
-	// Zweiter Konstruktor, um ein neues Level aufzurufen 
-	public Level(int width, int height, Player player, int level, TiledTermPanel term) {
-		super(width, height-2);
-		switch (level){											//Liste der Maps in Abh�ngikeit vom Level  
-		case 0:{
-			gen = new World1();
-			break;	
-		}
-		case 1:{
-			gen = new World2();
+    public Level(int width, int height, Player player) {
+        // Create a new Map, but make it 2 Rows less higher than window is, so we have some Space for
+        // Statusmessages and stuff.
+        super(width, height - 2);
+        gen.generate(this);
+        addActor(player);
 
-			
-			break; 
-		}
-		case 2:{
-			gen = new World3();
-			break; 
-		}
-		case 3:{
-			gen = new World4();
-			break; 
-		}
-		case 4:{
-			gen = new World5();
-			addActor(new Dragon(term));
-			break; 
-		}
-		}
-		gen.generate(this);
-		addActor(player);
-	}
+    }
+    // Zweiter Konstruktor, um ein neues Level aufzurufen
 
-	private static Generator getLevelGenerator() {
-		return new World1();
-	}
+    public Level(int width, int height, Player player, int level, TiledTermPanel term) {
+        super(width, height - 2);
+        switch (level) {											//Liste der Maps in Abh�ngikeit vom Level
+            case 0: {
+                gen = new World1();
+                break;
+            }
+            case 1: {
+                gen = new World2();
+                break;
+            }
+	    case 2: {
+		gen = new World3();
+		break;
+	    }
+	    case 3: {
+		gen = new World4();
+		break;
+	    }
+	    case 4: {
+		gen = new World5();
+		break;
+	    }
+            default: {
+                gen = new World1();
+                break;
+            }
+        }
+        gen.generate(this);
+        addActor(player);
+        //insert Monster. We need new case-separation, because the Monsters should be added
+        //after the tile, so they do not land on unpassable tiles
+        switch (level) {											//Liste der Maps in Abh�ngikeit vom Level  
+            case 0: {
+            	addActor(new Zombie(term));
+                break;
+            }
+            case 1: {
+                addActor(new Troll(term,level));
+                addActor(new Orc(term));
+                addActor(new Rat(term));
+                addActor(new Slug_fat(term));
+                addActor(new Frog_poisonous(term));
+                addActor(new Unbeliever(term));
+                addActor(new Zombie(term));
+                addActor(new Shadow(term));
+                //addActor(new InvisibleZombie(term));
+                break;
+            }
+            case 2:{
+                break;
+            }
+            default:{
+                break;
+            }
+        }
+
+    }
+
+    private static Generator getLevelGenerator() {
+        return new World1();
+    }
 
 }

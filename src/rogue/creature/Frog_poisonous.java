@@ -24,14 +24,14 @@ import rogue.level.Screen;
  * An Orc ist a weak Monster
  * he moves randomly like the Dragon and hit the Player if he can
  */
-public class Orc extends Monster {
+public class Frog_poisonous extends Monster {
 
     PathFinder pathfinder = new AStar();
     RayCaster fov;
     int attackRadius;
 
-    public Orc(Terminal term) {
-        super(ColoredChar.create('O', new Color(0,100,0)), "Orc", 25, 8, term);
+    public Frog_poisonous(Terminal term) {
+        super(ColoredChar.create('F',	new Color(160,32,240)), "giftiger Frosch", 10, 3, term);
         fov = new RayCaster();
         attackRadius = 5;
     }
@@ -82,14 +82,14 @@ public class Orc extends Monster {
 		// Do Damage to Oppenent
 	        opponent.loseHitpoints(abzug);
 		// Print Result
-	        Random generator = new Random();
-            int ran = generator.nextInt( 4 );
-            switch(ran){
-            	case 0:System.out.println("Seine grießen Faust trifft dein Gesicht.");break;
-            	case 1:System.out.println("Das Ungetüm rammt dich um.");break;//optional hier alles sichtbare löschen
-            	case 2:System.out.println("Er schleudert dich durch die Luft.");break;
-            	case 3:System.out.println("Sein Gestank lähmt dich.");break;
-	        }
+	           Random generator = new Random();
+	            int ran = generator.nextInt( 4 );
+	            switch(ran){
+	            	case 0:System.out.println("Seine Gift brennt sich in deine Haut.");break;
+	            	case 1:System.out.println("Aaarrhhh... Du hast sein Gift im Auge.");break;//optional hier alles sichtbare löschen
+	            	case 2:System.out.println("Du unterschätzt dieses kleine Vieh.");break;
+	            	case 3:System.out.println("NEIN... Deine Haut wirt verätzt.");break;
+		        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
 		Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
@@ -102,6 +102,5 @@ public class Orc extends Monster {
 	    }
 
 	}
-
 
 

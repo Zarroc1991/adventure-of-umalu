@@ -19,6 +19,7 @@ import rogue.creature.Dummy;
 import rogue.creature.Monster;
 import rogue.creature.Orc;
 import rogue.creature.Player;
+import rogue.creature.Shadow;
 import rogue.creature.Troll;
 import rogue.level.Level;
 import rogue.level.Screen;
@@ -30,6 +31,7 @@ public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
    		int level = 0; 
 		// Set System options
+		Screen.initialiseScreen();
 		SystemHelper.getArgs(args);
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
 		// How many rounds for next healing+
@@ -45,7 +47,7 @@ public class Rogue {
 		Player player = new Player(term);
 		// Generate a new World
 
-		World world = new Level(80, 32, player);
+		World world = new Level(80,32, player, 0, term);
                
 
 		player.setName(CharacterCreation.getCharacterName(term, world));
@@ -62,6 +64,7 @@ public class Rogue {
 
 
                 // Add Minimap to left part in Window (Size given as Parameter), focus on Player
+ 	        // Add Minimap to left part in Window (Size given as Parameter), focus on Player
 
 
 		// term.registerCamera(player, 5, 5);
@@ -72,7 +75,7 @@ public class Rogue {
 		world.tick();
 		while(!player.expired()) { // Player is still living?
 			if (player.worldchange){								//überprüft, ob einen Levelup erfolgt ist
-				world.removeActor(player);						    //entfernt Spieler aus der alten Welt
+				world.removeActor(player); //entfernt Spieler aus der alten Welt
 				world = new Level(80,32, player, ++level, term);    //lädt das nächste Level 
 				player.setWorld(world);								//Spieler erkennt seine Welt
 				player.worldchange=false;

@@ -24,14 +24,14 @@ import rogue.level.Screen;
  * An Orc ist a weak Monster
  * he moves randomly like the Dragon and hit the Player if he can
  */
-public class Orc extends Monster {
+public class Shadow extends Monster {
 
     PathFinder pathfinder = new AStar();
     RayCaster fov;
     int attackRadius;
 
-    public Orc(Terminal term) {
-        super(ColoredChar.create('O', new Color(0,100,0)), "Orc", 25, 8, term);
+    public Shadow(Terminal term) {
+        super(ColoredChar.create(':', new Color(51,51,51)), "Schatten", 25, 10, term);
         fov = new RayCaster();
         attackRadius = 5;
     }
@@ -74,7 +74,7 @@ public class Orc extends Monster {
 	@Override
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
-	        System.out.println("Der " + name + " greift dich an");
+	        System.out.println("Ein " + name + "erhebt sich.");
 		// Create Randomizer
 	        Random random = new Random();
 		// Generate Damage
@@ -83,12 +83,13 @@ public class Orc extends Monster {
 	        opponent.loseHitpoints(abzug);
 		// Print Result
 	        Random generator = new Random();
-            int ran = generator.nextInt( 4 );
+            int ran = generator.nextInt( 5 );
             switch(ran){
-            	case 0:System.out.println("Seine grießen Faust trifft dein Gesicht.");break;
-            	case 1:System.out.println("Das Ungetüm rammt dich um.");break;//optional hier alles sichtbare löschen
-            	case 2:System.out.println("Er schleudert dich durch die Luft.");break;
-            	case 3:System.out.println("Sein Gestank lähmt dich.");break;
+            	case 0:System.out.println("Eine unerträgliche leere ergreift dich.");break;
+            	case 1:System.out.println("Du kannst nichts sehen.");break;//optional hier alles sichtbare löschen
+            	case 2:System.out.println("Dein größter Albtraum spielt sich in deinem Kopf ab.");break;
+            	case 3:System.out.println("Dein Herz fühlt sich so kalt an.");break;
+            	case 4:System.out.println("Du hast schreckliche Angst.");break;
 	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);

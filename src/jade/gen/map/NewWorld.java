@@ -56,8 +56,8 @@ public abstract class NewWorld extends MapGenerator {
 					case '†': {	c_color = ColoredChar.create('†', new Color(199,21,133));break;}
 					case '=': {	c_color = ColoredChar.create('=', new Color(210,105,30));break;}
 					case '#': {	c_color = ColoredChar.create('#', new Color(205,102,29));break;}
-					case '.': {	c_color = ColoredChar.create('.', new Color(51,51,51));break;}
 					case '¬': {	c_color = ColoredChar.create('¬', new Color(210,105,30));break;}
+					case '.': {	c_color = ColoredChar.create('.', new Color(51,51,51));	break;}
 					}
 					// System.out.println(c); // TODO Delete this line, when it
 					// is not needed anymore
