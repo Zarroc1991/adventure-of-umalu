@@ -36,6 +36,7 @@ public class AStar extends PathFinder
             closed.add(node);
 
             if(node.equals(end))
+                //we are done and found the path
                 return reconstructPath(node);
             //check out the neighbors of the current node
             for(Node neighbor : expandNode(node, world, nodes))
@@ -54,7 +55,7 @@ public class AStar extends PathFinder
                 }
             }
         }
-
+        //we didnt find a complete path
         return partialPath(closed);
     }
 
