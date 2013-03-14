@@ -26,6 +26,8 @@ public class Dragon extends Monster {
     public Dragon(ColoredChar face, String name, Terminal term) {
         super(face,name, 100, 5, term);
     }
+
+    @Override
     public void act() {
 		boolean fight = false;
 
