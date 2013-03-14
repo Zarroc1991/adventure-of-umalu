@@ -2,48 +2,74 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package rogue.creature;
 
+import jade.fov.RayCaster;
+import jade.path.*;
 import jade.ui.Terminal;
 import jade.util.Dice;
 import jade.util.datatype.ColoredChar;
+import jade.util.datatype.Coordinate;
 import jade.util.datatype.Direction;
+
+import java.awt.Color;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Random;
 
 import rogue.level.Screen;
 
 /**
  *
- * A Troll is a stupid Monster. He doesnt move at al, but ist very strong, and attcs you, when you are near him
+ * An Orc ist a weak Monster
+ * he moves randomly like the Dragon and hit the Player if he can
  */
-public class Troll extends Monster{
+public class Unbeliever extends Monster {
 
-    public Troll( Terminal term, int level) {
-        super(ColoredChar.create('T'),"Troll",level*20, level*3, term);
+    PathFinder pathfinder = new AStar();
+    RayCaster fov;
+    int attackRadius;
+
+    public Unbeliever(Terminal term) {
+        super(ColoredChar.create('U', new Color(255,185,15)), "Ungläubiger", 21, 6, term);
+        fov = new RayCaster();
+        attackRadius = 5;
     }
 
-
     @Override
-
-    /*
-     * A troll just checks, whether he can hit the player or not
-     */
     public void act() {
+        boolean actionOver = false;
+
         for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
             if (player != null) {
                 fight(player);
+
+                actionOver = true;
                 break;
 
             }
 
         }
 
+        if (!actionOver) {
+            Collection<Coordinate> viewField = fov.getViewField(this.world(), this.pos().x(), this.pos().y(), attackRadius);
+            for (Coordinate coordinate : viewField) {
+                if (this.world().getActorAt(Player.class, coordinate) != null) {
+                    Direction dir = this.pos().directionTo(pathfinder.getPath(this.world(), this.pos(), coordinate).get(0));
+                    move(dir);
+                    actionOver = true;
+                    break;
+                }
+            }
 
+            if (!actionOver) {
+
+
+                move(Dice.global.choose(Arrays.asList(Direction.values())));
+            }
+        }
     }
-
 
 	@Override
 	public void fight(Player opponent) {

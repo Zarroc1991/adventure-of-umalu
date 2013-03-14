@@ -43,6 +43,7 @@ public class RayCaster extends ViewField
         return fov;
     	}
         //alle als sichtbar markierten Objekte werden im Screen angezeigt 
+
     	protected Collection<Coordinate> calcViewFieldplayer(World world, int x, int y, int r){
     	Collection<Coordinate> fov = calcViewField(world, x, y,r);
         for(int i = 0; i<world.width()-1; i++){
