@@ -147,13 +147,14 @@ public class Player extends Creature implements Camera {
 		Random random = new Random();
 		// Get random Damage for Attack
 		int damage = random.nextInt(strength) + 1;
-		// Do Damage to Opponent
-		boolean opponentDied = opponent.loseHitpoints(damage);
+		
                 // Print result
 		System.out.println("Du hast " + damage + " Schaden verursacht");
 		System.out.println(opponent.name() + " hat noch " + opponent.hitpoints
 				+ " HP");
 		Screen.redrawEventLine("Du verursachst " + damage + " Schaden");
+                // Do Damage to Opponent
+		boolean opponentDied = opponent.loseHitpoints(damage);
                 if(opponentDied){
                     randomlyDropItem(opponent);
                 }
@@ -275,7 +276,7 @@ public class Player extends Creature implements Camera {
         switch(opponent.typenumber){
 
             case 0:{
-                //Dragon
+                //Rat, doesnt drop Weapons according to balance
                 break;
             }
             case 1:{
@@ -331,10 +332,18 @@ public class Player extends Creature implements Camera {
                 //Troll
                 break;
             }
+            case 99:{
+                //Dragon
+            }
             default:{
                 break;
             }
         }
         
+    }
+
+    @Override
+    public String name() {
+        return getName();
     }
 }
