@@ -8,10 +8,12 @@ import java.util.Random;
 import rogue.level.Screen;
 import jade.ui.Terminal;
 import java.lang.InterruptedException;
+import java.util.List;
 
 public abstract class Monster extends Creature {
 
     private String name;
+    public int typenumber;
     private int maxHitpoints;
     private Terminal term;
     public Monster(ColoredChar face) {
@@ -33,6 +35,7 @@ public abstract class Monster extends Creature {
     public String name() {
         return name;
     }
+
 
 
      /* fight of the Moster aganst the Player

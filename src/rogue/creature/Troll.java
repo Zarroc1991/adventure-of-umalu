@@ -19,6 +19,7 @@ public class Troll extends Monster{
 
     public Troll( Terminal term) {
         super(ColoredChar.create('T'),"Troll",5, 1, term);
+        this.typenumber =4;
     }
 
 

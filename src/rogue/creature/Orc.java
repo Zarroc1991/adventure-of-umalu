@@ -27,6 +27,7 @@ public class Orc extends Monster {
 
     public Orc(Terminal term) {
         super(ColoredChar.create('O'), "Orc", 10, 3, term);
+        this.typenumber =1;
         fov = new RayCaster();
         attackRadius = 5;
     }
