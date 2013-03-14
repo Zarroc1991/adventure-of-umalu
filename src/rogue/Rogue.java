@@ -30,6 +30,7 @@ public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
    		int level = 0; 
 		// Set System options
+		Screen.initialiseScreen();
 		SystemHelper.getArgs(args);
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
 		// How many rounds for next healing+

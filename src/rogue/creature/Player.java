@@ -86,6 +86,11 @@ public class Player extends Creature implements Camera {
 			case 'i': // Show Inventory
 				showInventoryScreen();
 				break;
+			case 'x': // TODO Change this key
+				Screen.showEventLog();
+				term.getKey();
+				Screen.redrawMap("HP: "+this.getHitpoints());
+				break;
 			default: // User pressed something else
 				Direction dir = Direction.keyToDir(key); // Get direction
 				
