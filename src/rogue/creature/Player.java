@@ -130,7 +130,7 @@ public class Player extends Creature implements Camera {
 	 * @return A collection of visible Items
 	 */
 	public Collection<Coordinate> getViewField() {
-		return fov.getViewFieldplayer(world(), pos().x(),pos().y(), 3); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
+		return fov.getViewFieldplayer(world(), pos().x(),pos().y(), 2); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
 	}
 
 	/**
