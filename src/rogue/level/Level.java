@@ -65,7 +65,7 @@ public class Level extends World {
             case 1: {
                 addActor(new Troll(term));
                 addActor(new Orc(term));
-                addActor(new InvisibleZombie(term));
+                //addActor(new InvisibleZombie(term));
                 addActor(new Dummy(ColoredChar.create('X', Color.blue), "Dummy", term));
                 break;
             }
