@@ -34,39 +34,32 @@ public class Orc extends Monster {
 
     @Override
     public void act() {
-        boolean actionOver = false;
-
-        for (Direction dir : Arrays.asList(Direction.values())) {
+            for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
             if (player != null) {
                 fight(player);
-
-                actionOver = true;
-                break;
-
+                return;
             }
-
         }
-
-        if (!actionOver) {
+        
             Collection<Coordinate> viewField = fov.getViewField(this.world(), this.pos().x(), this.pos().y(), attackRadius);
            System.out.println(viewField.size());
             for (Coordinate coordinate : viewField) {
                 if (this.world().getActorAt(Player.class, coordinate) != null) {
                     Direction dir = this.pos().directionTo(pathfinder.getPath(this.world(), this.pos(), coordinate).get(0));
                     move(dir);
-                    actionOver = true;
-                    break;
+                    return;
                 }
             }
 
-            if (!actionOver) {
+            
 
 
                 move(Dice.global.choose(Arrays.asList(Direction.values())));
             }
         }
-    }
-}
+
+    
+
 
 

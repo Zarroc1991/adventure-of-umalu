@@ -32,6 +32,7 @@ public abstract class Monster extends Creature {
 	this.term = term;
     }
 
+    @Override
     public String name() {
         return name;
     }
