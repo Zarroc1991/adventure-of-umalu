@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class Troll extends Monster{
 
     public Troll( Terminal term) {
-        super(ColoredChar.create('T'),"Troll",50, 10, term);
+        super(ColoredChar.create('T'),"Troll",5, 1, term);
     }
 
 
