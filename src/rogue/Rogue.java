@@ -19,6 +19,7 @@ import rogue.creature.Dummy;
 import rogue.creature.Monster;
 import rogue.creature.Orc;
 import rogue.creature.Player;
+import rogue.creature.Shadow;
 import rogue.creature.Troll;
 import rogue.level.Level;
 import rogue.level.Screen;
@@ -45,7 +46,7 @@ public class Rogue {
 		Player player = new Player(term);
 		// Generate a new World
 
-		World world = new Level(80, 32, player);
+		World world = new Level(80,32, player, 0, term);
                
 
 		player.setName(CharacterCreation.getCharacterName(term, world));
@@ -60,9 +61,7 @@ public class Rogue {
 		// Who deleted this, and why?
 		//world.addActor(new Monster(ColoredChar.create('D', Color.red),"roter Drache"));
 
-		// Add a Dragon so we have an enemy
-		world.addActor(new Dragon(ColoredChar.create('D',Color.red),"roter Drache",term));
-                // Add Minimap to left part in Window (Size given as Parameter), focus on Player
+        // Add Minimap to left part in Window (Size given as Parameter), focus on Player
 
 		// term.registerCamera(player, 5, 5);
 

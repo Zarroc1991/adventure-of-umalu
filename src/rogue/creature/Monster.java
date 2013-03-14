@@ -11,9 +11,9 @@ import java.lang.InterruptedException;
 
 public abstract class Monster extends Creature {
 
-    private String name;
+    protected String name;
     private int maxHitpoints;
-    private Terminal term;
+    protected Terminal term;
     public Monster(ColoredChar face) {
         super(face);
         strength = 5;
@@ -39,7 +39,7 @@ public abstract class Monster extends Creature {
      * causes random damage between 1 and 5
      */
     // TODO Clean up Messages in Console, to use just a single line
-    public void fight(Player opponent) {
+    abstract public void fight(Player opponent); /*{
         System.out.println("der " + name + "greift dich an");
 	// Create Randomizer
         Random random = new Random();
@@ -57,5 +57,5 @@ public abstract class Monster extends Creature {
 		System.out.println("!InterruptedException");
 		e.printStackTrace();
 	}
-    }
-}
+    }*/
+} 

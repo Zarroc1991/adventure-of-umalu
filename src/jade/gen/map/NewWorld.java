@@ -54,6 +54,7 @@ public abstract class NewWorld extends MapGenerator {
 					case '^': {	c_color = ColoredChar.create('^', Color.darkGray);	break;}
 					case '$': {	c_color = ColoredChar.create('$', Color.yellow);	break;}
 					case 'P': {	c_color = ColoredChar.create('P', Color.green);	break;}
+					case '.': {	c_color = ColoredChar.create('.', new Color(51,51,51));	break;}
 					}
 					// System.out.println(c); // TODO Delete this line, when it
 					// is not needed anymore
