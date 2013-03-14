@@ -31,10 +31,9 @@ public abstract class NewWorld extends MapGenerator {
 								// Zeichen ersetzt.
 			ArrayList notPassable = new ArrayList();
 			notPassable.add('#');
-			notPassable.add('7');
 			notPassable.add('~');
 			notPassable.add('^');
-			notPassable.add('P');
+			notPassable.add(';');
 			while (line != null) {
 				int i;
 
@@ -53,6 +52,7 @@ public abstract class NewWorld extends MapGenerator {
 					case '$': {	c_color = ColoredChar.create('$', Color.yellow);	break;}
 					case 'P': {	c_color = ColoredChar.create('P', Color.green);	break;}
 					case ',': {	c_color = ColoredChar.create(',', Color.green);	break;}
+					case ';': {	c_color = ColoredChar.create(';', new Color(69,139,0));	break;}
 					case '†': {	c_color = ColoredChar.create('†', new Color(199,21,133));break;}
 					case '=': {	c_color = ColoredChar.create('=', new Color(210,105,30));break;}
 					case '#': {	c_color = ColoredChar.create('#', new Color(205,102,29));break;}
