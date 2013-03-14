@@ -61,14 +61,14 @@ public class Level extends World {
         //after the tile, so they do not land on unpassable tiles
         switch (level) {											//Liste der Maps in Abh�ngikeit vom Level  
             case 0: {
-                addActor(new Troll(term,level));
+                //addActor(new Troll(term,level));
                 addActor(new Rat(term));
                 addActor(new Slug_fat(term));
                 addActor(new Frog_poisonous(term));
                 break;
             }
             case 1: {
-                addActor(new Troll(term,level));
+                //addActor(new Troll(term,level));
                 addActor(new Rat(term));
                 addActor(new Slug_fat(term));
                 addActor(new Frog_poisonous(term));
@@ -76,7 +76,7 @@ public class Level extends World {
                 break;
             }
             case 2:{
-                addActor(new Troll(term,level));
+                //addActor(new Troll(term,level));
                 addActor(new Rat(term));//kat1
                 addActor(new Slug_fat(term));//kat2
                 addActor(new Frog_poisonous(term));//kat3
