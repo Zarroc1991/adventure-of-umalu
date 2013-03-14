@@ -80,35 +80,42 @@ public class Player extends Creature implements Camera {
 			char key;
 			key = term.getKey();
 			switch (key) {
-				case 'q': // User wants to quit
-					expire(); // Leave let player die, so this application quits
-					break;
-				case 'i': // Show Inventory
-					showInventoryScreen();
-					break;
-				default: // User pressed something else
-					Direction dir = Direction.keyToDir(key); // Get direction
-					// Something useful pressed?
-					if (dir != null) { // Yes
-						// Get list of all monsters on target Coordinates
-						Collection<Monster> actorlist = world().getActorsAt(Monster.class, x() + dir.dx(), y() + dir.dy());
-						// Is there a monster on TargetL
-						if (!actorlist.isEmpty()) { // Yes
-							// Fight first monster on coordinate.
-							fight((Monster) actorlist.toArray()[0]);
-						} else {
-							if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('§')) {
-								System.out.println("Level Up");  
-								worldchange= true;					//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
-								move(dir);
-							} else {// No monster there
-
-								move(dir);
-
-								break;
+			case 'q': // User wants to quit
+				expire(); // Leave let player die, so this application quits
+				break;
+			case 'i': // Show Inventory
+				showInventoryScreen();
+				break;
+			default: // User pressed something else
+				Direction dir = Direction.keyToDir(key); // Get direction
+				
+				// Something useful pressed?
+				if (dir != null) { // Yes
+					// Get list of all monsters on target Coordinates
+					Collection<Monster> actorlist = world().getActorsAt(Monster.class, x() + dir.dx(), y() + dir.dy());
+					// Is there a monster on TargetL
+					if (!actorlist.isEmpty()) { // Yes
+						// Fight first monster on coordinate.
+						fight((Monster) actorlist.toArray()[0]);
+					} else {
+						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('©')) {
+							System.out.println("Level Up");  
+							worldchange= true;					//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+							move(dir);
+							
+							for(Coordinate coord: getViewField()){
+								world().viewable(coord.x(), coord.y());
+						}} else {// No monster there
+							move(dir);
+							
+							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
+								world().viewable(coord.x(), coord.y());
 							}
+							break;
 						}
 					}
+
+				}
 			}
 		} catch (InterruptedException e) { // Something has happened here
 			System.out.println("!Interrupted Exception");
@@ -123,12 +130,11 @@ public class Player extends Creature implements Camera {
 	 * @return A collection of visible Items
 	 */
 	public Collection<Coordinate> getViewField() {
-		return fov.getViewField(world(), pos(), 5);
+		return fov.getViewFieldplayer(world(), pos().x(),pos().y(), 2); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
 	}
 
 	/**
-	 * Player fights the opponent. Causes random damage between 1 and strength
-	 * 
+	 * Player fights the opponent. Causes random damage between 1 and strength	 * 
 	 * @param opponent
 	 *            The opponent Monster
 	 */
@@ -159,11 +165,16 @@ public class Player extends Creature implements Camera {
 	 * Player regains 1 Hitpoint. Method should be used every x rounds in rogue
 	 */
 	public void regainHitpoint() {
+		// Is there something to heal
 		if (hitpoints < maxHitpoints) {
+			// Gain Healthpoint back
 			hitpoints++;
+			// Print message to Console
 			System.out.println("Du hast einen HP regeneriert, jetzt " + hitpoints+" HP");
+			// Print Eventline
 			Screen.redrawEventLine("Du regenerierst einen HP.");
 			try{
+				// Wait for pressed Key
 				term.getKey();
 
 			} catch (InterruptedException e) {
@@ -181,35 +192,64 @@ public class Player extends Creature implements Camera {
 	}
 
 	/**
-	 *
+	 * Creates and prints an Inventory Screen
 	 */
 	public void showInventoryScreen() {
 		boolean loop = true;
-		while (loop) {
+		// Inventar geschlossen?
+		while (loop) { // Nein.
+			// Erstelle eine ArrayList von Strings um dort unser Inventarinterface zu puffern
 			ArrayList<String> lines = new ArrayList<String>();
+			// Erstelle eine Titelzeile
+			// TODO In die Mitte Verschieben
 			lines.add("Inventar");
+			// Zeige was der Nutzer gerade angelegt hat
 			lines.add("Du traegst: ");
+			// Lade die Liste
 			Item[] wornItems = inventory.getWornItems();
-			lines.add("Kopf: "+wornItems[Item.ITEMTYPE_HEAD]);
-			lines.add("Schwert: "+wornItems[Item.ITEMTYPE_HEAD]);
+			// Generiere den Output fuer den aktuellen Helm
+			lines.add("<K>opf: "+wornItems[Item.ITEMTYPE_HEAD].getName()+" [+DMG: "+wornItems[Item.ITEMTYPE_HEAD].getDamageBonus()+", +HP: "+wornItems[Item.ITEMTYPE_HEAD].getHealthBonus()+"]");
+			// Generiere den Output fuer das aktuelle Schwert
+			lines.add("<S>chwert: "+wornItems[Item.ITEMTYPE_SWORD].getName()+" [+DMG: "+wornItems[Item.ITEMTYPE_SWORD].getDamageBonus()+", +HP: "+wornItems[Item.ITEMTYPE_SWORD].getHealthBonus()+"]");
+			// TODO Zeige gesamt Bonus an
+			// Zeige an, was sonst noch im Inventar liegt, aber nicht angelegt wurde (und somit keinen Bonus bringt)
 			ArrayList<Item> backpack = inventory.listBackpack();
 			lines.add("Du hast im Rucksack: ");
 			for (int i = 0;i<backpack.size();i++) {
+				// Zeige das Item an Stelle an i an
 				lines.add("("+i+") "+backpack.get(i).getName()+"[+DMG: "+backpack.get(i).getDamageBonus()+", +HP: "+backpack.get(i).getHealthBonus()+"]");
 			}
 			// TODO Add lines here.
 			Screen.putText(lines);
 			try {
+				// Erwarte eine Eingabe vom Nutzer.
 				char key = term.getKey();
 				switch (key) {
 					case 'q':
 					loop = false;
 					break;
+					case 'k':
+					//wornItems[Item.ITEMTYPE_HEAD].showInfo(term,inventory);
+					inventory.showWorn(Item.ITEMTYPE_HEAD, term);
+					break;
+					case 's':
+					//wornItems[Item.ITEMTYPE_SWORD].showInfo();
+					inventory.showWorn(Item.ITEMTYPE_SWORD, term);
+					break;
 					case '0':
+					inventory.showInfo(0, term);
 					break;
 					case '1':
+					inventory.showInfo(1,term);
 					break;
 					case '2':
+					inventory.showInfo(2, term);
+					break;
+					case '3':
+					inventory.showInfo(3, term);
+					break;
+					case '4':
+					inventory.showInfo(4, term);
 					break;
 				}
 			} catch (InterruptedException e) {
@@ -217,6 +257,7 @@ public class Player extends Creature implements Camera {
 				e.printStackTrace();
 			}
 		}
+		// Inventar verlassen, zeichne wieder die Karte.
 		Screen.redrawMap();
 	}
 }

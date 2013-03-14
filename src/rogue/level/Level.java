@@ -16,6 +16,7 @@ public class Level extends World {
 
 	private static Generator gen = getLevelGenerator();
 
+
 	public Level(int width, int height, Player player) {
 		// Create a new Map, but make it 2 Rows less higher than window is, so we have some Space for
 		// Statusmessages and stuff.
@@ -33,10 +34,8 @@ public class Level extends World {
 		}
 		case 1:{
 			gen = new World2();
-                                addActor(new Troll(term));
-                                addActor(new Orc(term));
-                                addActor(new InvisibleZombie(term));
-			//addActor(new Dummy(ColoredChar.create('X',Color.blue),"Dummy",term)); //Ordnet jedem Level Monster hinzu 
+
+			
 			break; 
 		}
 		case 2:{

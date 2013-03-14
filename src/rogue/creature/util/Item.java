@@ -6,6 +6,11 @@
  */
 package rogue.creature.util;
 
+import jade.ui.TiledTermPanel;
+import jade.ui.Terminal;
+import java.util.ArrayList;
+import rogue.level.Screen;
+
 /**
  * Represents a single Item for players Inventory
  */
@@ -15,15 +20,20 @@ public class Item {
 	private int[] modificators;
 	private int itemType;
 	private int type;
+	private int maxDurability;
+	private int durability;
+	private boolean equipped;
 
 	/**
 	 * Describes Item is as Helmet
 	 */
 	public static final int ITEMTYPE_HEAD = 0;
+
 	/**
 	 * Describes Item as Chest Armor
 	 */
 	public static final int ITEMTYPE_BODY = 1;
+
 	/**
 	 * Describes Item as a Weapon (Sword)
 	 */
@@ -36,12 +46,17 @@ public class Item {
 	 * @param goldValue Goldvalue of Object
 	 */
 	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth) {
+		// Name einfuegen
 		this.name = name;
+		// Platzhalter fuer den Fall der Faelle
 		this.goldValue = goldValue;
+		// Was fuer eine Art Item ist das?
 		this.type = type;
+		// Setze die Modifikatoren
 		this.modificators = new int[2];
 		this.modificators[0] = bonusDamage;
 		this.modificators[1] = bonusHealth;
+		equipped = false;
 	}
 
 	/**
@@ -62,13 +77,93 @@ public class Item {
 		return name;
 	}
 
+
+	public int getItemType() {
+		return itemType;
+	}
+
+	/**
+	 * Returns Damagebonus of this Item
+	 * 
+	 * @return Damagebonus of this Item
+	 */
 	public int getDamageBonus() {
 		return modificators[0];
 	}
 
+	/**
+	 * Returns Healthbonus of this Item
+	 *
+	 * @return Healthbonus of this Item
+	 */
 	public int getHealthBonus() {
 		return modificators[1];
 	}
+
+	/**
+	 * Prints Information about given Item on Screen.
+	 * 
+	 * @param term currently used terminal
+	 * @param inventory currently used inventory
+	 */
+	public void showItem(Terminal term, Inventory inventory) {
+		Item item = this;
+		ArrayList<String> lines = new ArrayList<String>();
+		lines.add(item.getName());
+		lines.add("Bonus Schaden: "+item.getDamageBonus());
+		lines.add("Bonus Gesundheitspunkte: "+item.getHealthBonus()); // TODO Bessere Uebersetzung finden
+		String result = new String();
+		if (equipped) {
+			lines.add("Derzeit angelegt.");
+		} else {
+			lines.add("Derzeit nicht angelegt");
+		}
+		char key = ' ';
+		Screen.printBlock(lines, Screen.lastTerminal, Screen.lastWorld);
+		try{
+			key = term.getKey();
+		} catch (InterruptedException e) {
+			System.out.println("!Error: ");
+			e.printStackTrace();
+		}
+		switch (key) {
+			case 'q':
+				// Leave this screen (go back to inventory) and the inventory untouched.
+				break;
+			case 's':
+				if (!equipped) {
+					// Put this Item on.
+					inventory.equip(this);
+				} else {
+					// Cannot put this item down without substitute right now.
+				}
+				break;
+			case 'd':
+				// Destroy item, when it is not worn
+				if (!equipped) {
+					ArrayList<String> warningScreen = new ArrayList<String>();
+					warningScreen.add("============================");
+					warningScreen.add("=WARNUNG!=WARNUNG!=WARNUNG!=");
+					warningScreen.add("============================");
+					warningScreen.add("Sicher das "+this.getName()+" zerstoert werden soll?");
+					warningScreen.add("<J>a");
+					warningScreen.add("<N>ein");
+					Screen.printBlock(warningScreen, Screen.lastTerminal, Screen.lastWorld);
+					try {
+						char selection = term.getKey();
+						if (selection == 'j') {
+							inventory.removeItem(this);
+						}
+					} catch (InterruptedException e) {
+						System.out.println("!Error: InterruptedException");
+						e.printStackTrace();
+					}
+				}
+				break;
+		}
+	}
+
+	public void setEquipped(boolean equipped) {
+		this.equipped = equipped;
+	}
 }
-
-

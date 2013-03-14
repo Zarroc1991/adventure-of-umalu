@@ -8,6 +8,9 @@ package rogue.creature.util;
 
 import java.util.ArrayList;
 import rogue.level.Screen;
+import rogue.creature.util.NotEnoughSpaceException;
+import jade.ui.TiledTermPanel;
+import jade.ui.Terminal;
 
 /**
  * Represents an Inventory for player.
@@ -25,10 +28,21 @@ public class Inventory {
 	 * @param gold Amount of Gold character initially starts with
 	 */
 	public Inventory(int maximumItems, int gold) {
-		backpackSpaces = new ArrayList<Item>(maximumItems);
-		wornItems = new Item[2];
 		this.gold = gold;
 		this.maximumItems = maximumItems;
+		backpackSpaces = new ArrayList<Item>(maximumItems);
+		//Item test = 
+		try {
+			this.addItem(new Item("TestGegenstand",0,Item.ITEMTYPE_SWORD,5,10));
+		} catch (NotEnoughSpaceException e) {
+			System.out.println("Nicht genug Platz");
+			e.printStackTrace();
+		}
+		wornItems = new Item[3];
+		Item standardHelmet = new Item("Standard Helm",0,Item.ITEMTYPE_HEAD,0,0);
+		Item standardSword = new Item("Standard Schwert",0,Item.ITEMTYPE_SWORD,0,0);
+		wornItems[Item.ITEMTYPE_HEAD] = standardHelmet;
+		wornItems[Item.ITEMTYPE_SWORD] = standardSword;
 	}
 	
 	/**
@@ -132,7 +146,7 @@ public class Inventory {
 	/**
 	 * Returns the sum of all Bonusdamage
 	 *
-	 * @r157ggeturn Bonusdamage for user
+	 * @return Bonusdamage for user
 	 */
 	public int getBonusDamageOfWornItems() {
 		int sum = 0;
@@ -155,8 +169,53 @@ public class Inventory {
 		return sum;
 	}
 
+	/**
+	 * Returns all Items currently worn by user
+	 *
+	 * @return List of all worn Items by user
+	 */
 	public Item[] getWornItems() {
 		return wornItems;
+	}
+
+	/**
+	 * Calls showItem Method for worn Item
+	 *
+	 * @param index Index of Item to be shown
+	 * @param term Used Terminal
+	 */
+	public void showWorn(int index, Terminal term) {
+		wornItems[index].showItem(term, this);
+	}
+	
+	/**
+	 * Calls showItem for Item in backpack
+	 *
+	 * @param place Index of Item to be shown
+	 * @param term Used Terminal
+	 */
+	public void showInfo(int place, Terminal term) {
+		backpackSpaces.get(place).showItem(term, this);
+	}
+
+	/**
+	 * Starts to wear an unequipped Item
+	 *
+	 * @param item Item to equip
+	 */
+	public void equip(Item item) {
+		item.setEquipped(true);
+		Item buffer = wornItems[item.getItemType()];
+		wornItems[item.getItemType()] = item;
+		this.removeItem(item);
+		buffer.setEquipped(false);
+		try {
+			this.addItem(buffer);
+		} catch (NotEnoughSpaceException e) {
+			System.out.println("!Error Exception:");
+			e.printStackTrace();
+			System.out.println("Somethings fishy here...");
+		}
 	}
 }
 

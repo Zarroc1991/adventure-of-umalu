@@ -4,10 +4,13 @@ import jade.core.Actor;
 import jade.core.World;
 import jade.gen.map.Cellular;
 import jade.gen.map.World1;
+import jade.path.AStar;
 import jade.ui.TiledTermPanel;
 import jade.util.datatype.ColoredChar;
+import jade.util.datatype.Coordinate;
 import java.awt.Color;
 import java.util.Collection;
+import java.util.List;
 import rogue.creature.Dragon;
 
 import rogue.creature.InvisibleZombie;
@@ -25,7 +28,7 @@ import rogue.system.SystemHelper;
 
 public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
-		int level = 0; 
+   		int level = 0; 
 		// Set System options
 		SystemHelper.getArgs(args);
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
@@ -33,16 +36,17 @@ public class Rogue {
 		final int hpCycle=10;
 		int roundsToHpUp = hpCycle;
 		// Nobody knows right now, what happens here
-		term.registerTile("dungeon.png", 5, 59, ColoredChar.create('#'));
+		/*term.registerTile("dungeon.png", 5, 59, ColoredChar.create('#'));
 		term.registerTile("dungeon.png", 3, 60, ColoredChar.create('.'));
 		term.registerTile("dungeon.png", 5, 20, ColoredChar.create('@'));
-		term.registerTile("dungeon.png", 14, 30, ColoredChar.create('D', Color.red));
+		term.registerTile("dungeon.png", 14, 30, ColoredChar.create('D', Color.red));*/
 
 		// Create a new Player
 		Player player = new Player(term);
 		// Generate a new World
 
 		World world = new Level(80, 32, player);
+               
 
 		player.setName(CharacterCreation.getCharacterName(term, world));
 		Screen.printLine(player.getName(),term,world);
@@ -56,17 +60,20 @@ public class Rogue {
 		// Who deleted this, and why?
 		//world.addActor(new Monster(ColoredChar.create('D', Color.red),"roter Drache"));
 
-		// Add a Dragon so we have an enemy
-		//world.addActor(new Dragon(ColoredChar.create('D',Color.red),"roter Drache",term));
-		// Add Minimap to left part in Window (Size given as Parameter), focus on Player
+
+                // Add Minimap to left part in Window (Size given as Parameter), focus on Player
+
 
 		// term.registerCamera(player, 5, 5);
 
+		// Add Minimap to left part in Window (Size given as Parameter), focus on Player
+  
 		// Play Game
+		world.tick();
 		while(!player.expired()) { // Player is still living?
-			if (player.worldchange){								//ï¿½berprï¿½ft, ob einen Levelup erfolgt ist
+			if (player.worldchange){								//überprüft, ob einen Levelup erfolgt ist
 				world.removeActor(player);						    //entfernt Spieler aus der alten Welt
-				world = new Level(80,32, player, ++level, term);		//lädt das nächste Level 
+				world = new Level(80,32, player, ++level, term);    //lädt das nächste Level 
 				player.setWorld(world);								//Spieler erkennt seine Welt
 				player.worldchange=false;
                                 
@@ -78,8 +85,8 @@ public class Rogue {
 			  player.expire();
 			  continue;
 			  }*/
-
-			// TODO HPup Codeblock should move to Player.act(), since it is only his stuff
+		    term.registerCamera(player, player.x(), player.y()+1);		//Kamera verfolgt den Spieler
+		    // TODO HPup Codeblock should move to Player.act(), since it is only his stuff
 			// Finished hpCycle?
 			if (roundsToHpUp == 0) { // Yes
 				// Give Player a hitpoint
@@ -99,7 +106,6 @@ public class Rogue {
 				player.expire();
 				continue;
 			}
-
 			Screen.lastWorld = world;
 			Screen.lastTerminal = term;
 			Screen.redrawMap("HP: "+player.getHitpoints());
@@ -115,8 +121,8 @@ public class Rogue {
 			
 			//Screen
 			// Give everyone else the chance to make his move
+			//world.tick();
 			world.tick();
-
 		}
 		term.clearBuffer();
 		//Screen.showFile(normalizePath("src\\rogue\\system\\end.txt","rogue/system/end.txt"), term, world);
