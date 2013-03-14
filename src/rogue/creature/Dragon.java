@@ -5,6 +5,7 @@
 
 package rogue.creature;
 
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -31,7 +32,7 @@ public class Dragon extends Monster {
     }
 
     public Dragon(Terminal term) {
-        super(ColoredChar.create('D'), "roter Drache", 100, 5, term);
+        super(ColoredChar.create('D',Color.red), "roter Drache", 100, 5, term);
     }
  
 
