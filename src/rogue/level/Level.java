@@ -14,7 +14,8 @@ import jade.util.datatype.ColoredChar;
 
 public class Level extends World {
 
-    private static Generator gen = getLevelGenerator();
+	private static Generator gen = getLevelGenerator();
+
 
     public Level(int width, int height, Player player) {
         // Create a new Map, but make it 2 Rows less higher than window is, so we have some Space for
@@ -60,23 +61,34 @@ public class Level extends World {
         //after the tile, so they do not land on unpassable tiles
         switch (level) {											//Liste der Maps in Abh�ngikeit vom Level  
             case 0: {
-            	addActor(new Zombie(term));
+                addActor(new Troll(term,level));
+                addActor(new Rat(term));
+                addActor(new Slug_fat(term));
+                addActor(new Frog_poisonous(term));
                 break;
             }
             case 1: {
                 addActor(new Troll(term,level));
-                addActor(new Orc(term));
                 addActor(new Rat(term));
                 addActor(new Slug_fat(term));
                 addActor(new Frog_poisonous(term));
-                addActor(new Unbeliever(term));
                 addActor(new Zombie(term));
-                addActor(new Shadow(term));
-                //addActor(new InvisibleZombie(term));
                 break;
             }
             case 2:{
-                break;
+                addActor(new Troll(term,level));
+                addActor(new Rat(term));//kat1
+                addActor(new Slug_fat(term));//kat2
+                addActor(new Frog_poisonous(term));//kat3
+                addActor(new Zombie(term));//kat4
+                addActor(new Unbeliever(term));//kat5
+                addActor(new Orc(term));//kat6
+                addActor(new Shadow(term));//kat7
+                break;        
+            }
+            case 3:{
+                addActor(new Dragon(term));
+                break;        
             }
             default:{
                 break;
@@ -88,4 +100,5 @@ public class Level extends World {
     private static Generator getLevelGenerator() {
         return new World1();
     }
+
 }

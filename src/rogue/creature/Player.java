@@ -103,7 +103,7 @@ public class Player extends Creature implements Camera {
 						// Fight first monster on coordinate.
 						fight((Monster) actorlist.toArray()[0]);
 					} else {
-						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('§')) {  
+						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('©')) {  
 							Screen.redrawEventLine("Möchtes du diesen Raum verlassen? Drücke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
 							if (term.getKey()=='j'){
 								worldchange= true;

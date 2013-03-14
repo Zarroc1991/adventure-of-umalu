@@ -5,6 +5,7 @@
 
 package rogue.creature;
 
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -30,8 +31,15 @@ public class Dragon extends Monster {
         super(face,name, 100, 5, term);
     }
 
+    public Dragon(Terminal term) {
+        super(ColoredChar.create('D',Color.red), "roter Drache", 100, 5, term);
+    }
+ 
+
+
     @Override
     public void act() {
+
 		boolean fight = false;
 		
 		for (Direction dir : Arrays.asList(Direction.values())) {

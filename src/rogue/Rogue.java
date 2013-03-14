@@ -62,10 +62,10 @@ public class Rogue {
 		// Who deleted this, and why?
 		//world.addActor(new Monster(ColoredChar.create('D', Color.red),"roter Drache"));
 
-		// Add a Dragon so we have an enemy
 
                 // Add Minimap to left part in Window (Size given as Parameter), focus on Player
  	        // Add Minimap to left part in Window (Size given as Parameter), focus on Player
+
 
 		// term.registerCamera(player, 5, 5);
 
