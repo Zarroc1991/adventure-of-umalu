@@ -60,7 +60,7 @@ public class Level extends World {
         //after the tile, so they do not land on unpassable tiles
         switch (level) {											//Liste der Maps in Abh�ngikeit vom Level  
             case 0: {
-            	
+            	addActor(new Zombie(term));
                 break;
             }
             case 1: {

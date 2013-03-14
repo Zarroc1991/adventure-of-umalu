@@ -74,7 +74,7 @@ public class Slug_fat extends Monster {
 	@Override
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
-	        System.out.println("der " + name + "greift dich an");
+	        System.out.println("Die " + name + " greift dich an");
 		// Create Randomizer
 	        Random random = new Random();
 		// Generate Damage
@@ -82,6 +82,14 @@ public class Slug_fat extends Monster {
 		// Do Damage to Oppenent
 	        opponent.loseHitpoints(abzug);
 		// Print Result
+            Random generator = new Random();
+            int ran = generator.nextInt( 4 );
+            switch(ran){
+            	case 0:System.out.println("Ihr Schleim stinkt fürchterlich.");break;
+            	case 1:System.out.println("Sie spuckt dich voll Schleim...");break;
+            	case 2:System.out.println("Ahhh sie zieht eine Schleimspur über dich.");break;
+            	case 3:System.out.println("Sie setzt sich auf dich.");break;
+	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
 		Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");

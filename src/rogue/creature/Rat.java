@@ -39,9 +39,10 @@ public class Rat extends Monster {
     @Override
     public void act() {
         boolean actionOver = false;
-
+        
         for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
+
             if (player != null) {
                 fight(player);
 
@@ -74,7 +75,7 @@ public class Rat extends Monster {
 	@Override
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
-	        System.out.println("der " + name + "greift dich an");
+	        System.out.println("Die " + name + " greift dich an");
 		// Create Randomizer
 	        Random random = new Random();
 		// Generate Damage
@@ -82,6 +83,14 @@ public class Rat extends Monster {
 		// Do Damage to Oppenent
 	        opponent.loseHitpoints(abzug);
 		// Print Result
+            Random generator = new Random();
+            int ran = generator.nextInt( 4 );
+            switch(ran){
+            	case 0:System.out.println("Ihre Z‰hne stecken in deinem Hintern.");break;
+            	case 1:System.out.println("Sie beiﬂt in deinen groﬂen Zeh");break;
+            	case 2:System.out.println("Tollwutalarm");break;
+            	case 3:System.out.println("Sie quickt so laut.");break;
+	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
 		Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");

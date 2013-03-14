@@ -74,7 +74,7 @@ public class Orc extends Monster {
 	@Override
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
-	        System.out.println("der " + name + "greift dich an");
+	        System.out.println("Der " + name + " greift dich an");
 		// Create Randomizer
 	        Random random = new Random();
 		// Generate Damage
@@ -82,6 +82,14 @@ public class Orc extends Monster {
 		// Do Damage to Oppenent
 	        opponent.loseHitpoints(abzug);
 		// Print Result
+	        Random generator = new Random();
+            int ran = generator.nextInt( 4 );
+            switch(ran){
+            	case 0:System.out.println("Seine grießen Faust trifft dein Gesicht.");break;
+            	case 1:System.out.println("Das Ungetüm rammt dich um.");break;//optional hier alles sichtbare löschen
+            	case 2:System.out.println("Er schleudert dich durch die Luft.");break;
+            	case 3:System.out.println("Sein Gestank lähmt dich.");break;
+	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
 		Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");

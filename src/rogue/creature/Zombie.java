@@ -56,6 +56,11 @@ public class Zombie extends Monster {
                 if (this.world().getActorAt(Player.class, coordinate) != null) {
                     Direction dir = this.pos().directionTo(pathfinder.getPath(this.world(), this.pos(), coordinate).get(0));
                     move(dir);
+     	           Random generator = new Random();
+   	            int ran = generator.nextInt( 4 );
+   	            switch(ran){
+   	            	case 0:System.out.println("Gehirne!!!");break;
+   	            }
                     actionOver = true;
                     break;
                 }
@@ -72,7 +77,7 @@ public class Zombie extends Monster {
 	@Override
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
-	        System.out.println("der " + name + "greift dich an");
+	        System.out.println("Ein"+ name + " attackiert dich");
 		// Create Randomizer
 	        Random random = new Random();
 		// Generate Damage
@@ -80,6 +85,14 @@ public class Zombie extends Monster {
 		// Do Damage to Oppenent
 	        opponent.loseHitpoints(abzug);
 		// Print Result
+	           Random generator = new Random();
+	            int ran = generator.nextInt( 4 );
+	            switch(ran){
+	            	case 0:System.out.println("Er bewirft dich mit einem Arm.");break;
+	            	case 1:System.out.println("Er hat ein Auge auf dich geworfen.");break;//optional hier alles sichtbare löschen
+	            	case 2:System.out.println("Er packt dein Kopf und will dein Gehirn.");break;
+	            	case 3:System.out.println("Sein Gestank raubt dir den Atem.");break;
+		        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
 		Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");

@@ -149,7 +149,7 @@ public class Player extends Creature implements Camera {
 	 */
 	// TODO Clean up Messages in Console, to use just a single line
 	private void fight(Monster opponent) {
-		System.out.println("Du k√§mpfst gegen " + opponent.name());
+		System.out.println("Du k‰mpfst gegen " + opponent.name());
 		// Get a randomizer
 		Random random = new Random();
 		// Get random Damage for Attack
