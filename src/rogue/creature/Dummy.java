@@ -12,7 +12,7 @@ import java.lang.InterruptedException;
 public class Dummy extends Monster {
 
 	public Dummy(ColoredChar face, String name, Terminal term) {
-		super(face, name, 50, 10, term);
+		super(face, name, 5, 1, term);
 	}
 
 	public void act() {

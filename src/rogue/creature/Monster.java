@@ -34,30 +34,8 @@ public abstract class Monster extends Creature {
         return name;
     }
 
-    @Override
-    public abstract void act() ;
-      /*   boolean fight = false;
 
-        for (Direction dir : Arrays.asList(Direction.values())) {
-            Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
-            if (player != null) {	
-                fight(player);
-
-                fight = true;
-                break;
-
-            }
-
-        }
-        
-        if (!fight) {
-
-            move(Dice.global.choose(Arrays.asList(Direction.values())));
-        }*/
-    
-    
-     /*
-     * fight of the Moster aganst the Player
+     /* fight of the Moster aganst the Player
      * causes random damage between 1 and 5
      */
     // TODO Clean up Messages in Console, to use just a single line
@@ -70,8 +48,8 @@ public abstract class Monster extends Creature {
 	// Do Damage to Oppenent
         opponent.loseHitpoints(abzug);
 	// Print Result
-        System.out.println("Du hast "+ abzug + "HP verloren");
-        System.out.println("verbleibende HP:"+ opponent.hitpoints);
+        System.out.println("Du hast "+ abzug + " HP verloren");
+        System.out.println("verbleibende HP: "+ opponent.hitpoints);
 	Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
 	try {
 		term.getKey();

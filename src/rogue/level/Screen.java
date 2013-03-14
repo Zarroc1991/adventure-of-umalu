@@ -183,18 +183,27 @@ public class Screen {
 		lastTerminal.refreshScreen();
 	}
 
+	/**
+	 * Puts Text in Eventline. redrawEventLine does not delete content on its own!
+	 *
+	 * @param eventLine Line to be printed.
+	 */
 	public static void redrawEventLine(String eventLine) {
 		int x;
 		for (x = 0; x < eventLine.length(); x++) {
 			lastTerminal.bufferChar(x, lastWorld.height() + 1,
 					ColoredChar.create(eventLine.charAt(x)));
 		}
-		x += 11;
+		
 		while (x < lastWorld.width()) {
 			lastTerminal.bufferChar(x, lastWorld.height() + 1,
 					ColoredChar.create(' '));
 			x++;
 		}
 		lastTerminal.refreshScreen();
+	}
+
+	public static void putText(ArrayList<String> lines) {
+		Screen.printBlock(lines, Screen.lastTerminal, Screen.lastWorld);
 	}
 }

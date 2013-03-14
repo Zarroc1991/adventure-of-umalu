@@ -11,9 +11,12 @@ import jade.util.Dice;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Direction;
 import jade.ui.Terminal;
+import jade.util.Dice;
+import jade.util.datatype.Direction;
+import java.util.Arrays;
 
 /**
- *
+ * TODO Delete this Class, when it is not used anymore, as instances of Montster do the same thing right now
  * @author alle
  */
 public class Dragon extends Monster {
@@ -23,6 +26,8 @@ public class Dragon extends Monster {
     public Dragon(ColoredChar face, String name, Terminal term) {
         super(face,name, 100, 5, term);
     }
+
+    @Override
     public void act() {
 		boolean fight = false;
 
@@ -38,9 +43,9 @@ public class Dragon extends Monster {
 		}
 
 		if (!fight) {
-
 			move(Dice.global.choose(Arrays.asList(Direction.values())));
 		}
 	}
+
 }
 
