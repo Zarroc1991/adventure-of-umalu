@@ -63,6 +63,7 @@ public class Level extends World {
                 break;
             }
             case 1: {
+                addActor(new Rat(term));
                 addActor(new Troll(term));
                 addActor(new Orc(term));
                 //addActor(new InvisibleZombie(term));

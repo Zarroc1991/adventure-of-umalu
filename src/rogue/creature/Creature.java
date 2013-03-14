@@ -2,6 +2,7 @@ package rogue.creature;
 
 import jade.core.Actor;
 import jade.util.datatype.ColoredChar;
+import rogue.level.Screen;
 
 /**
  * Defines an abstract Class for every Being on Map
@@ -9,7 +10,7 @@ import jade.util.datatype.ColoredChar;
 public abstract class Creature extends Actor {
 	public int hitpoints;
 	public int strength;
-
+        
 	/**
 	 * Creates a new Creature Object
 	 *
@@ -50,9 +51,11 @@ public abstract class Creature extends Actor {
 	public boolean checkHitpoints() {
 		if(hitpoints<=0){
      			expire();
+                        Screen.redrawEventLine(name()+" wurde von dir besiegt");
                         return true;
 		}
                 return false;
 	}
+        public abstract String name();
 
 }
