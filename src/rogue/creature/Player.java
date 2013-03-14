@@ -108,14 +108,14 @@ public class Player extends Creature implements Camera {
 		}
 	}
 
-	@Override
+	//@Override
 	/**
 	 * Get what is visible
 	 *
 	 * @return A collection of visible Items
 	 */
 	public Collection<Coordinate> getViewField() {
-		return fov.getViewField(world(), pos(), 3); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
+		return fov.getViewFieldplayer(world(), pos().x(),pos().y(), 3); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
 	}
 
 	/**

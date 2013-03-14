@@ -41,7 +41,13 @@ public class RayCaster extends ViewField
             fov.addAll(raycaster.getPartialPath(world, x, y, x + r, y + dy));
         }
         //alle als sichtbar markierten Objekte werden im Screen angezeigt 
-        for(int i = 0; i<world.width()-1; i++){
+        return fov;
+        }
+     
+    protected Collection<Coordinate> calcViewFieldplayer(World world, int x, int y, int r){ 
+    	Collection<Coordinate> fov = calcViewField(world,x, y, r);  
+        
+    	for(int i = 0; i<world.width()-1; i++){
         	for(int j=0; j<world.height()-1; j++){
         	 if(world.isviewable(i, j)){
         	 fov.addAll(raycaster.getPartialPath(world, i+1,j+1,i,j));
