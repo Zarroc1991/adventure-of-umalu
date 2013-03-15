@@ -1,3 +1,4 @@
+
 package rogue.creature;
 
 import jade.core.Actor;
@@ -33,6 +34,7 @@ public class Player extends Creature implements Camera {
 	private int strength;
 	private String name;
 	private Inventory inventory;
+      
 
 	public Boolean worldchange = false;   // standardm��ig ist keine Map�nderung erfolgt
 	/**
@@ -286,11 +288,13 @@ public class Player extends Creature implements Camera {
         //TODO
         Random random = new Random();
         random.nextInt(strength);
+        
 
-        switch(opponent.typenumber){
+        /*switch(opponent.typenumber){
 
-            case 0:{
+            case (0):{
                 //Rat, doesnt drop Weapons according to balance
+                System.out.println("fiese Nacktschnecke");
                 break;
             }
             case 1:{
@@ -352,12 +356,9 @@ public class Player extends Creature implements Camera {
             default:{
                 break;
             }
-        }
+        }*/
         
     }
-
-    @Override
-    public String name() {
-        return getName();
-    }
 }
+
+

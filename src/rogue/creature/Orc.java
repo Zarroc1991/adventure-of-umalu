@@ -30,45 +30,51 @@ public class Orc extends Monster {
     RayCaster fov;
     int attackRadius;
 
-    public Orc(Terminal term) {          
+    public Orc(Terminal term) {
         super(ColoredChar.create('O', new Color(0,100,0)), "Orc", 25, 8, term);
-        this.typenumber =1;
         fov = new RayCaster();
         attackRadius = 5;
     }
 
     @Override
     public void act() {
-            for (Direction dir : Arrays.asList(Direction.values())) {
+        boolean actionOver = false;
+
+        for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
             if (player != null) {
                 fight(player);
-                return;
+
+                actionOver = true;
+                break;
+
             }
+
         }
-        
+
+        if (!actionOver) {
             Collection<Coordinate> viewField = fov.getViewField(this.world(), this.pos().x(), this.pos().y(), attackRadius);
             for (Coordinate coordinate : viewField) {
                 if (this.world().getActorAt(Player.class, coordinate) != null) {
                     Direction dir = this.pos().directionTo(pathfinder.getPath(this.world(), this.pos(), coordinate).get(0));
                     move(dir);
-                    return;
+                    actionOver = true;
+                    break;
                 }
             }
 
-            
+            if (!actionOver) {
 
 
                 move(Dice.global.choose(Arrays.asList(Direction.values())));
             }
-        
-
-    
+        }
+    }
 
 	@Override
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
-	        System.out.println("Der " + name() + " greift dich an");
+	        System.out.println("Der " + name + " greift dich an");
 		// Create Randomizer
 	        Random random = new Random();
 		// Generate Damage
@@ -86,7 +92,7 @@ public class Orc extends Monster {
 	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
-		Screen.redrawEventLine(name()+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
+		Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
 		try {
 			term.getKey();
 		} catch(InterruptedException e) {
@@ -95,8 +101,9 @@ public class Orc extends Monster {
 		}
 	    }
 
-	}
 
+
+	}
 
 
 

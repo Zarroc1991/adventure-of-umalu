@@ -68,7 +68,6 @@ public class Level extends World {
                 break;
             }
             case 1: {
-
                 //addActor(new Troll(term,level));
                 addActor(new Rat(term));
                 addActor(new Slug_fat(term));

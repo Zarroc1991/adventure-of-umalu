@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -41,6 +42,7 @@ public class Screen {
 		term.clearBuffer();
 		try {
 			// Prepare File for reading (open it)
+
 			//FileReader fr = new FileReader(filePath);
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"UTF-8"));
 			// int lineNumber = MAXHEIGHT; // TODO Delete this line, when it is
@@ -223,3 +225,4 @@ public class Screen {
 		Screen.putText(Screen.eventLog);
 	}
 }
+
