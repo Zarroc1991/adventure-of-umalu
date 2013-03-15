@@ -88,6 +88,11 @@ public class Player extends Creature implements Camera {
 			case 'i': // Show Inventory
 				showInventoryScreen();
 				break;
+			case 'x': // TODO Change this key
+				Screen.showEventLog();
+				term.getKey();
+				Screen.redrawMap("HP: "+this.getHitpoints());
+				break;
 			default: // User pressed something else
 				Direction dir = Direction.keyToDir(key); // Get direction
 				
@@ -100,10 +105,16 @@ public class Player extends Creature implements Camera {
 						// Fight first monster on coordinate.
 						fight((Monster) actorlist.toArray()[0]);
 					} else {
-						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('�')) {
-							System.out.println("Level Up");  
-							worldchange= true;					//Stellt fest, dass eine T�r gefunden wurde und somit eine Map�nderung erfolgt
-							move(dir);
+
+						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('�')) {  
+							Screen.redrawEventLine("M�chtes du diesen Raum verlassen? Dr�cke j f�r Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine T�r gefunden wurde und somit eine Map�nderung erfolgt
+							if (term.getKey()=='j'){
+								worldchange= true;
+								move(dir);}
+							else{
+								move(0,0); 
+								}
+
 							
 							for(Coordinate coord: getViewField()){
 								world().viewable(coord.x(), coord.y());
@@ -125,14 +136,14 @@ public class Player extends Creature implements Camera {
 		}
 	}
 
-	@Override
+	//@Override
 	/**
 	 * Get what is visible
 	 *
 	 * @return A collection of visible Items
 	 */
 	public Collection<Coordinate> getViewField() {
-		return fov.getViewFieldplayer(world(), pos().x(),pos().y(), 3); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
+		return fov.getViewFieldplayer(world(), pos().x(),pos().y(), 2); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
 	}
 
 	/**
@@ -142,7 +153,7 @@ public class Player extends Creature implements Camera {
 	 */
 	// TODO Clean up Messages in Console, to use just a single line
 	private void fight(Monster opponent) {
-		System.out.println("Du kämpfst gegen " + opponent.name());
+		System.out.println("Du k�mpfst gegen " + opponent.name());
 		// Get a randomizer
 		Random random = new Random();
 		// Get random Damage for Attack

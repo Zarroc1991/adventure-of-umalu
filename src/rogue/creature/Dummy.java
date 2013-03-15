@@ -35,4 +35,10 @@ public class Dummy extends Monster {
 			move(Dice.global.choose(Arrays.asList(Direction.values())));
 		}
 	}
+
+	@Override
+	public void fight(Player opponent) {
+		// TODO Auto-generated method stub
+		
+	}
 }

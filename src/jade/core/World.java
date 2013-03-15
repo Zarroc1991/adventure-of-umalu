@@ -6,6 +6,8 @@ import jade.util.Lambda;
 import jade.util.Lambda.FilterFunc;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Coordinate;
+
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -597,7 +599,7 @@ public abstract class World extends Messenger
 		public Tile()			
 		{
 			passable = true;
-			viewable = true;//false -> Sihtbarkeit einschr�nken		//jedes Tile erh�lt nocht die Eigenschaft der Sichtbarkeit 
+			viewable = false;//false -> Sihtbarkeit einschr�nken		//jedes Tile erh�lt nocht die Eigenschaft der Sichtbarkeit 
 			face = ColoredChar.create('.');
 			actors = new HashSet<Actor>();
 		}

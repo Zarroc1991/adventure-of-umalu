@@ -28,6 +28,11 @@ import java.util.logging.Logger;
 public class Screen {
 	public static World lastWorld;
 	public static TiledTermPanel lastTerminal;
+	public static ArrayList<String> eventLog;
+
+	public static void initialiseScreen() {
+		eventLog = new ArrayList<String>();
+	}
 
 	public static void showFile(String filePath, TiledTermPanel term,
 			World world) {
@@ -200,10 +205,19 @@ public class Screen {
 					ColoredChar.create(' '));
 			x++;
 		}
+
+		if (eventLog.size() == 25) {
+			eventLog.remove(0);
+		}
+		eventLog.add(eventLine);
 		lastTerminal.refreshScreen();
 	}
 
 	public static void putText(ArrayList<String> lines) {
 		Screen.printBlock(lines, Screen.lastTerminal, Screen.lastWorld);
+	}
+
+	public static void showEventLog() {
+		Screen.putText(Screen.eventLog);
 	}
 }

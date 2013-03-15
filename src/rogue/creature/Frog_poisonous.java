@@ -24,46 +24,52 @@ import rogue.level.Screen;
  * An Orc ist a weak Monster
  * he moves randomly like the Dragon and hit the Player if he can
  */
-public class Orc extends Monster {
+public class Frog_poisonous extends Monster {
 
     PathFinder pathfinder = new AStar();
     RayCaster fov;
     int attackRadius;
 
-    public Orc(Terminal term) {          
-        super(ColoredChar.create('O', new Color(0,100,0)), "Orc", 25, 8, term);
-        this.typenumber =1;
+    public Frog_poisonous(Terminal term) {
+        super(ColoredChar.create('F',	new Color(160,32,240)), "giftiger Frosch", 10, 3, term);
         fov = new RayCaster();
         attackRadius = 5;
     }
 
     @Override
     public void act() {
-            for (Direction dir : Arrays.asList(Direction.values())) {
+        boolean actionOver = false;
+
+        for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
             if (player != null) {
                 fight(player);
-                return;
+
+                actionOver = true;
+                break;
+
             }
+
         }
-        
+
+        if (!actionOver) {
             Collection<Coordinate> viewField = fov.getViewField(this.world(), this.pos().x(), this.pos().y(), attackRadius);
             for (Coordinate coordinate : viewField) {
                 if (this.world().getActorAt(Player.class, coordinate) != null) {
                     Direction dir = this.pos().directionTo(pathfinder.getPath(this.world(), this.pos(), coordinate).get(0));
                     move(dir);
-                    return;
+                    actionOver = true;
+                    break;
                 }
             }
 
-            
+            if (!actionOver) {
 
 
                 move(Dice.global.choose(Arrays.asList(Direction.values())));
             }
-        
-
-    
+        }
+    }
 
 	@Override
 	public void fight(Player opponent) {
@@ -76,14 +82,14 @@ public class Orc extends Monster {
 		// Do Damage to Oppenent
 	        opponent.loseHitpoints(abzug);
 		// Print Result
-	        Random generator = new Random();
-            int ran = generator.nextInt( 4 );
-            switch(ran){
-            	case 0:System.out.println("Seine grie�en Faust trifft dein Gesicht.");break;
-            	case 1:System.out.println("Das Unget�m rammt dich um.");break;//optional hier alles sichtbare l�schen
-            	case 2:System.out.println("Er schleudert dich durch die Luft.");break;
-            	case 3:System.out.println("Sein Gestank l�hmt dich.");break;
-	        }
+	           Random generator = new Random();
+	            int ran = generator.nextInt( 4 );
+	            switch(ran){
+	            	case 0:System.out.println("Seine Gift brennt sich in deine Haut.");break;
+	            	case 1:System.out.println("Aaarrhhh... Du hast sein Gift im Auge.");break;//optional hier alles sichtbare l�schen
+	            	case 2:System.out.println("Du untersch�tzt dieses kleine Vieh.");break;
+	            	case 3:System.out.println("NEIN... Deine Haut wirt ver�tzt.");break;
+		        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
 		Screen.redrawEventLine(name()+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
@@ -96,7 +102,5 @@ public class Orc extends Monster {
 	    }
 
 	}
-
-
 
 
