@@ -2,8 +2,10 @@ package jade.gen.map;
 
 import java.awt.Color;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import jade.core.World;
 import jade.util.Dice;
@@ -17,8 +19,7 @@ public abstract class NewWorld extends MapGenerator {
 		// TODO Auto-generated method stub
 		try {
 			// Prepare File for reading (open it)
-			FileReader fr = new FileReader(filePath);
-			BufferedReader br = new BufferedReader(fr);
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"UTF-8"));
 			// int lineNumber = MAXHEIGHT; // TODO Delete this line, when it is
 			// not needed anymore
 
