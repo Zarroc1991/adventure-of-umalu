@@ -371,7 +371,7 @@ public abstract class World extends Messenger
 		grid[x][y].viewable = true ;
 	}
 	public Boolean isviewable(int x, int y){
-		Guard.argumentsInsideBounds(x, y, width, height);		//Überprüft, ob etwas sichtbar ist
+		Guard.argumentsInsideBounds(x, y, width, height);		//ï¿½berprï¿½ft, ob etwas sichtbar ist
 		return grid[x][y].viewable ;
 	}
 	/**
@@ -597,7 +597,7 @@ public abstract class World extends Messenger
 		public Tile()			
 		{
 			passable = true;
-			viewable = true;//false -> Sichtbarkeit einschränken		//jedes Tile erhält nocht die Eigenschaft der Sichtbarkeit 
+			viewable = true;//false -> Sichtbarkeit einschrÃ¤nken		//jedes Tile erhï¿½lt nocht die Eigenschaft der Sichtbarkeit 
 			face = ColoredChar.create('.');
 			actors = new HashSet<Actor>();
 		}
