@@ -20,10 +20,8 @@ import rogue.level.Screen;
  */
 public class Troll extends Monster{
 
-
     public Troll( Terminal term, int level) {
         super(ColoredChar.create('T'),"Troll",level*20, level*3, term);
-        this.typenumber = 4;
     }
 
 
@@ -50,7 +48,7 @@ public class Troll extends Monster{
 	@Override
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
-	        System.out.println("der " + name() + "greift dich an");
+	        System.out.println("der " + name + "greift dich an");
 		// Create Randomizer
 	        Random random = new Random();
 		// Generate Damage
@@ -60,7 +58,7 @@ public class Troll extends Monster{
 		// Print Result
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
-		Screen.redrawEventLine(name()+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
+		Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
 		try {
 			term.getKey();
 		} catch(InterruptedException e) {

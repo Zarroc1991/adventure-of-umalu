@@ -8,13 +8,10 @@ import java.util.Random;
 import rogue.level.Screen;
 import jade.ui.Terminal;
 import java.lang.InterruptedException;
-import java.util.List;
 
 public abstract class Monster extends Creature {
 
-
-    private String name;
-    public int typenumber;
+    protected String name;
     private int maxHitpoints;
     protected Terminal term;
     public Monster(ColoredChar face) {
@@ -33,11 +30,9 @@ public abstract class Monster extends Creature {
 	this.term = term;
     }
 
-    @Override
     public String name() {
         return name;
     }
-
 
 
      /* fight of the Moster aganst the Player
@@ -53,7 +48,6 @@ public abstract class Monster extends Creature {
 	// Do Damage to Oppenent
         opponent.loseHitpoints(abzug);
 	// Print Result
-        
         System.out.println("Du hast "+ abzug + " HP verloren");
         System.out.println("verbleibende HP: "+ opponent.hitpoints);
 	Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
