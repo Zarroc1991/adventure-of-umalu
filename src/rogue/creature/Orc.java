@@ -85,10 +85,10 @@ public class Orc extends Monster {
 	        Random generator = new Random();
             int ran = generator.nextInt( 4 );
             switch(ran){
-            	case 0:System.out.println("Seine grießen Faust trifft dein Gesicht.");break;
-            	case 1:System.out.println("Das Ungetüm rammt dich um.");break;//optional hier alles sichtbare löschen
+            	case 0:System.out.println("Seine rieÃŸen Faust trifft dein Gesicht.");break;
+            	case 1:System.out.println("Das UngetÃ¼m rammt dich um.");break;//optional hier alles sichtbare lï¿½schen
             	case 2:System.out.println("Er schleudert dich durch die Luft.");break;
-            	case 3:System.out.println("Sein Gestank lähmt dich.");break;
+            	case 3:System.out.println("Sein Gestank lÃ¤hmt dich.");break;
 	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);

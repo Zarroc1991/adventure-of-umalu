@@ -1,3 +1,4 @@
+
 package jade.core;
 
 import jade.util.Dice;
@@ -609,3 +610,4 @@ public abstract class World extends Messenger
 	}
 
 }
+

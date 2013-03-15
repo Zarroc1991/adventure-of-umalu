@@ -11,7 +11,7 @@ public class World4 extends NewWorld {
 	@Override
 	//ruft generateStep aus NewWorld auf
 	protected void generateStep(World world, Dice dice) {
-		generateStep(world,dice,Path.generateAbsolutePath("maps/Map5.txt"));
+		generateStep(world,dice,Path.generateAbsolutePath("maps/Welt1.txt"));
 		
 	}
 

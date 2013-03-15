@@ -86,8 +86,8 @@ public class Rat extends Monster {
             Random generator = new Random();
             int ran = generator.nextInt( 4 );
             switch(ran){
-            	case 0:System.out.println("Ihre Z‰hne stecken in deinem Hintern.");break;
-            	case 1:System.out.println("Sie beiﬂt in deinen groﬂen Zeh");break;
+            	case 0:System.out.println("Ihre Z√§hne stecken in deinem Hintern.");break;
+            	case 1:System.out.println("Sie bei√üt in deinen gro√üen Zeh");break;
             	case 2:System.out.println("Tollwutalarm");break;
             	case 3:System.out.println("Sie quickt so laut.");break;
 	        }

@@ -31,7 +31,7 @@ public class Unbeliever extends Monster {
     int attackRadius;
 
     public Unbeliever(Terminal term) {
-        super(ColoredChar.create('U', new Color(255,185,15)), "Ungläubiger", 21, 6, term);
+        super(ColoredChar.create('U', new Color(255,185,15)), "UnglÃ¤ubiger", 21, 6, term);
         fov = new RayCaster();
         attackRadius = 5;
     }
@@ -86,7 +86,7 @@ public class Unbeliever extends Monster {
 	            int ran = generator.nextInt( 4 );
 	            switch(ran){
 	            	case 0:System.out.println("Dein Gott ist eine Illusion.");break;
-	            	case 1:System.out.println("Kremsgrdr mag dich nicht mehr.");break;//optional hier alles sichtbare löschen
+	            	case 1:System.out.println("Kremsgrdr mag dich nicht mehr.");break;//optional hier alles sichtbare lï¿½schen
 	            	case 2:System.out.println("YOLO");break;
 	            	case 3:System.out.println("Sieh doch ein das Kremsgrdr dir nicht hilft.");break;
 		        }

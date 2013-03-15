@@ -1,3 +1,4 @@
+
 package rogue;
 
 import jade.core.Actor;
@@ -138,3 +139,4 @@ public class Rogue {
 
 
 }
+

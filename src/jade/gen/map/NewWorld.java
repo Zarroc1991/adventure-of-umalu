@@ -1,3 +1,4 @@
+
 package jade.gen.map;
 
 import java.awt.Color;
@@ -54,10 +55,10 @@ public abstract class NewWorld extends MapGenerator {
 					case 'P': {	c_color = ColoredChar.create('P', Color.green);	break;}
 					case ',': {	c_color = ColoredChar.create(',', Color.green);	break;}
 					case ';': {	c_color = ColoredChar.create(';', new Color(69,139,0));	break;}
-					case '\u0086': {	c_color = ColoredChar.create('\u0086', new Color(199,21,133));break;}
+					case '\u2020': {	c_color = ColoredChar.create('\u2020', new Color(199,21,133));break;}
 					case '=': {	c_color = ColoredChar.create('=', new Color(210,105,30));break;}
 					case '#': {	c_color = ColoredChar.create('#', new Color(205,102,29));break;}
-					case '\u00AC': {	c_color = ColoredChar.create('\u00A8', new Color(210,105,30));break;}
+					case '\u00AC': {	c_color = ColoredChar.create('\u00AC', new Color(210,105,30));break;}
 					case '.': {	c_color = ColoredChar.create('.', new Color(51,51,51));	break;}
 					}
 					// System.out.println(c); // TODO Delete this line, when it
@@ -104,3 +105,4 @@ public abstract class NewWorld extends MapGenerator {
 	// Reicht abstrakte Methode weiter, um verschiedene Maps zu laden
 
 }
+
