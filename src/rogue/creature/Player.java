@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class Player extends Creature implements Camera {
 	private Terminal term;
 	private ViewField fov;
-	private static final int maxHitpoints = 15;
+	private static final int maxHitpoints = 100;
 	private int strength;
 	private String name;
 	private Inventory inventory;
@@ -106,7 +106,7 @@ public class Player extends Creature implements Camera {
 						fight((Monster) actorlist.toArray()[0]);
 					} else {
 
-						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('�')) {  
+						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('©')) {
 							Screen.redrawEventLine("M�chtes du diesen Raum verlassen? Dr�cke j f�r Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine T�r gefunden wurde und somit eine Map�nderung erfolgt
 							if (term.getKey()=='j'){
 								worldchange= true;
