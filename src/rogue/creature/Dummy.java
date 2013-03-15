@@ -13,6 +13,7 @@ public class Dummy extends Monster {
 
 	public Dummy(ColoredChar face, String name, Terminal term) {
 		super(face, name, 5, 1, term);
+                this.typenumber = 2;
 	}
 
 	public void act() {

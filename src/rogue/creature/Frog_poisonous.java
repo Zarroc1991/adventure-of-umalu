@@ -74,7 +74,7 @@ public class Frog_poisonous extends Monster {
 	@Override
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
-	        System.out.println("Der " + name + " greift dich an");
+	        System.out.println("Der " + name() + " greift dich an");
 		// Create Randomizer
 	        Random random = new Random();
 		// Generate Damage
@@ -86,13 +86,13 @@ public class Frog_poisonous extends Monster {
 	            int ran = generator.nextInt( 4 );
 	            switch(ran){
 	            	case 0:System.out.println("Seine Gift brennt sich in deine Haut.");break;
-	            	case 1:System.out.println("Aaarrhhh... Du hast sein Gift im Auge.");break;//optional hier alles sichtbare löschen
-	            	case 2:System.out.println("Du unterschätzt dieses kleine Vieh.");break;
-	            	case 3:System.out.println("NEIN... Deine Haut wirt verätzt.");break;
+	            	case 1:System.out.println("Aaarrhhh... Du hast sein Gift im Auge.");break;//optional hier alles sichtbare lï¿½schen
+	            	case 2:System.out.println("Du unterschï¿½tzt dieses kleine Vieh.");break;
+	            	case 3:System.out.println("NEIN... Deine Haut wirt verï¿½tzt.");break;
 		        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
-		Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
+		Screen.redrawEventLine(name()+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
 		try {
 			term.getKey();
 		} catch(InterruptedException e) {

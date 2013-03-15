@@ -2,6 +2,7 @@ package rogue.creature;
 
 import jade.core.Actor;
 import jade.util.datatype.ColoredChar;
+import rogue.level.Screen;
 
 /**
  * Defines an abstract Class for every Being on Map
@@ -9,7 +10,7 @@ import jade.util.datatype.ColoredChar;
 public abstract class Creature extends Actor {
 	public int hitpoints;
 	public int strength;
-
+        
 	/**
 	 * Creates a new Creature Object
 	 *
@@ -38,17 +39,24 @@ public abstract class Creature extends Actor {
 	 *
 	 * @param damage Amount of Hitpoints this creature should loose
 	 */
-	public void loseHitpoints(int damage) {
+	public boolean loseHitpoints(int damage) {
 		hitpoints -= damage;
-		checkHitpoints();
+		return checkHitpoints();
 	}
 	
 	/**
-	 * Checks, if creature is dead (by having <= 0 hitpoints), if so, Creature dies
+	 * Checks, if creature is dead (by having <= 0 hitpoints), if so, Creature dies and
+         * returns true
 	 */
-	public void checkHitpoints() {
+	public boolean checkHitpoints() {
 		if(hitpoints<=0){
-			expire();
+     			expire();
+                        Screen.redrawEventLine(name()+" wurde von dir besiegt");
+
+                        return true;
 		}
+                return false;
 	}
+        public abstract String name();
+
 }

@@ -11,6 +11,8 @@ import jade.ui.Terminal;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Coordinate;
 import jade.util.datatype.Direction;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rogue.level.Screen;
 import rogue.creature.util.Inventory;
 import rogue.creature.util.Item;
@@ -32,7 +34,7 @@ public class Player extends Creature implements Camera {
 	private String name;
 	private Inventory inventory;
 
-	public Boolean worldchange = false;   // standardmäßig ist keine Mapänderung erfolgt
+	public Boolean worldchange = false;   // standardmï¿½ï¿½ig ist keine Mapï¿½nderung erfolgt
 	/**
 	 * Creates a new Player Object
 	 * 
@@ -103,14 +105,16 @@ public class Player extends Creature implements Camera {
 						// Fight first monster on coordinate.
 						fight((Monster) actorlist.toArray()[0]);
 					} else {
-						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('©')) {  
-							Screen.redrawEventLine("Möchtes du diesen Raum verlassen? Drücke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+
+						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('ï¿½')) {  
+							Screen.redrawEventLine("Mï¿½chtes du diesen Raum verlassen? Drï¿½cke j fï¿½r Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tï¿½r gefunden wurde und somit eine Mapï¿½nderung erfolgt
 							if (term.getKey()=='j'){
 								worldchange= true;
 								move(dir);}
 							else{
 								move(0,0); 
 								}
+
 							
 							for(Coordinate coord: getViewField()){
 								world().viewable(coord.x(), coord.y());
@@ -149,19 +153,27 @@ public class Player extends Creature implements Camera {
 	 */
 	// TODO Clean up Messages in Console, to use just a single line
 	private void fight(Monster opponent) {
-		System.out.println("Du kämpfst gegen " + opponent.name());
+		System.out.println("Du kï¿½mpfst gegen " + opponent.name());
 		// Get a randomizer
 		Random random = new Random();
 		// Get random Damage for Attack
 		int damage = random.nextInt(strength) + 1;
-		// Do Damage to Opponent
-		opponent.loseHitpoints(damage);
-		// Print result
+		
+                // Print result
 		System.out.println("Du hast " + damage + " Schaden verursacht");
 		System.out.println(opponent.name() + " hat noch " + opponent.hitpoints
 				+ " HP");
 		Screen.redrawEventLine("Du verursachst " + damage + " Schaden");
-		try {
+                // Do Damage to Opponent
+		boolean opponentDied = opponent.loseHitpoints(damage);
+                try {
+                if(opponentDied){
+                    //wait for key to continue on Status message
+                    term.getKey();
+                    randomlyDropItem(opponent);
+                }
+		
+		
 			term.getKey();
 
 		} catch (InterruptedException e) {
@@ -269,4 +281,83 @@ public class Player extends Creature implements Camera {
 		// Inventar verlassen, zeichne wieder die Karte.
 		Screen.redrawMap();
 	}
+
+    private void randomlyDropItem(Monster opponent) {
+        //TODO
+        Random random = new Random();
+        random.nextInt(strength);
+
+        switch(opponent.typenumber){
+
+            case 0:{
+                //Rat, doesnt drop Weapons according to balance
+                break;
+            }
+            case 1:{
+                //Orc
+
+                int zufallszahl =random.nextInt(20);
+                Item item = null;
+                try{
+                    if(zufallszahl== 0){
+                    //Langschwert droppt zu 1/20
+                     item = new Item("Langschwert", 0, 2, 6, 0);
+                    inventory.addItem(item);
+                    //Status message
+                    Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                    //Wait for pressed key
+                    term.getKey();
+
+                }else if(zufallszahl<=4){
+                    //Kurzschwert droppt zu 1/5
+                     item = new Item("Kurzschwert", 0, 1, 3,0);
+                    inventory.addItem(item);
+                    //Status message
+                    Screen.redrawEventLine("Du hast ein Kurzschwert bekommen, druecke i, um das Inventar zu oeffnen");
+		    // Wait for pressed Key
+                    term.getKey();
+                }
+
+                }catch (NotEnoughSpaceException ex) {
+                    try{
+                    //Status message
+                    Screen.redrawEventLine("Du konntest leider ein"+item.getName()+" nicht ins Inventar aufnehmen, da es voll war");
+                    //Wait for pressed key
+                    term.getKey();
+                    }catch (InterruptedException e) {
+				System.out.println("!IOException");
+				e.printStackTrace();
+                }
+                    
+                }catch (InterruptedException e) {
+				System.out.println("!IOException");
+				e.printStackTrace();
+                }break;
+            }
+            case 2:{
+                //Dummy
+                break;
+            }
+            case 3:{
+                //InvisibleZombie
+                break;
+            }
+            case 4:{
+                //Troll
+                break;
+            }
+            case 99:{
+                //Dragon
+            }
+            default:{
+                break;
+            }
+        }
+        
+    }
+
+    @Override
+    public String name() {
+        return getName();
+    }
 }

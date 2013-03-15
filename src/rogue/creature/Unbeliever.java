@@ -31,7 +31,7 @@ public class Unbeliever extends Monster {
     int attackRadius;
 
     public Unbeliever(Terminal term) {
-        super(ColoredChar.create('U', new Color(255,185,15)), "Ungläubiger", 21, 6, term);
+        super(ColoredChar.create('U', new Color(255,185,15)), "Unglï¿½ubiger", 21, 6, term);
         fov = new RayCaster();
         attackRadius = 5;
     }
@@ -74,7 +74,7 @@ public class Unbeliever extends Monster {
 	@Override
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
-	        System.out.println("Der " + name + " greift dich an");
+	        System.out.println("Der " + name() + " greift dich an");
 		// Create Randomizer
 	        Random random = new Random();
 		// Generate Damage
@@ -86,13 +86,13 @@ public class Unbeliever extends Monster {
 	            int ran = generator.nextInt( 4 );
 	            switch(ran){
 	            	case 0:System.out.println("Dein Gott ist eine Illusion.");break;
-	            	case 1:System.out.println("Kremsgrdr mag dich nicht mehr.");break;//optional hier alles sichtbare löschen
+	            	case 1:System.out.println("Kremsgrdr mag dich nicht mehr.");break;//optional hier alles sichtbare lï¿½schen
 	            	case 2:System.out.println("YOLO");break;
 	            	case 3:System.out.println("Sieh doch ein das Kremsgrdr dir nicht hilft.");break;
 		        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
-		Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
+		Screen.redrawEventLine(name()+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
 		try {
 			term.getKey();
 		} catch(InterruptedException e) {

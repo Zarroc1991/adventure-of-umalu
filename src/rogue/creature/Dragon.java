@@ -29,6 +29,7 @@ public class Dragon extends Monster {
     */
     public Dragon(ColoredChar face, String name, Terminal term) {
         super(face,name, 100, 5, term);
+        this.typenumber=99;
     }
 
     public Dragon(Terminal term) {
@@ -60,7 +61,7 @@ public class Dragon extends Monster {
 	@Override
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
-	        System.out.println("Ra´s al Ghul greift dich an");
+	        System.out.println("Raï¿½s al Ghul greift dich an");
 		// Create Randomizer
 	        Random random = new Random();
 		// Generate Damage
@@ -74,11 +75,11 @@ public class Dragon extends Monster {
             	case 0:System.out.println("Er verbrennt dir den Arsch!");break;
             	case 1:System.out.println("Eine Drachenkralle trifft dich.");break;
             	case 2:System.out.println("Iiiihh er hat dich angefurzt.");break;
-            	case 3:System.out.println("Aua Drachenzähne sind scharf");break;
+            	case 3:System.out.println("Aua Drachenzï¿½hne sind scharf");break;
 	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
-		Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
+		Screen.redrawEventLine(name()+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
 		try {
 			term.getKey();
 		} catch(InterruptedException e) {

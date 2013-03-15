@@ -46,18 +46,16 @@ public abstract class NewWorld extends MapGenerator {
 						c_color = ColoredChar.create('#');
 						break;
 					}
-					case ':': {	c_color = ColoredChar.create('.', Color.yellow);	break;}// :wird zu grünen Punkt
+					case ':': {	c_color = ColoredChar.create('.', Color.yellow);	break;}// :wird zu grï¿½nen Punkt
 					case '~': {	c_color = ColoredChar.create('~', Color.blue);	break;}
 					case '^': {	c_color = ColoredChar.create('^', new Color(210,105,30));break;}
 					case '$': {	c_color = ColoredChar.create('$', Color.yellow);	break;}
 					case 'P': {	c_color = ColoredChar.create('P', Color.green);	break;}
 					case ',': {	c_color = ColoredChar.create(',', Color.green);	break;}
 					case ';': {	c_color = ColoredChar.create(';', new Color(69,139,0));	break;}
-					case '†': {	c_color = ColoredChar.create('†', new Color(199,21,133));break;}
+					case 'ï¿½': {	c_color = ColoredChar.create('ï¿½', new Color(199,21,133));break;}
 					case '=': {	c_color = ColoredChar.create('=', new Color(210,105,30));break;}
-					case '#': {	c_color = ColoredChar.create('#', new Color(205,102,29));break;}
-					case '¬': {	c_color = ColoredChar.create('¬', new Color(210,105,30));break;}
-					case '.': {	c_color = ColoredChar.create('.', new Color(51,51,51));	break;}
+					case '#': {	c_color = ColoredChar.create('#', new Color(205,102,29));break;}					case '.': {	c_color = ColoredChar.create('.', new Color(51,51,51));	break;}
 					}
 					// System.out.println(c); // TODO Delete this line, when it
 					// is not needed anymore
