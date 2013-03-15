@@ -52,6 +52,7 @@ public abstract class Creature extends Actor {
 		if(hitpoints<=0){
      			expire();
                         Screen.redrawEventLine(name()+" wurde von dir besiegt");
+
                         return true;
 		}
                 return false;

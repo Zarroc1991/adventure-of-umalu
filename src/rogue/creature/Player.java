@@ -155,11 +155,14 @@ public class Player extends Creature implements Camera {
 		Screen.redrawEventLine("Du verursachst " + damage + " Schaden");
                 // Do Damage to Opponent
 		boolean opponentDied = opponent.loseHitpoints(damage);
+                try {
                 if(opponentDied){
+                    //wait for key to continue on Status message
+                    term.getKey();
                     randomlyDropItem(opponent);
                 }
 		
-		try {
+		
 			term.getKey();
 
 		} catch (InterruptedException e) {
@@ -285,7 +288,7 @@ public class Player extends Creature implements Camera {
                 int zufallszahl =random.nextInt(20);
                 Item item = null;
                 try{
-                    if(zufallszahl<= 20){
+                    if(zufallszahl== 0){
                     //Langschwert droppt zu 1/20
                      item = new Item("Langschwert", 0, 2, 6, 0);
                     inventory.addItem(item);
