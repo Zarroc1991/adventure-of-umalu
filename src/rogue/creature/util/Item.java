@@ -10,6 +10,7 @@ import jade.ui.TiledTermPanel;
 import jade.ui.Terminal;
 import java.util.ArrayList;
 import rogue.level.Screen;
+import rogue.system.HelpScreen;
 
 /**
  * Represents a single Item for players Inventory
@@ -159,6 +160,9 @@ public class Item {
 						e.printStackTrace();
 					}
 				}
+				break;
+			case 'o':
+				HelpScreen.printItemHelpScreen();
 				break;
 		}
 	}

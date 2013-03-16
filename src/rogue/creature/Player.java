@@ -264,6 +264,10 @@ public class Player extends Creature implements Camera {
 					case '4':
 					inventory.showInfo(4, term);
 					break;
+					case 'o':
+					HelpScreen.printInventoryHelpScreen();
+					break;
+					
 				}
 			} catch (InterruptedException e) {
 				System.out.println("!Exeception");
