@@ -59,6 +59,16 @@ public class Item {
 		this.modificators[1] = bonusHealth;
 		equipped = false;
 	}
+	
+	/**
+	 *
+	 */
+	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth, boolean equipped) {
+		// Call other Constructor
+		this(name, goldValue, type, bonusDamage, bonusHealth);
+		// Set equipped
+		this.equipped = equipped;
+	}
 
 	/**
 	 * Returns Goldvalue of this item.
