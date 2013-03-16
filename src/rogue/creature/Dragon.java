@@ -20,8 +20,8 @@ import java.util.Arrays;
 import rogue.level.Screen;
 
 /**
- * TODO Delete this Class, when it is not used anymore, as instances of Montster do the same thing right now
- * @author alle
+ * 
+ * 
  */
 public class Dragon extends Monster {
    /*

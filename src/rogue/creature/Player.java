@@ -285,23 +285,55 @@ public class Player extends Creature implements Camera {
 	}
 
     private void randomlyDropItem(Monster opponent) {
-        //TODO
         Random random = new Random();
         random.nextInt(strength);
+        //This Item drops;
+        Item item = null;
         
+        switch(opponent.typenumber){
 
-        /*switch(opponent.typenumber){
-
-            case (0):{
+            case 1:{
                 //Rat, doesnt drop Weapons according to balance
-                System.out.println("fiese Nacktschnecke");
+                System.out.println("Ratte lässt nichts fallen");
                 break;
             }
-            case 1:{
-                //Orc
+            case 2:{
+                //Fette Nacktschnecke
+                //random Number decides whether an Item drops or not and which one
+                int zufallszahl =random.nextInt(3);
+                
+                try{
+                    if(zufallszahl== 0){
+                    //Axt drops 1/3 of the time
+                     item = new Item("Axt", 0, 0, 2, 0);
+                    inventory.addItem(item);
+                    //Status message
+                    Screen.redrawEventLine("Du hast eine Axt bekommen, druecke i, um das Inventar zu oeffnen");
+                    //Wait for pressed key
+                    term.getKey();
+                }
 
+                }catch (NotEnoughSpaceException ex) {
+                    try{
+                    //Status message
+                    Screen.redrawEventLine("Du konntest leider ein"+item.getName()+" nicht ins Inventar aufnehmen, da es voll war");
+                    //Wait for pressed key
+                    term.getKey();
+                    }catch (InterruptedException e) {
+				System.out.println("!IOException");
+				e.printStackTrace();
+                }
+                    
+                }catch (InterruptedException e) {
+				System.out.println("!IOException");
+				e.printStackTrace();
+                }break;
+            }
+            case 3:{
+                //Giftiger Frosch
+                //random Number decides whether an Item drops or not and which one
                 int zufallszahl =random.nextInt(20);
-                Item item = null;
+
                 try{
                     if(zufallszahl== 0){
                     //Langschwert droppt zu 1/20
@@ -332,31 +364,57 @@ public class Player extends Creature implements Camera {
 				System.out.println("!IOException");
 				e.printStackTrace();
                 }
-                    
+
                 }catch (InterruptedException e) {
 				System.out.println("!IOException");
 				e.printStackTrace();
-                }break;
-            }
-            case 2:{
-                //Dummy
+                }
                 break;
-            }
-            case 3:{
-                //InvisibleZombie
-                break;
+                
             }
             case 4:{
+                //Zombie
+                //TODO muss Waffen droppen
+                break;
+            }
+            case 5:{
+                //Unbeliever
+                //TODO muss Waffen droppen
+                break;
+            }
+            case 6:{
+                //Orc
+                //TODO Waffen droppen
+                break;
+            }
+            case 7:{
+                //Shodow
+                //TODO Waffen droppen
+                break;
+            }
+            case 10:{
                 //Troll
+                //TODO Waffendroppen
+                break;
+            }
+            case 11:{
+                //Unsichbarer Zombie
+                //droppt nichts
+                break;
+            }
+            case 12:{
+                //Dummie
+                //TODO Waffen droppen
                 break;
             }
             case 99:{
                 //Dragon
+                //droppt nichts
             }
             default:{
                 break;
             }
-        }*/
+        }
         
     }
 }

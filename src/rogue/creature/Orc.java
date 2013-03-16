@@ -34,8 +34,8 @@ public class Orc extends Monster {
         super(ColoredChar.create('O', new Color(0,100,0)), "Orc", 25, 8, term);
         fov = new RayCaster();
         attackRadius = 5;
-        //Typenumber 5, since cat. 5
-        typenumber = 5;
+        //Typenumber 6, since cat. 6
+        typenumber = 6;
     }
 
     @Override
