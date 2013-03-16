@@ -328,7 +328,7 @@ public class Player extends Creature implements Camera {
                 try{
                     if(zufallszahl== 0){
                     //Axt drops 1/3 of the time
-                     item = new Item("Axt", 0, 0, 2, 0);
+                     item = new Item("Axt", 0, 0, 2, 0,5);
                     inventory.addItem(item);
                     //Status message
                     Screen.redrawEventLine("Du hast eine Axt bekommen, druecke i, um das Inventar zu oeffnen");
@@ -360,7 +360,7 @@ public class Player extends Creature implements Camera {
                 try{
                     if(zufallszahl== 0){
                     //Langschwert droppt zu 1/20
-                     item = new Item("Langschwert", 0, 2, 6, 0);
+                     item = new Item("Langschwert", 0, 2, 6, 0,5);
                     inventory.addItem(item);
                     //Status message
                     Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
@@ -369,7 +369,7 @@ public class Player extends Creature implements Camera {
 
                 }else if(zufallszahl<=4){
                     //Kurzschwert droppt zu 1/5
-                     item = new Item("Kurzschwert", 0, 1, 3,0);
+                     item = new Item("Kurzschwert", 0, 1, 3,0,5);
                     inventory.addItem(item);
                     //Status message
                     Screen.redrawEventLine("Du hast ein Kurzschwert bekommen, druecke i, um das Inventar zu oeffnen");

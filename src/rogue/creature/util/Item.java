@@ -61,6 +61,8 @@ public class Item {
 		this.modificators = new int[2];
 		this.modificators[0] = bonusDamage;
 		this.modificators[1] = bonusHealth;
+		this.maxDurability = durability;
+		this.durability = durability;
 		equipped = false;
 	}
 	

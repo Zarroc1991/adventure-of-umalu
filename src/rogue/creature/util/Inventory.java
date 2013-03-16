@@ -33,14 +33,14 @@ public class Inventory {
 		backpackSpaces = new ArrayList<Item>(maximumItems);
 		//Item test = 
 		try {
-			this.addItem(new Item("TestGegenstand",0,Item.ITEMTYPE_SWORD,5,10));
+			this.addItem(new Item("TestGegenstand",0,Item.ITEMTYPE_SWORD,5,10,5));
 		} catch (NotEnoughSpaceException e) {
 			System.out.println("Nicht genug Platz");
 			e.printStackTrace();
 		}
 		wornItems = new Item[3];
-		Item standardHelmet = new Item("Standard Helm",0,Item.ITEMTYPE_HEAD,0,0, true);
-		Item standardSword = new Item("Standard Schwert",0,Item.ITEMTYPE_SWORD,0,0, true);
+		Item standardHelmet = new Item("Standard Helm",0,Item.ITEMTYPE_HEAD,0,0, 5,true);
+		Item standardSword = new Item("Standard Schwert",0,Item.ITEMTYPE_SWORD,0,0, 5,true);
 		wornItems[Item.ITEMTYPE_HEAD] = standardHelmet;
 		wornItems[Item.ITEMTYPE_SWORD] = standardSword;
 	}
