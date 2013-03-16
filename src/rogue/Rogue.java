@@ -111,7 +111,7 @@ public class Rogue {
 			}
 			Screen.lastWorld = world;
 			Screen.lastTerminal = term;
-			Screen.redrawMap("HP: "+player.getHitpoints());
+			Screen.redrawMap("HP: "+player.getHitpoints()+"/"+player.getMaxHitpoints());
 
 			// TODO Delete this Block if noone needs it anymore.
 			// Redraw Windowcontents now

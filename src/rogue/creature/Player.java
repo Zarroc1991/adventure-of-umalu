@@ -216,6 +216,10 @@ public class Player extends Creature implements Camera {
 	public int getHitpoints() {
 		return hitpoints;
 	}
+	
+	public int getMaxHitpoints() {
+		return maxHitpoints;
+	}
 
 	/**
 	 * Creates and prints an Inventory Screen
