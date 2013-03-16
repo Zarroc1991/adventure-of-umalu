@@ -32,6 +32,8 @@ public class Zombie extends Monster {
         super(ColoredChar.create('Z'), "Zombie", 16, 4, term);
         fov = new RayCaster();
         attackRadius = 5;
+        //Typenumber 4, since cat.4
+        typenumber = 4;
     }
 
     @Override

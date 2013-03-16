@@ -34,6 +34,8 @@ public class Slug_fat extends Monster {
         super(ColoredChar.create('~', new Color(238,48,167)), "fette Nacktschnecke", 8, 2, term);
         fov = new RayCaster();
         attackRadius = 5;
+        //second weakest Monster, hence Typenumber 2
+        typenumber = 2;
     }
 
     @Override

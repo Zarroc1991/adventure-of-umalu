@@ -1,4 +1,3 @@
-
 package jade.gen.map;
 
 import java.awt.Color;
@@ -105,4 +104,3 @@ public abstract class NewWorld extends MapGenerator {
 	// Reicht abstrakte Methode weiter, um verschiedene Maps zu laden
 
 }
-

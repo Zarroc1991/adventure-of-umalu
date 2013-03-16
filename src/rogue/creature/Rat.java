@@ -34,6 +34,8 @@ public class Rat extends Monster {
         super(ColoredChar.create('R', new Color(110,110,110)), "Ratte", 5, 1, term);
         fov = new RayCaster();
         attackRadius = 5;
+        //a Rat is the weakest Monster, hence Typenumber 1
+        typenumber = 1;
     }
 
     @Override

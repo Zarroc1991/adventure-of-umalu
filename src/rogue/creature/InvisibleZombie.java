@@ -22,6 +22,8 @@ public class InvisibleZombie extends Monster{
 
     public InvisibleZombie( Terminal term) {
         super(null, "Unsichtbarer Zombie",8 ,2, term);
+        //second special Monster, hence Typenumber 11
+        typenumber =11;
     }
 
     @Override

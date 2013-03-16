@@ -20,7 +20,7 @@ import java.util.Arrays;
 import rogue.level.Screen;
 
 /**
- * TODO Delete this Class, when it is not used anymore, as instances of Montster do the same thing right now
+ * TODO Delete this Class, when it is not used anymore, as instances of Monster do the same thing right now
  * @author alle
  */
 public class Dragon extends Monster {
@@ -29,6 +29,8 @@ public class Dragon extends Monster {
     */
     public Dragon(ColoredChar face, String name, Terminal term) {
         super(face,name, 100, 5, term);
+        //the Dragon is so special, he is number 99
+        typenumber =99;
     }
 
     public Dragon(Terminal term) {

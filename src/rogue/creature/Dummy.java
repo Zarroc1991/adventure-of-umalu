@@ -13,6 +13,8 @@ public class Dummy extends Monster {
 
 	public Dummy(ColoredChar face, String name, Terminal term) {
 		super(face, name, 5, 1, term);
+                //third special Monster, hence Typenumber 12
+                typenumber = 12;
 	}
 
 	public void act() {

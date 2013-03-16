@@ -34,6 +34,8 @@ public class Frog_poisonous extends Monster {
         super(ColoredChar.create('F',	new Color(160,32,240)), "giftiger Frosch", 10, 3, term);
         fov = new RayCaster();
         attackRadius = 5;
+        //Typenumber 3, sice Monster of Categorie 3
+        typenumber = 3;
     }
 
     @Override
@@ -80,7 +82,7 @@ public class Frog_poisonous extends Monster {
 		// Generate Damage
 	        int abzug = random.nextInt(strength)+1;
 		// Do Damage to Oppenent
-	        opponent.loseHitpoints(abzug);
+	        boolean test = opponent.loseHitpoints(abzug);
 		// Print Result
 	           Random generator = new Random();
 	            int ran = generator.nextInt( 4 );
