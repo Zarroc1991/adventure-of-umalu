@@ -85,7 +85,7 @@ public class Player extends Creature implements Camera {
 			key = term.getKey();
 			switch (key) {
 			case 'q': // User wants to quit
-				expire(); // Leave let player die, so this application quits
+				confirmQuit(); // Leave let player die, so this application quits
 				break;
 			case 'i': // Show Inventory
 				showInventoryScreen();
@@ -134,6 +134,18 @@ public class Player extends Creature implements Camera {
 				}
 			}
 		} catch (InterruptedException e) { // Something has happened here
+			System.out.println("!Interrupted Exception");
+			e.printStackTrace();
+		}
+	}
+
+	public void confirmQuit() {
+		Screen.redrawEventLine("Sicher dass Adventures in Umalu beendet werden soll? <J>a/<N>ein");
+		try {
+			if (term.getKey() == 'j') {
+				expire();
+			}
+		} catch (InterruptedException e) {
 			System.out.println("!Interrupted Exception");
 			e.printStackTrace();
 		}
