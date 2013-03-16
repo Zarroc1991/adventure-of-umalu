@@ -11,11 +11,12 @@ import jade.ui.Terminal;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Coordinate;
 import jade.util.datatype.Direction;
-import rogue.level.Screen;
+import rogue.system.HelpScreen;
 import rogue.creature.util.Inventory;
 import rogue.creature.util.Item;
 import rogue.creature.util.NotEnoughGoldException;
 import rogue.creature.util.NotEnoughSpaceException;
+import rogue.level.Screen;
 import java.util.Random;
 import java.lang.InterruptedException;
 import jade.core.World;
@@ -85,6 +86,9 @@ public class Player extends Creature implements Camera {
 				break;
 			case 'i': // Show Inventory
 				showInventoryScreen();
+				break;
+			case 'o':
+				HelpScreen.printMainHelpScreen();
 				break;
 			case 'x': // TODO Change this key
 				Screen.showEventLog();
