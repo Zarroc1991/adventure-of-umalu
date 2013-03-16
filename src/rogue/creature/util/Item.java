@@ -121,6 +121,9 @@ public class Item {
 
 	/**
 	 * Decreases Durability of Item
+	 *
+	 * @param value Amount of Durability lost.
+	 */
 	public void reduceDurability(int value) {
 		durability -= value;
 	}
