@@ -34,6 +34,8 @@ public class Slug_fat extends Monster {
         super(ColoredChar.create('~', new Color(238,48,167)), "fette Nacktschnecke", 8, 2, term);
         fov = new RayCaster();
         attackRadius = 5;
+        //second weakest Monster, hence Typenumber 2
+        typenumber = 2;
     }
 
     @Override
@@ -85,9 +87,9 @@ public class Slug_fat extends Monster {
             Random generator = new Random();
             int ran = generator.nextInt( 4 );
             switch(ran){
-            	case 0:System.out.println("Ihr Schleim stinkt fürchterlich.");break;
+            	case 0:System.out.println("Ihr Schleim stinkt fï¿½rchterlich.");break;
             	case 1:System.out.println("Sie spuckt dich voll Schleim...");break;
-            	case 2:System.out.println("Ahhh sie zieht eine Schleimspur über dich.");break;
+            	case 2:System.out.println("Ahhh sie zieht eine Schleimspur ï¿½ber dich.");break;
             	case 3:System.out.println("Sie setzt sich auf dich.");break;
 	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");

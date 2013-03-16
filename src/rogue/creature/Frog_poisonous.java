@@ -34,6 +34,8 @@ public class Frog_poisonous extends Monster {
         super(ColoredChar.create('F',	new Color(160,32,240)), "giftiger Frosch", 10, 3, term);
         fov = new RayCaster();
         attackRadius = 5;
+        //Typenumber 3, sice Monster of Categorie 3
+        typenumber = 3;
     }
 
     @Override
@@ -86,9 +88,9 @@ public class Frog_poisonous extends Monster {
 	            int ran = generator.nextInt( 4 );
 	            switch(ran){
 	            	case 0:System.out.println("Seine Gift brennt sich in deine Haut.");break;
-	            	case 1:System.out.println("Aaarrhhh... Du hast sein Gift im Auge.");break;//optional hier alles sichtbare löschen
-	            	case 2:System.out.println("Du unterschätzt dieses kleine Vieh.");break;
-	            	case 3:System.out.println("NEIN... Deine Haut wirt verätzt.");break;
+	            	case 1:System.out.println("Aaarrhhh... Du hast sein Gift im Auge.");break;//optional hier alles sichtbare lï¿½schen
+	            	case 2:System.out.println("Du unterschï¿½tzt dieses kleine Vieh.");break;
+	            	case 3:System.out.println("NEIN... Deine Haut wirt verï¿½tzt.");break;
 		        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);

@@ -34,6 +34,8 @@ public class Rat extends Monster {
         super(ColoredChar.create('R', new Color(110,110,110)), "Ratte", 5, 1, term);
         fov = new RayCaster();
         attackRadius = 5;
+        //a Rat is the weakest Monster, hence Typenumber 1
+        typenumber = 1;
     }
 
     @Override
@@ -86,8 +88,8 @@ public class Rat extends Monster {
             Random generator = new Random();
             int ran = generator.nextInt( 4 );
             switch(ran){
-            	case 0:System.out.println("Ihre Zähne stecken in deinem Hintern.");break;
-            	case 1:System.out.println("Sie beißt in deinen großen Zeh");break;
+            	case 0:System.out.println("Ihre Zï¿½hne stecken in deinem Hintern.");break;
+            	case 1:System.out.println("Sie beiï¿½t in deinen groï¿½en Zeh");break;
             	case 2:System.out.println("Tollwutalarm");break;
             	case 3:System.out.println("Sie quickt so laut.");break;
 	        }
