@@ -214,7 +214,7 @@ public class Inventory {
 		} catch (NotEnoughSpaceException e) {
 			System.out.println("!Error Exception:");
 			e.printStackTrace();
-			System.out.println("Somethings fishy here...");
+			System.out.println("Something is strange here...");
 		}
 	}
 }
