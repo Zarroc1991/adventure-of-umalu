@@ -48,8 +48,9 @@ public class Item {
 	 * @param type Sword or Helmet Item
 	 * @param bonusDamage Additional Damage by Item
 	 * @param bonusHealth Addiotional Health by Item
+	 * @param durability Maximum Durability of this Item
 	 */
-	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth) {
+	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth, int durability) {
 		// Name einfuegen
 		this.name = name;
 		// Platzhalter fuer den Fall der Faelle
@@ -66,19 +67,20 @@ public class Item {
 	/**
 	 * Creates a new Item Object with given name and Goldvalue. Additionally sets equipped Value.
 	 * This method should only get called for initial Items in inventory, all other Items should use
-	 * Item(name, goldValue, type, bonusDamage, bonusHealth)!
+	 * Item(name, goldValue, type, bonusDamage, bonusHealth, durability)!
 	 *
 	 * @param name Name of Item
 	 * @param goldValue Goldvalue of Item
 	 * @param type Sword or Helmet Item
 	 * @param bonusDamage Additional Damage by Item
-	 * @param bonusHealth Addiotional Health by Item
+	 * @param bonusHealth Additioonal Health by Item
+	 * @param durability maximum durability of this item
 	 * @param equipped Equipped Value
 	 */
 
-	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth, boolean equipped) {
+	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth, int durability, boolean equipped) {
 		// Call other Constructor
-		this(name, goldValue, type, bonusDamage, bonusHealth);
+		this(name, goldValue, type, bonusDamage, bonusHealth, durability);
 		// Set equipped
 		this.equipped = equipped;
 	}
@@ -116,6 +118,12 @@ public class Item {
 	}
 
 	/**
+	 * Decreases Durability of Item
+	public void reduceDurability(int value) {
+		durability -= value;
+	}
+
+	/**
 	 * Returns Healthbonus of this Item
 	 *
 	 * @return Healthbonus of this Item
@@ -136,6 +144,7 @@ public class Item {
 		lines.add(item.getName());
 		lines.add("Bonus Schaden: "+item.getDamageBonus());
 		lines.add("Bonus Gesundheitspunkte: "+item.getHealthBonus()); // TODO Bessere Uebersetzung finden
+		lines.add("Haltbarkeit: "+durability+"/"+maxDurability);
 		String result = new String();
 		if (equipped) {
 			lines.add("Derzeit angelegt.");
