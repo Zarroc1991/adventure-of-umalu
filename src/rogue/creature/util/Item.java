@@ -44,7 +44,10 @@ public class Item {
 	 * Creates a new Item Object wth given name and Goldvalue
 	 *
 	 * @param name Name of Item
-	 * @param goldValue Goldvalue of Object
+	 * @param goldValue Goldvalue of Item
+	 * @param type Sword or Helmet Item
+	 * @param bonusDamage Additional Damage by Item
+	 * @param bonusHealth Addiotional Health by Item
 	 */
 	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth) {
 		// Name einfuegen
@@ -58,6 +61,26 @@ public class Item {
 		this.modificators[0] = bonusDamage;
 		this.modificators[1] = bonusHealth;
 		equipped = false;
+	}
+	
+	/**
+	 * Creates a new Item Object with given name and Goldvalue. Additionally sets equipped Value.
+	 * This method should only get called for initial Items in inventory, all other Items should use
+	 * Item(name, goldValue, type, bonusDamage, bonusHealth)!
+	 *
+	 * @param name Name of Item
+	 * @param goldValue Goldvalue of Item
+	 * @param type Sword or Helmet Item
+	 * @param bonusDamage Additional Damage by Item
+	 * @param bonusHealth Addiotional Health by Item
+	 * @param equipped Equipped Value
+	 */
+
+	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth, boolean equipped) {
+		// Call other Constructor
+		this(name, goldValue, type, bonusDamage, bonusHealth);
+		// Set equipped
+		this.equipped = equipped;
 	}
 
 	/**
