@@ -82,15 +82,15 @@ public class Frog_poisonous extends Monster {
 		// Generate Damage
 	        int abzug = random.nextInt(strength)+1;
 		// Do Damage to Oppenent
-	        opponent.loseHitpoints(abzug);
+	        boolean test = opponent.loseHitpoints(abzug);
 		// Print Result
 	           Random generator = new Random();
 	            int ran = generator.nextInt( 4 );
 	            switch(ran){
 	            	case 0:System.out.println("Seine Gift brennt sich in deine Haut.");break;
 	            	case 1:System.out.println("Aaarrhhh... Du hast sein Gift im Auge.");break;//optional hier alles sichtbare l�schen
-	            	case 2:System.out.println("Du untersch�tzt dieses kleine Vieh.");break;
-	            	case 3:System.out.println("NEIN... Deine Haut wirt ver�tzt.");break;
+	            	case 2:System.out.println("Du unterschätzt dieses kleine Vieh.");break;
+	            	case 3:System.out.println("NEIN... Deine Haut wird verätzt.");break;
 		        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);

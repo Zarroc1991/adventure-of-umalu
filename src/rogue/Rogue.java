@@ -74,9 +74,9 @@ public class Rogue {
 		// Play Game
 		//world.tick();
 		while(!player.expired()) { // Player is still living?
-			if (player.worldchange){								//�berpr�ft, ob einen Levelup erfolgt ist
+			if (player.worldchange){								//Überprüft, ob einen Levelup erfolgt ist
 				world.removeActor(player); //entfernt Spieler aus der alten Welt
-				world = new Level(80,32, player, ++level, term);    //l�dt das n�chste Level 
+				world = new Level(80,32, player, ++level, term);    //lädt das nächste Level 
 				player.setWorld(world);								//Spieler erkennt seine Welt
 				player.worldchange=false;
                                 
@@ -111,7 +111,7 @@ public class Rogue {
 			}
 			Screen.lastWorld = world;
 			Screen.lastTerminal = term;
-			Screen.redrawMap("HP: "+player.getHitpoints());
+			Screen.redrawMap("HP: "+player.getHitpoints()+"/"+player.getMaxHitpoints());
 
 			// TODO Delete this Block if noone needs it anymore.
 			// Redraw Windowcontents now

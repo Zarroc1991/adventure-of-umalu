@@ -1,4 +1,3 @@
-
 package rogue.creature;
 
 import jade.core.Actor;
@@ -12,6 +11,7 @@ import jade.ui.Terminal;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Coordinate;
 import jade.util.datatype.Direction;
+import rogue.system.HelpScreen;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rogue.level.Screen;
@@ -19,6 +19,7 @@ import rogue.creature.util.Inventory;
 import rogue.creature.util.Item;
 import rogue.creature.util.NotEnoughGoldException;
 import rogue.creature.util.NotEnoughSpaceException;
+import rogue.level.Screen;
 import java.util.Random;
 import java.lang.InterruptedException;
 import jade.core.World;
@@ -30,13 +31,12 @@ import java.util.ArrayList;
 public class Player extends Creature implements Camera {
 	private Terminal term;
 	private ViewField fov;
-	private static final int maxHitpoints = 100;
+	private static final int maxHitpoints = 15;
 	private int strength;
 	private String name;
 	private Inventory inventory;
-      
 
-	public Boolean worldchange = false;   // standardm��ig ist keine Map�nderung erfolgt
+	public Boolean worldchange = false;   // standardmäßig ist keine Mapänderung erfolgt
 	/**
 	 * Creates a new Player Object
 	 * 
@@ -84,11 +84,14 @@ public class Player extends Creature implements Camera {
 			char key;
 			key = term.getKey();
 			switch (key) {
-			case 'q': // User wants to quit
-				expire(); // Leave let player die, so this application quits
+			case 'b': // User wants to quit//beenden später auf esc 
+				confirmQuit(); // Leave let player die, so this application quits
 				break;
 			case 'i': // Show Inventory
 				showInventoryScreen();
+				break;
+			case 'o':
+				HelpScreen.printMainHelpScreen();
 				break;
 			case 'x': // TODO Change this key
 				Screen.showEventLog();
@@ -107,16 +110,14 @@ public class Player extends Creature implements Camera {
 						// Fight first monster on coordinate.
 						fight((Monster) actorlist.toArray()[0]);
 					} else {
-
-						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('©')) {
-							Screen.redrawEventLine("M�chtes du diesen Raum verlassen? Dr�cke j f�r Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine T�r gefunden wurde und somit eine Map�nderung erfolgt
+						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u00a9')) {  
+							Screen.redrawEventLine("Möchtest du diesen Raum verlassen? Drüccke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
 							if (term.getKey()=='j'){
 								worldchange= true;
 								move(dir);}
 							else{
 								move(0,0); 
 								}
-
 							
 							for(Coordinate coord: getViewField()){
 								world().viewable(coord.x(), coord.y());
@@ -133,6 +134,18 @@ public class Player extends Creature implements Camera {
 				}
 			}
 		} catch (InterruptedException e) { // Something has happened here
+			System.out.println("!Interrupted Exception");
+			e.printStackTrace();
+		}
+	}
+
+	public void confirmQuit() {
+		Screen.redrawEventLine("Sicher dass Adventures in Umalu beendet werden soll? <J>a/<N>ein");
+		try {
+			if (term.getKey() == 'j') {
+				expire();
+			}
+		} catch (InterruptedException e) {
 			System.out.println("!Interrupted Exception");
 			e.printStackTrace();
 		}
@@ -155,13 +168,15 @@ public class Player extends Creature implements Camera {
 	 */
 	// TODO Clean up Messages in Console, to use just a single line
 	private void fight(Monster opponent) {
-		System.out.println("Du k�mpfst gegen " + opponent.name());
+		System.out.println("Du kämpfst gegen " + opponent.name());
 		// Get a randomizer
 		Random random = new Random();
 		// Get random Damage for Attack
 		int damage = random.nextInt(strength) + 1;
+		// Do Damage to Opponent
+		opponent.loseHitpoints(damage);
+		// Print result
 		
-                // Print result
 		System.out.println("Du hast " + damage + " Schaden verursacht");
 		System.out.println(opponent.name() + " hat noch " + opponent.hitpoints
 				+ " HP");
@@ -212,6 +227,10 @@ public class Player extends Creature implements Camera {
 	 */
 	public int getHitpoints() {
 		return hitpoints;
+	}
+	
+	public int getMaxHitpoints() {
+		return maxHitpoints;
 	}
 
 	/**
@@ -274,6 +293,10 @@ public class Player extends Creature implements Camera {
 					case '4':
 					inventory.showInfo(4, term);
 					break;
+					case 'o':
+					HelpScreen.printInventoryHelpScreen();
+					break;
+					
 				}
 			} catch (InterruptedException e) {
 				System.out.println("!Exeception");

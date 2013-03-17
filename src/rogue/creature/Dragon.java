@@ -20,8 +20,8 @@ import java.util.Arrays;
 import rogue.level.Screen;
 
 /**
- * 
- * 
+ * TODO Delete this Class, when it is not used anymore, as instances of Monster do the same thing right now
+ * @author alle
  */
 public class Dragon extends Monster {
    /*
@@ -76,7 +76,7 @@ public class Dragon extends Monster {
             	case 0:System.out.println("Er verbrennt dir den Arsch!");break;
             	case 1:System.out.println("Eine Drachenkralle trifft dich.");break;
             	case 2:System.out.println("Iiiihh er hat dich angefurzt.");break;
-            	case 3:System.out.println("Aua Drachenz�hne sind scharf");break;
+            	case 3:System.out.println("Aua Drachenzähne sind scharf");break;
 	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);

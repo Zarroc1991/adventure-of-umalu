@@ -39,8 +39,8 @@ public class Inventory {
 			e.printStackTrace();
 		}
 		wornItems = new Item[3];
-		Item standardHelmet = new Item("Standard Helm",0,Item.ITEMTYPE_HEAD,0,0);
-		Item standardSword = new Item("Standard Schwert",0,Item.ITEMTYPE_SWORD,0,0);
+		Item standardHelmet = new Item("Standard Helm",0,Item.ITEMTYPE_HEAD,0,0, true);
+		Item standardSword = new Item("Standard Schwert",0,Item.ITEMTYPE_SWORD,0,0, true);
 		wornItems[Item.ITEMTYPE_HEAD] = standardHelmet;
 		wornItems[Item.ITEMTYPE_SWORD] = standardSword;
 	}
@@ -214,7 +214,7 @@ public class Inventory {
 		} catch (NotEnoughSpaceException e) {
 			System.out.println("!Error Exception:");
 			e.printStackTrace();
-			System.out.println("Somethings fishy here...");
+			System.out.println("Something is strange here...");
 		}
 	}
 }

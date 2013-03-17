@@ -87,10 +87,10 @@ public class Shadow extends Monster {
 	        Random generator = new Random();
             int ran = generator.nextInt( 5 );
             switch(ran){
-            	case 0:System.out.println("Eine unertr�gliche leere ergreift dich.");break;
+            	case 0:System.out.println("Eine unerträgliche leere ergreift dich.");break;
             	case 1:System.out.println("Du kannst nichts sehen.");break;//optional hier alles sichtbare l�schen
-            	case 2:System.out.println("Dein gr��ter Albtraum spielt sich in deinem Kopf ab.");break;
-            	case 3:System.out.println("Dein Herz f�hlt sich so kalt an.");break;
+            	case 2:System.out.println("Dein größter Albtraum spielt sich in deinem Kopf ab.");break;
+            	case 3:System.out.println("Dein Herz fühlt sich so kalt an.");break;
             	case 4:System.out.println("Du hast schreckliche Angst.");break;
 	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
