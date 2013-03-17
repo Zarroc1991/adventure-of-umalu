@@ -91,7 +91,7 @@ public class Zombie extends Monster {
 	            int ran = generator.nextInt( 4 );
 	            switch(ran){
 	            	case 0:System.out.println("Er bewirft dich mit einem Arm.");break;
-	            	case 1:System.out.println("Er hat ein Auge auf dich geworfen.");break;//optional hier alles sichtbare löschen
+	            	case 1:System.out.println("Er hat ein Auge auf dich geworfen.");break;//optional hier alles sichtbare loeschen
 	            	case 2:System.out.println("Er packt dein Kopf und will dein Gehirn.");break;
 	            	case 3:System.out.println("Sein Gestank raubt dir den Atem.");break;
 		        }
