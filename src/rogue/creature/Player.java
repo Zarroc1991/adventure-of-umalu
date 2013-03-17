@@ -84,7 +84,7 @@ public class Player extends Creature implements Camera {
 			char key;
 			key = term.getKey();
 			switch (key) {
-			case 'q': // User wants to quit
+			case 'b': // User wants to quit//beenden später auf esc 
 				confirmQuit(); // Leave let player die, so this application quits
 				break;
 			case 'i': // Show Inventory
