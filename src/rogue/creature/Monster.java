@@ -14,6 +14,9 @@ public abstract class Monster extends Creature {
     protected String name;
     private int maxHitpoints;
     protected Terminal term;
+    // Typenumber is used to recognize, wich Sort of Monster we have
+    protected  int typenumber;
+
     public Monster(ColoredChar face) {
         super(face);
         strength = 5;

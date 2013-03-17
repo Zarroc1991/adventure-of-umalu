@@ -34,6 +34,8 @@ public class Unbeliever extends Monster {
         super(ColoredChar.create('U', new Color(255,185,15)), "Ungläubiger", 21, 6, term);
         fov = new RayCaster();
         attackRadius = 5;
+        //Typenumber 5, since cat. 5
+        typenumber = 5;
     }
 
     @Override

@@ -34,6 +34,8 @@ public class Shadow extends Monster {
         super(ColoredChar.create(':', new Color(51,51,51)), "Schatten", 25, 10, term);
         fov = new RayCaster();
         attackRadius = 5;
+        //Typenumber 7 since cat 7
+        typenumber =7;
     }
 
     @Override

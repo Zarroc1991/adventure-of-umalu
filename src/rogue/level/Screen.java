@@ -224,5 +224,14 @@ public class Screen {
 	public static void showEventLog() {
 		Screen.putText(Screen.eventLog);
 	}
+
+	public static void anyKey() {
+		try {
+			lastTerminal.getKey();
+		} catch (InterruptedException e) {
+			System.out.println("!InterruptedException e");
+			e.printStackTrace();
+		}
+	}
 }
 
