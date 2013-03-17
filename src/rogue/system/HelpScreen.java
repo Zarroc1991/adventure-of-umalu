@@ -25,7 +25,7 @@ public class HelpScreen {
 		lines.add("<i> - Inventar anzeigen");
 		lines.add("<g> - Diese Hilfe anezeigen");
 		lines.add("<x> - Eventlog anzeigen");
-		lines.add("<q> - Adventures of Umalu beenden");
+		lines.add("<b> - Adventures of Umalu beenden");
 		lines.add("");
 		lines.add("+++ Beliebige Taste zum Fortfahren druecken +++");
 		Screen.putText(lines);
