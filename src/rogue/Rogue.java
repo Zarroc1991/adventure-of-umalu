@@ -54,7 +54,7 @@ public class Rogue {
 		Screen.printLine(player.getName(),term,world);
 		term.getKey();
 		// Show Splashscreen for Start
-		Screen.showFile(Path.generateAbsolutePath("rogue/system/start.txt"),term,world);
+		Screen.showFile(Path.generateAbsolutePath("maps/start.txt"),term,world);
 
 		// Press any Key to continue
 		term.getKey();
@@ -129,7 +129,7 @@ public class Rogue {
 		}
 		term.clearBuffer();
 		//Screen.showFile(normalizePath("src\\rogue\\system\\end.txt","rogue/system/end.txt"), term, world);
-		Screen.showFile(Path.generatePath("rogue/system/end.txt"),term, world);
+		Screen.showFile(Path.generatePath("maps/end.txt"),term, world);
 
 		term.getKey();
 		System.exit(0);
