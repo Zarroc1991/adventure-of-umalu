@@ -32,7 +32,7 @@ public class Player extends Creature implements Camera {
 	private String name;
 	private Inventory inventory;
 
-	public Boolean worldchange = false;   // standardmäßig ist keine Mapänderung erfolgt
+	public Boolean worldchange = false;   // standardmÃ¤ÃŸig ist keine MapÃ¤nderung erfolgt
 	/**
 	 * Creates a new Player Object
 	 * 
@@ -103,8 +103,11 @@ public class Player extends Creature implements Camera {
 						// Fight first monster on coordinate.
 						fight((Monster) actorlist.toArray()[0]);
 					} else {
-						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('©')) {  
-							Screen.redrawEventLine("Möchtes du diesen Raum verlassen? Drücke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+						for(Coordinate coord: getViewField()){
+							world().viewable(coord.x(), coord.y());
+							}
+						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('Â©')) {  
+							Screen.redrawEventLine("MÃ¶chtes du diesen Raum verlassen? DrÃ¼cke j fÃ¼r Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine TÃ¼r gefunden wurde und somit eine MapÃ¤nderung erfolgt
 							if (term.getKey()=='j'){
 								worldchange= true;
 								move(dir);}
@@ -112,14 +115,15 @@ public class Player extends Creature implements Camera {
 								move(0,0); 
 								}
 							
-							for(Coordinate coord: getViewField()){
-								world().viewable(coord.x(), coord.y());
-						}} else {// No monster there
-							move(dir);
+							} else {// No monster there
+							
 							
 							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
 								world().viewable(coord.x(), coord.y());
+							
+							
 							}
+							move(dir);
 							break;
 						}
 					}
@@ -149,7 +153,7 @@ public class Player extends Creature implements Camera {
 	 */
 	// TODO Clean up Messages in Console, to use just a single line
 	private void fight(Monster opponent) {
-		System.out.println("Du kämpfst gegen " + opponent.name());
+		System.out.println("Du kÃ¤mpfst gegen " + opponent.name());
 		// Get a randomizer
 		Random random = new Random();
 		// Get random Damage for Attack

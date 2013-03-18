@@ -72,11 +72,12 @@ public class Rogue {
 		// Add Minimap to left part in Window (Size given as Parameter), focus on Player
   
 		// Play Game
-		world.tick();
+		//world.tick();
+		//world.tick();
 		while(!player.expired()) { // Player is still living?
-			if (player.worldchange){								//überprüft, ob einen Levelup erfolgt ist
+			if (player.worldchange){								//ï¿½berprï¿½ft, ob einen Levelup erfolgt ist
 				world.removeActor(player); //entfernt Spieler aus der alten Welt
-				world = new Level(80,32, player, ++level, term);    //lädt das nächste Level 
+				world = new Level(80,32, player, ++level, term);    //lï¿½dt das nï¿½chste Level 
 				player.setWorld(world);								//Spieler erkennt seine Welt
 				player.worldchange=false;
                                 
@@ -109,6 +110,7 @@ public class Rogue {
 				player.expire();
 				continue;
 			}
+			
 			Screen.lastWorld = world;
 			Screen.lastTerminal = term;
 			Screen.redrawMap("HP: "+player.getHitpoints());
