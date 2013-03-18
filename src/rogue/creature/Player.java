@@ -30,138 +30,140 @@ import java.util.ArrayList;
  */
 public class Player extends Creature implements Camera {
 
-    private Terminal term;
-    private ViewField fov;
-    private static final int maxHitpoints = 15;
-    private int strength;
-    private String name;
-    private Inventory inventory;
-    public Boolean worldchange = false;   // standardmäßig ist keine Mapänderung erfolgt
+	private Terminal term;
+	private ViewField fov;
+	private static final int maxHitpoints = 15;
+	private int strength;
+	private String name;
+	private Inventory inventory;
 
-    /**
-     * Creates a new Player Object
-     *
-     * @param term
-     *            Currently used Terminalobject
-     */
-    public Player(Terminal term) {
-        // Put Charactersymbol on Screen
-        super(ColoredChar.create('@'));
-        // Save Terminal
-        this.term = term;
-        fov = new RayCaster();
-        // Initialise Hitpoints on Max
-        hitpoints = maxHitpoints;
-        strength = 5;
-        inventory = new Inventory(5, 50);
-    }
+	public Boolean worldchange = false;   // standardmäßig ist keine Mapänderung erfolgt
+	/**
+	 * Creates a new Player Object
+	 * 
+	 * @param term
+	 *            Currently used Terminalobject
+	 */
+	public Player(Terminal term) {
+		// Put Charactersymbol on Screen
+		super(ColoredChar.create('@'));
+		// Save Terminal
+		this.term = term;
+		fov = new RayCaster();
+		// Initialise Hitpoints on Max
+		hitpoints = maxHitpoints;
+		strength = 5;
+		inventory = new Inventory(5,50);
+	}
 
-    /**
-     * Sets Charactername. Should be only called on character Creation.
-     *
-     * @param name
-     *            New Name of Character
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+	/**
+	 * Sets Charactername. Should be only called on character Creation.
+	 * 
+	 * @param name
+	 *            New Name of Character
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    /**
-     * Returns Charactername.
-     *
-     * @return Name of Character
-     */
-    public String getName() {
-        return name;
-    }
+	/**
+	 * Returns Charactername.
+	 * 
+	 * @return Name of Character
+	 */
+	public String getName() {
+		return name;
+	}
 
-    @Override
-    /**
-     * Ask Player to do some action (passing him the baton). Reads input and moves Character accordingly.
-     */
-    public void act() {
-        try {
-            // Get pressed char
-            char key;
-            key = term.getKey();
-            switch (key) {
-                case 'b': // User wants to quit//beenden später auf esc
-                    confirmQuit(); // Leave let player die, so this application quits
-                    break;
-                case 'i': // Show Inventory
-                    showInventoryScreen();
-                    break;
-                case 'o':
-                    HelpScreen.printMainHelpScreen();
-                    break;
-                case 'x': // TODO Change this key
-                    Screen.showEventLog();
-                    term.getKey();
-                    Screen.redrawMap("HP: " + this.getHitpoints());
-                    break;
-                default: // User pressed something else
-                    Direction dir = Direction.keyToDir(key); // Get direction
+	@Override
+	/**
+	 * Ask Player to do some action (passing him the baton). Reads input and moves Character accordingly.
+	 */
+	public void act() {
+		try {
+			// Get pressed char
+			char key;
+			key = term.getKey();
+			switch (key) {
+			case 'b': // User wants to quit//beenden später auf esc 
+				confirmQuit(); // Leave let player die, so this application quits
+				break;
+			case 'i': // Show Inventory
+				showInventoryScreen();
+				break;
+			case 'o':
+				HelpScreen.printMainHelpScreen();
+				break;
+			case 'x': // TODO Change this key
+				Screen.showEventLog();
+				term.getKey();
+				Screen.redrawMap("HP: "+this.getHitpoints());
+				break;
+			default: // User pressed something else
+				Direction dir = Direction.keyToDir(key); // Get direction
+				
+				// Something useful pressed?
+				if (dir != null) { // Yes
+					// Get list of all monsters on target Coordinates
+					Collection<Monster> actorlist = world().getActorsAt(Monster.class, x() + dir.dx(), y() + dir.dy());
+					// Is there a monster on TargetL
+					if (!actorlist.isEmpty()) { // Yes
+						// Fight first monster on coordinate.
+						fight((Monster) actorlist.toArray()[0]);
+					} else {
+						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u00a9')) {  
+							Screen.redrawEventLine("M\u00f6chtest du diesen Raum verlassen? Dr\u00fccke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+							for(Coordinate coord: getViewField()){
+								world().viewable(coord.x(), coord.y());}
+							if (term.getKey()=='j'){
+								worldchange= true;
+								move(dir);}
+							else{
+								move(0,0); 
+								}
+							
+						
+						} else {// No monster there
+							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
+								world().viewable(coord.x(), coord.y());}
+							
+							move(dir);
+							
+							
+						
+							break;
+						}
+					}
 
-                    // Something useful pressed?
-                    if (dir != null) { // Yes
-                        // Get list of all monsters on target Coordinates
-                        Collection<Monster> actorlist = world().getActorsAt(Monster.class, x() + dir.dx(), y() + dir.dy());
-                        // Is there a monster on TargetL
-                        if (!actorlist.isEmpty()) { // Yes
-                            // Fight first monster on coordinate.
-                            fight((Monster) actorlist.toArray()[0]);
-                        } else {
-                            if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u00a9')) {
-                                Screen.redrawEventLine("Möchtest du diesen Raum verlassen? Drüccke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
-                                if (term.getKey() == 'j') {
-                                    worldchange = true;
-                                    move(dir);
-                                } else {
-                                    move(0, 0);
-                                }
+				}
+			}
+		} catch (InterruptedException e) { // Something has happened here
+			System.out.println("!Interrupted Exception");
+			e.printStackTrace();
+		}
+	}
 
-                                for (Coordinate coord : getViewField()) {
-                                    world().viewable(coord.x(), coord.y());
-                                }
-                            } else {// No monster there
-                                move(dir);
+	public void confirmQuit() {
+		Screen.redrawEventLine("Sicher dass Adventures in Umalu beendet werden soll? <J>a/<N>ein");
+		try {
+			if (term.getKey() == 'j') {
+				expire();
+			}
+		} catch (InterruptedException e) {
+			System.out.println("!Interrupted Exception");
+			e.printStackTrace();
+		}
+	}
 
-                                for (Coordinate coord : getViewField()) {				//macht alles sichtbar, was im Field of View ist
-                                    world().viewable(coord.x(), coord.y());
-                                }
-                                break;
-                            }
-                        }
-
-                    }
-            }
-        } catch (InterruptedException e) { // Something has happened here
-            System.out.println("!Interrupted Exception");
-            e.printStackTrace();
-        }
-    }
-
-    public void confirmQuit() {
-        Screen.redrawEventLine("Sicher dass Adventures in Umalu beendet werden soll? <J>a/<N>ein");
-        try {
-            if (term.getKey() == 'j') {
-                expire();
-            }
-        } catch (InterruptedException e) {
-            System.out.println("!Interrupted Exception");
-            e.printStackTrace();
-        }
-    }
-
-    //@Override
-    /**
-     * Get what is visible
-     *
-     * @return A collection of visible Items
-     */
-    public Collection<Coordinate> getViewField() {
-        return fov.getViewFieldplayer(world(), pos().x(), pos().y(), 2); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
-    }
+	//@Override
+	/**
+	 * Get what is visible
+	 *
+	 * @return A collection of visible Items
+	 */
+	public Collection<Coordinate> getViewField() {
+		return fov.getViewFieldplayer(world(), pos().x(),pos().y(), 2); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
+	} 
 
     /**
      * Player fights the opponent. Causes random damage between 1 and strength	 *
