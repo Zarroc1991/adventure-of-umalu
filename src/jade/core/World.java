@@ -29,6 +29,7 @@ public abstract class World extends Messenger
 	private Set<Actor> register;
 	private List<Class<? extends Actor>> drawOrder;
 	private List<Class<? extends Actor>> actOrder;
+        public Coordinate playerstart;
 
 	/**
 	 * Constructs a new {@code World} with the given dimensions. Both width and height must be
