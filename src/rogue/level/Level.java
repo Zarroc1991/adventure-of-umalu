@@ -3,6 +3,7 @@ package rogue.level;
 import jade.core.Actor;
 import java.awt.Color;
 
+import jade.core.Actor;
 import jade.core.World;
 import jade.gen.Generator;
 
@@ -44,18 +45,22 @@ public class Level extends World {
                 gen = new World2();
                 break;
             }
-            case 2: {
-                gen = new World3();
-                break;
-            }
-            case 3: {
-                gen = new World4();
-                break;
-            }
-            case 4: {
-                gen = new World5();
-                break;
-            }
+	    case 2: {
+		gen = new World3();
+		break;
+	    }
+	    case 3: {
+		gen = new World4();
+		break;
+	    }
+	    case 4: {
+		gen = new World5();
+		break;
+	    }
+	    case 5: {
+		gen = new Arena();
+		break;
+	    }
             default: {
                 gen = new World1();
                 break;
@@ -93,7 +98,16 @@ public class Level extends World {
                 addActor(new Shadow(term));//kat7
                 break;
             }
-            case 3: {
+            case 3:{
+                
+                break;        
+            }
+            case 4:{
+                
+                break;        
+            }
+            case 5:{
+
                 addActor(new Dragon(term));
                 break;
             }
