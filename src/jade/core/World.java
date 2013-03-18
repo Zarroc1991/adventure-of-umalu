@@ -64,8 +64,9 @@ public abstract class World extends Messenger
 	{
 		for(Class<? extends Actor> cls : actOrder)
 			for(Actor actor : getActors(cls)){
-				actor.act();
-
+                            if(!actor.expired()){
+                            actor.act();
+                            }
 			}
 
 		removeExpired();
