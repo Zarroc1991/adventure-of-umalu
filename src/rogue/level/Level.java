@@ -19,6 +19,7 @@ import jade.util.datatype.Coordinate;
 import java.lang.reflect.InvocationTargetException;
 import rogue.creature.util.Item;
 
+import rogue.system.SystemHelper;
 public class Level extends World {
 
     private static Generator gen = getLevelGenerator();
@@ -70,52 +71,53 @@ public class Level extends World {
         this.addActor(player, playerstart);
         //insert Monster. We need new case-separation, because the Monsters should be added
         //after the tile, so they do not land on unpassable tiles
-        switch (level) {											//Liste der Maps in Abhaengikeit vom Level  
-            case 0: {
-                //addActor(new Troll(term,level));
-                addActors(Rat.class, term, 15);
-                addActors(Slug_fat.class, term, 4);
-                addActor(new Frog_poisonous(term));
-                addActor(new ItemGenerator(ColoredChar.create('1', Color.yellow), new Item("Testhelm", 0, Item.ITEMTYPE_HEAD, 0, 15), term));
-                break;
-            }
-            case 1: {
-                //addActor(new Troll(term,level));
-                addActor(new Rat(term));
-                addActor(new Slug_fat(term));
-                addActor(new Frog_poisonous(term));
-                addActor(new Zombie(term));
-                break;
-            }
-            case 2: {
-                //addActor(new Troll(term,level));
-                addActor(new Rat(term));//kat1
-                addActor(new Slug_fat(term));//kat2
-                addActor(new Frog_poisonous(term));//kat3
-                addActor(new Zombie(term));//kat4
-                addActor(new Unbeliever(term));//kat5
-                addActor(new Orc(term));//kat6
-                addActor(new Shadow(term));//kat7
-                break;
-            }
-            case 3:{
-                
-                break;        
-            }
-            case 4:{
-                
-                break;        
-            }
-            case 5:{
+	if (!SystemHelper.speedrun) {
+		switch (level) {											//Liste der Maps in Abhaengikeit vom Level  
+			case 0: {
+					//addActor(new Troll(term,level));
+					addActors(Rat.class, term, 15);
+					addActors(Slug_fat.class, term, 4);
+					addActor(new Frog_poisonous(term));
+					addActor(new ItemGenerator(ColoredChar.create('1', Color.yellow), new Item("Testhelm", 0, Item.ITEMTYPE_HEAD, 0, 15), term));
+					break;
+			}
+			case 1: {
+					//addActor(new Troll(term,level));
+					addActor(new Rat(term));
+					addActor(new Slug_fat(term));
+					addActor(new Frog_poisonous(term));
+					addActor(new Zombie(term));
+					break;
+			}
+			case 2: {
+					//addActor(new Troll(term,level));
+					addActor(new Rat(term));//kat1
+					addActor(new Slug_fat(term));//kat2
+					addActor(new Frog_poisonous(term));//kat3
+					addActor(new Zombie(term));//kat4
+					addActor(new Unbeliever(term));//kat5
+					addActor(new Orc(term));//kat6
+					addActor(new Shadow(term));//kat7
+					break;
+			}
+			case 3:{
 
-                addActor(new Dragon(term));
-                break;
-            }
-            default: {
-                break;
-            }
-        }
+				       break;        
+			}
+			case 4:{
 
+				       break;        
+			}
+			case 5:{
+
+				       addActor(new Dragon(term));
+				       break;
+			}
+			default: {
+					 break;
+			}
+		}
+	}
     }
 
     private static Generator getLevelGenerator() {
