@@ -36,6 +36,82 @@ public class Screen {
 	public static void initialiseScreen() {
 		eventLog = new ArrayList<String>();
 	}
+	
+	//Liest txt Dateien ein und gibt sie im Schreibmaschinenstyle aus und fügt ggf. den String name eine 
+	public static void intro(String name, String filePath, TiledTermPanel term,World world) {
+		term.clearBuffer();
+		try {
+			// Prepare File for reading (open it)
+
+
+			//FileReader fr = new FileReader(filePath);
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"UTF-8"));
+			// int lineNumber = MAXHEIGHT; // TODO Delete this line, when it is
+			// not needed anymore
+			// Read first line
+			String line = br.readLine();
+			// Count read Lines
+			int lineNumber = 0;
+			// Go through whole file
+			while (line != null) {
+				int i;
+				for (i = 0; i < line.length(); i++) {
+					// Read Character at Position i in current line
+					char c = line.charAt(i);
+					if(c== '@'){
+					for(int j= 0; j < name.length(); j++){
+						term.bufferChar(i+j, lineNumber, ColoredChar.create(name.charAt(j)));
+						Thread.sleep(5);
+						term.refreshScreen();
+					}
+					
+					
+					// System.out.println(c); // TODO Delete this line, when it
+					// is not needed anymore
+					// Put Character on Screen
+					i= i+name.length();}
+					else{
+					term.bufferChar(i, lineNumber, ColoredChar.create(c));
+					}
+					Thread.sleep(5);
+					term.refreshScreen();}
+				// Fill rest of Line with Whitespaces
+				while (i < world.width()) {
+					term.bufferChar(i, lineNumber, ColoredChar.create(' '));
+					i++;
+				}
+				// Read next line
+				line = br.readLine();
+				// Increment Linecounter
+				lineNumber++;
+			}
+			// Fill rest of Lines with Whitespaces
+			while (lineNumber < world.height()) {
+				// Put Whitespaces in Columns
+				for (int i = 0; i < world.width(); i++) {
+					term.bufferChar(i, lineNumber, ColoredChar.create(' '));
+				}
+				// Go to next Line
+				lineNumber++;
+			}
+			// Redraw Window
+			term.refreshScreen();
+
+		} catch (IOException e) { // Something went wrong while reading the File
+			System.out.println("!IoException");
+			e.printStackTrace();
+			System.exit(1);
+		}
+		// catch (FileNotFoundException ex) { TODO Delete this Block if it is
+		// not needed anymore
+		// System.out.println("file not found");
+		// System.exit(1);
+		// }
+ catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public static void showFile(String filePath, TiledTermPanel term,
 			World world) {
@@ -59,6 +135,7 @@ public class Screen {
 				for (i = 0; i < line.length(); i++) {
 					// Read Character at Position i in current line
 					char c = line.charAt(i);
+					
 					// System.out.println(c); // TODO Delete this line, when it
 					// is not needed anymore
 					// Put Character on Screen
