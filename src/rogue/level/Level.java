@@ -66,9 +66,8 @@ public class Level extends World {
         switch (level) {											//Liste der Maps in Abhaengikeit vom Level  
             case 0: {
                 //addActor(new Troll(term,level));
-                addActors(Rat.class, term, 5);
-                addActor(new Rat(term));
-                addActor(new Slug_fat(term));
+                addActors(Rat.class, term, 15);
+                addActors(Slug_fat.class, term, 4);
                 addActor(new Frog_poisonous(term));
                 addActor(new ItemGenerator(ColoredChar.create('1', Color.yellow), new Item("Testhelm", 0, Item.ITEMTYPE_HEAD, 0, 15), term));
                 break;
