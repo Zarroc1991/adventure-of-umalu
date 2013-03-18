@@ -21,41 +21,37 @@ import rogue.creature.util.Item;
 
 import rogue.system.SystemHelper;
 public class Level extends World {
-
-    private static Generator gen = getLevelGenerator();
-
-
+    private static Generator gen; /* = getLevelGenerator();*/
     public Level(int width, int height, Player player) {
         // Create a new Map, but make it 2 Rows less higher than window is, so we have some Space for
         // Statusmessages and stuff.
         super(width, height - 2);
         gen.generate(this);
         addActor(player);
-
     }
     // Zweiter Konstruktor, um ein neues Level aufzurufen
 
-    public Level(int width, int height, Player player, int level, TiledTermPanel term) {
+    public Level(int width, int height, Player player,int levelorder, int level, TiledTermPanel term) {
         super(width, height - 2);
-        switch (level) {											//Liste der Maps in Abh�ngikeit vom Level
+        switch (levelorder) {											//Liste der Maps in Abh�ngikeit vom Level
             case 0: {
-                gen = new World1();
+                gen = new World1(level);
                 break;
             }
             case 1: {
-                gen = new World2();
+                gen = new World2(level);
                 break;
             }
 	    case 2: {
-		gen = new World3();
+		gen = new World3(level);
 		break;
 	    }
 	    case 3: {
-		gen = new World4();
+		gen = new World4(level);
 		break;
 	    }
 	    case 4: {
-		gen = new World5();
+		gen = new World5(level);
 		break;
 	    }
 	    case 5: {
@@ -63,7 +59,7 @@ public class Level extends World {
 		break;
 	    }
             default: {
-                gen = new World1();
+                gen = new World1(level);
                 break;
             }
         }
@@ -120,9 +116,10 @@ public class Level extends World {
 	}
     }
 
-    private static Generator getLevelGenerator() {
+    /*private static Generator getLevelGenerator() {
         return new World1();
-    }
+    }*/
+    // Delete following function?
     /*
      * adds {@ anzahl} actors of the class  {@cls}
      */

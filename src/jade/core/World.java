@@ -591,7 +591,7 @@ public abstract class World extends Messenger
 	{
 		register.remove(actor);
 	}
-
+	
 	private class Tile
 	{
 		public boolean passable;
@@ -608,7 +608,7 @@ public abstract class World extends Messenger
 				viewable = true;
 			} else {
 				viewable = false;
-			}//false -> Sichtbarkeit einschränken		//jedes Tile erh�lt nocht die Eigenschaft der Sichtbarkeit 
+			}//false -> Sichtbarkeit einschränken		//jedes Tile erhält nocht die Eigenschaft der Sichtbarkeit 
 
 
 			face = ColoredChar.create('.');
