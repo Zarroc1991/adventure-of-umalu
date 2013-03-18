@@ -323,9 +323,12 @@ public class Player extends Creature implements Camera {
     private void randomlyDropItem(Monster opponent) {
         Random random = new Random();
         random.nextInt(strength);
+		Screen.redrawEventLine(opponent.name+" stirbt");
+		System.out.println(opponent.name+" stirbt");
         //This Item drops;
         Item item = null;
         try {
+
             switch (opponent.typenumber) {
 
                 case 1: {
