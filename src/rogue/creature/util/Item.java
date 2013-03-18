@@ -24,6 +24,7 @@ public class Item {
 	private int maxDurability;
 	private int durability;
 	private boolean equipped;
+	private String description;
 
 	/**
 	 * Describes Item is as Helmet
@@ -41,13 +42,13 @@ public class Item {
 	public static final int ITEMTYPE_SWORD = 2;
 
 	/**
-	 * Creates a new Item Object wth given name and Goldvalue
+	 * Creates a new Item Object with given name and Goldvalue
 	 *
 	 * @param name Name of Item
 	 * @param goldValue Goldvalue of Item
 	 * @param type Sword or Helmet Item
 	 * @param bonusDamage Additional Damage by Item
-	 * @param bonusHealth Addiotional Health by Item
+	 * @param bonusHealth Additional Health by Item
 	 */
 	public Item(String name, int goldValue, int itemType, int bonusDamage, int bonusHealth) {
 		// Name einfuegen
@@ -63,6 +64,22 @@ public class Item {
 		equipped = false;
 	}
 	
+	/**
+	 * Creates a new Item Object with given Parameters. Works like Item(name, goldValue, itemType, bonusDamag, bonusHealth),
+	 * but also sets a descriptive text.
+	 *
+	 * @param name Name of Item
+	 * @param goldValue Goldvalue of Item
+	 * @param type Weapon or Armor
+	 * @param bonusDamage Additional Damage by Item
+	 * @param bonusHealth Additional Health by Item
+	 * @param description Descriptive Text, given by Lore
+	 */
+	public Item(String name, int goldValue, int itemType, int bonusDamage, int bonusHealth, String description) {
+		this(name, goldValue, itemType, bonusDamage, bonusHealth);
+		this.description = description;
+	}
+
 	/**
 	 * Creates a new Item Object with given name and Goldvalue. Additionally sets equipped Value.
 	 * This method should only get called for initial Items in inventory, all other Items should use
