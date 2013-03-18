@@ -57,6 +57,8 @@ public class Player extends Creature implements Camera {
 		inventory = new Inventory(5,50);
 	}
 
+
+
 	/**
 	 * Sets Charactername. Should be only called on character Creation.
 	 * 

@@ -29,6 +29,7 @@ public abstract class World extends Messenger
 	private Set<Actor> register;
 	private List<Class<? extends Actor>> drawOrder;
 	private List<Class<? extends Actor>> actOrder;
+        // the player should be set here at the start
         public Coordinate playerstart;
 
 	/**

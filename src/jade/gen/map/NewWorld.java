@@ -60,6 +60,7 @@ public abstract class NewWorld extends MapGenerator {
 					case '#': {	c_color = ColoredChar.create('#', new Color(205,102,29));break;}
 					case '\u00AC': {	c_color = ColoredChar.create('\u00AC', new Color(210,105,30));break;}
 					case '.': {	c_color = ColoredChar.create('.', new Color(51,51,51));	break;}
+                                        //player starts here
                                         case '\u00AE':{ world.playerstart = new Coordinate(i,lineNumber);}
 					}
 					// System.out.println(c); // TODO Delete this line, when it
