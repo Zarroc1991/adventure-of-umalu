@@ -51,6 +51,10 @@ public class Level extends World {
 		gen = new World5();
 		break;
 	    }
+	    case 5: {
+			gen = new Arena();
+			break;
+		    }
             default: {
                 gen = new World1();
                 break;
@@ -88,6 +92,14 @@ public class Level extends World {
                 break;        
             }
             case 3:{
+                
+                break;        
+            }
+            case 4:{
+                
+                break;        
+            }
+            case 5:{
                 addActor(new Dragon(term));
                 break;        
             }
