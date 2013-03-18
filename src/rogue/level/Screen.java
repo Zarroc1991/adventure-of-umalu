@@ -295,6 +295,27 @@ public class Screen {
 		lastTerminal.refreshScreen();
 	}
 
+	public static void redrawEventLine(String eventLine, boolean saveInLog) {
+		int x;
+		for (x = 0; x < eventLine.length(); x++) {
+			lastTerminal.bufferChar(x, lastWorld.height() + 1,
+					ColoredChar.create(eventLine.charAt(x)));
+		}
+		
+		while (x < lastWorld.width()) {
+			lastTerminal.bufferChar(x, lastWorld.height() + 1,
+					ColoredChar.create(' '));
+			x++;
+		}
+		if (saveInLog) {
+			if (eventLog.size() == 25) {
+				eventLog.remove(0);
+			}
+		}
+		eventLog.add(eventLine);
+		lastTerminal.refreshScreen();
+	}
+	
 	public static void putText(ArrayList<String> lines) {
 		Screen.printBlock(lines, Screen.lastTerminal, Screen.lastWorld);
 	}
