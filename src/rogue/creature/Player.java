@@ -112,6 +112,8 @@ public class Player extends Creature implements Camera {
 					} else {
 						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u00a9')) {  
 							Screen.redrawEventLine("Möchtest du diesen Raum verlassen? Drüccke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+							for(Coordinate coord: getViewField()){
+								world().viewable(coord.x(), coord.y());}
 							if (term.getKey()=='j'){
 								worldchange= true;
 								move(dir);}
@@ -119,14 +121,15 @@ public class Player extends Creature implements Camera {
 								move(0,0); 
 								}
 							
-							for(Coordinate coord: getViewField()){
-								world().viewable(coord.x(), coord.y());
-						}} else {// No monster there
+						
+						} else {// No monster there
+							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
+								world().viewable(coord.x(), coord.y());}
+							
 							move(dir);
 							
-							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
-								world().viewable(coord.x(), coord.y());
-							}
+							
+						
 							break;
 						}
 					}
@@ -173,8 +176,6 @@ public class Player extends Creature implements Camera {
 		Random random = new Random();
 		// Get random Damage for Attack
 		int damage = random.nextInt(strength) + 1;
-		// Do Damage to Opponent
-		opponent.loseHitpoints(damage);
 		// Print result
 		
 		System.out.println("Du hast " + damage + " Schaden verursacht");

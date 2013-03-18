@@ -29,6 +29,7 @@ public class HelpScreen {
 		lines.add("-- Weiteres Interface --");
 		lines.add("<i> - Inventar anzeigen");
 		lines.add("<o> - Diese Hilfe anzeigen");
+
 		lines.add("<x> - Eventlog anzeigen");
 		lines.add("<b> - Adventures of Umalu beenden");
 		lines.add("");
