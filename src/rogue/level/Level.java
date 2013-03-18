@@ -58,7 +58,7 @@ public class Level extends World {
         addActor(player);
         //insert Monster. We need new case-separation, because the Monsters should be added
         //after the tile, so they do not land on unpassable tiles
-        switch (level) {											//Liste der Maps in Abhaengikeit vom Level  
+       switch (level) {											//Liste der Maps in Abhaengikeit vom Level  
             case 0: {
                 //addActor(new Troll(term,level));
                 addActor(new Rat(term));
