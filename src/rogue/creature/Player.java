@@ -29,6 +29,7 @@ import java.util.ArrayList;
  * Represents Player
  */
 public class Player extends Creature implements Camera {
+
 	private Terminal term;
 	private ViewField fov;
 	private static final int maxHitpoints = 15;
@@ -162,284 +163,309 @@ public class Player extends Creature implements Camera {
 	 */
 	public Collection<Coordinate> getViewField() {
 		return fov.getViewFieldplayer(world(), pos().x(),pos().y(), 2); //hab mal den Sichtbarkeitsradius verkleinert, damit es spannender ist
-	}
+	} 
 
-	/**
-	 * Player fights the opponent. Causes random damage between 1 and strength	 * 
-	 * @param opponent
-	 *            The opponent Monster
-	 */
-	// TODO Clean up Messages in Console, to use just a single line
-	private void fight(Monster opponent) {
-		System.out.println("Du kämpfst gegen " + opponent.name());
-		// Get a randomizer
-		Random random = new Random();
-		// Get random Damage for Attack
-		int damage = random.nextInt(strength) + 1;
-		// Print result
-		
-		System.out.println("Du hast " + damage + " Schaden verursacht");
-		System.out.println(opponent.name() + " hat noch " + opponent.hitpoints
-				+ " HP");
-		Screen.redrawEventLine("Du verursachst " + damage + " Schaden");
-                // Do Damage to Opponent
-		boolean opponentDied = opponent.loseHitpoints(damage);
-                try {
-                if(opponentDied){
-                    //wait for key to continue on Status message
-                    term.getKey();
-                    randomlyDropItem(opponent);
+    /**
+     * Player fights the opponent. Causes random damage between 1 and strength	 *
+     * @param opponent
+     *            The opponent Monster
+     */
+    // TODO Clean up Messages in Console, to use just a single line
+    private void fight(Monster opponent) {
+        System.out.println("Du kämpfst gegen " + opponent.name());
+        // Get a randomizer
+        Random random = new Random();
+        // Get random Damage for Attack
+        int damage = random.nextInt(strength) + 1;
+        // Print result
+
+        System.out.println("Du hast " + damage + " Schaden verursacht");
+        System.out.println(opponent.name() + " hat noch " + opponent.hitpoints
+                + " HP");
+        Screen.redrawEventLine("Du verursachst " + damage + " Schaden");
+        // Do Damage to Opponent
+        boolean opponentDied = opponent.loseHitpoints(damage);
+        
+        try {
+            if (opponentDied) {
+                //wait for key to continue on Status message
+                term.getKey();
+                randomlyDropItem(opponent);
+            }
+
+
+            term.getKey();
+
+        } catch (InterruptedException e) {
+            System.out.println("!InterruptedException");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Player regains 1 Hitpoint. Method should be used every x rounds in rogue
+     */
+    public void regainHitpoint() {
+        // Is there something to heal
+        if (hitpoints < maxHitpoints) {
+            // Gain Healthpoint back
+            hitpoints++;
+            // Print message to Console
+            System.out.println("Du hast einen HP regeneriert, jetzt " + hitpoints + " HP");
+            // Print Eventline
+            Screen.redrawEventLine("Du regenerierst einen HP.");
+            try {
+                // Wait for pressed Key
+                term.getKey();
+
+            } catch (InterruptedException e) {
+                System.out.println("!IOException");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     *
+     */
+    public int getHitpoints() {
+        return hitpoints;
+    }
+
+    public int getMaxHitpoints() {
+        return maxHitpoints;
+    }
+
+    /**
+     * Creates and prints an Inventory Screen
+     */
+    public void showInventoryScreen() {
+        boolean loop = true;
+        // Inventar geschlossen?
+        while (loop) { // Nein.
+            // Erstelle eine ArrayList von Strings um dort unser Inventarinterface zu puffern
+            ArrayList<String> lines = new ArrayList<String>();
+            // Erstelle eine Titelzeile
+            // TODO In die Mitte Verschieben
+            lines.add("Inventar");
+            // Zeige was der Nutzer gerade angelegt hat
+            lines.add("Du traegst: ");
+            // Lade die Liste
+            Item[] wornItems = inventory.getWornItems();
+            // Generiere den Output fuer den aktuellen Helm
+            lines.add("<K>opf: " + wornItems[Item.ITEMTYPE_HEAD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_HEAD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_HEAD].getHealthBonus() + "]");
+            // Generiere den Output fuer das aktuelle Schwert
+            lines.add("<S>chwert: " + wornItems[Item.ITEMTYPE_SWORD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_SWORD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_SWORD].getHealthBonus() + "]");
+            // TODO Zeige gesamt Bonus an
+            // Zeige an, was sonst noch im Inventar liegt, aber nicht angelegt wurde (und somit keinen Bonus bringt)
+            ArrayList<Item> backpack = inventory.listBackpack();
+            lines.add("Du hast im Rucksack: ");
+            for (int i = 0; i < backpack.size(); i++) {
+                // Zeige das Item an Stelle an i an
+                lines.add("(" + i + ") " + backpack.get(i).getName() + "[+DMG: " + backpack.get(i).getDamageBonus() + ", +HP: " + backpack.get(i).getHealthBonus() + "]");
+            }
+            // TODO Add lines here.
+            Screen.putText(lines);
+            try {
+                // Erwarte eine Eingabe vom Nutzer.
+                char key = term.getKey();
+                switch (key) {
+                    case 'q':
+                        loop = false;
+                        break;
+                    case 'k':
+                        //wornItems[Item.ITEMTYPE_HEAD].showInfo(term,inventory);
+                        inventory.showWorn(Item.ITEMTYPE_HEAD, term);
+                        break;
+                    case 's':
+                        //wornItems[Item.ITEMTYPE_SWORD].showInfo();
+                        inventory.showWorn(Item.ITEMTYPE_SWORD, term);
+                        break;
+                    case '0':
+                        inventory.showInfo(0, term);
+                        break;
+                    case '1':
+                        inventory.showInfo(1, term);
+                        break;
+                    case '2':
+                        inventory.showInfo(2, term);
+                        break;
+                    case '3':
+                        inventory.showInfo(3, term);
+                        break;
+                    case '4':
+                        inventory.showInfo(4, term);
+                        break;
+                    case 'o':
+                        HelpScreen.printInventoryHelpScreen();
+                        break;
+
                 }
-		
-		
-			term.getKey();
-
-		} catch (InterruptedException e) {
-			System.out.println("!InterruptedException");
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Player regains 1 Hitpoint. Method should be used every x rounds in rogue
-	 */
-	public void regainHitpoint() {
-		// Is there something to heal
-		if (hitpoints < maxHitpoints) {
-			// Gain Healthpoint back
-			hitpoints++;
-			// Print message to Console
-			System.out.println("Du hast einen HP regeneriert, jetzt " + hitpoints+" HP");
-			// Print Eventline
-			Screen.redrawEventLine("Du regenerierst einen HP.");
-			try{
-				// Wait for pressed Key
-				term.getKey();
-
-			} catch (InterruptedException e) {
-				System.out.println("!IOException");
-				e.printStackTrace();
-			}
-		}
-	}
-
-	/**
-	 *
-	 */
-	public int getHitpoints() {
-		return hitpoints;
-	}
-	
-	public int getMaxHitpoints() {
-		return maxHitpoints;
-	}
-
-	/**
-	 * Creates and prints an Inventory Screen
-	 */
-	public void showInventoryScreen() {
-		boolean loop = true;
-		// Inventar geschlossen?
-		while (loop) { // Nein.
-			// Erstelle eine ArrayList von Strings um dort unser Inventarinterface zu puffern
-			ArrayList<String> lines = new ArrayList<String>();
-			// Erstelle eine Titelzeile
-			// TODO In die Mitte Verschieben
-			lines.add("Inventar");
-			// Zeige was der Nutzer gerade angelegt hat
-			lines.add("Du traegst: ");
-			// Lade die Liste
-			Item[] wornItems = inventory.getWornItems();
-			// Generiere den Output fuer den aktuellen Helm
-			lines.add("<K>opf: "+wornItems[Item.ITEMTYPE_HEAD].getName()+" [+DMG: "+wornItems[Item.ITEMTYPE_HEAD].getDamageBonus()+", +HP: "+wornItems[Item.ITEMTYPE_HEAD].getHealthBonus()+"]");
-			// Generiere den Output fuer das aktuelle Schwert
-			lines.add("<S>chwert: "+wornItems[Item.ITEMTYPE_SWORD].getName()+" [+DMG: "+wornItems[Item.ITEMTYPE_SWORD].getDamageBonus()+", +HP: "+wornItems[Item.ITEMTYPE_SWORD].getHealthBonus()+"]");
-			// TODO Zeige gesamt Bonus an
-			// Zeige an, was sonst noch im Inventar liegt, aber nicht angelegt wurde (und somit keinen Bonus bringt)
-			ArrayList<Item> backpack = inventory.listBackpack();
-			lines.add("Du hast im Rucksack: ");
-			for (int i = 0;i<backpack.size();i++) {
-				// Zeige das Item an Stelle an i an
-				lines.add("("+i+") "+backpack.get(i).getName()+"[+DMG: "+backpack.get(i).getDamageBonus()+", +HP: "+backpack.get(i).getHealthBonus()+"]");
-			}
-			// TODO Add lines here.
-			Screen.putText(lines);
-			try {
-				// Erwarte eine Eingabe vom Nutzer.
-				char key = term.getKey();
-				switch (key) {
-					case 'q':
-					loop = false;
-					break;
-					case 'k':
-					//wornItems[Item.ITEMTYPE_HEAD].showInfo(term,inventory);
-					inventory.showWorn(Item.ITEMTYPE_HEAD, term);
-					break;
-					case 's':
-					//wornItems[Item.ITEMTYPE_SWORD].showInfo();
-					inventory.showWorn(Item.ITEMTYPE_SWORD, term);
-					break;
-					case '0':
-					inventory.showInfo(0, term);
-					break;
-					case '1':
-					inventory.showInfo(1,term);
-					break;
-					case '2':
-					inventory.showInfo(2, term);
-					break;
-					case '3':
-					inventory.showInfo(3, term);
-					break;
-					case '4':
-					inventory.showInfo(4, term);
-					break;
-					case 'o':
-					HelpScreen.printInventoryHelpScreen();
-					break;
-					
-				}
-			} catch (InterruptedException e) {
-				System.out.println("!Exeception");
-				e.printStackTrace();
-			}
-		}
-		// Inventar verlassen, zeichne wieder die Karte.
-		Screen.redrawMap();
-	}
+            } catch (InterruptedException e) {
+                System.out.println("!Exeception");
+                e.printStackTrace();
+            }
+        }
+        // Inventar verlassen, zeichne wieder die Karte.
+        Screen.redrawMap();
+    }
 
     private void randomlyDropItem(Monster opponent) {
         Random random = new Random();
         random.nextInt(strength);
         //This Item drops;
         Item item = null;
-        
-        switch(opponent.typenumber){
+        try {
+            switch (opponent.typenumber) {
 
-            case 1:{
-                //Rat, doesnt drop Weapons according to balance
-                System.out.println("Ratte lässt nichts fallen");
-                break;
-            }
-            case 2:{
-                //Fette Nacktschnecke
-                //random Number decides whether an Item drops or not and which one
-                int zufallszahl =random.nextInt(3);
-                
-                try{
-                    if(zufallszahl== 0){
-                    //Axt drops 1/3 of the time
-                     item = new Item("Axt", 0, 0, 2, 0);
-                    inventory.addItem(item);
-                    //Status message
-                    Screen.redrawEventLine("Du hast eine Axt bekommen, druecke i, um das Inventar zu oeffnen");
-                    //Wait for pressed key
-                    term.getKey();
+                case 1: {
+                    //Rat, doesnt drop Weapons according to balance
+                    System.out.println("Ratte lässt nichts fallen");
+                    break;
                 }
+                case 2: {
+                    //Fette Nacktschnecke
+                    //random Number decides whether an Item drops or not and which one
+                    int zufallszahl = random.nextInt(3);
 
-                }catch (NotEnoughSpaceException ex) {
-                    try{
-                    //Status message
-                    Screen.redrawEventLine("Du konntest leider ein"+item.getName()+" nicht ins Inventar aufnehmen, da es voll war");
-                    //Wait for pressed key
-                    term.getKey();
-                    }catch (InterruptedException e) {
-				System.out.println("!IOException");
-				e.printStackTrace();
+
+                    if (zufallszahl == 0) {
+                        //Axt drops 1/3 of the time
+                        item = new Item("Axt", 0, Item.ITEMTYPE_SWORD, 2, 0);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast eine Axt bekommen, druecke i, um das Inventar zu oeffnen");
+                        //Wait for pressed key
+                        term.getKey();
+                    }
+
+                    break;
                 }
-                    
-                }catch (InterruptedException e) {
-				System.out.println("!IOException");
-				e.printStackTrace();
-                }break;
-            }
-            case 3:{
-                //Giftiger Frosch
-                //random Number decides whether an Item drops or not and which one
-                int zufallszahl =random.nextInt(20);
+                case 3: {
+                    //Giftiger Frosch
+                    //random Number decides whether an Item drops or not and which one
+                    int zufallszahl = random.nextInt(20);
 
-                try{
-                    if(zufallszahl== 0){
-                    //Langschwert droppt zu 1/20
-                     item = new Item("Langschwert", 0, 2, 6, 0);
-                    inventory.addItem(item);
-                    //Status message
-                    Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
-                    //Wait for pressed key
-                    term.getKey();
+                    if (zufallszahl == 0) {
+                        //Langschwert droppt zu 1/20
+                        item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        //Wait for pressed key
+                        term.getKey();
 
-                }else if(zufallszahl<=4){
-                    //Kurzschwert droppt zu 1/5
-                     item = new Item("Kurzschwert", 0, 1, 3,0);
-                    inventory.addItem(item);
-                    //Status message
-                    Screen.redrawEventLine("Du hast ein Kurzschwert bekommen, druecke i, um das Inventar zu oeffnen");
-		    // Wait for pressed Key
-                    term.getKey();
+                    } else if (zufallszahl <= 4) {
+                        //Kurzschwert droppt zu 1/5
+                        item = new Item("Kurzschwert", 0, Item.ITEMTYPE_SWORD, 3, 0);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Kurzschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        // Wait for pressed Key
+                        term.getKey();
+                    }
+                    break;
+
                 }
+                case 4: {
+                    //Zombie
+                    //random Number decides whether an Item drops or not and which one
+                    int zufallszahl = random.nextInt(20);
 
-                }catch (NotEnoughSpaceException ex) {
-                    try{
-                    //Status message
-                    Screen.redrawEventLine("Du konntest leider ein"+item.getName()+" nicht ins Inventar aufnehmen, da es voll war");
-                    //Wait for pressed key
-                    term.getKey();
-                    }catch (InterruptedException e) {
-				System.out.println("!IOException");
-				e.printStackTrace();
-                }
+                    if (zufallszahl < 5) {
+                        //Langschwert droppt zu 1/4
+                        item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        //Wait for pressed key
+                        term.getKey();
 
-                }catch (InterruptedException e) {
-				System.out.println("!IOException");
-				e.printStackTrace();
+                    } else if (zufallszahl < 9) {
+                        //Riesenschwert droppt zu 1/5
+                        item = new Item("Riesenschwert", 0, Item.ITEMTYPE_SWORD, 12, 0);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        // Wait for pressed Key
+                        term.getKey();
+                    }
+                    break;
                 }
-                break;
-                
+                case 5: {
+                    //Unbeliever
+                   //random Number decides whether an Item drops or not and which one
+                    int zufallszahl = random.nextInt(12);
+
+                    if (zufallszahl < 3) {
+                        //Riesenschwert droppt zu 1/4
+                        item = new Item("Riesenschwert", 0, Item.ITEMTYPE_SWORD, 12, 0);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        //Wait for pressed key
+                        term.getKey();
+
+                    } else if (zufallszahl < 5) {
+                        //Riesenschwert droppt zu 1/6
+                        item = new Item("Großschwert", 0, Item.ITEMTYPE_SWORD, 12, 0);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        // Wait for pressed Key
+                        term.getKey();
+                    }
+                    break;
+                }
+                case 6: {
+                    //Orc
+                    //TODO Waffen droppen
+                    break;
+                }
+                case 7: {
+                    //Shodow
+                    //TODO Waffen droppen
+                    break;
+                }
+                case 10: {
+                    //Troll
+                    //TODO Waffendroppen
+                    break;
+                }
+                case 11: {
+                    //Unsichbarer Zombie
+                    //droppt nichts
+                    break;
+                }
+                case 12: {
+                    //Dummie
+                    //TODO Waffen droppen
+                    break;
+                }
+                case 99: {
+                    //Dragon
+                    //droppt nichts
+                }
+                default: {
+                    break;
+                }
             }
-            case 4:{
-                //Zombie
-                //TODO muss Waffen droppen
-                break;
+        } catch (NotEnoughSpaceException ex) {
+            try {
+                //Status message
+                Screen.redrawEventLine("Du konntest leider ein" + item.getName() + " nicht ins Inventar aufnehmen, da es voll war");
+                //Wait for pressed key
+                term.getKey();
+            } catch (InterruptedException e) {
+                System.out.println("!IOException");
+                e.printStackTrace();
             }
-            case 5:{
-                //Unbeliever
-                //TODO muss Waffen droppen
-                break;
-            }
-            case 6:{
-                //Orc
-                //TODO Waffen droppen
-                break;
-            }
-            case 7:{
-                //Shodow
-                //TODO Waffen droppen
-                break;
-            }
-            case 10:{
-                //Troll
-                //TODO Waffendroppen
-                break;
-            }
-            case 11:{
-                //Unsichbarer Zombie
-                //droppt nichts
-                break;
-            }
-            case 12:{
-                //Dummie
-                //TODO Waffen droppen
-                break;
-            }
-            case 99:{
-                //Dragon
-                //droppt nichts
-            }
-            default:{
-                break;
-            }
+
+        } catch (InterruptedException e) {
+            System.out.println("!IOException");
+            e.printStackTrace();
         }
-        
+
     }
 }
 

@@ -64,8 +64,9 @@ public abstract class World extends Messenger
 	{
 		for(Class<? extends Actor> cls : actOrder)
 			for(Actor actor : getActors(cls)){
-				actor.act();
-
+                            if(!actor.expired()){
+                            actor.act();
+                            }
 			}
 
 		removeExpired();
@@ -601,11 +602,13 @@ public abstract class World extends Messenger
 		{
 			passable = true;
 
+
 			if (SystemHelper.debug) {
 				viewable = true;
 			} else {
 				viewable = false;
 			}//false -> Sichtbarkeit einschränken		//jedes Tile erhält nocht die Eigenschaft der Sichtbarkeit 
+
 
 			face = ColoredChar.create('.');
 			actors = new HashSet<Actor>();
@@ -618,4 +621,3 @@ public abstract class World extends Messenger
 	}
 
 }
-
