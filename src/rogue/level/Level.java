@@ -14,7 +14,7 @@ import jade.util.datatype.ColoredChar;
 
 public class Level extends World {
 
-	private static Generator gen = getLevelGenerator();
+	private static Generator gen; /* = getLevelGenerator();*/
 
 
     public Level(int width, int height, Player player) {
@@ -23,35 +23,34 @@ public class Level extends World {
         super(width, height - 2);
         gen.generate(this);
         addActor(player);
-
     }
     // Zweiter Konstruktor, um ein neues Level aufzurufen
 
-    public Level(int width, int height, Player player, int level, TiledTermPanel term) {
+    public Level(int width, int height, Player player,int levelorder, int level, TiledTermPanel term) {
         super(width, height - 2);
-        switch (level) {											//Liste der Maps in Abh�ngikeit vom Level
+        switch (levelorder) {											//Liste der Maps in Abh�ngikeit vom Level
             case 0: {
-                gen = new World1();
+                gen = new World1(level);
                 break;
             }
             case 1: {
-                gen = new World2();
+                gen = new World2(level);
                 break;
             }
 	    case 2: {
-		gen = new World3();
+		gen = new World3(level);
 		break;
 	    }
 	    case 3: {
-		gen = new World4();
+		gen = new World4(level);
 		break;
 	    }
 	    case 4: {
-		gen = new World5();
+		gen = new World5(level);
 		break;
 	    }
             default: {
-                gen = new World1();
+                gen = new World1(level);
                 break;
             }
         }
@@ -97,8 +96,8 @@ public class Level extends World {
 
     }
 
-    private static Generator getLevelGenerator() {
-        return new World1();
-    }
+   /* private static Generator getLevelGenerator() {
+        return new World1(level)
+    }*/
 
 }
