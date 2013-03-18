@@ -206,7 +206,7 @@ public class Inventory {
 	public void equip(Item item) {
 		item.setEquipped(true);
 		Item buffer = wornItems[item.getItemType()];
-		wornItems[item.getItemType()] = item;
+                wornItems[item.getItemType()] = item;
 		this.removeItem(item);
 		buffer.setEquipped(false);
 		try {

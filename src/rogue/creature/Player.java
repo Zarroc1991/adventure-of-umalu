@@ -24,6 +24,7 @@ import java.util.Random;
 import java.lang.InterruptedException;
 import jade.core.World;
 import java.util.ArrayList;
+import rogue.system.SystemHelper;
 
 /**
  * Represents Player
@@ -329,8 +330,8 @@ public class Player extends Creature implements Camera {
                     int zufallszahl = random.nextInt(3);
 
 
-                    if (zufallszahl == 0) {
-                        //Axt drops 1/3 of the time
+                    if (zufallszahl == 0||SystemHelper.debug) {
+                        //Axt drops 1/3 of the time, always, if Debug-Mode
                         item = new Item("Axt", 0, Item.ITEMTYPE_SWORD, 2, 0);
                         inventory.addItem(item);
                         //Status message
@@ -372,8 +373,8 @@ public class Player extends Creature implements Camera {
                     //random Number decides whether an Item drops or not and which one
                     int zufallszahl = random.nextInt(20);
 
-                    if (zufallszahl < 5) {
-                        //Langschwert droppt zu 1/4
+                    if (zufallszahl < 5||SystemHelper.debug) {
+                        //Langschwert droppt zu 1/4, immer im Debug-Mode
                         item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0);
                         inventory.addItem(item);
                         //Status message
