@@ -2,6 +2,7 @@ package rogue.level;
 
 import java.awt.Color;
 
+import jade.core.Actor;
 import jade.core.World;
 import jade.gen.Generator;
 
@@ -62,8 +63,8 @@ public class Level extends World {
         switch (level) {											//Liste der Maps in Abhaengikeit vom Level  
             case 0: {
                 //addActor(new Troll(term,level));
-                addActor(new Rat(term));
-                addActor(new Slug_fat(term));
+            	addActor(new Rat(term));
+            	addActor(new Slug_fat(term));
                 addActor(new Frog_poisonous(term));
                 break;
             }
