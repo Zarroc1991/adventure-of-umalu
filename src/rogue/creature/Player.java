@@ -362,20 +362,57 @@ public class Player extends Creature implements Camera {
                         // Wait for pressed Key
                         term.getKey();
                     }
-
-
-
                     break;
 
                 }
                 case 4: {
                     //Zombie
-                    //TODO muss Waffen droppen
+                    //random Number decides whether an Item drops or not and which one
+                    int zufallszahl = random.nextInt(20);
+
+                    if (zufallszahl < 5) {
+                        //Langschwert droppt zu 1/4
+                        item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        //Wait for pressed key
+                        term.getKey();
+
+                    } else if (zufallszahl < 9) {
+                        //Riesenschwert droppt zu 1/5
+                        item = new Item("Riesenschwert", 0, Item.ITEMTYPE_SWORD, 12, 0);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        // Wait for pressed Key
+                        term.getKey();
+                    }
                     break;
                 }
                 case 5: {
                     //Unbeliever
-                    //TODO muss Waffen droppen
+                   //random Number decides whether an Item drops or not and which one
+                    int zufallszahl = random.nextInt(12);
+
+                    if (zufallszahl < 3) {
+                        //Riesenschwert droppt zu 1/4
+                        item = new Item("Riesenschwert", 0, Item.ITEMTYPE_SWORD, 12, 0);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        //Wait for pressed key
+                        term.getKey();
+
+                    } else if (zufallszahl < 5) {
+                        //Riesenschwert droppt zu 1/6
+                        item = new Item("Großschwert", 0, Item.ITEMTYPE_SWORD, 12, 0);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        // Wait for pressed Key
+                        term.getKey();
+                    }
                     break;
                 }
                 case 6: {
