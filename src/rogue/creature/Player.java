@@ -176,8 +176,6 @@ public class Player extends Creature implements Camera {
 		Random random = new Random();
 		// Get random Damage for Attack
 		int damage = random.nextInt(strength) + 1;
-		// Do Damage to Opponent
-		opponent.loseHitpoints(damage);
 		// Print result
 		
 		System.out.println("Du hast " + damage + " Schaden verursacht");
