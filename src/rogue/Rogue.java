@@ -61,12 +61,16 @@ public class Rogue {
 		Screen.showFile(Path.generateAbsolutePath("maps/start.txt"),term,world);
 		term.getKey();
 		player.setName(CharacterCreation.getCharacterName(term, world));
-		Screen.printLine(player.getName(),term,world);
+		if (SystemHelper.debug) {
+			Screen.printLine(player.getName(),term,world);
+		}
 		term.getKey();
 		
 		//Screen.showFile(Path.generateAbsolutePath("maps/start.txt"),term,world);
 		//Zeigt Intro 
-		Screen.intro(player.getName(), Path.generateAbsolutePath("txt Dateien/Intro.txt"),term,world);
+		if (!SystemHelper.debug) {
+			Screen.intro(player.getName(), Path.generateAbsolutePath("txt Dateien/Intro.txt"),term,world);
+		}
 		// Press any Key to continue
 		term.getKey();
 		
