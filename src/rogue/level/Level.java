@@ -14,12 +14,14 @@ import java.util.logging.Logger;
 import rogue.creature.*;
 
 import jade.util.datatype.ColoredChar;
+import jade.util.datatype.Coordinate;
 import java.lang.reflect.InvocationTargetException;
 import rogue.creature.util.Item;
 
 public class Level extends World {
 
     private static Generator gen = getLevelGenerator();
+
 
     public Level(int width, int height, Player player) {
         // Create a new Map, but make it 2 Rows less higher than window is, so we have some Space for
@@ -60,7 +62,7 @@ public class Level extends World {
             }
         }
         gen.generate(this);
-        addActor(player);
+        this.addActor(player, playerstart);
         //insert Monster. We need new case-separation, because the Monsters should be added
         //after the tile, so they do not land on unpassable tiles
         switch (level) {											//Liste der Maps in Abhaengikeit vom Level  
