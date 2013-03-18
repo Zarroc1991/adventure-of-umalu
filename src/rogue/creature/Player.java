@@ -11,11 +11,15 @@ import jade.ui.Terminal;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Coordinate;
 import jade.util.datatype.Direction;
+import rogue.system.HelpScreen;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import rogue.level.Screen;
 import rogue.creature.util.Inventory;
 import rogue.creature.util.Item;
 import rogue.creature.util.NotEnoughGoldException;
 import rogue.creature.util.NotEnoughSpaceException;
+import rogue.level.Screen;
 import java.util.Random;
 import java.lang.InterruptedException;
 import jade.core.World;
@@ -80,11 +84,14 @@ public class Player extends Creature implements Camera {
 			char key;
 			key = term.getKey();
 			switch (key) {
-			case 'q': // User wants to quit
-				expire(); // Leave let player die, so this application quits
+			case 'b': // User wants to quit//beenden später auf esc 
+				confirmQuit(); // Leave let player die, so this application quits
 				break;
 			case 'i': // Show Inventory
 				showInventoryScreen();
+				break;
+			case 'o':
+				HelpScreen.printMainHelpScreen();
 				break;
 			case 'x': // TODO Change this key
 				Screen.showEventLog();
@@ -103,27 +110,26 @@ public class Player extends Creature implements Camera {
 						// Fight first monster on coordinate.
 						fight((Monster) actorlist.toArray()[0]);
 					} else {
-						for(Coordinate coord: getViewField()){
-							world().viewable(coord.x(), coord.y());
-							}
 						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('©')) {  
-							Screen.redrawEventLine("Möchtes du diesen Raum verlassen? Drücke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+							Screen.redrawEventLine("Möchtes du diesen Raum verlassen? Drücke j für Ja, ansonsten verweilst du hier.");}//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u00a9')) {  
+							Screen.redrawEventLine("M\u00f6chtest du diesen Raum verlassen? Dr\u00fccke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+							for(Coordinate coord: getViewField()){
+								world().viewable(coord.x(), coord.y());}
 							if (term.getKey()=='j'){
 								worldchange= true;
 								move(dir);}
 							else{
 								move(0,0); 
 								}
-							
-							} else {// No monster there
-							
-							
+
+						} else {// No monster there
 							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
-								world().viewable(coord.x(), coord.y());
+								world().viewable(coord.x(), coord.y());}
 							
-							
-							}
 							move(dir);
+							
+							
 							break;
 						}
 					}
@@ -131,6 +137,18 @@ public class Player extends Creature implements Camera {
 				}
 			}
 		} catch (InterruptedException e) { // Something has happened here
+			System.out.println("!Interrupted Exception");
+			e.printStackTrace();
+		}
+	}
+
+	public void confirmQuit() {
+		Screen.redrawEventLine("Sicher dass Adventures in Umalu beendet werden soll? <J>a/<N>ein");
+		try {
+			if (term.getKey() == 'j') {
+				expire();
+			}
+		} catch (InterruptedException e) {
 			System.out.println("!Interrupted Exception");
 			e.printStackTrace();
 		}
@@ -158,14 +176,22 @@ public class Player extends Creature implements Camera {
 		Random random = new Random();
 		// Get random Damage for Attack
 		int damage = random.nextInt(strength) + 1;
-		// Do Damage to Opponent
-		opponent.loseHitpoints(damage);
 		// Print result
+		
 		System.out.println("Du hast " + damage + " Schaden verursacht");
 		System.out.println(opponent.name() + " hat noch " + opponent.hitpoints
 				+ " HP");
 		Screen.redrawEventLine("Du verursachst " + damage + " Schaden");
-		try {
+                // Do Damage to Opponent
+		boolean opponentDied = opponent.loseHitpoints(damage);
+                try {
+                if(opponentDied){
+                    //wait for key to continue on Status message
+                    term.getKey();
+                    randomlyDropItem(opponent);
+                }
+		
+		
 			term.getKey();
 
 		} catch (InterruptedException e) {
@@ -202,6 +228,10 @@ public class Player extends Creature implements Camera {
 	 */
 	public int getHitpoints() {
 		return hitpoints;
+	}
+	
+	public int getMaxHitpoints() {
+		return maxHitpoints;
 	}
 
 	/**
@@ -264,6 +294,10 @@ public class Player extends Creature implements Camera {
 					case '4':
 					inventory.showInfo(4, term);
 					break;
+					case 'o':
+					HelpScreen.printInventoryHelpScreen();
+					break;
+					
 				}
 			} catch (InterruptedException e) {
 				System.out.println("!Exeception");
@@ -273,4 +307,140 @@ public class Player extends Creature implements Camera {
 		// Inventar verlassen, zeichne wieder die Karte.
 		Screen.redrawMap();
 	}
+
+    private void randomlyDropItem(Monster opponent) {
+        Random random = new Random();
+        random.nextInt(strength);
+        //This Item drops;
+        Item item = null;
+        
+        switch(opponent.typenumber){
+
+            case 1:{
+                //Rat, doesnt drop Weapons according to balance
+                System.out.println("Ratte lässt nichts fallen");
+                break;
+            }
+            case 2:{
+                //Fette Nacktschnecke
+                //random Number decides whether an Item drops or not and which one
+                int zufallszahl =random.nextInt(3);
+                
+                try{
+                    if(zufallszahl== 0){
+                    //Axt drops 1/3 of the time
+                     item = new Item("Axt", 0, 0, 2, 0);
+                    inventory.addItem(item);
+                    //Status message
+                    Screen.redrawEventLine("Du hast eine Axt bekommen, druecke i, um das Inventar zu oeffnen");
+                    //Wait for pressed key
+                    term.getKey();
+                }
+
+                }catch (NotEnoughSpaceException ex) {
+                    try{
+                    //Status message
+                    Screen.redrawEventLine("Du konntest leider ein"+item.getName()+" nicht ins Inventar aufnehmen, da es voll war");
+                    //Wait for pressed key
+                    term.getKey();
+                    }catch (InterruptedException e) {
+				System.out.println("!IOException");
+				e.printStackTrace();
+                }
+                    
+                }catch (InterruptedException e) {
+				System.out.println("!IOException");
+				e.printStackTrace();
+                }break;
+            }
+            case 3:{
+                //Giftiger Frosch
+                //random Number decides whether an Item drops or not and which one
+                int zufallszahl =random.nextInt(20);
+
+                try{
+                    if(zufallszahl== 0){
+                    //Langschwert droppt zu 1/20
+                     item = new Item("Langschwert", 0, 2, 6, 0);
+                    inventory.addItem(item);
+                    //Status message
+                    Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                    //Wait for pressed key
+                    term.getKey();
+
+                }else if(zufallszahl<=4){
+                    //Kurzschwert droppt zu 1/5
+                     item = new Item("Kurzschwert", 0, 1, 3,0);
+                    inventory.addItem(item);
+                    //Status message
+                    Screen.redrawEventLine("Du hast ein Kurzschwert bekommen, druecke i, um das Inventar zu oeffnen");
+		    // Wait for pressed Key
+                    term.getKey();
+                }
+
+                }catch (NotEnoughSpaceException ex) {
+                    try{
+                    //Status message
+                    Screen.redrawEventLine("Du konntest leider ein"+item.getName()+" nicht ins Inventar aufnehmen, da es voll war");
+                    //Wait for pressed key
+                    term.getKey();
+                    }catch (InterruptedException e) {
+				System.out.println("!IOException");
+				e.printStackTrace();
+                }
+
+                }catch (InterruptedException e) {
+				System.out.println("!IOException");
+				e.printStackTrace();
+                }
+                break;
+                
+            }
+            case 4:{
+                //Zombie
+                //TODO muss Waffen droppen
+                break;
+            }
+            case 5:{
+                //Unbeliever
+                //TODO muss Waffen droppen
+                break;
+            }
+            case 6:{
+                //Orc
+                //TODO Waffen droppen
+                break;
+            }
+            case 7:{
+                //Shodow
+                //TODO Waffen droppen
+                break;
+            }
+            case 10:{
+                //Troll
+                //TODO Waffendroppen
+                break;
+            }
+            case 11:{
+                //Unsichbarer Zombie
+                //droppt nichts
+                break;
+            }
+            case 12:{
+                //Dummie
+                //TODO Waffen droppen
+                break;
+            }
+            case 99:{
+                //Dragon
+                //droppt nichts
+            }
+            default:{
+                break;
+            }
+        }
+        
+    }
 }
+
+

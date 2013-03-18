@@ -1,3 +1,4 @@
+
 package jade.core;
 
 import jade.util.Dice;
@@ -13,6 +14,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import rogue.system.SystemHelper;
 
 /**
  * Represents a game world on which {@code Actor} can interact.
@@ -597,7 +600,13 @@ public abstract class World extends Messenger
 		public Tile()			
 		{
 			passable = true;
-			viewable = true;//false -> Sichtbarkeit einschr�nken		//jedes Tile erh�lt nocht die Eigenschaft der Sichtbarkeit 
+
+			if (SystemHelper.debug) {
+				viewable = true;
+			} else {
+				viewable = false;
+			}//false -> Sichtbarkeit einschränken		//jedes Tile erhält nocht die Eigenschaft der Sichtbarkeit 
+
 			face = ColoredChar.create('.');
 			actors = new HashSet<Actor>();
 		}
@@ -609,3 +618,4 @@ public abstract class World extends Messenger
 	}
 
 }
+

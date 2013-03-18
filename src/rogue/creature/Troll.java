@@ -22,6 +22,8 @@ public class Troll extends Monster{
 
     public Troll( Terminal term, int level) {
         super(ColoredChar.create('T'),"Troll",level*20, level*3, term);
+        // special Monster get Typenumbers from 10 onwards
+        typenumber = 10;
     }
 
 

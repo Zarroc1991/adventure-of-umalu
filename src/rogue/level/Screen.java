@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -11,11 +12,11 @@ import jade.core.World;
 import jade.ui.TiledTermPanel;
 import jade.util.datatype.ColoredChar;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader; 
-import java.io.FileInputStream; 
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,10 +42,10 @@ public class Screen {
 		term.clearBuffer();
 		try {
 			// Prepare File for reading (open it)
-			
+
+
 			//FileReader fr = new FileReader(filePath);
-			
-			BufferedReader br =new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"UTF-8"));
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"UTF-8"));
 			// int lineNumber = MAXHEIGHT; // TODO Delete this line, when it is
 			// not needed anymore
 
@@ -224,4 +225,14 @@ public class Screen {
 	public static void showEventLog() {
 		Screen.putText(Screen.eventLog);
 	}
+
+	public static void anyKey() {
+		try {
+			lastTerminal.getKey();
+		} catch (InterruptedException e) {
+			System.out.println("!InterruptedException e");
+			e.printStackTrace();
+		}
+	}
 }
+

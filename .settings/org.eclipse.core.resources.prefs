@@ -1,2 +1,9 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/rogue/Rogue.java=UTF-8
+=======
+encoding//src/jade/core/World.java=UTF-8
+encoding//src/jade/gen/map/NewWorld.java=UTF-8
+encoding//src/rogue/creature/Player.java=UTF-8
+encoding/<project>=UTF-8
+>>>>>>> upstream/master

@@ -38,17 +38,19 @@ public abstract class Creature extends Actor {
 	 *
 	 * @param damage Amount of Hitpoints this creature should loose
 	 */
-	public void loseHitpoints(int damage) {
+	public boolean loseHitpoints(int damage) {
 		hitpoints -= damage;
-		checkHitpoints();
+		return checkHitpoints();
 	}
 	
 	/**
 	 * Checks, if creature is dead (by having <= 0 hitpoints), if so, Creature dies
 	 */
-	public void checkHitpoints() {
+	public boolean checkHitpoints() {
 		if(hitpoints<=0){
 			expire();
+                        return true;
 		}
+                return false;
 	}
 }
