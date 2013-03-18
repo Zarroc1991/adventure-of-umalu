@@ -23,7 +23,7 @@ public class CharacterCreation {
 		// Set to some character
 		char c = ' ';
 		// Set Standardinputstring
-		String printName = new String("Name: _"); // Used to Store String to be printed
+		String printName = new String("Wie ist dein Name, mutiger Krieger? _"); // Used to Store String to be printed
 		String name = new String(); // Used to Store name given by user
 		while (c != '\n') { // Stop when user presses Return (Newline)
 			Screen.printLine(printName, term, world); // Print Users Input
