@@ -29,7 +29,7 @@ public class Rat extends Monster {
     PathFinder pathfinder = new AStar();
     RayCaster fov;
     int attackRadius;
-
+   
     public Rat(Terminal term) {
         super(ColoredChar.create('R', new Color(110,110,110)), "Ratte", 5, 1, term);
         fov = new RayCaster();
