@@ -95,12 +95,12 @@ public class Rogue {
 		while(!player.expired()) { // Player is still living?
 			if (player.worldchangeup){								//Überprüft, ob einen Levelup erfolgt ist
 				world.removeActor(player); //entfernt Spieler aus der alten Welt
-				world = new Level(80,32, player, levelorder.get(++level),++level, term);    //lädt das nächste Level 
+				world = new Level(80,32, player, levelorder.get(++level),level, term);    //lädt das nächste Level 
 				player.setWorld(world);								//Spieler erkennt seine Welt
 				player.worldchangeup=false;}
 				else if(player.worldchangedown){
 					world.removeActor(player); //entfernt Spieler aus der alten Welt
-					world = new Level(80,32, player, levelorder.get(--level),--level, term);    //lädt das nächste Level 
+					world = new Level(80,32, player, levelorder.get(--level),level, term);    //lädt das nächste Level 
 					player.setWorld(world);								//Spieler erkennt seine Welt
 					player.worldchangedown=false;}
 					
