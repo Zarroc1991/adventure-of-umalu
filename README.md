@@ -39,3 +39,4 @@ Tastenkürzel
 * i startet das Inventarinterface (mit q verlassen, Item auswählen, mit s anlegen)
 * x zeigt die letzten Eventnachrichten an
 * o zeigt den Hilfebildschirm an (hier gibt es auch weiterführende Informationen)
+* 
