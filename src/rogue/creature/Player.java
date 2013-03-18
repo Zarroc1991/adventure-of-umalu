@@ -75,7 +75,9 @@ public class Player extends Creature implements Camera {
 	public String getName() {
 		return name;
 	}
-
+        public Inventory getInventory(){
+            return inventory;
+        }
 	@Override
 	/**
 	 * Ask Player to do some action (passing him the baton). Reads input and moves Character accordingly.
