@@ -49,13 +49,13 @@ public class Item {
 	 * @param bonusDamage Additional Damage by Item
 	 * @param bonusHealth Addiotional Health by Item
 	 */
-	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth) {
+	public Item(String name, int goldValue, int itemType, int bonusDamage, int bonusHealth) {
 		// Name einfuegen
 		this.name = name;
 		// Platzhalter fuer den Fall der Faelle
 		this.goldValue = goldValue;
 		// Was fuer eine Art Item ist das?
-		this.type = type;
+		this.itemType = itemType;
 		// Setze die Modifikatoren
 		this.modificators = new int[2];
 		this.modificators[0] = bonusDamage;
