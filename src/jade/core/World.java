@@ -590,7 +590,7 @@ public abstract class World extends Messenger
 	{
 		register.remove(actor);
 	}
-
+	
 	private class Tile
 	{
 		public boolean passable;
