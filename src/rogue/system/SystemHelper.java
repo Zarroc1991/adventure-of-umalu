@@ -9,6 +9,7 @@ package rogue.system;
 public class SystemHelper {
 	public static boolean debug = false;
 	public static boolean speedrun = false;
+	public static boolean isApplet = false;
 
 	/**
 	 * Prints a message to Console, prefixed with '> Debug', when debug option has been set
@@ -36,6 +37,7 @@ public class SystemHelper {
 	 * @param args List of Arguments
 	 */
 	public static void getArgs(String[] args) {
+		SystemHelper.isApplet = true;
 		for (int i=0;i<args.length;i++) {
 			if (args[i].compareTo("debug") == 0) {
 				// Debugmode selected
