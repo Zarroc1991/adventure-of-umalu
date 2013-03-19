@@ -6,6 +6,7 @@ import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Coordinate;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -194,4 +195,6 @@ public class TiledTermPanel extends TermPanel
             }
         }
     }
+
+	
 }

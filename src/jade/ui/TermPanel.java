@@ -96,7 +96,10 @@ public class TermPanel extends Terminal
     {
         return screen.consumeKeyPress();
     }
-
+    public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		screen.keyPressed(e);
+	}
     @Override
     public void refreshScreen()
     {
