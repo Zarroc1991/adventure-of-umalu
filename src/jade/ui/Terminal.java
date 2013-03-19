@@ -300,10 +300,10 @@ public abstract class Terminal
 
         bufferRelative(camera, ch, pos.x(), pos.y());
     }
-    public ArrayList<Integer> levelorder(int j){
+    public ArrayList<Integer> levelorder(int i){
     	ArrayList<Integer> level = new ArrayList<Integer>() ;
-		for(int i=0; i<j; i++){
-			level.add(i);
+		for(int j=0; j<i; j++){
+			level.add(j);
 		}
 		Collections.shuffle(level);
 		return level; 
