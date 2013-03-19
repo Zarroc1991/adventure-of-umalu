@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Adventures in Umalu</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>	
+<body>
+	<h1>Adventures in Umalu</h1>
+	<p>Adventures in Umalu ist ein rogue-like Dungeon-crawler Spiel, geschrieben in Java. Es wurde im Zuge des Sofwarepraktikum-Kurses 2013 des <a href="http://www.mi.fu-berlin.de/inf/">Instituts f&uuml;r Informatik</a> der <a href="http://www.fu-berlin.de">Freien Universit&auml;t Berlin</a> von
+	<ul>
+		<li><a href="https://github.com/26thmeusoc">Dirk Braun</a></li>
+		<li><a href="https://github.com/Zarroc1991">Paul Kermas</a></li>
+		<li><a href="https://github.com/NicolasLoer">Nicolas Loerbroks</a></li>
+		<li><a href="https://github.com/Schachus">Markus Penner</a></li>
+		<li><a href="https://github.com/TheStube">Christoph Spenke</a></li>
+	</ul>
+	<p>entwickelt. Adventures of Umalu verwendet die <a href="http://code.google.com/p/jaderogue/">jade-rogue Library</a> von Jeffrey Lund.
+	<p>Adventures of Umalu besteht aus zwei Spielen:
+	<dl>
+		<dt>Adventures in Umalu</dt> <dd>- Geh auf ein Abenteuer um den Drachen Ra's al-Ghul aus dem Berge Umalu zu vertreiben.
+		<dt>Running in Umalu</dt> <dd>- Geh auf Speedrun in den Karten von <i>Adventures in Umalu</i>. Mache dabei so wenige Schritte in so kurzer Zeit wie m&ouml;glich.</dd>
+	</dl>
+	<p>Es gibt die folgenden M&ouml;glichkeiten um Adventures oder Running in Umalu zu spielen:
+		<ul>
+			<li><a href="#source">Sourcen laden und kompilieren</a></li>
+			<li><a href="#jar">.jar Datei laden und starten</a></li>
+			<li><a href="#online">Online spielen</a></li>
+		</ul>
+	<h2 id="source">Sourcen laden und kompilieren</h2>
+	<ol>
+		<li> Lade die Daten mit git von der Projektseite:
+			<pre>
+git clone https://github.com/26thmeusoc/adventure-of-umalu.git adventure-of-umalu
+			</pre>
+		</li>
+		<li> Wechsel mit deinem Terminalclient in den neuen Projektordner:
+			<pre>
+cd adventure-of-umalu/src
+			</pre>
+		</li>
+		<li> Kompiliere das Projekt:
+			<pre>
+javac rogue/Rogue.java
+			</pre>
+		</li>
+		<li> Starte das Programm (Adventures in Umalu)
+			<pre>
+java rogue/Rogue
+			</pre>
+		</li>
+		<li> oder: Starte Running in Umalu:
+		<pre>
+java rogue/Rogue speedrun
+		</pre>
+	</ol>
+	<h2 id="jar">.jar Datei laden und starten</h2>
+	<ol>
+		<li>Lade die .jar Datei herunter: <a href="./adventure-of-umalu.jar">Herunterladen</a></li>
+		<li>&Ouml;ffne deinen Terminalclient und wechsel in den Ordner mit der .jar Datei</li>
+		<li>Starte Adventure of Umalu
+		<pre>
+java -jar adventure-of-umalu.jar
+		</pre>
+		</li>
+		<li> oder: Starte Running in Umalu:
+		<pre>
+java -jar adventure-of-umalu.jar speedrun
+		</pre>
+	</ol>
+
+	<h2 id="online">Online spielen</h2>
+	<ol>
+		<li>Stelle sicher dass dein Browser Java unterst&uuml;tzt und dein Java Webstart aktiviert ist</li>
+		<li>Folge einem der beiden Links:
+		<ul><li><a href="./adventure.html">Adventures in Umalu spielen</a></li><li><a href="./running.html">Running in Umalu spielen</a></li></ul>
+	</ol>
+	<p>
+    <a href="http://validator.w3.org/check?uri=referer"><img
+      src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01 Strict" height="31" width="88"></a>
+  </p>
+</body>
+</html>
