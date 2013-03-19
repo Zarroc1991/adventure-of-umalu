@@ -31,7 +31,7 @@ public abstract class NewWorld extends MapGenerator {
 			// Go through whole file
 			ColoredChar c_color;// einige Zeichen werden durch andere bunte
 								// Zeichen ersetzt.
-			ArrayList notPassable = new ArrayList();
+			ArrayList<Character> notPassable = new ArrayList<Character>();
 			notPassable.add('#');
 			notPassable.add('~');
 			notPassable.add('^');
@@ -66,7 +66,7 @@ public abstract class NewWorld extends MapGenerator {
 					//beim ersten Level soll es kein Leveldown geben 
 					if(level==0 && c=='\u00ae'){
 						
-						c_color=ColoredChar.create('.');
+						c_color=ColoredChar.create('.', new Color(51,51,51));
 					}
 					// System.out.println(c); // TODO Delete this line, when it
 					// is not needed anymore

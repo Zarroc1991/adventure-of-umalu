@@ -302,8 +302,8 @@ public abstract class Terminal
     }
     public ArrayList<Integer> levelorder(int i){
     	ArrayList<Integer> level = new ArrayList<Integer>() ;
-		for(i=0; i<5; i++){
-			level.add(i);
+		for(int j=0; j<i; j++){
+			level.add(j);
 		}
 		Collections.shuffle(level);
 		return level; 
