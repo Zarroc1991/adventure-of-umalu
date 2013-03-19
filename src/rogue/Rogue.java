@@ -220,6 +220,10 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 
 	@Override
 	public void start() { 
+		getAppletArgs(); // lese aus was an Argumenten moeglicherweise uebergeben wird
+		int level = 0; 
+		int stepSum = 0;
+		int stepLevel = 0;
 	    roundsToHpUp = hpCycle;
 		t = new Thread(new Runnable() {
 			@Override
@@ -294,9 +298,19 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 
 					Screen.lastWorld = world;
 					Screen.lastTerminal = term;
-					Screen.redrawMap("HP: " + player.getHitpoints() + "/"
-							+ player.getMaxHitpoints());
-
+					/**Screen.redrawMap("HP: " + player.getHitpoints() + "/"
+							+ player.getMaxHitpoints());*/
+					if (!SystemHelper.speedrun) {
+						Screen.redrawMap("HP: "+player.getHitpoints()+"/"+player.getMaxHitpoints());
+					} else {
+						Calendar calen = Calendar.getInstance();
+						long timeInSeconds = (calen.getTimeInMillis()-startTime)/1000;
+						if (timeInSeconds < 60) {
+						Screen.redrawMap("Steps: "+stepSum+" in "+timeInSeconds+"s");
+					} else {
+						Screen.redrawMap("Steps: "+stepSum+" in "+timeInSeconds/60+"min "+timeInSeconds%60+"s");
+					}
+				}
 					
 
 					// Screen
@@ -330,5 +344,13 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 		if (e.getID() == KeyEvent.KEY_TYPED)
 			term.keyPressed(e);
 		return true;
+	}
+	
+	public static void getAppletArgs() {
+		if (getParameter("debug").equalsIgnoreCase("1")) {
+			SystemHelper.debug = true;
+		} else if (getParameter("speedrun").equalsIgnoreCase("1")) {
+			SystemHelper.debug = true;
+		}
 	}
 }
