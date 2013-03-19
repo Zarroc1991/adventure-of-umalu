@@ -35,23 +35,23 @@ public class Level extends World {
         super(width, height - 2);
         switch (levelorder) {											//Liste der Maps in Abh�ngikeit vom Level
             case 0: {
-                gen = new World1(levelorder,aufwaerts);
+                gen = new World1(level,aufwaerts);
                 break;
             }
             case 1: {
-                gen = new World2(levelorder,aufwaerts);
+                gen = new World2(level,aufwaerts);
                 break;
             }
 	    case 2: {
-		gen = new World3(levelorder,aufwaerts);
+		gen = new World3(level,aufwaerts);
 		break;
 	    }
 	    case 3: {
-		gen = new World4(levelorder,aufwaerts);
+		gen = new World4(level,aufwaerts);
 		break;
 	    }
 	    case 4: {
-		gen = new World5(levelorder,aufwaerts);
+		gen = new World5(level,aufwaerts);
 		break;
 	    }
 	    case 5: {
