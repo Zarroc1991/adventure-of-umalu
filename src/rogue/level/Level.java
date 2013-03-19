@@ -31,27 +31,27 @@ public class Level extends World {
     }
     // Zweiter Konstruktor, um ein neues Level aufzurufen
 
-    public Level(int width, int height, Player player,int levelorder, int level, TiledTermPanel term) {
+    public Level(int width, int height, Player player,int levelorder, int level,boolean aufwaerts, TiledTermPanel term) {
         super(width, height - 2);
         switch (levelorder) {											//Liste der Maps in Abh�ngikeit vom Level
             case 0: {
-                gen = new World1(level);
+                gen = new World1(levelorder,aufwaerts);
                 break;
             }
             case 1: {
-                gen = new World2(level);
+                gen = new World2(levelorder,aufwaerts);
                 break;
             }
 	    case 2: {
-		gen = new World3(level);
+		gen = new World3(levelorder,aufwaerts);
 		break;
 	    }
 	    case 3: {
-		gen = new World4(level);
+		gen = new World4(levelorder,aufwaerts);
 		break;
 	    }
 	    case 4: {
-		gen = new World5(level);
+		gen = new World5(levelorder,aufwaerts);
 		break;
 	    }
 	    case 5: {
@@ -59,11 +59,12 @@ public class Level extends World {
 		break;
 	    }
             default: {
-                gen = new World1(level);
+                gen = new World1(level,aufwaerts);
                 break;
             }
         }
         gen.generate(this);
+        //player starts at Playerstart
         this.addActor(player, playerstart);
         //insert Monster. We need new case-separation, because the Monsters should be added
         //after the tile, so they do not land on unpassable tiles
@@ -74,7 +75,7 @@ public class Level extends World {
 					addActors(Rat.class, term, 15);
 					addActors(Slug_fat.class, term, 4);
 					addActor(new Frog_poisonous(term));
-					addActor(new ItemGenerator(ColoredChar.create('1', Color.yellow), new Item("Testhelm", 0, Item.ITEMTYPE_HEAD, 0, 15), term));
+					addActor(new ItemGenerator(ColoredChar.create('I', Color.yellow), new Item("Testhelm", 0, Item.ITEMTYPE_HEAD, 0, 15), term));
 					break;
 			}
 			case 1: {

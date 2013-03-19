@@ -11,6 +11,6 @@ public class Arena extends NewWorld {
 	@Override
 	//ruft generateStep aus NewWorld auf
 	protected void generateStep(World world, Dice dice) {
-		generateStep(world,dice,Path.generateAbsolutePath("maps/Arena.txt"));
+		generateStep(world,dice,Path.generateAbsolutePath("maps/Arena.txt"),5, true);
 	}
 }

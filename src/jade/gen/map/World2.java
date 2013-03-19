@@ -8,17 +8,19 @@ import jade.util.Dice;
 // Beispiel Map World1 
 public class World2 extends NewWorld {
 	private int level;
-	
-	public World2(int level){
+        private boolean aufwaerts;
+
+	public World2(int level, boolean aufwaerts){
 		super();
 		this.level = level;
-		
-		 
+                this.aufwaerts = aufwaerts;
+
+
 	}
 	@Override
 	//ruft generateStep aus NewWorld auf
 	protected void generateStep(World world, Dice dice) {
-		generateStep(world,dice,Path.generateAbsolutePath("maps/Welt2.txt"),level );
+		generateStep(world,dice,Path.generateAbsolutePath("maps/Welt2.txt"),level, aufwaerts );
 		
 	}
 

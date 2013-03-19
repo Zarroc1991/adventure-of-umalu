@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Calendar;
+import java.util.logging.Logger;
 import javax.swing.JApplet;
 
 import rogue.creature.Dragon;
@@ -43,6 +44,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 	int roundsToHpUp;
 	
 	public static void main(String[] args) throws InterruptedException {
+
    		int level = 0; 
 		int stepSum = 0;
 		int stepLevel = 0;
@@ -70,7 +72,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 		// erstellt zufällige Levelreihenfolge
 		ArrayList<Integer> levelorder = term.levelorder(levelanzahl);
 		// Generate a new World
-		World world = new Level(80, 32, player, levelorder.get(level), level,
+		World world = new Level(80, 32, player, levelorder.get(level), level,true,
 				term);
 		// Show Splashscreen for Start
 		Screen.showFile(Path.generateAbsolutePath("maps/start.txt"), term,
@@ -115,14 +117,14 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 				world.removeActor(player); // entfernt Spieler aus der alten
 											// Welt
 				world = new Level(80, 32, player, levelorder.get(++level),
-						level, term); // lädt das nächste Level
+						level,true, term); // lädt das nächste Level
 				player.setWorld(world); // Spieler erkennt seine Welt
 				player.worldchangeup = false;
 			} else if (player.worldchangedown) {
 				world.removeActor(player); // entfernt Spieler aus der alten
 											// Welt
 				world = new Level(80, 32, player, levelorder.get(--level),
-						level, term); // lädt das nächste Level
+						level,false, term); // lädt das nächste Level
 				player.setWorld(world); // Spieler erkennt seine Welt
 				player.worldchangedown = false;
 			}
@@ -214,7 +216,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 		getContentPane().add(term.panel());
 		player = new Player(term);
 		levelorder = term.levelorder(levelanzahl);
-		world = new Level(80, 32, player, levelorder.get(level), level,term);
+		world = new Level(80, 32, player, levelorder.get(level),level,true,term);
 		System.out.println("applet initialized");
 	}
 
@@ -253,14 +255,14 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 						world.removeActor(player); // entfernt Spieler aus der alten
 													// Welt
 						world = new Level(80, 32, player, levelorder.get(++level),
-								level, term); // lädt das nächste Level
+								level,true, term); // lädt das nächste Level
 						player.setWorld(world); // Spieler erkennt seine Welt
 						player.worldchangeup = false;
 					} else if (player.worldchangedown) {
 						world.removeActor(player); // entfernt Spieler aus der alten
 													// Welt
 						world = new Level(80, 32, player, levelorder.get(--level),
-								level, term); // lädt das nächste Level
+								level,false, term); // lädt das nächste Level
 						player.setWorld(world); // Spieler erkennt seine Welt
 						player.worldchangedown = false;
 					}
@@ -318,7 +320,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 				System.exit(0);
 		}});
 		t.start();
-		System.out.println("applet started");
+       		System.out.println("applet started");
 	}
 	@Override
 	public void stop() {

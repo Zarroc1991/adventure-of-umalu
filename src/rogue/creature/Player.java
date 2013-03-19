@@ -57,6 +57,8 @@ public class Player extends Creature implements Camera {
 		inventory = new Inventory(5,50);
 	}
 
+
+
 	/**
 	 * Sets Charactername. Should be only called on character Creation.
 	 * 
@@ -465,15 +467,13 @@ public class Player extends Creature implements Camera {
                 }
             }
         } catch (NotEnoughSpaceException ex) {
-            try {
+            
                 //Status message
-                Screen.redrawEventLine("Du konntest leider ein" + item.getName() + " nicht ins Inventar aufnehmen, da es voll war");
+                //Screen.redrawEventLine("Du konntest leider ein" + item.getName() + " nicht ins Inventar aufnehmen, da es voll war");
                 //Wait for pressed key
-                term.getKey();
-            } catch (InterruptedException e) {
-                System.out.println("!IOException");
-                e.printStackTrace();
-            }
+               // term.getKey();
+                inventory.fullInventoryScreen(item);
+             
 
         } catch (InterruptedException e) {
             System.out.println("!IOException");
