@@ -280,6 +280,7 @@ public class Player extends Creature implements Camera {
                 // Erwarte eine Eingabe vom Nutzer.
                 char key = term.getKey();
                 switch (key) {
+					case 'i':
                     case 'q':
                         loop = false;
                         break;
