@@ -49,7 +49,7 @@ public abstract class NewWorld extends MapGenerator {
 						break;
 					}
 
-					case ':': {	c_color = ColoredChar.create('.', Color.yellow);	break;}// :wird zu grünen Punkt
+					case ':': {	c_color = ColoredChar.create('.', Color.yellow);	break;}
 					case '~': {	c_color = ColoredChar.create('~', Color.blue);	break;}
 					case '^': {	c_color = ColoredChar.create('^', new Color(210,105,30));break;}
 					case '$': {	c_color = ColoredChar.create('$', Color.yellow);	break;}
@@ -62,9 +62,9 @@ public abstract class NewWorld extends MapGenerator {
 					case '\u00AC': {	c_color = ColoredChar.create('\u00AC', new Color(210,105,30));break;}
 					case '.': {	c_color = ColoredChar.create('.', new Color(51,51,51));	break;}
                                         //player starts here
-                                        case '\u00AE':{if(aufwaerts)world.playerstart = new Coordinate(i,lineNumber);}
+                                        case '\u00AE':{if(aufwaerts){world.playerstart = new Coordinate(i,lineNumber);}}
                                         //or here
-                                        case '\u00A9':{if(!aufwaerts)world.playerstart = new Coordinate(i,lineNumber);}
+                                        case '\u00A9':{if(!aufwaerts){world.playerstart = new Coordinate(i,lineNumber);}}
 					}
 					//beim ersten Level soll es kein Leveldown geben 
 					if(level==0 && c=='\u00ae'){
