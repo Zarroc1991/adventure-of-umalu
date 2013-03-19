@@ -167,7 +167,7 @@ public abstract class World extends Messenger
 	{
 		addActor(actor, getOpenTile());
 	}
-
+	
 	/**
 	 * Removes an {@code Actor} from the {@code World}. The {@code Actor} must be both bound to this
 	 * {@code World} and not held by another {@code Actor}. However, if the {@code Actor} is
@@ -592,7 +592,7 @@ public abstract class World extends Messenger
 	{
 		register.remove(actor);
 	}
-
+	
 	private class Tile
 	{
 		public boolean passable;
@@ -609,7 +609,7 @@ public abstract class World extends Messenger
 				viewable = true;
 			} else {
 				viewable = false;
-			}//false -> Sichtbarkeit einschränken		//jedes Tile erh�lt nocht die Eigenschaft der Sichtbarkeit 
+			}//false -> Sichtbarkeit einschränken		//jedes Tile erhält nocht die Eigenschaft der Sichtbarkeit 
 
 
 			face = ColoredChar.create('.');

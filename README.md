@@ -35,7 +35,12 @@ Beim zweiten Befehl darauf achten, dass am Ende des Befehls NICHT .java steht, d
 
 Tastenkürzel
 ===
-* WASD oder vim-like-Steuerung zur Bewegung, q,e,y,c fuer Diagonal laufen
+* WASD oder vim-like-Steuerung zur Bewegung, q,e,y,c fuer Diagonal laufen`
 * i startet das Inventarinterface (mit q verlassen, Item auswählen, mit s anlegen)
 * x zeigt die letzten Eventnachrichten an
-* o zeigt den Hilfebildschirm an (hier gibt es auch weiterführende Informationen)
+* o zeigt den Hilfebildschirm an (hier gibt es auch weiterführende Informationen)`
+
+Running in Umalu
+===
+Für die Speedrun Version wird das Spiel mit dem Parameter ```speedrun``` gestartet:
+```java rogue/Rogue speedrun```

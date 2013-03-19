@@ -37,8 +37,8 @@ public class Player extends Creature implements Camera {
 	private int strength;
 	private String name;
 	private Inventory inventory;
-
-	public Boolean worldchange = false;   // standardmäßig ist keine Mapänderung erfolgt
+	public Boolean worldchangedown = false;   // standardmäßig ist keine Mapänderung erfolgt
+	public Boolean worldchangeup = false; 
 	/**
 	 * Creates a new Player Object
 	 * 
@@ -117,17 +117,25 @@ public class Player extends Creature implements Camera {
 						fight((Monster) actorlist.toArray()[0]);
 					} else {
 						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u00a9')) {  
-							Screen.redrawEventLine("M\u00f6chtest du diesen Raum verlassen? Dr\u00fccke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+							Screen.redrawEventLine("M\u00f6chtest du diesen Raum verlassen? Dr\u00fccke j f\u00fcr Ja, ansonsten verweilst du hier.", false);//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
 							for(Coordinate coord: getViewField()){
 								world().viewable(coord.x(), coord.y());}
 							if (term.getKey()=='j'){
-								worldchange= true;
+								worldchangeup= true;
 								move(dir);}
 							else{
 								move(0,0); 
-								}
-							
-						
+								}}
+							else if(world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u00ae')) {  
+									Screen.redrawEventLine("M\u00f6chtest du diesen Raum verlassen? Dr\u00fccke j für Ja, ansonsten verweilst du hier.", false);//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+									for(Coordinate coord: getViewField()){
+										world().viewable(coord.x(), coord.y());}
+									if (term.getKey()=='j'){
+										worldchangedown= true;
+										move(dir);}
+									else{
+										move(0,0); 
+										}
 						} else {// No monster there
 							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
 								world().viewable(coord.x(), coord.y());}
@@ -135,7 +143,6 @@ public class Player extends Creature implements Camera {
 							move(dir);
 							
 							
-						
 							break;
 						}
 					}
@@ -318,9 +325,12 @@ public class Player extends Creature implements Camera {
     private void randomlyDropItem(Monster opponent) {
         Random random = new Random();
         random.nextInt(strength);
+		Screen.redrawEventLine(opponent.name+" stirbt");
+		System.out.println(opponent.name+" stirbt");
         //This Item drops;
         Item item = null;
         try {
+
             switch (opponent.typenumber) {
 
                 case 1: {
@@ -331,7 +341,7 @@ public class Player extends Creature implements Camera {
                 case 2: {
                     //Fette Nacktschnecke
                     //random Number decides whether an Item drops or not and which one
-                    int zufallszahl = random.nextInt(3);
+                    int zufallszahl = random.nextInt(1);
 
 
                     if (zufallszahl == 0||SystemHelper.debug) {

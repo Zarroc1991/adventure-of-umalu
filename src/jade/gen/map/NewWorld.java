@@ -16,7 +16,7 @@ public abstract class NewWorld extends MapGenerator {
 
 	// neue generateStep Methode damit man eine Map als txt-Datei einlesen kann
 	// - analog zu showfile
-	protected void generateStep(World world, Dice dice, String filePath) {
+	protected void generateStep(World world, Dice dice, String filePath, int level) {
 		// TODO Auto-generated method stub
 		try {
 			// Prepare File for reading (open it)
@@ -48,6 +48,7 @@ public abstract class NewWorld extends MapGenerator {
 						c_color = ColoredChar.create('#');
 						break;
 					}
+
 					case ':': {	c_color = ColoredChar.create('.', Color.yellow);	break;}// :wird zu grünen Punkt
 					case '~': {	c_color = ColoredChar.create('~', Color.blue);	break;}
 					case '^': {	c_color = ColoredChar.create('^', new Color(210,105,30));break;}
@@ -62,6 +63,11 @@ public abstract class NewWorld extends MapGenerator {
 					case '.': {	c_color = ColoredChar.create('.', new Color(51,51,51));	break;}
                                         //player starts here
                                         case '\u00AE':{ world.playerstart = new Coordinate(i,lineNumber);}
+					}
+					//beim ersten Level soll es kein Leveldown geben 
+					if(level==0 && c=='\u00ae'){
+						
+						c_color=ColoredChar.create('.');
 					}
 					// System.out.println(c); // TODO Delete this line, when it
 					// is not needed anymore

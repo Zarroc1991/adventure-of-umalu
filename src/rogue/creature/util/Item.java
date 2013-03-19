@@ -24,6 +24,7 @@ public class Item {
 	private int maxDurability;
 	private int durability;
 	private boolean equipped;
+	private ArrayList<String> description;
 
 	/**
 	 * Describes Item is as Helmet
@@ -41,13 +42,13 @@ public class Item {
 	public static final int ITEMTYPE_SWORD = 2;
 
 	/**
-	 * Creates a new Item Object wth given name and Goldvalue
+	 * Creates a new Item Object with given name and Goldvalue
 	 *
 	 * @param name Name of Item
 	 * @param goldValue Goldvalue of Item
 	 * @param type Sword or Helmet Item
 	 * @param bonusDamage Additional Damage by Item
-	 * @param bonusHealth Addiotional Health by Item
+	 * @param bonusHealth Additional Health by Item
 	 */
 	public Item(String name, int goldValue, int itemType, int bonusDamage, int bonusHealth) {
 		// Name einfuegen
@@ -64,9 +65,42 @@ public class Item {
 	}
 	
 	/**
+	 * Creates a new Item Object with given Parameters. Works like Item(name, goldValue, itemType, bonusDamag, bonusHealth),
+	 * but also sets a descriptive text.
+	 *
+	 * @param name Name of Item
+	 * @param goldValue Goldvalue of Item
+	 * @param type Weapon or Armor
+	 * @param bonusDamage Additional Damage by Item
+	 * @param bonusHealth Additional Health by Item
+	 * @param description Descriptive Text, given by Lore
+	 */
+	public Item(String name, int goldValue, int itemType, int bonusDamage, int bonusHealth, String description) {
+		this(name, goldValue, itemType, bonusDamage, bonusHealth);
+		this.description = new ArrayList<String>();
+		this.description.add(description);
+	}
+
+	/**
+	 * Creates a new Item Object with given Parameters. Works like Item(name, goldValue, itemType, bonusDamag, bonusHealth),
+	 * but also sets a descriptive text.
+	 *
+	 * @param name Name of Item
+	 * @param goldValue Goldvalue of Item
+	 * @param type Weapon or Armor
+	 * @param bonusDamage Additional Damage by Item
+	 * @param bonusHealth Additional Health by Item
+	 * @param description Descriptive Text, given by Lore. Allows to add multiple Lines of Text.
+	 */
+	public Item(String name, int goldValue, int itemType, int bonusDamage, int bonusHealth, ArrayList<String> description) {
+		this(name, goldValue, itemType, bonusDamage, bonusHealth);
+		this.description = description;
+	}
+
+	/**
 	 * Creates a new Item Object with given name and Goldvalue. Additionally sets equipped Value.
 	 * This method should only get called for initial Items in inventory, all other Items should use
-	 * Item(name, goldValue, type, bonusDamage, bonusHealth)!
+	 * Item(name, goldValue, type, bonusDamage, bonusHealth,[description])!
 	 *
 	 * @param name Name of Item
 	 * @param goldValue Goldvalue of Item
@@ -135,7 +169,13 @@ public class Item {
 		ArrayList<String> lines = new ArrayList<String>();
 		lines.add(item.getName());
 		lines.add("Bonus Schaden: "+item.getDamageBonus());
-		lines.add("Bonus Gesundheitspunkte: "+item.getHealthBonus()); // TODO Bessere Uebersetzung finden
+		lines.add("Bonus Gesundheitspunkte: "+item.getHealthBonus()); // TODO Bessere Uebersetzung findel
+		// Add some descriptive Text for this Item
+		if (item.description != null) {
+			lines.add("");
+			lines.addAll(description);
+			lines.add("");
+		}
 		String result = new String();
 		if (equipped) {
 			lines.add("Derzeit angelegt.");

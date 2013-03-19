@@ -8,6 +8,7 @@ package rogue.system;
 
 public class SystemHelper {
 	public static boolean debug = false;
+	public static boolean speedrun = false;
 
 	/**
 	 * Prints a message to Console, prefixed with '> Debug', when debug option has been set
@@ -39,6 +40,8 @@ public class SystemHelper {
 			if (args[i].compareTo("debug") == 0) {
 				// Debugmode selected
 				SystemHelper.debug = true;
+			} else if (args[i].compareTo("speedrun") == 0) {
+				SystemHelper.speedrun = true;
 			}
 		}
 	}

@@ -5,6 +5,8 @@ import jade.util.Guard;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Coordinate;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -298,4 +300,13 @@ public abstract class Terminal
 
         bufferRelative(camera, ch, pos.x(), pos.y());
     }
+    public ArrayList<Integer> levelorder(int j){
+    	ArrayList<Integer> level = new ArrayList<Integer>() ;
+		for(int i=0; i<j; i++){
+			level.add(i);
+		}
+		Collections.shuffle(level);
+		return level; 
+	}
+    
 }

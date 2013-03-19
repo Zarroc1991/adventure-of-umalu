@@ -62,7 +62,7 @@ public class Dragon extends Monster {
 	@Override
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
-	        System.out.println("Ra�s al Ghul greift dich an");
+	        System.out.println("Ra's al Ghul greift dich an");
 		// Create Randomizer
 	        Random random = new Random();
 		// Generate Damage
