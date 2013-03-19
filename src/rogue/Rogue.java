@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Calendar;
+import java.util.logging.Logger;
 import javax.swing.JApplet;
 
 import rogue.creature.Dragon;
@@ -319,7 +320,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 				System.exit(0);
 		}});
 		t.start();
-		System.out.println("applet started");
+       		System.out.println("applet started");
 	}
 	@Override
 	public void stop() {

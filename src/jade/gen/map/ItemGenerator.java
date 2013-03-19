@@ -48,7 +48,7 @@ public class ItemGenerator extends Actor{
                 //wait for key presssed
                 term.getKey();
             } catch (NotEnoughSpaceException ex) {
-                Logger.getLogger(ItemGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                player.getInventory().fullInventoryScreen(item);
             }catch(InterruptedException ex){
                 Logger.getLogger(ItemGenerator.class.getName()).log(Level.SEVERE, null, ex);
             }
