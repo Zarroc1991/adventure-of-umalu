@@ -64,7 +64,6 @@ public class Level extends World {
         gen.generate(this);
         //player starts at Playerstart
         this.addActor(player, playerstart);
-        addActor(new Player(term));
         //insert Monster. We need new case-separation, because the Monsters should be added
         //after the tile, so they do not land on unpassable tiles
         switch (level) {											//Liste der Maps in Abhaengikeit vom Level  

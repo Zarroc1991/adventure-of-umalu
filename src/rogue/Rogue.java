@@ -29,8 +29,8 @@ import rogue.system.SystemHelper;
 
 public class Rogue {
 	public static void main(String[] args) throws InterruptedException {
-   		int level = 0; 
-		// Set System options
+   		int level = 0;
+                // Set System options
 		Screen.initialiseScreen();
 		SystemHelper.getArgs(args);
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
@@ -76,7 +76,7 @@ public class Rogue {
 		while(!player.expired()) { // Player is still living?
 			if (player.worldchange){								//Überprüft, ob einen Levelup erfolgt ist
 				world.removeActor(player); //entfernt Spieler aus der alten Welt
-				world = new Level(80,32, player, ++level, term);    //lädt das nächste Level 
+				world = new Level(80,32, player,++level, term);    //lädt das nächste Level
 				player.setWorld(world);								//Spieler erkennt seine Welt
 				player.worldchange=false;
                                 
