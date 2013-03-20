@@ -34,9 +34,10 @@ public class Player extends Creature implements Camera {
 
 	private Terminal term;
 	private ViewField fov;
-	private static final int maxHitpoints = 15;
-	private int strength;
-	private String name;
+        private static final int maxHitpointsWithoutArmor = 15;
+        private static final int strengthWithoutArmor = 5;
+	private static int maxHitpoints;
+        private String name;
 	private Inventory inventory;
 	public Boolean worldchangedown = false;   // standardmäßig ist keine Mapänderung erfolgt
 	public Boolean worldchangeup = false; 
@@ -53,8 +54,9 @@ public class Player extends Creature implements Camera {
 		this.term = term;
 		fov = new RayCaster();
 		// Initialise Hitpoints on Max
+                maxHitpoints = maxHitpointsWithoutArmor;
 		hitpoints = maxHitpoints;
-		strength = 5;
+		strength = strengthWithoutArmor;
                 if(SystemHelper.debug){
 		inventory = new Inventory(2,50);
                 }else{
@@ -100,6 +102,9 @@ public class Player extends Creature implements Camera {
 				break;
 			case 'i': // Show Inventory
 				showInventoryScreen();
+                                updateHP();
+                                updateStrength();
+
 				break;
 			case 'o':
 				HelpScreen.printMainHelpScreen();
@@ -492,6 +497,23 @@ public class Player extends Creature implements Camera {
             e.printStackTrace();
         }
 
+
+    }
+
+    public void updateHP(int newBonusHP){
+        float relativeHP = hitpoints/maxHitpoints;
+        maxHitpoints = maxHitpointsWithoutArmor+newBonusHP;
+        int newHP = Math.round(relativeHP*maxHitpoints);
+        hitpoints = newHP;
+    }
+    public void updateHP(){
+        updateHP(inventory.getHealthBonus());
+    }
+    public void updateStrength(int newBonusStrength){
+        strength= newBonusStrength+strengthWithoutArmor;
+    }
+    public void updateStrength(){
+        updateStrength(inventory.getBonusDamageOfWornItems());
     }
 }
 

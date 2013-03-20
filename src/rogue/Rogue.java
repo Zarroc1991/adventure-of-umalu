@@ -150,11 +150,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 			}
 			// Decrement hpCycle Counter
 			roundsToHpUp--;
-
 			// Generate a List of Monsters still on Map
-
-			
-
 			Screen.lastWorld = world;
 			Screen.lastTerminal = term;
 			if (!SystemHelper.speedrun) {

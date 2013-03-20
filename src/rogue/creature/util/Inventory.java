@@ -153,7 +153,9 @@ public class Inventory {
 	public int getBonusDamageOfWornItems() {
 		int sum = 0;
 		for (int i=0;i<wornItems.length;i++) {
+                        if(wornItems[i]!=null){
 			sum += wornItems[i].getDamageBonus();
+                        }
 		}
 		return sum;
 	}
@@ -166,7 +168,9 @@ public class Inventory {
 	public int getHealthBonus() {
 		int sum = 0;
 		for (int i=0;i<wornItems.length;i++) {
+                        if(wornItems[i]!=null){
 			sum += wornItems[i].getHealthBonus();
+                        }
 		}
 		return sum;
 	}
@@ -218,7 +222,7 @@ public class Inventory {
 			e.printStackTrace();
 			System.out.println("Something is strange here...");
 		}
-	}
+     	}
 	
 	public void fullInventoryScreen(Item item) {
 		boolean loop = true;

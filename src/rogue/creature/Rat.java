@@ -60,9 +60,9 @@ public class Rat extends Monster {
                 move(dir);
                 return;
             }
-            move(Dice.global.choose(Arrays.asList(Direction.values())));
+            
 
-        }
+        }move(Dice.global.choose(Arrays.asList(Direction.values())));
     }
 
     @Override
