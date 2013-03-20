@@ -15,6 +15,7 @@ import jade.util.datatype.Direction;
 import java.awt.Color;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 import rogue.level.Screen;
@@ -39,39 +40,41 @@ public class Shadow extends Monster {
     }
 
     @Override
-    public void act() {
-        boolean actionOver = false;
-
+  public void act() {
+        
         for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
-            if (player != null) {
+
+            if (player != null && world().tileAt(pos().x()+dir.dx(),pos().y()+dir.dy())!=ColoredChar.create('\u2020', new Color(199,21,133))) {
                 fight(player);
 
-                actionOver = true;
-                break;
+                return;
 
-            }
+            }//if(player!=null)
 
-        }
+        }//for(Direction dir... 
 
-        if (!actionOver) {
             Collection<Coordinate> viewField = fov.getViewField(this.world(), this.pos().x(), this.pos().y(), attackRadius);
             for (Coordinate coordinate : viewField) {
                 if (this.world().getActorAt(Player.class, coordinate) != null) {
-                    Direction dir = this.pos().directionTo(pathfinder.getPath(this.world(), this.pos(), coordinate).get(0));
+
+                	List<Coordinate> path = pathfinder.getPath(this.world(), this.pos(), coordinate);
+                    if(path!=null){
+                	Direction dir = this.pos().directionTo(path.get(0));
+                	if(world().tileAt(pos().x()+dir.dx(),pos().y()+dir.dy())!=ColoredChar.create('\u2020', new Color(199,21,133))){
                     move(dir);
-                    actionOver = true;
-                    break;
-                }
-            }
+                    return;
+                	}//if(world()
+                    }//if(path...                    
+                }//if(this.world()...
+            }//for(Coordinate ...
 
-            if (!actionOver) {
+                Direction dir =Dice.global.choose(Arrays.asList(Direction.values()));
+                if (world().tileAt(x() + dir.dx(), y() + dir.dy()) != ColoredChar.create('\u2020', new Color(199,21,133))){
+                	move(dir);
+                }//end of if
 
-
-                move(Dice.global.choose(Arrays.asList(Direction.values())));
-            }
-        }
-    }
+            }//act
 
 	@Override
 	public void fight(Player opponent) {
