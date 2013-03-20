@@ -435,9 +435,7 @@ public class Player extends Creature implements Camera {
                         //Status message
                         Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
                         //Wait for pressed key
-                        term.getKey();
-                        inventory.addItem(item);
-                        
+                        term.getKey(); 
                         
 
                     } else if (zufallszahl < 9) {
