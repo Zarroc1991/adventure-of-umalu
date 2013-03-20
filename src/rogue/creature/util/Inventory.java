@@ -162,7 +162,6 @@ public class Inventory {
 					System.out.println("!InterruptedException");
 					e.printStackTrace();
 				}
-				Screen.redrawEventLine("Dein "+ wornItems[Item.ITEMTYPE_SWORD].getName()+ " ist zunichte gegangen");
                 Item temp = wornItems[Item.ITEMTYPE_SWORD];
                 wornItems[Item.ITEMTYPE_SWORD] = null;
                 this.removeItem(temp);
