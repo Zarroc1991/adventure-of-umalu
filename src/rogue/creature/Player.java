@@ -355,8 +355,6 @@ public class Player extends Creature implements Camera {
                     //Fette Nacktschnecke
                     //random Number decides whether an Item drops or not and which one
                     int zufallszahl = random.nextInt(3);
-
-
                     if (zufallszahl == 0||SystemHelper.debug) {
                         //Axt drops 1/3 of the time, always, if Debug-Mode
                         item = new Item("Axt", 0, Item.ITEMTYPE_SWORD, 2, 0);
