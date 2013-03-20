@@ -88,10 +88,10 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 		//Zeigt Intro 
 		if (!SystemHelper.debug) {
 			Screen.intro(player.getName(), Path.generateAbsolutePath("txt Dateien/Intro.txt"),term,world);
-		}
+		
 		// Press any Key to continue
 		term.getKey();
-
+		}
 		Calendar cal = Calendar.getInstance();
 		long startTime = cal.getTimeInMillis();
 		// Who deleted this, and why?
@@ -296,6 +296,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 
 					Screen.lastWorld = world;
 					Screen.lastTerminal = term;
+					Screen.redrawMap();
 					Screen.redrawMap("HP: " + player.getHitpoints() + "/"
 							+ player.getMaxHitpoints());
 

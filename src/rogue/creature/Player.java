@@ -39,6 +39,7 @@ public class Player extends Creature implements Camera {
 	private Inventory inventory;
 	public Boolean worldchangedown = false;   // standardmäßig ist keine Mapänderung erfolgt
 	public Boolean worldchangeup = false; 
+	private Boolean fight = false; 
 	/**
 	 * Creates a new Player Object
 	 * 
@@ -114,7 +115,13 @@ public class Player extends Creature implements Camera {
 					// Is there a monster on TargetL
 					if (!actorlist.isEmpty()) { // Yes
 						// Fight first monster on coordinate.
-						fight((Monster) actorlist.toArray()[0]);
+						if(fight){
+							fight((Monster) actorlist.toArray()[0]);
+		                	fight = false;
+		                	
+		                }
+		                fight = true; 
+						
 					} else {
 						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u00a9')) {  
 							Screen.redrawEventLine("M\u00f6chtest du diesen Raum verlassen? Dr\u00fccke j f\u00fcr Ja, ansonsten verweilst du hier.", false);//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
