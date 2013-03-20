@@ -57,6 +57,7 @@ public abstract class World extends Messenger
 		actOrder.add(Actor.class);
 	}
 
+
 	/**
 	 * Performs one tick. This will call {@code act()} on all {@code Actor} in the order specified
 	 * by the act order of the {@code World}. Any {@code Actor} whose type does not appear in the
