@@ -75,7 +75,7 @@ public class Level extends World {
 					addActors(Rat.class, term, 15);
 					addActors(Slug_fat.class, term, 4);
 					addActor(new Frog_poisonous(term));
-					addActor(new ItemGenerator(ColoredChar.create('R', Color.yellow), new Item("Leichte Rüstung", 0, Item.ITEMTYPE_HEAD, 0, 10,1), term));
+					addActor(new ItemGenerator(ColoredChar.create('R', Color.yellow), new Item("Leichte R\u00fcstung", 0, Item.ITEMTYPE_HEAD, 0, 10,1), term));
 
 					break;
 			}
@@ -85,7 +85,7 @@ public class Level extends World {
 					addActors(Slug_fat.class, term, 6);
 					addActors(Frog_poisonous.class,term,5);
 					addActors(Zombie.class,term,2);
-					addActor(new ItemGenerator(ColoredChar.create('R', Color.yellow), new Item("Lederrüstung", 0, Item.ITEMTYPE_HEAD, 0, 30,1), term));
+					addActor(new ItemGenerator(ColoredChar.create('R', Color.yellow), new Item("Lederr\u00fcstung", 0, Item.ITEMTYPE_HEAD, 0, 30,1), term));
 					break;
 			}
 			case 2: {
@@ -102,7 +102,7 @@ public class Level extends World {
 				addActors(Zombie.class,term,6);
 				addActors(Unbeliever.class,term,6);
 				addActors(Orc.class,term,2);
-				addActor(new ItemGenerator(ColoredChar.create('R', Color.yellow), new Item("Eisenrüstung", 0, Item.ITEMTYPE_HEAD, 0, 80,1), term));       
+				addActor(new ItemGenerator(ColoredChar.create('R', Color.yellow), new Item("Eisenr\u00fcstung", 0, Item.ITEMTYPE_HEAD, 0, 80,1), term));       
 				break;        
 			}
 			case 4:{
@@ -110,7 +110,7 @@ public class Level extends World {
 				addActors(Unbeliever.class,term,7);
 				addActors(Orc.class,term,6);
 				addActors(Shadow.class,term,5);
-				addActor(new ItemGenerator(ColoredChar.create('R', Color.yellow), new Item("Heilige Rüstung", 0, Item.ITEMTYPE_HEAD, 0, 110,1), term));       
+				addActor(new ItemGenerator(ColoredChar.create('R', Color.yellow), new Item("Heilige R\u00fcstung", 0, Item.ITEMTYPE_HEAD, 0, 110,1), term));       
 				break;        
 			}
 			case 5:{

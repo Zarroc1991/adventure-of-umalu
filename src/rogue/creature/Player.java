@@ -294,16 +294,24 @@ public class Player extends Creature implements Camera {
             // Lade die Liste
             Item[] wornItems = inventory.getWornItems();
             // Generiere den Output fuer den aktuellen Helm
-            lines.add("<K>opf: " + wornItems[Item.ITEMTYPE_HEAD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_HEAD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_HEAD].getHealthBonus() + "]");
+			if (wornItems[Item.ITEMTYPE_HEAD] != null) {
+				lines.add("<K>\u00f6rper: " + wornItems[Item.ITEMTYPE_HEAD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_HEAD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_HEAD].getHealthBonus() + ", Dura: "+wornItems[Item.ITEMTYPE_HEAD].getDurability()+"/"+wornItems[Item.ITEMTYPE_HEAD].getMaxDurability()+"]");
+			} else {
+				lines.add("K\u00f6: Nichts.");
+			}
             // Generiere den Output fuer das aktuelle Schwert
-            lines.add("<S>chwert: " + wornItems[Item.ITEMTYPE_SWORD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_SWORD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_SWORD].getHealthBonus() + "]");
+			if (wornItems[Item.ITEMTYPE_SWORD] != null) {
+				lines.add("<S>chwert: " + wornItems[Item.ITEMTYPE_SWORD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_SWORD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_SWORD].getHealthBonus() + ", Dura: "+wornItems[Item.ITEMTYPE_SWORD].getDurability()+"/"+wornItems[Item.ITEMTYPE_SWORD].getMaxDurability()+"]");
+			} else {
+				lines.add("Schwert: Keines");
+			}
             // TODO Zeige gesamt Bonus an
             // Zeige an, was sonst noch im Inventar liegt, aber nicht angelegt wurde (und somit keinen Bonus bringt)
             ArrayList<Item> backpack = inventory.listBackpack();
             lines.add("Du hast im Rucksack: ");
             for (int i = 0; i < backpack.size(); i++) {
                 // Zeige das Item an Stelle an i an
-                lines.add("(" + i + ") " + backpack.get(i).getName() + "[+DMG: " + backpack.get(i).getDamageBonus() + ", +HP: " + backpack.get(i).getHealthBonus() + "]");
+                lines.add("(" + i + ") " + backpack.get(i).getName() + "[+DMG: " + backpack.get(i).getDamageBonus() + ", +HP: " + backpack.get(i).getHealthBonus()+", Dura: " + backpack.get(i).getDurability()+"/"+backpack.get(i).getMaxDurability()+"]");
             }
             // TODO Add lines here.
             Screen.putText(lines);
@@ -317,11 +325,15 @@ public class Player extends Creature implements Camera {
                         break;
                     case 'k':
                         //wornItems[Item.ITEMTYPE_HEAD].showInfo(term,inventory);
-                        inventory.showWorn(Item.ITEMTYPE_HEAD, term);
+						if (wornItems[Item.ITEMTYPE_HEAD] != null) {
+							inventory.showWorn(Item.ITEMTYPE_HEAD, term);
+						}
                         break;
                     case 's':
                         //wornItems[Item.ITEMTYPE_SWORD].showInfo();
-                        inventory.showWorn(Item.ITEMTYPE_SWORD, term);
+						if (wornItems[Item.ITEMTYPE_SWORD] != null) {
+							inventory.showWorn(Item.ITEMTYPE_SWORD, term);
+						}
                         break;
                     case '0':
                         inventory.showInfo(0, term);
@@ -455,10 +467,10 @@ public class Player extends Creature implements Camera {
 
                     } else if (zufallszahl < 25) {
                         //Großschwert droppt zu 1/6
-                        item = new Item("Großschwert", 0, Item.ITEMTYPE_SWORD, 19, 0,25);
+                        item = new Item("Gro\u00dfschwert", 0, Item.ITEMTYPE_SWORD, 19, 0,25);
                         inventory.addItem(item);
                         //Status message
-                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        Screen.redrawEventLine("Du hast ein Gro\u00dfschwert bekommen, druecke i, um das Inventar zu oeffnen");
                         // Wait for pressed Key
                         term.getKey();
                     }else if (zufallszahl < 31) {
@@ -466,7 +478,7 @@ public class Player extends Creature implements Camera {
                         item = new Item("Akragons Relikt", 0, Item.ITEMTYPE_SWORD, 25, 0,10);
                         inventory.addItem(item);
                         //Status message
-                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        Screen.redrawEventLine("Du hast ein Akragons Relikt bekommen, druecke i, um das Inventar zu oeffnen");
                         // Wait for pressed Key
                         term.getKey();
                     }else if (zufallszahl < 36) {
@@ -474,7 +486,7 @@ public class Player extends Creature implements Camera {
                         item = new Item("Dumbarons Kolossschwert", 0, Item.ITEMTYPE_SWORD, 27, 0,10);
                         inventory.addItem(item);
                         //Status message
-                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        Screen.redrawEventLine("Du hast ein Dumbarons Kolossschwert bekommen, druecke i, um das Inventar zu oeffnen");
                         // Wait for pressed Key
                         term.getKey();
                     }
@@ -487,19 +499,19 @@ public class Player extends Creature implements Camera {
 
                     if (zufallszahl < 1) {
                         //Kunkrans Drachtentöter droppt zu 1/15
-                        item = new Item("Kunkrans Drachtentöter", 0, Item.ITEMTYPE_SWORD, 45, 0,4);
+                        item = new Item("Kunkrans Drachtent\u00f6ter", 0, Item.ITEMTYPE_SWORD, 45, 0,4);
                         inventory.addItem(item);
                         //Status message
-                        Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        Screen.redrawEventLine("Du hast ein Kunkranks Drachent\u00f6 bekommen, druecke i, um das Inventar zu oeffnen");
                         //Wait for pressed key
                         term.getKey();
 
                     } else if (zufallszahl < 6) {
                         //Großschwert droppt zu 1/3
-                        item = new Item("Großschwert", 0, Item.ITEMTYPE_SWORD, 19, 0,25);
+                        item = new Item("Gro\u00dfschwert", 0, Item.ITEMTYPE_SWORD, 19, 0,25);
                         inventory.addItem(item);
                         //Status message
-                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        Screen.redrawEventLine("Du hast ein Gro\u00dfschwert bekommen, druecke i, um das Inventar zu oeffnen");
                         // Wait for pressed Key
                         term.getKey();
                     }else if (zufallszahl < 9) {
@@ -507,7 +519,7 @@ public class Player extends Creature implements Camera {
                         item = new Item("Akragons Relikt", 0, Item.ITEMTYPE_SWORD, 25, 0,10);
                         inventory.addItem(item);
                         //Status message
-                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        Screen.redrawEventLine("Du hast Akragons Relikt bekommen, druecke i, um das Inventar zu oeffnen");
                         // Wait for pressed Key
                         term.getKey();
                     }else if (zufallszahl < 12) {
@@ -515,7 +527,7 @@ public class Player extends Creature implements Camera {
                         item = new Item("Dumbarons Kolossschwert", 0, Item.ITEMTYPE_SWORD, 27, 0,10);
                         inventory.addItem(item);
                         //Status message
-                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        Screen.redrawEventLine("Du hast ein Dumbarons Kolossschwert bekommen, druecke i, um das Inventar zu oeffnen");
                         // Wait for pressed Key
                         term.getKey();
                     }
@@ -526,10 +538,10 @@ public class Player extends Creature implements Camera {
                 	int zufallszahl = random.nextInt(5);
                 	if (zufallszahl < 1) {
                         //Kunkrans Drachtentöter droppt zu 1/5
-                        item = new Item("Kunkrans Drachtentöter", 0, Item.ITEMTYPE_SWORD, 45, 0,4);
+                        item = new Item("Kunkrans Drachtent\u00f6ter", 0, Item.ITEMTYPE_SWORD, 45, 0,4);
                         inventory.addItem(item);
                         //Status message
-                        Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        Screen.redrawEventLine("Du hast ein Kunkrans Drachtent\u00f6ter bekommen, druecke i, um das Inventar zu oeffnen");
                         //Wait for pressed key
                         term.getKey();
                         }

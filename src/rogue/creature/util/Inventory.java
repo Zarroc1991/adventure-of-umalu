@@ -44,10 +44,19 @@ public class Inventory {
             e.printStackTrace();
         }
         wornItems = new Item[3];
-        Item standardHelmet = new Item("Standard Helm", 0, Item.ITEMTYPE_HEAD,
-                0, 0, true, 1);
-        Item standardSword = new Item("Standard Schwert", 0,
-                Item.ITEMTYPE_SWORD, 0, 0, true, Integer.MAX_VALUE);
+
+		ArrayList<String> loreText = new ArrayList<String>();
+		loreText.add("Deine Abenteurerr\u00fcstung geh\u00f6 war zwar blankpoliert,");
+		loreText.add("sie ist jedoch wegen der vergangenen Schlachten bereits");
+		loreText.add("blutverschmiert.");
+        Item standardHelmet = new Item("Abenteurerr\u00fcstung", 0, Item.ITEMTYPE_HEAD,
+                0, 0, true, 1,loreText);
+		loreText = new ArrayList<String>();
+		loreText.add("Nach vielen anstrengenden K\f00e4mpfen hast du dieses Schwert erhalten");
+		loreText.add("aber es ist unwahrscheinlich dass es bis zum Kampf gegen den Drachen");
+		loreText.add("halten wird.");
+        Item standardSword = new Item("Klinge der Rache", 0,
+                Item.ITEMTYPE_SWORD, 0, 0, true, 25, 3, loreText);
         wornItems[Item.ITEMTYPE_HEAD] = standardHelmet;
         wornItems[Item.ITEMTYPE_SWORD] = standardSword;
     }
@@ -146,6 +155,13 @@ public class Inventory {
         if (wornItems[Item.ITEMTYPE_SWORD] != null) {
             wornItems[Item.ITEMTYPE_SWORD].decreaseStability();
             if (wornItems[Item.ITEMTYPE_SWORD].stability == 0) {
+				Screen.redrawEventLine("Dein "+ wornItems[Item.ITEMTYPE_SWORD].getName()+ " ist zunichte gegangen");
+				try {
+					Screen.lastTerminal.getKey();
+				} catch (InterruptedException e) {
+					System.out.println("!InterruptedException");
+					e.printStackTrace();
+				}
                 Item temp = wornItems[Item.ITEMTYPE_SWORD];
                 wornItems[Item.ITEMTYPE_SWORD] = null;
                 Screen.redrawEventLine("Dein "+ wornItems[Item.ITEMTYPE_SWORD].getName()+ "ist zunichte gegangen");
@@ -254,17 +270,22 @@ public class Inventory {
      */
     public void equip(Item item) {
         item.setEquipped(true);
-        Item buffer = wornItems[item.getItemType()];
-        wornItems[item.getItemType()] = item;
-        this.removeItem(item);
-        buffer.setEquipped(false);
-        try {
-            this.addItem(buffer);
-        } catch (NotEnoughSpaceException e) {
-            System.out.println("!Error Exception:");
-            e.printStackTrace();
-            System.out.println("Something is strange here...");
-        }
+		if (wornItems[item.getItemType()] != null) {
+        	Item buffer = wornItems[item.getItemType()];
+	        wornItems[item.getItemType()] = item;
+	        this.removeItem(item);
+	        buffer.setEquipped(false);
+	        try {
+	            this.addItem(buffer);
+	        } catch (NotEnoughSpaceException e) {
+	            System.out.println("!Error Exception:");
+	            e.printStackTrace();
+	            System.out.println("Something is strange here...");
+	        }
+		} else {
+			wornItems[item.getItemType()] = item;
+			this.removeItem(item);
+		}
     }
 
     public void fullInventoryScreen(Item item) {
@@ -281,12 +302,13 @@ public class Inventory {
                 lines.add("(" + i + ") " + backpackSpaces.get(i).getName()
                         + "[+DMG: " + backpackSpaces.get(i).getDamageBonus()
                         + ", +HP: " + backpackSpaces.get(i).getHealthBonus()
-                        + ", +St: " + backpackSpaces.get(i).getStability() + "]");
+                        + ", Dura: "+ backpackSpaces.get(i).getDurability()+"/"+backpackSpaces.get(i).getMaxDurability()+"]");
+
             }
             lines.add("");
             lines.add("Gefunden: " + item.getName() + " [+DMG: "
                     + item.getDamageBonus() + ", +HP: " + item.getHealthBonus()
-                    + "]");
+                    + ", Dura: "+ item.getDurability()+"/"+item.getMaxDurability()+"]");
             lines.add("");
             lines.add("Waehle nun: <0>-<4> Rucksackgegenstand zerstoeren");
             lines.add("oder <q> um " + item.getName() + " zu vernichten");

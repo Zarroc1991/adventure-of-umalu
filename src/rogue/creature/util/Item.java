@@ -63,7 +63,8 @@ public class Item {
 		this.modificators[0] = bonusDamage;
 		this.modificators[1] = bonusHealth;
 		equipped = false;
-		this.stability= stability ; 
+		this.stability= stability;
+		this.maxDurability = stability; 
 	}
 	
 	/**
@@ -118,7 +119,24 @@ public class Item {
 		// Set equipped
 		this.equipped = equipped;
 	}
-
+	
+	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth, boolean equipped, int maxStability, int curStability, ArrayList<String> description) {
+		// Call other Constructor
+		this(name, goldValue, type, bonusDamage, bonusHealth,maxStability);
+		// Set equipped and stability
+		this.stability = curStability;
+		this.equipped = equipped;
+		this.description = description;
+	}
+	
+	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth, boolean equipped, int stability, ArrayList<String> description) {
+		// Call other Constructor
+		this(name, goldValue, type, bonusDamage, bonusHealth,stability);
+		// Set equipped
+		this.equipped = equipped;
+		this.description = description;
+	}
+	
 	/**
 	 * Returns Goldvalue of this item.
 	 *
@@ -175,6 +193,7 @@ public class Item {
 		lines.add(item.getName());
 		lines.add("Bonus Schaden: "+item.getDamageBonus());
 		lines.add("Bonus Gesundheitspunkte: "+item.getHealthBonus()); // TODO Bessere Uebersetzung findel
+		lines.add("Haltbarkeit: "+stability+"/"+maxDurability);
 		// Add some descriptive Text for this Item
 		if (item.description != null) {
 			lines.add("");
@@ -241,5 +260,13 @@ public class Item {
 	public void decreaseStability(){
 		stability--;
 		
+	}
+	
+	public int getDurability() {
+		return stability;
+	}
+	
+	public int getMaxDurability() {
+		return maxDurability;
 	}
 }
