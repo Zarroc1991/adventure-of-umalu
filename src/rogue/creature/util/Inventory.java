@@ -44,6 +44,7 @@ public class Inventory {
             e.printStackTrace();
         }
         wornItems = new Item[3];
+
 		ArrayList<String> loreText = new ArrayList<String>();
 		loreText.add("Deine Abenteurerr\u00fcstung geh\u00f6 war zwar blankpoliert,");
 		loreText.add("sie ist jedoch wegen der vergangenen Schlachten bereits");
@@ -163,6 +164,7 @@ public class Inventory {
 				}
                 Item temp = wornItems[Item.ITEMTYPE_SWORD];
                 wornItems[Item.ITEMTYPE_SWORD] = null;
+                Screen.redrawEventLine("Dein "+ wornItems[Item.ITEMTYPE_SWORD].getName()+ "ist zunichte gegangen");
                 this.removeItem(temp);
             }
         }
@@ -301,6 +303,7 @@ public class Inventory {
                         + "[+DMG: " + backpackSpaces.get(i).getDamageBonus()
                         + ", +HP: " + backpackSpaces.get(i).getHealthBonus()
                         + ", Dura: "+ backpackSpaces.get(i).getDurability()+"/"+backpackSpaces.get(i).getMaxDurability()+"]");
+
             }
             lines.add("");
             lines.add("Gefunden: " + item.getName() + " [+DMG: "

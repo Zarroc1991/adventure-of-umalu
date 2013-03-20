@@ -82,10 +82,11 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 				world);
 		term.getKey();
 		player.setName(CharacterCreation.getCharacterName(term, world));
-		if (SystemHelper.debug) {
+		if (!SystemHelper.debug) {
 			Screen.printLine(player.getName(),term,world);
+			term.getKey();
 		}
-		term.getKey();
+		
 		
 		//Screen.showFile(Path.generateAbsolutePath("maps/start.txt"),term,world);
 		//Zeigt Intro 
