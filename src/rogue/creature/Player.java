@@ -293,9 +293,17 @@ public class Player extends Creature implements Camera {
             // Lade die Liste
             Item[] wornItems = inventory.getWornItems();
             // Generiere den Output fuer den aktuellen Helm
-            lines.add("<K>opf: " + wornItems[Item.ITEMTYPE_HEAD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_HEAD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_HEAD].getHealthBonus() + "]");
+			if (wornItems[Item.ITEMTYPE_HEAD] != null) {
+				lines.add("<K>opf: " + wornItems[Item.ITEMTYPE_HEAD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_HEAD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_HEAD].getHealthBonus() + "]");
+			} else {
+				lines.add("Kopf: Nichts.");
+			}
             // Generiere den Output fuer das aktuelle Schwert
-            lines.add("<S>chwert: " + wornItems[Item.ITEMTYPE_SWORD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_SWORD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_SWORD].getHealthBonus() + "]");
+			if (wornItems[Item.ITEMTYPE_SWORD] != null) {
+				lines.add("<S>chwert: " + wornItems[Item.ITEMTYPE_SWORD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_SWORD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_SWORD].getHealthBonus() + "]");
+			} else {
+				lines.add("Schwert: Keines");
+			}
             // TODO Zeige gesamt Bonus an
             // Zeige an, was sonst noch im Inventar liegt, aber nicht angelegt wurde (und somit keinen Bonus bringt)
             ArrayList<Item> backpack = inventory.listBackpack();
@@ -316,11 +324,15 @@ public class Player extends Creature implements Camera {
                         break;
                     case 'k':
                         //wornItems[Item.ITEMTYPE_HEAD].showInfo(term,inventory);
-                        inventory.showWorn(Item.ITEMTYPE_HEAD, term);
+						if (wornItems[Item.ITEMTYPE_HEAD] != null) {
+							inventory.showWorn(Item.ITEMTYPE_HEAD, term);
+						}
                         break;
                     case 's':
                         //wornItems[Item.ITEMTYPE_SWORD].showInfo();
-                        inventory.showWorn(Item.ITEMTYPE_SWORD, term);
+						if (wornItems[Item.ITEMTYPE_SWORD] != null) {
+							inventory.showWorn(Item.ITEMTYPE_SWORD, term);
+						}
                         break;
                     case '0':
                         inventory.showInfo(0, term);
