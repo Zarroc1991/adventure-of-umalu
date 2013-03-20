@@ -294,13 +294,13 @@ public class Player extends Creature implements Camera {
             Item[] wornItems = inventory.getWornItems();
             // Generiere den Output fuer den aktuellen Helm
 			if (wornItems[Item.ITEMTYPE_HEAD] != null) {
-				lines.add("<K>opf: " + wornItems[Item.ITEMTYPE_HEAD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_HEAD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_HEAD].getHealthBonus() + "]");
+				lines.add("<K>opf: " + wornItems[Item.ITEMTYPE_HEAD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_HEAD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_HEAD].getHealthBonus() + ", Dura: "+wornItems[Item.ITEMTYPE_HEAD].getDurability()+"/"+wornItems[Item.ITEMTYPE_HEAD].getMaxDurability()+"]");
 			} else {
 				lines.add("Kopf: Nichts.");
 			}
             // Generiere den Output fuer das aktuelle Schwert
 			if (wornItems[Item.ITEMTYPE_SWORD] != null) {
-				lines.add("<S>chwert: " + wornItems[Item.ITEMTYPE_SWORD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_SWORD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_SWORD].getHealthBonus() + "]");
+				lines.add("<S>chwert: " + wornItems[Item.ITEMTYPE_SWORD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_SWORD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_SWORD].getHealthBonus() + ", Dura: "+wornItems[Item.ITEMTYPE_HEAD].getDurability()+"/"+wornItems[Item.ITEMTYPE_HEAD].getMaxDurability()+"]");
 			} else {
 				lines.add("Schwert: Keines");
 			}
@@ -310,7 +310,7 @@ public class Player extends Creature implements Camera {
             lines.add("Du hast im Rucksack: ");
             for (int i = 0; i < backpack.size(); i++) {
                 // Zeige das Item an Stelle an i an
-                lines.add("(" + i + ") " + backpack.get(i).getName() + "[+DMG: " + backpack.get(i).getDamageBonus() + ", +HP: " + backpack.get(i).getHealthBonus() + "]");
+                lines.add("(" + i + ") " + backpack.get(i).getName() + "[+DMG: " + backpack.get(i).getDamageBonus() + ", +HP: " + backpack.get(i).getHealthBonus()+", Dura: " + backpack.get(i).getDurability()+"/"+backpack.get(i).getMaxDurability()+"]");
             }
             // TODO Add lines here.
             Screen.putText(lines);

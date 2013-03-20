@@ -285,7 +285,7 @@ public class Inventory {
                 lines.add("(" + i + ") " + backpackSpaces.get(i).getName()
                         + "[+DMG: " + backpackSpaces.get(i).getDamageBonus()
                         + ", +HP: " + backpackSpaces.get(i).getHealthBonus()
-                        + "]");
+                        + ", Dura: "+ backpackSpaces.get(i).getDurability()+"/"+backpackSpaces.get(i).getMaxDurability()+"]");
             }
             lines.add("");
             lines.add("Gefunden: " + item.getName() + " [+DMG: "

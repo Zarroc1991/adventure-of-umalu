@@ -63,7 +63,8 @@ public class Item {
 		this.modificators[0] = bonusDamage;
 		this.modificators[1] = bonusHealth;
 		equipped = false;
-		this.stability= stability ; 
+		this.stability= stability;
+		this.maxDurability = stability; 
 	}
 	
 	/**
@@ -173,6 +174,7 @@ public class Item {
 		lines.add(item.getName());
 		lines.add("Bonus Schaden: "+item.getDamageBonus());
 		lines.add("Bonus Gesundheitspunkte: "+item.getHealthBonus()); // TODO Bessere Uebersetzung findel
+		lines.add("Haltbarkeit: "+durability+"/"+maxDurability);
 		// Add some descriptive Text for this Item
 		if (item.description != null) {
 			lines.add("");
@@ -239,5 +241,13 @@ public class Item {
 	public void decreaseStability(){
 		stability--;
 		
+	}
+	
+	public int getDurability() {
+		return stability;
+	}
+	
+	public int getMaxDurability() {
+		return maxDurability;
 	}
 }
