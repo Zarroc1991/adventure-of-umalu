@@ -52,7 +52,7 @@ public class Inventory {
         Item standardHelmet = new Item("Abenteurerr\u00fcstung", 0, Item.ITEMTYPE_HEAD,
                 0, 0, true, 1,loreText);
 		loreText = new ArrayList<String>();
-		loreText.add("Nach vielen anstrengenden K\f00e4mpfen hast du dieses Schwert erhalten");
+		loreText.add("Nach vielen anstrengenden K\u00e4mpfen hast du dieses Schwert erhalten");
 		loreText.add("aber es ist unwahrscheinlich dass es bis zum Kampf gegen den Drachen");
 		loreText.add("halten wird.");
         Item standardSword = new Item("Klinge der Rache", 0,
@@ -162,9 +162,9 @@ public class Inventory {
 					System.out.println("!InterruptedException");
 					e.printStackTrace();
 				}
+				Screen.redrawEventLine("Dein "+ wornItems[Item.ITEMTYPE_SWORD].getName()+ " ist zunichte gegangen");
                 Item temp = wornItems[Item.ITEMTYPE_SWORD];
                 wornItems[Item.ITEMTYPE_SWORD] = null;
-                Screen.redrawEventLine("Dein "+ wornItems[Item.ITEMTYPE_SWORD].getName()+ "ist zunichte gegangen");
                 this.removeItem(temp);
             }
         }
@@ -259,7 +259,9 @@ public class Inventory {
      *            Used Terminal
      */
     public void showInfo(int place, Terminal term) {
-        backpackSpaces.get(place).showItem(term, this);
+		if (backpackSpaces.size() >= place) {
+        	backpackSpaces.get(place).showItem(term, this);
+		}
     }
 
     /**
