@@ -1,14 +1,20 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-	"http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-	<title>Adventures in Umalu</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-</head>	
-<body>
-<p>
-  <applet code="rogue/Rogue.class" archives="buildtracks.jar" alt="Spiele Running in Umalu in deinem Browser.">
-  </applet>
-</p>
+	<head>
+		<title>swp-2013 applet</title>
+		<meta name="robots" content="noindex, nofollow"/>
+<script src="http://java.com/js/deployJava.js"></script>
+	</head>
+	<body>
+		<p>swp-2013 applet. Don't close this window unless you want to quit the
+			applet.</p>
+<script>
+    var attributes = {codebase:'https://26thmeusoc.github.com/adventure-of-umalu/',
+                      code:'rogue.Rogue',
+                      archive: 'buildtracks.jar?raw=true',
+                      width: '1240', 
+                      height: '440'};
+    var parameters = {java_arguments: '-Xmx256m'}; // customize per your needs
+    var version = '1.6' ; // JDK version
+    deployJava.runApplet(attributes, parameters, version);
+</script>
 </body>
-</html>
