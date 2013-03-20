@@ -33,7 +33,8 @@ public class Player extends Creature implements Camera {
 
 	private Terminal term;
 	private ViewField fov;
-	private static final int maxHitpoints = 15;
+	private static int maxHitpoints = 15;
+		
 	private int strength;
 	private String name;
 	private Inventory inventory;
@@ -55,6 +56,9 @@ public class Player extends Creature implements Camera {
 		hitpoints = maxHitpoints;
 		strength = 5;
 		inventory = new Inventory(5,50);
+		if (SystemHelper.debug) {
+			maxHitpoints = maxHitpoints * 1000000;
+		}
 	}
 
 
