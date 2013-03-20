@@ -71,6 +71,8 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 		Player player = new Player(term);
 		// erstellt zufällige Levelreihenfolge
 		ArrayList<Integer> levelorder = term.levelorder(levelanzahl);
+		levelorder.add(5);
+		
 		// Generate a new World
 		World world = new Level(80, 32, player, levelorder.get(level), level,true,
 				term);
