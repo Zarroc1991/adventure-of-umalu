@@ -10,6 +10,7 @@ public class SystemHelper {
 	public static boolean debug = false;
 	public static boolean speedrun = false;
 	public static boolean isApplet = false;
+	public static boolean isJar = false;
 
 	/**
 	 * Prints a message to Console, prefixed with '> Debug', when debug option has been set
