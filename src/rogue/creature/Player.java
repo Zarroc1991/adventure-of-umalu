@@ -21,6 +21,7 @@ import rogue.creature.util.NotEnoughGoldException;
 import rogue.creature.util.NotEnoughSpaceException;
 import rogue.level.Screen;
 import java.util.Random;
+import java.awt.Color;
 import java.lang.InterruptedException;
 import jade.core.World;
 import jade.gen.map.ItemGenerator;
@@ -34,7 +35,7 @@ public class Player extends Creature implements Camera {
 
 	private Terminal term;
 	private ViewField fov;
-        private static final int maxHitpointsWithoutArmor = 15;
+        private static int maxHitpointsWithoutArmor = 15;
         private static final int strengthWithoutArmor = 5;
 	private static int maxHitpoints;
         private String name;
@@ -54,6 +55,9 @@ public class Player extends Creature implements Camera {
 		this.term = term;
 		fov = new RayCaster();
 		// Initialise Hitpoints on Max
+                if (SystemHelper.debug) {
+			maxHitpointsWithoutArmor = maxHitpointsWithoutArmor * 1000000;
+		}
                 maxHitpoints = maxHitpointsWithoutArmor;
 		hitpoints = maxHitpoints;
 		strength = strengthWithoutArmor;
@@ -62,6 +66,9 @@ public class Player extends Creature implements Camera {
                 }else{
                     inventory = new Inventory(5,50);
                 }
+
+		
+
 	}
 
 
@@ -250,6 +257,12 @@ public class Player extends Creature implements Camera {
             }
         }
     }
+
+	public void regainChurchHitpoint() {
+		if(world().tileAt(pos())==ColoredChar.create('\u2020', new Color(199,21,133))){
+			regainHitpoint();
+		}//if
+	}//meth.
 
     /**
      *
@@ -515,6 +528,8 @@ public class Player extends Creature implements Camera {
     public void updateStrength(){
         updateStrength(inventory.getBonusDamageOfWornItems());
     }
+
 }
+
 
 

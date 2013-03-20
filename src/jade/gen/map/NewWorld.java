@@ -12,6 +12,9 @@ import jade.util.Dice;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Coordinate;
 import rogue.system.SystemHelper;
+import java.util.jar.JarFile;
+import java.util.jar.JarEntry;
+
 
 public abstract class NewWorld extends MapGenerator {
 
@@ -21,8 +24,15 @@ public abstract class NewWorld extends MapGenerator {
             SystemHelper.debugMessage(""+aufwaerts);
 		// TODO Auto-generated method stub
 		try {
+			BufferedReader br;
 			// Prepare File for reading (open it)
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"UTF-8"));
+			if (SystemHelper.isJar) {
+				JarFile jar = new JarFile("adventure-of-umalu.jar");
+				//JarEntry entry = jar.getEntry(filePath);
+				br = new BufferedReader(new InputStreamReader(jar.getInputStream(jar.getEntry(filePath)),"UTF-8"));
+			} else {
+				br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"UTF-8"));
+			}
 			// int lineNumber = MAXHEIGHT; // TODO Delete this line, when it is
 			// not needed anymore
 

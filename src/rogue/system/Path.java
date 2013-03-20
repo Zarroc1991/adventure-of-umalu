@@ -5,6 +5,7 @@ package rogue.system;
  *
  * Distributed under terms of the MIT license.
  */
+import rogue.system.SystemHelper;
 
 public class Path {
 
@@ -16,6 +17,10 @@ public class Path {
 	 * @return Absolute Path in current Workingdirectory
 	 */
 	public static String generatePath(String path) {
+		// Running from .jar ?
+		if (SystemHelper.isJar) {
+			return path;
+		}
 		// What OS is running?
 		if (isWin()) {
 			// Delete me later
@@ -58,9 +63,12 @@ public class Path {
 	 * @return Absolute Path
 	 */
 	public static String generateAbsolutePath(String path) {
+		// Running from .jar?
+		if (SystemHelper.isJar) {
+			return path;
+		}
 		// Get current working directory
 		String currentDirectory = System.getProperty("user.dir");
-
 		// Are we running Windows?
 		if (isWin()) {
 			// Check if src is already included
@@ -80,6 +88,16 @@ public class Path {
 				// No, include src/ Folder
 				return currentDirectory.concat("/src/").concat(path);
 			}
+		}
+	}
+	/**
+	 * Checks if Application is running from a .jar File and sets SystemHelper.isJar accordingly
+	 */
+	public void runningFromJar() {
+		String className = this.getClass().getName().replace('.', '/');
+		String classJar = this.getClass().getResource("/" + className + ".class").toString();
+		if (classJar.startsWith("jar:")) {
+			SystemHelper.isJar = true;
 		}
 	}
 }

@@ -55,6 +55,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
    		int roundsToHpUp = hpCycle;
    		// Set System options
 		Screen.initialiseScreen();
+		new Path().runningFromJar();
 		SystemHelper.getArgs(args);
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
 
@@ -71,6 +72,8 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 		Player player = new Player(term);
 		// erstellt zufällige Levelreihenfolge
 		ArrayList<Integer> levelorder = term.levelorder(levelanzahl);
+		levelorder.add(5);
+		
 		// Generate a new World
 		World world = new Level(80, 32, player, levelorder.get(level), level,true,
 				term);
@@ -145,7 +148,10 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 				player.regainHitpoint();
 				// Reset Counter
 				roundsToHpUp = hpCycle;
-			}
+			}else{
+				player.regainChurchHitpoint();
+			}//
+						
 			// Decrement hpCycle Counter
 			roundsToHpUp--;
 			// Generate a List of Monsters still on Map
