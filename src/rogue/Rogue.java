@@ -149,7 +149,10 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 				player.regainHitpoint();
 				// Reset Counter
 				roundsToHpUp = hpCycle;
-			}
+			}else{
+				player.regainChurchHitpoint();
+			}//
+						
 			// Decrement hpCycle Counter
 			roundsToHpUp--;
 
