@@ -58,6 +58,7 @@ public class Rat extends Monster {
             for (Coordinate coordinate : viewField) {
                 if (this.world().getActorAt(Player.class, coordinate) != null) {
                     Direction dir = this.pos().directionTo(pathfinder.getPath(this.world(), this.pos(), coordinate).get(0));
+                    if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u2020'))
                     move(dir);
                     return;
                 }//if(this.world()...
