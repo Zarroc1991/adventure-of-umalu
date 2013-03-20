@@ -27,7 +27,7 @@ public abstract class NewWorld extends MapGenerator {
 			if (SystemHelper.isJar) {
 				JarFile jar = new JarFile("adventure-of-umalu.jar");
 				//JarEntry entry = jar.getEntry(filePath);
-				br = new BufferedReader(new InputStreamReader(jar.getInputStream(jar.getEntry(+filePath)),"UTF-8"));
+				br = new BufferedReader(new InputStreamReader(jar.getInputStream(jar.getEntry(filePath)),"UTF-8"));
 			} else {
 				br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"UTF-8"));
 			}
