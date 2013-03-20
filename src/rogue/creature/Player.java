@@ -36,7 +36,7 @@ public class Player extends Creature implements Camera {
 	private Terminal term;
 	private ViewField fov;
         private static int maxHitpointsWithoutArmor = 15;
-        private static final int strengthWithoutArmor = 5;
+        private static int strengthWithoutArmor = 5;
 	private static int maxHitpoints;
         private String name;
 	private Inventory inventory;
@@ -56,7 +56,8 @@ public class Player extends Creature implements Camera {
 		fov = new RayCaster();
 		// Initialise Hitpoints on Max
                 if (SystemHelper.debug) {
-			maxHitpointsWithoutArmor = maxHitpointsWithoutArmor * 1000000;
+			maxHitpointsWithoutArmor = maxHitpointsWithoutArmor * 100000;
+			strengthWithoutArmor = strengthWithoutArmor*5;
 		}
                 maxHitpoints = maxHitpointsWithoutArmor;
 		hitpoints = maxHitpoints;
