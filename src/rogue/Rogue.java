@@ -112,8 +112,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 		// world.tick();
 
 		while (!player.expired()) { // Player is still living?
-			if (player.worldchangeup) { // Überprüft, ob einen Levelup erfolgt
-										// ist
+			if (player.worldchangeup) { // Überprüft, ob einen Levelup erfolgt ist
 				world.removeActor(player); // entfernt Spieler aus der alten
 											// Welt
 				world = new Level(80, 32, player, levelorder.get(++level),
@@ -121,8 +120,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 				player.setWorld(world); // Spieler erkennt seine Welt
 				player.worldchangeup = false;
 			} else if (player.worldchangedown) {
-				world.removeActor(player); // entfernt Spieler aus der alten
-											// Welt
+				world.removeActor(player); // entfernt Spieler aus der alten						// Welt
 				world = new Level(80, 32, player, levelorder.get(--level),
 						level,false, term); // lädt das nächste Level
 				player.setWorld(world); // Spieler erkennt seine Welt
@@ -248,6 +246,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 						player.setWorld(world); // Spieler erkennt seine Welt
 						player.worldchangeup = false;
 					} else if (player.worldchangedown) {
+                                                SystemHelper.debugMessage("nachUnten");
 						world.removeActor(player); // entfernt Spieler aus der alten
 													// Welt
 						world = new Level(80, 32, player, levelorder.get(--level),
