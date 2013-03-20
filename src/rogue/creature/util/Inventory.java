@@ -44,9 +44,11 @@ public class Inventory {
             e.printStackTrace();
         }
         wornItems = new Item[3];
-        Item standardHelmet = new Item("Standard Helm", 0, Item.ITEMTYPE_HEAD,
-                0, 0, true, 1);
-        Item standardSword = new Item("Standard Schwert", 0,
+		ArrayList<String> loreText = new ArrayList<String>();
+		loreText.add("Die Abenteurerr\u00fcstung geh\u00f6 zu den Wertvollsten deiner Besitzt\u00fcmer.");
+        Item standardHelmet = new Item("Abenteurerr\u00fcstung", 0, Item.ITEMTYPE_HEAD,
+                0, 0, true, 1,loreText);
+        Item standardSword = new Item("\u00dcbungsschwert", 0,
                 Item.ITEMTYPE_SWORD, 0, 0, true, 1);
         wornItems[Item.ITEMTYPE_HEAD] = standardHelmet;
         wornItems[Item.ITEMTYPE_SWORD] = standardSword;
