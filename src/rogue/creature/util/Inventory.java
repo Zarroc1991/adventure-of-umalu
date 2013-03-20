@@ -305,7 +305,7 @@ public class Inventory {
             lines.add("");
             lines.add("Gefunden: " + item.getName() + " [+DMG: "
                     + item.getDamageBonus() + ", +HP: " + item.getHealthBonus()
-                    + "]");
+                    + ", Dura: "+ item.getDurability()+"/"+item.getMaxDurability()+"]");
             lines.add("");
             lines.add("Waehle nun: <0>-<4> Rucksackgegenstand zerstoeren");
             lines.add("oder <q> um " + item.getName() + " zu vernichten");
