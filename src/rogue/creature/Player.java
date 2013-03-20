@@ -21,6 +21,7 @@ import rogue.creature.util.NotEnoughGoldException;
 import rogue.creature.util.NotEnoughSpaceException;
 import rogue.level.Screen;
 import java.util.Random;
+import java.awt.Color;
 import java.lang.InterruptedException;
 import jade.core.World;
 import java.util.ArrayList;
@@ -241,6 +242,12 @@ public class Player extends Creature implements Camera {
             }
         }
     }
+
+	public void regainChurchHitpoint() {
+		if(world().tileAt(pos())==ColoredChar.create('\u2020', new Color(199,21,133))){
+			regainHitpoint();
+		}//if
+	}//meth.
 
     /**
      *
@@ -486,6 +493,8 @@ public class Player extends Creature implements Camera {
         }
 
     }
+
 }
+
 
 

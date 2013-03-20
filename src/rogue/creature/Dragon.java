@@ -9,6 +9,9 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.Random;
 
+import jade.fov.RayCaster;
+import jade.path.AStar;
+import jade.path.PathFinder;
 import jade.util.Dice;
 import jade.util.datatype.ColoredChar;
 import jade.util.datatype.Direction;
@@ -23,23 +26,22 @@ import rogue.level.Screen;
  * TODO Delete this Class, when it is not used anymore, as instances of Monster do the same thing right now
  * @author alle
  */
+
 public class Dragon extends Monster {
-   /*
-    * every Dragon has 100 Hitpoints and Strength 5(until now)
-    */
-    public Dragon(ColoredChar face, String name, Terminal term) {
-        super(face,name, 100, 5, term);
-        //the Dragon is so special, he is number 99
-        typenumber =99;
-    }
+		
+	    PathFinder pathfinder = new AStar();
+	    RayCaster fov;
+	    int attackRadius;
 
-    public Dragon(Terminal term) {
-        super(ColoredChar.create('D',Color.red), "roter Drache", 100, 5, term);
-    }
- 
+	    public Dragon(Terminal term) {
+	        super(ColoredChar.create('D',Color.red), "roter Drache", 130, 25, term);
+	        fov = new RayCaster();
+	        attackRadius = 100;
+	        //the Dragon is so special, he is number 99
+	        typenumber =99;
+	    }
 
-
-    @Override
+	@Override
     public void act() {
 
 		boolean fight = false;

@@ -80,10 +80,10 @@ public class Level extends World {
 			}
 			case 1: {
 					//addActor(new Troll(term,level));
-					addActor(new Rat(term));
-					addActor(new Slug_fat(term));
-					addActor(new Frog_poisonous(term));
-					addActor(new Zombie(term));
+					addActors(Rat.class, term, 5);
+					addActors(Slug_fat.class, term, 6);
+					addActors(Frog_poisonous.class,term,5);
+					addActors(Zombie.class,term,2);
 					break;
 			}
 			case 2: {
