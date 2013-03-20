@@ -187,6 +187,9 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 			// Screen
 			// Give everyone else the chance to make his move
 			// world.tick();
+			world.playertick();
+			term.registerCamera(player, player.x(), player.y() + 1);
+			term.bufferCameras(); 
 			world.tick();
 			stepSum++;
 		}

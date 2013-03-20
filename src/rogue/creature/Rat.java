@@ -29,7 +29,6 @@ public class Rat extends Monster {
     PathFinder pathfinder = new AStar();
     RayCaster fov;
     int attackRadius;
-    boolean fight = false; 
    
     public Rat(Terminal term) {
         super(ColoredChar.create('R', new Color(110,110,110)), "Ratte", 5, 1, term);
@@ -42,15 +41,13 @@ public class Rat extends Monster {
     @Override
     public void act() {
         boolean actionOver = false;
-        	for (Direction dir : Arrays.asList(Direction.values())) {
+        
+        for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
+
             if (player != null) {
-            	if(fight){
-                	fight(player);
-                	fight = false;
-                	
-                }
-                fight = true; 
+                fight(player);
+
                 actionOver = true;
                 break;
 
@@ -79,7 +76,8 @@ public class Rat extends Monster {
 
 	@Override
 	public void fight(Player opponent) {
-	      System.out.println("Die " + name + " greift dich an");
+		
+	        System.out.println("Die " + name + " greift dich an");
 		// Create Randomizer
 	        Random random = new Random();
 		// Generate Damage
