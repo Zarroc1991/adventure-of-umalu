@@ -30,17 +30,17 @@ public class Rat extends Monster {
     RayCaster fov;
     int attackRadius;
    
+    
     public Rat(Terminal term) {
         super(ColoredChar.create('R', new Color(110,110,110)), "Ratte", 5, 1, term);
         fov = new RayCaster();
         attackRadius = 5;
         //a Rat is the weakest Monster, hence Typenumber 1
         typenumber = 1;
-    }
+    }//public Rat
 
     @Override
     public void act() {
-        boolean actionOver = false;
         
         for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
@@ -48,31 +48,25 @@ public class Rat extends Monster {
             if (player != null) {
                 fight(player);
 
-                actionOver = true;
-                break;
+                return;
 
-            }
+            }//if(player!=null)
 
-        }
+        }//for(Direction dir... 
 
-        if (!actionOver) {
             Collection<Coordinate> viewField = fov.getViewField(this.world(), this.pos().x(), this.pos().y(), attackRadius);
             for (Coordinate coordinate : viewField) {
                 if (this.world().getActorAt(Player.class, coordinate) != null) {
                     Direction dir = this.pos().directionTo(pathfinder.getPath(this.world(), this.pos(), coordinate).get(0));
                     move(dir);
-                    actionOver = true;
-                    break;
-                }
-            }
-
-            if (!actionOver) {
-
+                    return;
+                }//if(this.world()...
+            }//for(Coordinate ...
 
                 move(Dice.global.choose(Arrays.asList(Direction.values())));
-            }
-        }
-    }
+            }//act
+        
+    
 
 	@Override
 	public void fight(Player opponent) {
@@ -92,7 +86,7 @@ public class Rat extends Monster {
             	case 1:System.out.println("Sie beißt in deinen großen Zeh");break;
             	case 2:System.out.println("Tollwutalarm");break;
             	case 3:System.out.println("Sie quickt so laut.");break;
-	        }
+	        }//switch
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
 		Screen.redrawEventLine(name+" macht "+abzug+" Schaden (Rest: "+opponent.hitpoints+")");
@@ -101,9 +95,9 @@ public class Rat extends Monster {
 		} catch(InterruptedException e) {
 			System.out.println("!InterruptedException");
 			e.printStackTrace();
-		}
-	    }
+		}//catch
+	    }//fight
 
-	}
+	}//class
 
 
