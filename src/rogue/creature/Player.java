@@ -24,6 +24,7 @@ import java.util.Random;
 import java.lang.InterruptedException;
 import jade.core.World;
 import java.util.ArrayList;
+import rogue.system.SystemHelper;
 
 /**
  * Represents Player
@@ -56,6 +57,8 @@ public class Player extends Creature implements Camera {
 		inventory = new Inventory(5,50);
 	}
 
+
+
 	/**
 	 * Sets Charactername. Should be only called on character Creation.
 	 * 
@@ -74,7 +77,9 @@ public class Player extends Creature implements Camera {
 	public String getName() {
 		return name;
 	}
-
+        public Inventory getInventory(){
+            return inventory;
+        }
 	@Override
 	/**
 	 * Ask Player to do some action (passing him the baton). Reads input and moves Character accordingly.
@@ -112,7 +117,7 @@ public class Player extends Creature implements Camera {
 						fight((Monster) actorlist.toArray()[0]);
 					} else {
 						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u00a9')) {  
-							Screen.redrawEventLine("M\u00f6chtest du diesen Raum verlassen? Dr\u00fccke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+							Screen.redrawEventLine("M\u00f6chtest du diesen Raum verlassen? Dr\u00fccke j f\u00fcr Ja, ansonsten verweilst du hier.", false);//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
 							for(Coordinate coord: getViewField()){
 								world().viewable(coord.x(), coord.y());}
 							if (term.getKey()=='j'){
@@ -121,8 +126,8 @@ public class Player extends Creature implements Camera {
 							else{
 								move(0,0); 
 								}}
-							else if(world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('®')) {  
-									Screen.redrawEventLine("M\u00f6chtest du diesen Raum verlassen? Dr\u00fccke j für Ja, ansonsten verweilst du hier.");//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
+							else if(world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u00ae')) {  
+									Screen.redrawEventLine("M\u00f6chtest du diesen Raum verlassen? Dr\u00fccke j für Ja, ansonsten verweilst du hier.", false);//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
 									for(Coordinate coord: getViewField()){
 										world().viewable(coord.x(), coord.y());}
 									if (term.getKey()=='j'){
@@ -277,6 +282,7 @@ public class Player extends Creature implements Camera {
                 // Erwarte eine Eingabe vom Nutzer.
                 char key = term.getKey();
                 switch (key) {
+					case 'i':
                     case 'q':
                         loop = false;
                         break;
@@ -320,9 +326,12 @@ public class Player extends Creature implements Camera {
     private void randomlyDropItem(Monster opponent) {
         Random random = new Random();
         random.nextInt(strength);
+		Screen.redrawEventLine(opponent.name+" stirbt");
+		System.out.println(opponent.name+" stirbt");
         //This Item drops;
         Item item = null;
         try {
+
             switch (opponent.typenumber) {
 
                 case 1: {
@@ -333,11 +342,11 @@ public class Player extends Creature implements Camera {
                 case 2: {
                     //Fette Nacktschnecke
                     //random Number decides whether an Item drops or not and which one
-                    int zufallszahl = random.nextInt(3);
+                    int zufallszahl = random.nextInt(1);
 
 
-                    if (zufallszahl == 0) {
-                        //Axt drops 1/3 of the time
+                    if (zufallszahl == 0||SystemHelper.debug) {
+                        //Axt drops 1/3 of the time, always, if Debug-Mode
                         item = new Item("Axt", 0, Item.ITEMTYPE_SWORD, 2, 0);
                         inventory.addItem(item);
                         //Status message
@@ -379,8 +388,8 @@ public class Player extends Creature implements Camera {
                     //random Number decides whether an Item drops or not and which one
                     int zufallszahl = random.nextInt(20);
 
-                    if (zufallszahl < 5) {
-                        //Langschwert droppt zu 1/4
+                    if (zufallszahl < 5||SystemHelper.debug) {
+                        //Langschwert droppt zu 1/4, immer im Debug-Mode
                         item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0);
                         inventory.addItem(item);
                         //Status message
@@ -458,15 +467,13 @@ public class Player extends Creature implements Camera {
                 }
             }
         } catch (NotEnoughSpaceException ex) {
-            try {
+            
                 //Status message
-                Screen.redrawEventLine("Du konntest leider ein" + item.getName() + " nicht ins Inventar aufnehmen, da es voll war");
+                //Screen.redrawEventLine("Du konntest leider ein" + item.getName() + " nicht ins Inventar aufnehmen, da es voll war");
                 //Wait for pressed key
-                term.getKey();
-            } catch (InterruptedException e) {
-                System.out.println("!IOException");
-                e.printStackTrace();
-            }
+               // term.getKey();
+                inventory.fullInventoryScreen(item);
+             
 
         } catch (InterruptedException e) {
             System.out.println("!IOException");

@@ -11,6 +11,8 @@ import rogue.level.Screen;
 import rogue.creature.util.NotEnoughSpaceException;
 import jade.ui.TiledTermPanel;
 import jade.ui.Terminal;
+import java.util.ArrayList;
+
 
 /**
  * Represents an Inventory for player.
@@ -206,7 +208,7 @@ public class Inventory {
 	public void equip(Item item) {
 		item.setEquipped(true);
 		Item buffer = wornItems[item.getItemType()];
-		wornItems[item.getItemType()] = item;
+                wornItems[item.getItemType()] = item;
 		this.removeItem(item);
 		buffer.setEquipped(false);
 		try {
@@ -215,6 +217,66 @@ public class Inventory {
 			System.out.println("!Error Exception:");
 			e.printStackTrace();
 			System.out.println("Something is strange here...");
+		}
+	}
+	
+	public void fullInventoryScreen(Item item) {
+		boolean loop = true;
+		while (loop) {
+			ArrayList<String> lines = new ArrayList<String>();
+			lines.add("Du hast "+item.getName()+" gefunden, aber das Inventar ist voll.");
+			lines.add("Vernichte nun einen Gegenstand aus deinem Rucksack oder "+item.getName()+":");
+			lines.add("");
+			for (int i = 0; i < backpackSpaces.size(); i++) {
+	            // Zeige das Item an Stelle an i an
+	            lines.add("(" + i + ") " + backpackSpaces.get(i).getName() + "[+DMG: " + backpackSpaces.get(i).getDamageBonus() + ", +HP: " + backpackSpaces.get(i).getHealthBonus() + "]");
+	        }
+			lines.add("");
+			lines.add("Gefunden: "+item.getName()+" [+DMG: "+item.getDamageBonus()+", +HP: "+item.getHealthBonus()+"]");
+			lines.add("");
+			lines.add("Waehle nun: <0>-<4> Rucksackgegenstand zerstoeren");
+			lines.add("oder <q> um "+item.getName()+" zu vernichten");
+			Screen.putText(lines);
+			try{
+				char key = Screen.lastTerminal.getKey();
+				switch(key) {
+					case '0':
+						this.removeItem(0);
+						this.addItem(item);
+						loop = false;
+						break;
+					case '1':
+						this.removeItem(1);
+						this.addItem(item);
+						loop = false;
+						break;
+					case '2':
+						this.removeItem(2);
+						this.addItem(item);
+						loop = false;
+						break;
+					case '3':
+						this.removeItem(3);
+						this.addItem(item);
+						loop = false;
+						break;
+					case '4':
+						this.removeItem(4);
+						this.addItem(item);
+						loop = false;
+						break;
+					case 'q':
+						loop = false;
+						break;
+				}
+			} catch (InterruptedException e) {
+				System.out.println("!Exception");
+				e.printStackTrace();
+			} catch (NotEnoughSpaceException e) {
+				System.out.println("!Exception");
+				e.printStackTrace();
+				System.out.println("O_O");
+			}
 		}
 	}
 }

@@ -29,6 +29,8 @@ public abstract class World extends Messenger
 	private Set<Actor> register;
 	private List<Class<? extends Actor>> drawOrder;
 	private List<Class<? extends Actor>> actOrder;
+        // the player should be set here at the start
+        public Coordinate playerstart;
 
 	/**
 	 * Constructs a new {@code World} with the given dimensions. Both width and height must be
@@ -165,7 +167,7 @@ public abstract class World extends Messenger
 	{
 		addActor(actor, getOpenTile());
 	}
-
+	
 	/**
 	 * Removes an {@code Actor} from the {@code World}. The {@code Actor} must be both bound to this
 	 * {@code World} and not held by another {@code Actor}. However, if the {@code Actor} is

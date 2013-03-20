@@ -15,7 +15,8 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
+import java.util.Calendar;
+import java.util.logging.Logger;
 import javax.swing.JApplet;
 
 import rogue.creature.Dragon;
@@ -43,13 +44,16 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 	int roundsToHpUp;
 	
 	public static void main(String[] args) throws InterruptedException {
-		int level = 0;
-		int levelanzahl = 5;
-		// How many rounds for next healing+
-		final int hpCycle = 10;
-		int roundsToHpUp = hpCycle;
 
+   		int level = 0; 
+		int stepSum = 0;
+		int stepLevel = 0;
 		// Set System options
+   		int levelanzahl = 5;
+   		// How many rounds for next healing+
+   		final int hpCycle=10; 
+   		int roundsToHpUp = hpCycle;
+   		// Set System options
 		Screen.initialiseScreen();
 		SystemHelper.getArgs(args);
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
@@ -68,23 +72,28 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 		// erstellt zufällige Levelreihenfolge
 		ArrayList<Integer> levelorder = term.levelorder(levelanzahl);
 		// Generate a new World
-		World world = new Level(80, 32, player, levelorder.get(level), level,
+		World world = new Level(80, 32, player, levelorder.get(level), level,true,
 				term);
 		// Show Splashscreen for Start
 		Screen.showFile(Path.generateAbsolutePath("maps/start.txt"), term,
 				world);
 		term.getKey();
 		player.setName(CharacterCreation.getCharacterName(term, world));
-		Screen.printLine(player.getName(), term, world);
+		if (SystemHelper.debug) {
+			Screen.printLine(player.getName(),term,world);
+		}
 		term.getKey();
-
-		// Screen.showFile(Path.generateAbsolutePath("maps/start.txt"),term,world);
-		// Zeigt Intro
-		Screen.intro(player.getName(),
-				Path.generateAbsolutePath("txt Dateien/Intro.txt"), term, world);
+		
+		//Screen.showFile(Path.generateAbsolutePath("maps/start.txt"),term,world);
+		//Zeigt Intro 
+		if (!SystemHelper.debug) {
+			Screen.intro(player.getName(), Path.generateAbsolutePath("txt Dateien/Intro.txt"),term,world);
+		}
 		// Press any Key to continue
 		term.getKey();
 
+		Calendar cal = Calendar.getInstance();
+		long startTime = cal.getTimeInMillis();
 		// Who deleted this, and why?
 		// world.addActor(new Monster(ColoredChar.create('D',
 		// Color.red),"roter Drache"));
@@ -108,14 +117,14 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 				world.removeActor(player); // entfernt Spieler aus der alten
 											// Welt
 				world = new Level(80, 32, player, levelorder.get(++level),
-						level, term); // lädt das nächste Level
+						level,true, term); // lädt das nächste Level
 				player.setWorld(world); // Spieler erkennt seine Welt
 				player.worldchangeup = false;
 			} else if (player.worldchangedown) {
 				world.removeActor(player); // entfernt Spieler aus der alten
 											// Welt
 				world = new Level(80, 32, player, levelorder.get(--level),
-						level, term); // lädt das nächste Level
+						level,false, term); // lädt das nächste Level
 				player.setWorld(world); // Spieler erkennt seine Welt
 				player.worldchangedown = false;
 			}
@@ -155,8 +164,17 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 
 			Screen.lastWorld = world;
 			Screen.lastTerminal = term;
-			Screen.redrawMap("HP: " + player.getHitpoints() + "/"
-					+ player.getMaxHitpoints());
+			if (!SystemHelper.speedrun) {
+				Screen.redrawMap("HP: "+player.getHitpoints()+"/"+player.getMaxHitpoints());
+			} else {
+				Calendar calen = Calendar.getInstance();
+				long timeInSeconds = (calen.getTimeInMillis()-startTime)/1000;
+				if (timeInSeconds < 60) {
+				Screen.redrawMap("Steps: "+stepSum+" in "+timeInSeconds+"s");
+				} else {
+					Screen.redrawMap("Steps: "+stepSum+" in "+timeInSeconds/60+"min "+timeInSeconds%60+"s");
+				}
+			}
 
 			// TODO Delete this Block if noone needs it anymore.
 			// Redraw Windowcontents now
@@ -170,6 +188,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 			// Give everyone else the chance to make his move
 			// world.tick();
 			world.tick();
+			stepSum++;
 		}
 		term.clearBuffer();
 		// Screen.showFile(normalizePath("src\\rogue\\system\\end.txt","rogue/system/end.txt"),
@@ -197,7 +216,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 		getContentPane().add(term.panel());
 		player = new Player(term);
 		levelorder = term.levelorder(levelanzahl);
-		world = new Level(80, 32, player, levelorder.get(level), level,term);
+		world = new Level(80, 32, player, levelorder.get(level),level,true,term);
 		System.out.println("applet initialized");
 	}
 
@@ -236,14 +255,14 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 						world.removeActor(player); // entfernt Spieler aus der alten
 													// Welt
 						world = new Level(80, 32, player, levelorder.get(++level),
-								level, term); // lädt das nächste Level
+								level,true, term); // lädt das nächste Level
 						player.setWorld(world); // Spieler erkennt seine Welt
 						player.worldchangeup = false;
 					} else if (player.worldchangedown) {
 						world.removeActor(player); // entfernt Spieler aus der alten
 													// Welt
 						world = new Level(80, 32, player, levelorder.get(--level),
-								level, term); // lädt das nächste Level
+								level,false, term); // lädt das nächste Level
 						player.setWorld(world); // Spieler erkennt seine Welt
 						player.worldchangedown = false;
 					}
@@ -301,7 +320,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 				System.exit(0);
 		}});
 		t.start();
-		System.out.println("applet started");
+       		System.out.println("applet started");
 	}
 	@Override
 	public void stop() {
