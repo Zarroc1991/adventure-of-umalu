@@ -58,6 +58,7 @@ public class Rat extends Monster {
             Collection<Coordinate> viewField = fov.getViewField(this.world(), this.pos().x(), this.pos().y(), attackRadius);
             for (Coordinate coordinate : viewField) {
                 if (this.world().getActorAt(Player.class, coordinate) != null) {
+
                 	List<Coordinate> path = pathfinder.getPath(this.world(), this.pos(), coordinate);
                     if(path!=null){
                 	Direction dir = this.pos().directionTo(path.get(0));
@@ -73,6 +74,7 @@ public class Rat extends Monster {
                 if (world().tileAt(x() + dir.dx(), y() + dir.dy()) != ColoredChar.create('\u2020', new Color(199,21,133))){
                 	move(dir);
                 }//end of if
+
             }//act
         
     
