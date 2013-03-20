@@ -75,7 +75,7 @@ public class Level extends World {
 					addActors(Rat.class, term, 15);
 					addActors(Slug_fat.class, term, 4);
 					addActor(new Frog_poisonous(term));
-					addActor(new ItemGenerator(ColoredChar.create('I', Color.yellow), new Item("Testhelm", 0, Item.ITEMTYPE_HEAD, 0, 15), term));
+					addActor(new ItemGenerator(ColoredChar.create('I', Color.yellow), new Item("Testhelm", 0, Item.ITEMTYPE_HEAD, 0, 15,1), term));
 					break;
 			}
 			case 1: {

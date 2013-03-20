@@ -76,7 +76,7 @@ public class Rat extends Monster {
 
 	@Override
 	public void fight(Player opponent) {
-		// TODO Auto-generated method stub {
+		
 	        System.out.println("Die " + name + " greift dich an");
 		// Create Randomizer
 	        Random random = new Random();

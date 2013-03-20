@@ -256,6 +256,8 @@ public abstract class Terminal
         for(Coordinate coord : camera.getViewField())
             bufferChar(coord.getTranslated(offX, offY-1), world.look(coord));
     }
+    
+    
 
     /**
      * Calls {@code bufferCamera} for every {@code Camera} registered with the {@code Terminal}.

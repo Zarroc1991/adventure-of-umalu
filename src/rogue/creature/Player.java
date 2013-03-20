@@ -132,6 +132,7 @@ public class Player extends Creature implements Camera {
 					if (!actorlist.isEmpty()) { // Yes
 						// Fight first monster on coordinate.
 						fight((Monster) actorlist.toArray()[0]);
+						inventory.decreaseStability();
 					} else {
 						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u00a9')) {  
 							Screen.redrawEventLine("M\u00f6chtest du diesen Raum verlassen? Dr\u00fccke j f\u00fcr Ja, ansonsten verweilst du hier.", false);//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
@@ -374,7 +375,7 @@ public class Player extends Creature implements Camera {
 
                     if (zufallszahl == 0||SystemHelper.debug) {
                         //Axt drops 1/3 of the time, always, if Debug-Mode
-                        item = new Item("Axt", 0, Item.ITEMTYPE_SWORD, 2, 0);                      
+                        item = new Item("Axt", 0, Item.ITEMTYPE_SWORD, 2, 0,30);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast eine Axt bekommen, druecke i, um das Inventar zu oeffnen");
@@ -392,7 +393,7 @@ public class Player extends Creature implements Camera {
 
                     if (zufallszahl == 0) {
                         //Langschwert droppt zu 1/20
-                        item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0);
+                        item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0,10);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
@@ -401,7 +402,7 @@ public class Player extends Creature implements Camera {
 
                     } else if (zufallszahl <= 4) {
                         //Kurzschwert droppt zu 1/5
-                        item = new Item("Kurzschwert", 0, Item.ITEMTYPE_SWORD, 3, 0);
+                        item = new Item("Kurzschwert", 0, Item.ITEMTYPE_SWORD, 3, 0,15);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Kurzschwert bekommen, druecke i, um das Inventar zu oeffnen");
@@ -418,7 +419,8 @@ public class Player extends Creature implements Camera {
 
                     if (zufallszahl < 5||SystemHelper.debug) {
                         //Langschwert droppt zu 1/4, immer im Debug-Mode
-                        item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0);
+                        item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0, 10);
+                        inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
                         //Wait for pressed key
@@ -429,7 +431,7 @@ public class Player extends Creature implements Camera {
 
                     } else if (zufallszahl < 9) {
                         //Riesenschwert droppt zu 1/5
-                        item = new Item("Riesenschwert", 0, Item.ITEMTYPE_SWORD, 12, 0);
+                        item = new Item("Riesenschwert", 0, Item.ITEMTYPE_SWORD, 12, 0,8);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
@@ -445,7 +447,7 @@ public class Player extends Creature implements Camera {
 
                     if (zufallszahl < 3) {
                         //Riesenschwert droppt zu 1/4
-                        item = new Item("Riesenschwert", 0, Item.ITEMTYPE_SWORD, 12, 0);
+                        item = new Item("Riesenschwert", 0, Item.ITEMTYPE_SWORD, 12, 0,8);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
@@ -454,7 +456,7 @@ public class Player extends Creature implements Camera {
 
                     } else if (zufallszahl < 5) {
                         //Riesenschwert droppt zu 1/6
-                        item = new Item("Großschwert", 0, Item.ITEMTYPE_SWORD, 12, 0);
+                        item = new Item("Großschwert", 0, Item.ITEMTYPE_SWORD, 12, 0,25);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
