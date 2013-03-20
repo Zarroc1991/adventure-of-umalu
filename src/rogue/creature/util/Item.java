@@ -24,6 +24,7 @@ public class Item {
 	private int maxDurability;
 	private int durability;
 	private boolean equipped;
+	protected int stability;
 	private ArrayList<String> description;
 
 	/**
@@ -50,7 +51,7 @@ public class Item {
 	 * @param bonusDamage Additional Damage by Item
 	 * @param bonusHealth Additional Health by Item
 	 */
-	public Item(String name, int goldValue, int itemType, int bonusDamage, int bonusHealth) {
+	public Item(String name, int goldValue, int itemType, int bonusDamage, int bonusHealth, int stability) {
 		// Name einfuegen
 		this.name = name;
 		// Platzhalter fuer den Fall der Faelle
@@ -62,6 +63,7 @@ public class Item {
 		this.modificators[0] = bonusDamage;
 		this.modificators[1] = bonusHealth;
 		equipped = false;
+		this.stability= stability ; 
 	}
 	
 	/**
@@ -75,8 +77,8 @@ public class Item {
 	 * @param bonusHealth Additional Health by Item
 	 * @param description Descriptive Text, given by Lore
 	 */
-	public Item(String name, int goldValue, int itemType, int bonusDamage, int bonusHealth, String description) {
-		this(name, goldValue, itemType, bonusDamage, bonusHealth);
+	public Item(String name, int goldValue, int itemType, int bonusDamage, int bonusHealth, String description, int stability) {
+		this(name, goldValue, itemType, bonusDamage, bonusHealth,stability);
 		this.description = new ArrayList<String>();
 		this.description.add(description);
 	}
@@ -92,8 +94,8 @@ public class Item {
 	 * @param bonusHealth Additional Health by Item
 	 * @param description Descriptive Text, given by Lore. Allows to add multiple Lines of Text.
 	 */
-	public Item(String name, int goldValue, int itemType, int bonusDamage, int bonusHealth, ArrayList<String> description) {
-		this(name, goldValue, itemType, bonusDamage, bonusHealth);
+	public Item(String name, int goldValue, int itemType, int bonusDamage, int bonusHealth, ArrayList<String> description, int stability) {
+		this(name, goldValue, itemType, bonusDamage, bonusHealth, stability);
 		this.description = description;
 	}
 
@@ -110,9 +112,9 @@ public class Item {
 	 * @param equipped Equipped Value
 	 */
 
-	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth, boolean equipped) {
+	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth, boolean equipped, int stability) {
 		// Call other Constructor
-		this(name, goldValue, type, bonusDamage, bonusHealth);
+		this(name, goldValue, type, bonusDamage, bonusHealth,stability);
 		// Set equipped
 		this.equipped = equipped;
 	}
@@ -164,6 +166,7 @@ public class Item {
 	 * @param term currently used terminal
 	 * @param inventory currently used inventory
 	 */
+	
 	public void showItem(Terminal term, Inventory inventory) {
 		Item item = this;
 		ArrayList<String> lines = new ArrayList<String>();
@@ -232,5 +235,9 @@ public class Item {
 
 	public void setEquipped(boolean equipped) {
 		this.equipped = equipped;
+	}
+	public void decreaseStability(){
+		stability--;
+		
 	}
 }

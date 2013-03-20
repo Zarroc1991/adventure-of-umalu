@@ -91,10 +91,10 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 		//Zeigt Intro 
 		if (!SystemHelper.debug) {
 			Screen.intro(player.getName(), Path.generateAbsolutePath("txt Dateien/Intro.txt"),term,world);
-		}
+		
 		// Press any Key to continue
 		term.getKey();
-
+		}
 		Calendar cal = Calendar.getInstance();
 		long startTime = cal.getTimeInMillis();
 		// Who deleted this, and why?
@@ -115,8 +115,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 		// world.tick();
 
 		while (!player.expired()) { // Player is still living?
-			if (player.worldchangeup) { // Überprüft, ob einen Levelup erfolgt
-										// ist
+			if (player.worldchangeup) { // Überprüft, ob einen Levelup erfolgt ist
 				world.removeActor(player); // entfernt Spieler aus der alten
 											// Welt
 				world = new Level(80, 32, player, levelorder.get(++level),
@@ -124,8 +123,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 				player.setWorld(world); // Spieler erkennt seine Welt
 				player.worldchangeup = false;
 			} else if (player.worldchangedown) {
-				world.removeActor(player); // entfernt Spieler aus der alten
-											// Welt
+				world.removeActor(player); // entfernt Spieler aus der alten						// Welt
 				world = new Level(80, 32, player, levelorder.get(--level),
 						level,false, term); // lädt das nächste Level
 				player.setWorld(world); // Spieler erkennt seine Welt
@@ -156,9 +154,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 						
 			// Decrement hpCycle Counter
 			roundsToHpUp--;
-
 			// Generate a List of Monsters still on Map
-
 			Screen.lastWorld = world;
 			Screen.lastTerminal = term;
 			if (!SystemHelper.speedrun) {
@@ -184,6 +180,9 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 			// Screen
 			// Give everyone else the chance to make his move
 			// world.tick();
+			world.playertick();
+			term.registerCamera(player, player.x(), player.y() + 1);
+			term.bufferCameras(); 
 			world.tick();
 			stepSum++;
 		}
@@ -256,6 +255,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 						player.setWorld(world); // Spieler erkennt seine Welt
 						player.worldchangeup = false;
 					} else if (player.worldchangedown) {
+                                                SystemHelper.debugMessage("nachUnten");
 						world.removeActor(player); // entfernt Spieler aus der alten
 													// Welt
 						world = new Level(80, 32, player, levelorder.get(--level),
@@ -293,6 +293,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 
 					Screen.lastWorld = world;
 					Screen.lastTerminal = term;
+					Screen.redrawMap();
 					Screen.redrawMap("HP: " + player.getHitpoints() + "/"
 							+ player.getMaxHitpoints());
 

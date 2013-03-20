@@ -15,6 +15,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import rogue.creature.Monster;
+import rogue.creature.Player;
 import rogue.system.SystemHelper;
 
 /**
@@ -55,20 +57,30 @@ public abstract class World extends Messenger
 
 		actOrder = new ArrayList<Class<? extends Actor>>();
 		actOrder.add(Actor.class);
+			
 	}
+
 
 	/**
 	 * Performs one tick. This will call {@code act()} on all {@code Actor} in the order specified
 	 * by the act order of the {@code World}. Any {@code Actor} whose type does not appear in the
 	 * act order does not act. Any expired {@code Actor} are removed from the {@code World}.
 	 */
+	public void playertick(){
+		Player player = this.getActor(Player.class);
+		if(!player.expired()){
+                 player.act();
+                 }
+		}
+			
 	public void tick()
 	{
 		for(Class<? extends Actor> cls : actOrder)
 			for(Actor actor : getActors(cls)){
-                            if(!actor.expired()){
+                            if(!actor.expired()&& !actor.getClass().equals(Player.class)){
                             actor.act();
                             }
+                            
 			}
 
 		removeExpired();

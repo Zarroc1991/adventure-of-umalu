@@ -15,11 +15,13 @@ import rogue.system.SystemHelper;
 import java.util.jar.JarFile;
 import java.util.jar.JarEntry;
 
+
 public abstract class NewWorld extends MapGenerator {
 
 	// neue generateStep Methode damit man eine Map als txt-Datei einlesen kann
 	// - analog zu showfile
 	protected void generateStep(World world, Dice dice, String filePath, int level, boolean aufwaerts ) {
+            SystemHelper.debugMessage(""+aufwaerts);
 		// TODO Auto-generated method stub
 		try {
 			BufferedReader br;
@@ -72,12 +74,14 @@ public abstract class NewWorld extends MapGenerator {
 					case '\u00AC': {	c_color = ColoredChar.create('\u00AC', new Color(210,105,30));break;}
 					case '.': {	c_color = ColoredChar.create('.', new Color(51,51,51));	break;}
                                         //player starts here
-                                        case '\u00AE':{if(aufwaerts){world.playerstart = new Coordinate(i,lineNumber);}}
+                                        case '\u00AE':{
+                                            if(aufwaerts){world.playerstart = new Coordinate(i,lineNumber);}break;}
                                         //or here
-                                        case '\u00A9':{if(!aufwaerts){world.playerstart = new Coordinate(i,lineNumber);}}
+                                        case '\u00A9':{                                            
+                                            if(!aufwaerts){world.playerstart = new Coordinate(i,lineNumber);}break;}
 					}
 					//beim ersten Level soll es kein Leveldown geben 
-					if(level==0 && c=='\u00ae'){
+					if(level==0 && c=='\u00AE'){
 						
 						c_color=ColoredChar.create('.', new Color(51,51,51));
 					}
