@@ -148,6 +148,7 @@ public class Inventory {
             if (wornItems[Item.ITEMTYPE_SWORD].stability == 0) {
                 Item temp = wornItems[Item.ITEMTYPE_SWORD];
                 wornItems[Item.ITEMTYPE_SWORD] = null;
+                Screen.redrawEventLine("Dein "+ wornItems[Item.ITEMTYPE_SWORD].getName()+ "ist zunichte gegangen");
                 this.removeItem(temp);
             }
         }
@@ -280,7 +281,7 @@ public class Inventory {
                 lines.add("(" + i + ") " + backpackSpaces.get(i).getName()
                         + "[+DMG: " + backpackSpaces.get(i).getDamageBonus()
                         + ", +HP: " + backpackSpaces.get(i).getHealthBonus()
-                        + "]");
+                        + ", +St: " + backpackSpaces.get(i).getStability() + "]");
             }
             lines.add("");
             lines.add("Gefunden: " + item.getName() + " [+DMG: "
