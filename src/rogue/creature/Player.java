@@ -23,6 +23,7 @@ import rogue.level.Screen;
 import java.util.Random;
 import java.lang.InterruptedException;
 import jade.core.World;
+import jade.gen.map.ItemGenerator;
 import java.util.ArrayList;
 import rogue.system.SystemHelper;
 
@@ -54,7 +55,11 @@ public class Player extends Creature implements Camera {
 		// Initialise Hitpoints on Max
 		hitpoints = maxHitpoints;
 		strength = 5;
-		inventory = new Inventory(5,50);
+                if(SystemHelper.debug){
+		inventory = new Inventory(2,50);
+                }else{
+                    inventory = new Inventory(5,50);
+                }
 	}
 
 
@@ -137,10 +142,14 @@ public class Player extends Creature implements Camera {
 										move(0,0); 
 										}
 						} else {// No monster there
+                                                        move(dir);
+                                                        Actor itemGen= world().getActorAt(ItemGenerator.class, pos());
+                                                        if(itemGen!=null){
+                                                           itemGen.act();
+                                                        }
 							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
 								world().viewable(coord.x(), coord.y());}
-							
-							move(dir);
+								
 							
 							
 							break;
@@ -206,7 +215,7 @@ public class Player extends Creature implements Camera {
             }
 
 
-            term.getKey();
+            
 
         } catch (InterruptedException e) {
             System.out.println("!InterruptedException");
@@ -347,12 +356,13 @@ public class Player extends Creature implements Camera {
 
                     if (zufallszahl == 0||SystemHelper.debug) {
                         //Axt drops 1/3 of the time, always, if Debug-Mode
-                        item = new Item("Axt", 0, Item.ITEMTYPE_SWORD, 2, 0);
+                        item = new Item("Axt", 0, Item.ITEMTYPE_SWORD, 2, 0);                      
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast eine Axt bekommen, druecke i, um das Inventar zu oeffnen");
                         //Wait for pressed key
                         term.getKey();
+                       
                     }
 
                     break;
@@ -391,11 +401,13 @@ public class Player extends Creature implements Camera {
                     if (zufallszahl < 5||SystemHelper.debug) {
                         //Langschwert droppt zu 1/4, immer im Debug-Mode
                         item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0);
-                        inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
                         //Wait for pressed key
                         term.getKey();
+                        inventory.addItem(item);
+                        
+                        
 
                     } else if (zufallszahl < 9) {
                         //Riesenschwert droppt zu 1/5
