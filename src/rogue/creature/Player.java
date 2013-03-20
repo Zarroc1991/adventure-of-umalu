@@ -501,7 +501,8 @@ public class Player extends Creature implements Camera {
     }
 
     public void updateHP(int newBonusHP){
-        float relativeHP = hitpoints/maxHitpoints;
+        float relativeHP = ((float) hitpoints) /((float) maxHitpoints);
+        System.out.println(relativeHP);
         maxHitpoints = maxHitpointsWithoutArmor+newBonusHP;
         int newHP = Math.round(relativeHP*maxHitpoints);
         hitpoints = newHP;
