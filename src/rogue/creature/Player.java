@@ -155,14 +155,15 @@ public class Player extends Creature implements Camera {
 										move(0,0); 
 										}
 						} else {// No monster there
+							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
+								world().viewable(coord.x(), coord.y());}
+								
                                                         move(dir);
                                                         Actor itemGen= world().getActorAt(ItemGenerator.class, pos());
                                                         if(itemGen!=null){
                                                            itemGen.act();
                                                         }
-							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
-								world().viewable(coord.x(), coord.y());}
-								
+						
 							
 							
 							break;
@@ -178,7 +179,7 @@ public class Player extends Creature implements Camera {
 	}
 
 	public void confirmQuit() {
-		Screen.redrawEventLine("Sicher dass Adventures in Umalu beendet werden soll? <J>a/<N>ein");
+		Screen.redrawEventLine("Sicher dass Adventures in Umalu beendet werden soll? <J>a/<N>ein",false);
 		try {
 			if (term.getKey() == 'j') {
 				expire();

@@ -177,7 +177,9 @@ public class Item {
 	public int getHealthBonus() {
 		return modificators[1];
 	}
-
+	public int getStability(){
+		return stability; 
+	}
 	/**
 	 * Prints Information about given Item on Screen.
 	 * 
