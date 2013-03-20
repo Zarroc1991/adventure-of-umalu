@@ -146,6 +146,13 @@ public class Inventory {
         if (wornItems[Item.ITEMTYPE_SWORD] != null) {
             wornItems[Item.ITEMTYPE_SWORD].decreaseStability();
             if (wornItems[Item.ITEMTYPE_SWORD].stability == 0) {
+				Screen.redrawEventLine("Dein "+ wornItems[Item.ITEMTYPE_SWORD].getName()+ " ist zunichte gegangen");
+				try {
+					Screen.lastTerminal.getKey();
+				} catch (InterruptedException e) {
+					System.out.println("!InterruptedException");
+					e.printStackTrace();
+				}
                 Item temp = wornItems[Item.ITEMTYPE_SWORD];
                 wornItems[Item.ITEMTYPE_SWORD] = null;
                 this.removeItem(temp);
