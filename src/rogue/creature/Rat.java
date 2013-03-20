@@ -30,10 +30,9 @@ public class Rat extends Monster {
     PathFinder pathfinder = new AStar();
     RayCaster fov;
     int attackRadius;
-   
-    
+
     public Rat(Terminal term) {
-        super(ColoredChar.create('R', new Color(110,110,110)), "Ratte", 5, 1, term);
+        super(ColoredChar.create('R', new Color(110, 110, 110)), "Ratte", 5, 1, term);
         fov = new RayCaster();
         attackRadius = 5;
         //a Rat is the weakest Monster, hence Typenumber 1
@@ -42,19 +41,15 @@ public class Rat extends Monster {
 
     @Override
     public void act() {
-        
+
         for (Direction dir : Arrays.asList(Direction.values())) {
             Player player = world().getActorAt(Player.class, x() + dir.dx(), y() + dir.dy());
 
             if (player != null && world().tileAt(pos().x()+dir.dx(),pos().y()+dir.dy())!=ColoredChar.create('\u2020', new Color(199,21,133))) {
                 fight(player);
-
                 return;
-
             }//if(player!=null)
-
         }//for(Direction dir... 
-
             Collection<Coordinate> viewField = fov.getViewField(this.world(), this.pos().x(), this.pos().y(), attackRadius);
             for (Coordinate coordinate : viewField) {
                 if (this.world().getActorAt(Player.class, coordinate) != null) {
@@ -110,5 +105,6 @@ public class Rat extends Monster {
 	    }//fight
 
 	}//class
+
 
 

@@ -24,6 +24,7 @@ import java.util.Random;
 import java.awt.Color;
 import java.lang.InterruptedException;
 import jade.core.World;
+import jade.gen.map.ItemGenerator;
 import java.util.ArrayList;
 import rogue.system.SystemHelper;
 
@@ -34,10 +35,10 @@ public class Player extends Creature implements Camera {
 
 	private Terminal term;
 	private ViewField fov;
-	private static int maxHitpoints = 15;
-		
-	private int strength;
-	private String name;
+        private static int maxHitpointsWithoutArmor = 15;
+        private static final int strengthWithoutArmor = 5;
+	private static int maxHitpoints;
+        private String name;
 	private Inventory inventory;
 	public Boolean worldchangedown = false;   // standardmäßig ist keine Mapänderung erfolgt
 	public Boolean worldchangeup = false; 
@@ -54,13 +55,20 @@ public class Player extends Creature implements Camera {
 		this.term = term;
 		fov = new RayCaster();
 		// Initialise Hitpoints on Max
-		if (SystemHelper.debug) {
-			maxHitpoints = maxHitpoints * 1000000;
+                if (SystemHelper.debug) {
+			maxHitpointsWithoutArmor = maxHitpointsWithoutArmor * 1000000;
 		}
+                maxHitpoints = maxHitpointsWithoutArmor;
 		hitpoints = maxHitpoints;
-		strength = 5;
-		inventory = new Inventory(5,50);
+		strength = strengthWithoutArmor;
+                if(SystemHelper.debug){
+		inventory = new Inventory(2,50);
+                }else{
+                    inventory = new Inventory(5,50);
+                }
+
 		
+
 	}
 
 
@@ -101,6 +109,9 @@ public class Player extends Creature implements Camera {
 				break;
 			case 'i': // Show Inventory
 				showInventoryScreen();
+                                updateHP();
+                                updateStrength();
+
 				break;
 			case 'o':
 				HelpScreen.printMainHelpScreen();
@@ -143,10 +154,14 @@ public class Player extends Creature implements Camera {
 										move(0,0); 
 										}
 						} else {// No monster there
+                                                        move(dir);
+                                                        Actor itemGen= world().getActorAt(ItemGenerator.class, pos());
+                                                        if(itemGen!=null){
+                                                           itemGen.act();
+                                                        }
 							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
 								world().viewable(coord.x(), coord.y());}
-							
-							move(dir);
+								
 							
 							
 							break;
@@ -212,7 +227,7 @@ public class Player extends Creature implements Camera {
             }
 
 
-            term.getKey();
+            
 
         } catch (InterruptedException e) {
             System.out.println("!InterruptedException");
@@ -359,12 +374,13 @@ public class Player extends Creature implements Camera {
 
                     if (zufallszahl == 0||SystemHelper.debug) {
                         //Axt drops 1/3 of the time, always, if Debug-Mode
-                        item = new Item("Axt", 0, Item.ITEMTYPE_SWORD, 2, 0);
+                        item = new Item("Axt", 0, Item.ITEMTYPE_SWORD, 2, 0);                      
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast eine Axt bekommen, druecke i, um das Inventar zu oeffnen");
                         //Wait for pressed key
                         term.getKey();
+                       
                     }
 
                     break;
@@ -403,11 +419,13 @@ public class Player extends Creature implements Camera {
                     if (zufallszahl < 5||SystemHelper.debug) {
                         //Langschwert droppt zu 1/4, immer im Debug-Mode
                         item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0);
-                        inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
                         //Wait for pressed key
                         term.getKey();
+                        inventory.addItem(item);
+                        
+                        
 
                     } else if (zufallszahl < 9) {
                         //Riesenschwert droppt zu 1/5
@@ -492,6 +510,23 @@ public class Player extends Creature implements Camera {
             e.printStackTrace();
         }
 
+
+    }
+
+    public void updateHP(int newBonusHP){
+        float relativeHP = ((float) hitpoints) /((float) maxHitpoints);
+        maxHitpoints = maxHitpointsWithoutArmor+newBonusHP;
+        int newHP = Math.round(relativeHP*maxHitpoints);
+        hitpoints = newHP;
+    }
+    public void updateHP(){
+        updateHP(inventory.getHealthBonus());
+    }
+    public void updateStrength(int newBonusStrength){
+        strength= newBonusStrength+strengthWithoutArmor;
+    }
+    public void updateStrength(){
+        updateStrength(inventory.getBonusDamageOfWornItems());
     }
 
 }

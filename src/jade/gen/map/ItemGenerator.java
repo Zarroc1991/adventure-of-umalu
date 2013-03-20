@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jade.gen.map;
 
 import jade.core.Actor;
@@ -20,12 +19,11 @@ import rogue.level.Screen;
  * An actor, that doesnt do anything, but wait for the Player and let him find
  * an Item, when he passes him
  */
-public class ItemGenerator extends Actor{
+public class ItemGenerator extends Actor {
 
     // the Item to find here
     private Item item;
     private TiledTermPanel term;
-
 
     public ItemGenerator(ColoredChar face, Item item, TiledTermPanel term) {
         super(face);
@@ -36,23 +34,28 @@ public class ItemGenerator extends Actor{
     @Override
     public void act() {
         Player player = world().getActorAt(Player.class, pos());
-        if(player!=null){
+        if (player != null) {
+            try {
+                Screen.redrawEventLine(item.getName() + " gefunden");
+                //wait for key presssed
+                term.getKey();
+
+            } catch (InterruptedException e) {
+                Logger.getLogger(ItemGenerator.class.getName()).log(Level.SEVERE, null, e);
+            }
+
             try {
                 //Player gets the item
                 player.getInventory().addItem(item);
-                // the item is gone
-                expire();
-                //status message
-                Screen.redrawEventLine(item.getName() + " gefunden");
-
-                //wait for key presssed
-                term.getKey();
             } catch (NotEnoughSpaceException ex) {
                 player.getInventory().fullInventoryScreen(item);
-            }catch(InterruptedException ex){
-                Logger.getLogger(ItemGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                // the item is gone
             }
-        }
-    }
+                expire();
+                //status message
 
+            
+        }
+
+    }
 }
