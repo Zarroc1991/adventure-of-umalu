@@ -124,6 +124,12 @@
             <classpath refid="swp-rogue.classpath"/>
         </junit>
     </target>
+    <target name="Rogue (2)">
+        <java classname="sun.applet.AppletViewer" dir="." failonerror="true" fork="yes">
+            <arg line="Rogue (2).html"/>
+            <classpath refid="swp-rogue.classpath"/>
+        </java>
+    </target>
     <target name="junitreport">
         <junitreport todir="${junit.output.dir}">
             <fileset dir="${junit.output.dir}">
