@@ -17,6 +17,10 @@ public class Path {
 	 * @return Absolute Path in current Workingdirectory
 	 */
 	public static String generatePath(String path) {
+		// Running from .jar ?
+		if (SystemHelper.isJar) {
+			return path;
+		}
 		// What OS is running?
 		if (isWin()) {
 			// Delete me later
@@ -59,9 +63,12 @@ public class Path {
 	 * @return Absolute Path
 	 */
 	public static String generateAbsolutePath(String path) {
+		// Running from .jar?
+		if (SystemHelper.isJar) {
+			return path;
+		}
 		// Get current working directory
 		String currentDirectory = System.getProperty("user.dir");
-
 		// Are we running Windows?
 		if (isWin()) {
 			// Check if src is already included
