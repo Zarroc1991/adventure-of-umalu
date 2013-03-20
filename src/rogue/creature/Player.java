@@ -370,12 +370,10 @@ public class Player extends Creature implements Camera {
                 case 2: {
                     //Fette Nacktschnecke
                     //random Number decides whether an Item drops or not and which one
-                    int zufallszahl = random.nextInt(1);
-
-
+                    int zufallszahl = random.nextInt(3);
                     if (zufallszahl == 0||SystemHelper.debug) {
                         //Axt drops 1/3 of the time, always, if Debug-Mode
-                        item = new Item("Axt", 0, Item.ITEMTYPE_SWORD, 2, 0,30);
+                        item = new Item("Axt", 0, Item.ITEMTYPE_SWORD, 1, 0,30);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast eine Axt bekommen, druecke i, um das Inventar zu oeffnen");
@@ -393,7 +391,7 @@ public class Player extends Creature implements Camera {
 
                     if (zufallszahl == 0) {
                         //Langschwert droppt zu 1/20
-                        item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0,10);
+                        item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 7, 0,10);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
@@ -402,7 +400,7 @@ public class Player extends Creature implements Camera {
 
                     } else if (zufallszahl <= 4) {
                         //Kurzschwert droppt zu 1/5
-                        item = new Item("Kurzschwert", 0, Item.ITEMTYPE_SWORD, 3, 0,15);
+                        item = new Item("Kurzschwert", 0, Item.ITEMTYPE_SWORD, 2, 0,15);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Kurzschwert bekommen, druecke i, um das Inventar zu oeffnen");
@@ -419,7 +417,7 @@ public class Player extends Creature implements Camera {
 
                     if (zufallszahl < 5||SystemHelper.debug) {
                         //Langschwert droppt zu 1/4, immer im Debug-Mode
-                        item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 6, 0, 10);
+                        item = new Item("Langschwert", 0, Item.ITEMTYPE_SWORD, 7, 0, 10);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
@@ -431,7 +429,7 @@ public class Player extends Creature implements Camera {
 
                     } else if (zufallszahl < 9) {
                         //Riesenschwert droppt zu 1/5
-                        item = new Item("Riesenschwert", 0, Item.ITEMTYPE_SWORD, 12, 0,8);
+                        item = new Item("Riesenschwert", 0, Item.ITEMTYPE_SWORD, 19, 0,8);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
@@ -443,20 +441,36 @@ public class Player extends Creature implements Camera {
                 case 5: {
                     //Unbeliever
                    //random Number decides whether an Item drops or not and which one
-                    int zufallszahl = random.nextInt(12);
+                    int zufallszahl = random.nextInt(60);
 
-                    if (zufallszahl < 3) {
+                    if (zufallszahl < 15) {
                         //Riesenschwert droppt zu 1/4
-                        item = new Item("Riesenschwert", 0, Item.ITEMTYPE_SWORD, 12, 0,8);
+                        item = new Item("Riesenschwert", 0, Item.ITEMTYPE_SWORD, 19, 0,8);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
                         //Wait for pressed key
                         term.getKey();
 
-                    } else if (zufallszahl < 5) {
-                        //Riesenschwert droppt zu 1/6
-                        item = new Item("Großschwert", 0, Item.ITEMTYPE_SWORD, 12, 0,25);
+                    } else if (zufallszahl < 25) {
+                        //Großschwert droppt zu 1/6
+                        item = new Item("Großschwert", 0, Item.ITEMTYPE_SWORD, 19, 0,25);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        // Wait for pressed Key
+                        term.getKey();
+                    }else if (zufallszahl < 31) {
+                        //Akragons Relikt droppt zu 1/10
+                        item = new Item("Akragons Relikt", 0, Item.ITEMTYPE_SWORD, 25, 0,10);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        // Wait for pressed Key
+                        term.getKey();
+                    }else if (zufallszahl < 36) {
+                        //Dumbarons Kolossschwert droppt zu 1/12
+                        item = new Item("Dumbarons Kolossschwert", 0, Item.ITEMTYPE_SWORD, 27, 0,10);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
@@ -467,12 +481,57 @@ public class Player extends Creature implements Camera {
                 }
                 case 6: {
                     //Orc
-                    //TODO Waffen droppen
+                    //random Number decides whether an Item drops or not and which one
+                    int zufallszahl = random.nextInt(15);
+
+                    if (zufallszahl < 1) {
+                        //Kunkrans Drachtentöter droppt zu 1/15
+                        item = new Item("Kunkrans Drachtentöter", 0, Item.ITEMTYPE_SWORD, 45, 0,4);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        //Wait for pressed key
+                        term.getKey();
+
+                    } else if (zufallszahl < 6) {
+                        //Großschwert droppt zu 1/3
+                        item = new Item("Großschwert", 0, Item.ITEMTYPE_SWORD, 19, 0,25);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        // Wait for pressed Key
+                        term.getKey();
+                    }else if (zufallszahl < 9) {
+                        //Akragons Relikt droppt zu 1/5
+                        item = new Item("Akragons Relikt", 0, Item.ITEMTYPE_SWORD, 25, 0,10);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        // Wait for pressed Key
+                        term.getKey();
+                    }else if (zufallszahl < 12) {
+                        //Dumbarons Kolossschwert droppt zu 1/5
+                        item = new Item("Dumbarons Kolossschwert", 0, Item.ITEMTYPE_SWORD, 27, 0,10);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Großschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        // Wait for pressed Key
+                        term.getKey();
+                    }
                     break;
                 }
                 case 7: {
-                    //Shodow
-                    //TODO Waffen droppen
+                    //Shadow
+                	int zufallszahl = random.nextInt(5);
+                	if (zufallszahl < 1) {
+                        //Kunkrans Drachtentöter droppt zu 1/5
+                        item = new Item("Kunkrans Drachtentöter", 0, Item.ITEMTYPE_SWORD, 45, 0,4);
+                        inventory.addItem(item);
+                        //Status message
+                        Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        //Wait for pressed key
+                        term.getKey();
+                        }
                     break;
                 }
                 case 10: {

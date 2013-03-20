@@ -32,7 +32,7 @@ public class Frog_poisonous extends Monster {
     int attackRadius;
 
     public Frog_poisonous(Terminal term) {
-        super(ColoredChar.create('F',	new Color(160,32,240)), "giftiger Frosch", 10, 3, term);
+        super(ColoredChar.create('F',	new Color(160,32,240)), "giftiger Frosch", 10, 5, term);
         fov = new RayCaster();
         attackRadius = 5;
         //Typenumber 3, sice Monster of Categorie 3

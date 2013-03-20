@@ -34,7 +34,7 @@ public class Dragon extends Monster {
 	    int attackRadius;
 
 	    public Dragon(Terminal term) {
-	        super(ColoredChar.create('D',Color.red), "roter Drache", 130, 25, term);
+	        super(ColoredChar.create('D',Color.red), "roter Drache", 130, 50, term);
 	        fov = new RayCaster();
 	        attackRadius = 100;
 	        //the Dragon is so special, he is number 99

@@ -32,7 +32,7 @@ public class Orc extends Monster {
     int attackRadius;
 
     public Orc(Terminal term) {
-        super(ColoredChar.create('O', new Color(0,100,0)), "Orc", 25, 8, term);
+        super(ColoredChar.create('O', new Color(0,100,0)), "Orc", 25, 15, term);
         fov = new RayCaster();
         attackRadius = 5;
         //Typenumber 6, since cat. 6
