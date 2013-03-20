@@ -45,11 +45,17 @@ public class Inventory {
         }
         wornItems = new Item[3];
 		ArrayList<String> loreText = new ArrayList<String>();
-		loreText.add("Die Abenteurerr\u00fcstung geh\u00f6 zu den Wertvollsten deiner Besitzt\u00fcmer.");
+		loreText.add("Deine Abenteurerr\u00fcstung geh\u00f6 war zwar blankpoliert,");
+		loreText.add("sie ist jedoch wegen der vergangenen Schlachten bereits");
+		loreText.add("blutverschmiert.");
         Item standardHelmet = new Item("Abenteurerr\u00fcstung", 0, Item.ITEMTYPE_HEAD,
                 0, 0, true, 1,loreText);
-        Item standardSword = new Item("\u00dcbungsschwert", 0,
-                Item.ITEMTYPE_SWORD, 0, 0, true, 1);
+		loreText = new ArrayList<String>();
+		loreText.add("Nach vielen anstrengenden K\f00e4mpfen hast du dieses Schwert erhalten");
+		loreText.add("aber es ist unwahrscheinlich dass es bis zum Kampf gegen den Drachen");
+		loreText.add("halten wird.");
+        Item standardSword = new Item("Klinge der Rache", 0,
+                Item.ITEMTYPE_SWORD, 0, 0, true, 25, 3, loreText);
         wornItems[Item.ITEMTYPE_HEAD] = standardHelmet;
         wornItems[Item.ITEMTYPE_SWORD] = standardSword;
     }

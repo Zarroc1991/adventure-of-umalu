@@ -300,7 +300,7 @@ public class Player extends Creature implements Camera {
 			}
             // Generiere den Output fuer das aktuelle Schwert
 			if (wornItems[Item.ITEMTYPE_SWORD] != null) {
-				lines.add("<S>chwert: " + wornItems[Item.ITEMTYPE_SWORD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_SWORD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_SWORD].getHealthBonus() + ", Dura: "+wornItems[Item.ITEMTYPE_HEAD].getDurability()+"/"+wornItems[Item.ITEMTYPE_HEAD].getMaxDurability()+"]");
+				lines.add("<S>chwert: " + wornItems[Item.ITEMTYPE_SWORD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_SWORD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_SWORD].getHealthBonus() + ", Dura: "+wornItems[Item.ITEMTYPE_SWORD].getDurability()+"/"+wornItems[Item.ITEMTYPE_SWORD].getMaxDurability()+"]");
 			} else {
 				lines.add("Schwert: Keines");
 			}
@@ -537,10 +537,10 @@ public class Player extends Creature implements Camera {
                 	int zufallszahl = random.nextInt(5);
                 	if (zufallszahl < 1) {
                         //Kunkrans Drachtentöter droppt zu 1/5
-                        item = new Item("Kunkrans Drachtentöter", 0, Item.ITEMTYPE_SWORD, 45, 0,4);
+                        item = new Item("Kunkrans Drachtent\u00f6ter", 0, Item.ITEMTYPE_SWORD, 45, 0,4);
                         inventory.addItem(item);
                         //Status message
-                        Screen.redrawEventLine("Du hast ein Riesenschwert bekommen, druecke i, um das Inventar zu oeffnen");
+                        Screen.redrawEventLine("Du hast ein Kunkrans Drachtent\u00f6ter bekommen, druecke i, um das Inventar zu oeffnen");
                         //Wait for pressed key
                         term.getKey();
                         }

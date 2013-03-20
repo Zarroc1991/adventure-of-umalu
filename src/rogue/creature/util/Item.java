@@ -120,6 +120,15 @@ public class Item {
 		this.equipped = equipped;
 	}
 	
+	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth, boolean equipped, int maxStability, int curStability, ArrayList<String> description) {
+		// Call other Constructor
+		this(name, goldValue, type, bonusDamage, bonusHealth,maxStability);
+		// Set equipped and stability
+		this.stability = curStability;
+		this.equipped = equipped;
+		this.description = description;
+	}
+	
 	public Item(String name, int goldValue, int type, int bonusDamage, int bonusHealth, boolean equipped, int stability, ArrayList<String> description) {
 		// Call other Constructor
 		this(name, goldValue, type, bonusDamage, bonusHealth,stability);
