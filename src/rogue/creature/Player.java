@@ -294,9 +294,9 @@ public class Player extends Creature implements Camera {
             Item[] wornItems = inventory.getWornItems();
             // Generiere den Output fuer den aktuellen Helm
 			if (wornItems[Item.ITEMTYPE_HEAD] != null) {
-				lines.add("<K>opf: " + wornItems[Item.ITEMTYPE_HEAD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_HEAD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_HEAD].getHealthBonus() + ", Dura: "+wornItems[Item.ITEMTYPE_HEAD].getDurability()+"/"+wornItems[Item.ITEMTYPE_HEAD].getMaxDurability()+"]");
+				lines.add("<K>\u00f6rper: " + wornItems[Item.ITEMTYPE_HEAD].getName() + " [+DMG: " + wornItems[Item.ITEMTYPE_HEAD].getDamageBonus() + ", +HP: " + wornItems[Item.ITEMTYPE_HEAD].getHealthBonus() + ", Dura: "+wornItems[Item.ITEMTYPE_HEAD].getDurability()+"/"+wornItems[Item.ITEMTYPE_HEAD].getMaxDurability()+"]");
 			} else {
-				lines.add("Kopf: Nichts.");
+				lines.add("K\u00f6: Nichts.");
 			}
             // Generiere den Output fuer das aktuelle Schwert
 			if (wornItems[Item.ITEMTYPE_SWORD] != null) {
