@@ -179,7 +179,7 @@ public class Player extends Creature implements Camera {
 	}
 
 	public void confirmQuit() {
-		Screen.redrawEventLine("Sicher dass Adventures in Umalu beendet werden soll? <J>a/<N>ein");
+		Screen.redrawEventLine("Sicher dass Adventures in Umalu beendet werden soll? <J>a/<N>ein",false);
 		try {
 			if (term.getKey() == 'j') {
 				expire();
