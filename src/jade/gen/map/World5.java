@@ -21,7 +21,7 @@ public class World5 extends NewWorld {
 	//ruft generateStep aus NewWorld auf
 	protected void generateStep(World world, Dice dice) {
 		//generateStep(world,dice,Path.generateAbsolutePath("maps/Welt5.txt"));
-		generateStep(world,dice,Path.generateAbsolutePath("maps/Welt4.txt"),level,aufwaerts );
+		generateStep(world,dice,Path.generateAbsolutePath("maps/Welt5.txt"),level,aufwaerts );
 	}
 
 	
