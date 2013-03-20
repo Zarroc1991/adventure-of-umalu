@@ -55,6 +55,7 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
    		int roundsToHpUp = hpCycle;
    		// Set System options
 		Screen.initialiseScreen();
+		new Path().runningFromJar();
 		SystemHelper.getArgs(args);
 		TiledTermPanel term = TiledTermPanel.getFramedTerminal("Jade Rogue");
 
