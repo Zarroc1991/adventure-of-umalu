@@ -53,12 +53,13 @@ public class Player extends Creature implements Camera {
 		this.term = term;
 		fov = new RayCaster();
 		// Initialise Hitpoints on Max
-		hitpoints = maxHitpoints;
-		strength = 5;
-		inventory = new Inventory(5,50);
 		if (SystemHelper.debug) {
 			maxHitpoints = maxHitpoints * 1000000;
 		}
+		hitpoints = maxHitpoints;
+		strength = 5;
+		inventory = new Inventory(5,50);
+		
 	}
 
 
