@@ -32,7 +32,7 @@ public class Shadow extends Monster {
     int attackRadius;
 
     public Shadow(Terminal term) {
-        super(ColoredChar.create(':', new Color(51,51,51)), "Schatten", 25, 10, term);
+        super(ColoredChar.create(':', new Color(51,51,51)), "Schatten", 25, 19, term);
         fov = new RayCaster();
         attackRadius = 5;
         //Typenumber 7 since cat 7

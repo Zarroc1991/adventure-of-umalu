@@ -354,7 +354,7 @@ public class Player extends Creature implements Camera {
                 case 2: {
                     //Fette Nacktschnecke
                     //random Number decides whether an Item drops or not and which one
-                    int zufallszahl = random.nextInt(1);
+                    int zufallszahl = random.nextInt(3);
 
 
                     if (zufallszahl == 0||SystemHelper.debug) {

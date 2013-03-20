@@ -32,7 +32,7 @@ public class Zombie extends Monster {
     int attackRadius;
 
     public Zombie(Terminal term) {
-        super(ColoredChar.create('Z'), "Zombie", 16, 4, term);
+        super(ColoredChar.create('Z'), "Zombie", 16, 7, term);
         fov = new RayCaster();
         attackRadius = 5;
         //Typenumber 4, since cat.4
