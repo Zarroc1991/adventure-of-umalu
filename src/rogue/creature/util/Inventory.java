@@ -47,7 +47,7 @@ public class Inventory {
         Item standardHelmet = new Item("Standard Helm", 0, Item.ITEMTYPE_HEAD,
                 0, 0, true, 1);
         Item standardSword = new Item("Standard Schwert", 0,
-                Item.ITEMTYPE_SWORD, 0, 0, true, 1);
+                Item.ITEMTYPE_SWORD, 0, 0, true, Integer.MAX_VALUE);
         wornItems[Item.ITEMTYPE_HEAD] = standardHelmet;
         wornItems[Item.ITEMTYPE_SWORD] = standardSword;
     }
