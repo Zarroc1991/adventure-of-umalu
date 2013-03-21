@@ -14,10 +14,10 @@ public class HelpScreen {
 		lines.add("Adventures in Umalu - Hilfe");
 		lines.add("");
 		lines.add("-- Steuerung --");
-		lines.add("<w>,<k> - Nach Norden laufen");
-		lines.add("<a>,<h> - Nach Westen laufen");
-		lines.add("<s>,<j> - Nach Sueden laufen");
-		lines.add("<d>,<l> - Nach Osten  laufen");
+		lines.add("<w> - Nach Norden laufen");
+		lines.add("<a> - Nach Westen laufen");
+		lines.add("<s>,<x> - Nach Sueden laufen");
+		lines.add("<d> - Nach Osten  laufen");
 		lines.add("");
 		lines.add("-- Diagonal-Steuererung");
 		lines.add("<q> - Nach Nordwesten ("+'\u2196'+ ") laufen");
@@ -30,7 +30,7 @@ public class HelpScreen {
 		lines.add("<i> - Inventar anzeigen");
 		lines.add("<o> - Diese Hilfe anzeigen");
 
-		lines.add("<x> - Eventlog anzeigen");
+		lines.add("<h> - Eventlog anzeigen");
 		lines.add("<b> - Adventures of Umalu beenden");
 		lines.add("");
 		lines.add("+++ Beliebige Taste zum Fortfahren druecken +++");
