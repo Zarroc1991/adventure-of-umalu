@@ -90,10 +90,10 @@ public class Frog_poisonous extends Monster {
 	           Random generator = new Random();
 	            int ran = generator.nextInt( 4 );
 	            switch(ran){
-	            	case 0:System.out.println("Seine Gift brennt sich in deine Haut.");break;
-	            	case 1:System.out.println("Aaarrhhh... Du hast sein Gift im Auge.");break;//optional hier alles sichtbare l�schen
-	            	case 2:System.out.println("Du unterschätzt dieses kleine Vieh.");break;
-	            	case 3:System.out.println("NEIN... Deine Haut wird verätzt.");break;
+	            	case 0:Screen.showEventLineAndPutToConsole("Seine Gift brennt sich in deine Haut.", true, true);break;
+	            	case 1:Screen.showEventLineAndPutToConsole("Aaarrhhh... Du hast sein Gift im Auge.", true, true);break;//optional hier alles sichtbare l�schen
+	            	case 2:Screen.showEventLineAndPutToConsole("Du untersch\u00e4tzt dieses kleine Vieh.", true, true);break;
+	            	case 3:Screen.showEventLineAndPutToConsole("NEIN... Deine Haut wird ver\u00e4tzt.", true, true);break;
 		        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);

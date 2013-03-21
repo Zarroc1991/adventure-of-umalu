@@ -88,10 +88,10 @@ public class Rat extends Monster {
             Random generator = new Random();
             int ran = generator.nextInt( 4 );
             switch(ran){
-            	case 0:System.out.println("Ihre Zähne stecken in deinem Hintern.");break;
-            	case 1:System.out.println("Sie beißt in deinen großen Zeh");break;
-            	case 2:System.out.println("Tollwutalarm");break;
-            	case 3:System.out.println("Sie quickt so laut.");break;
+            	case 0:Screen.showEventLineAndPutToConsole("Ihre Z\u00e4hne stecken in deinem Hintern.",true, true);break;
+            	case 1:Screen.showEventLineAndPutToConsole("Sie bei\u00dft in deinen gro\u00dfen Zeh", true, true);break;
+            	case 2:Screen.showEventLineAndPutToConsole("Tollwutalarm",true, true);break;
+            	case 3:Screen.showEventLineAndPutToConsole("Sie quickt so laut.", true, true);break;
 	        }//switch
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);

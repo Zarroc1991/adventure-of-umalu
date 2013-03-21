@@ -206,6 +206,11 @@ public class Item {
 		} else {
 			lines.add("Derzeit nicht angelegt");
 		}
+		lines.add("");
+		if (equipped) {
+			lines.add("<s> Gegenstand anlegen");
+		}
+		lines.add("<q> Zur\u00fcck ins Inventar");
 		char key = ' ';
 		Screen.printBlock(lines, Screen.lastTerminal, Screen.lastWorld);
 		try{

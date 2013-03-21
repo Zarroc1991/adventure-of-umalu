@@ -81,19 +81,16 @@ public enum Direction
         {
 		case '6':
 		case 'd':
-		case 'l':
                 	return EAST;
 		case '4':
 		case 'a':
-           	case 'h':
            		 return WEST;
            	case '8':
-		case 'w':
-           	case 'k':
+			case 'w':
            		return NORTH;
            	case '2':
 		case 's':
-           	case 'j':
+		case 'x':
          		return SOUTH;
            	case '3':
            	case 'n':
