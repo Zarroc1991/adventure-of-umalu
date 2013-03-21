@@ -12,5 +12,12 @@ public class Arena extends NewWorld {
 	//ruft generateStep aus NewWorld auf
 	protected void generateStep(World world, Dice dice) {
 		generateStep(world,dice,Path.generateAbsolutePath("maps/Arena.txt"),5, true);
+                for (int i = 0; i < world.width(); i++) {
+                    for (int j = 0; j < world.height(); j++) {
+                        world.viewable(j, j);
+
+                    }
+
+            }
 	}
 }

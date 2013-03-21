@@ -222,15 +222,11 @@ public class Player extends Creature implements Camera {
         boolean opponentDied = opponent.loseHitpoints(damage);
         
         try {
+            term.getKey();
             if (opponentDied) {
                 //wait for key to continue on Status message
-                term.getKey();
                 randomlyDropItem(opponent);
-            }
-
-
-            
-
+            }       
         } catch (InterruptedException e) {
             System.out.println("!InterruptedException");
             e.printStackTrace();
