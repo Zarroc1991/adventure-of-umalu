@@ -81,8 +81,7 @@ public abstract class NewWorld extends MapGenerator {
                                             if(!aufwaerts){world.playerstart = new Coordinate(i,lineNumber);}break;}
 					}
 					//beim ersten Level soll es kein Leveldown geben 
-					if(level==0 && c=='\u00AE'){
-						
+					if((level==0||level==5) && c=='\u00AE'){
 						c_color=ColoredChar.create('.', new Color(51,51,51));
 					}
 					// System.out.println(c); // TODO Delete this line, when it
