@@ -90,6 +90,7 @@ public enum Direction
            		return NORTH;
            	case '2':
 		case 's':
+		case 'x':
          		return SOUTH;
            	case '3':
            	case 'n':
