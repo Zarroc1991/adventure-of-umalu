@@ -209,7 +209,7 @@ public class Item {
 			lines.add("Derzeit nicht angelegt");
 		}
 		lines.add("");
-		if (equipped) {
+		if (!equipped) {
 			lines.add("<s> Gegenstand anlegen");
 		}
 		lines.add("<q> Zur\u00fcck ins Inventar");
