@@ -307,6 +307,8 @@ public class Player extends Creature implements Camera {
                 // Zeige das Item an Stelle an i an
                 lines.add("(" + i + ") " + backpack.get(i).getName() + "[+DMG: " + backpack.get(i).getDamageBonus() + ", +HP: " + backpack.get(i).getHealthBonus()+", Dura: " + backpack.get(i).getDurability()+"/"+backpack.get(i).getMaxDurability()+"]");
             }
+			lines.add("");
+			lines.add("<q>/<i> Inventar verlassen, <o> Hilfe aufrufen");
             // TODO Add lines here.
             Screen.putText(lines);
             try {
