@@ -90,10 +90,10 @@ public class Zombie extends Monster {
 	           Random generator = new Random();
 	            int ran = generator.nextInt( 4 );
 	            switch(ran){
-	            	case 0:System.out.println("Er bewirft dich mit einem Arm.");break;
-	            	case 1:System.out.println("Er hat ein Auge auf dich geworfen.");break;//optional hier alles sichtbare loeschen
-	            	case 2:System.out.println("Er packt dein Kopf und will dein Gehirn.");break;
-	            	case 3:System.out.println("Sein Gestank raubt dir den Atem.");break;
+	            	case 0:Screen.showEventLineAndPutToConsole("Er bewirft dich mit einem Arm.", true, true);break;
+	            	case 1:Screen.showEventLineAndPutToConsole("Er hat ein Auge auf dich geworfen.", true, true);break;//optional hier alles sichtbare loeschen
+	            	case 2:Screen.showEventLineAndPutToConsole("Er packt dein Kopf und will dein Gehirn.", true, true);break;
+	            	case 3:Screen.showEventLineAndPutToConsole("Sein Gestank raubt dir den Atem.", true, true);break;
 		        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);

@@ -341,6 +341,19 @@ public class Screen {
 		Screen.putText(Screen.eventLog);
 	}
 
+	public static void showEventLineAndPutToConsole(String eventLine, boolean saveInLog, boolean waitForKey) {
+		Screen.redrawEventLine(eventLine, saveInLog);
+		System.out.println(eventLine);
+		if (waitForKey) {
+			try {
+				Screen.lastTerminal.getKey();
+			} catch (InterruptedException e) {
+				System.out.println("!InterruptedException");
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public static void anyKey() {
 		try {
 			lastTerminal.getKey();

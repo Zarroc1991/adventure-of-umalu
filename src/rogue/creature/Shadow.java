@@ -90,11 +90,11 @@ public class Shadow extends Monster {
 	        Random generator = new Random();
             int ran = generator.nextInt( 5 );
             switch(ran){
-            	case 0:System.out.println("Eine unerträgliche leere ergreift dich.");break;
-            	case 1:System.out.println("Du kannst nichts sehen.");break;//optional hier alles sichtbare l�schen
-            	case 2:System.out.println("Dein größter Albtraum spielt sich in deinem Kopf ab.");break;
-            	case 3:System.out.println("Dein Herz fühlt sich so kalt an.");break;
-            	case 4:System.out.println("Du hast schreckliche Angst.");break;
+            	case 0:Screen.showEventLineAndPutToConsole("Eine unerträgliche leere ergreift dich.", true, true);break;
+            	case 1:Screen.showEventLineAndPutToConsole("Du kannst nichts sehen.", true, true);break;//optional hier alles sichtbare l�schen
+            	case 2:Screen.showEventLineAndPutToConsole("Dein gr\u00f6\u00fcter Albtraum spielt sich in deinem Kopf ab.", true, true);break;
+            	case 3:Screen.showEventLineAndPutToConsole("Dein Herz fühlt sich so kalt an.", true, true);break;
+            	case 4:Screen.showEventLineAndPutToConsole("Du hast schreckliche Angst.", true, true);break;
 	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);
