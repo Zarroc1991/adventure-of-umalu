@@ -40,6 +40,9 @@ public class Rat extends Monster {
     }//public Rat
 
     @Override
+	/**
+	 * This Creatures has its move now
+	 */
     public void act() {
 
         for (Direction dir : Arrays.asList(Direction.values())) {
@@ -75,6 +78,9 @@ public class Rat extends Monster {
     
 
 	@Override
+	/**
+	 * Allows this monster to figth against the player
+	 */
 	public void fight(Player opponent) {
 		
 	        System.out.println("Die " + name + " greift dich an");

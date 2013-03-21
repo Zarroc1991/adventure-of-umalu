@@ -32,15 +32,34 @@ import java.util.jar.JarEntry;
  */
 
 public class Screen {
+	/**
+	 * Last used World
+	 */
 	public static World lastWorld;
+	/**
+	 * Last used Terminal
+	 */
 	public static TiledTermPanel lastTerminal;
+	/**
+	 * Last Eventmessages
+	 */
 	public static ArrayList<String> eventLog;
 
+	/**
+	 * Creates an empty EventLog
+	 */
 	public static void initialiseScreen() {
 		eventLog = new ArrayList<String>();
 	}
 	
-	//Liest txt Dateien ein und gibt sie im Schreibmaschinenstyle aus und fügt ggf. den String name eine 
+	/**
+	 * Reads a file at filePath and shows its content intro Style, include Players
+	 *
+	 * @param name Character Name, will be insterted in Text at @-Signs
+	 * @param filePath Path to File, which Contents will be added
+	 * @param term Currently Used Terminal
+	 * @param world Currently Used World
+	 */
 	public static void intro(String name, String filePath, TiledTermPanel term,World world) {
 		term.clearBuffer();
 		try {
@@ -124,6 +143,12 @@ public class Screen {
 		}
 	}
 
+	/**
+	 * Shows Content of File by printing it on Screen
+	 *
+	 * @param filePath Path to File
+	 * @param term Currently used Term
+	 */
 	public static void showFile(String filePath, TiledTermPanel term,
 			World world) {
 		term.clearBuffer();
@@ -312,6 +337,12 @@ public class Screen {
 		lastTerminal.refreshScreen();
 	}
 
+	/**
+	 * Prints a Text in Eventline, but gives possibility to not save it in Eventlog (e.g. Levelswitch)
+	 *
+	 * @param eventLine Line to be printed
+	 * @param saveInLog True, if this Message should be used in Eventlog, other should be set to false
+	 */
 	public static void redrawEventLine(String eventLine, boolean saveInLog) {
 		int x;
 		for (x = 0; x < eventLine.length(); x++) {
@@ -333,14 +364,29 @@ public class Screen {
 		lastTerminal.refreshScreen();
 	}
 	
+	/**
+	 * Prints a Block of Text at Fullscreen
+	 * 
+	 * @param lines Lines to be printed
+	 */
 	public static void putText(ArrayList<String> lines) {
 		Screen.printBlock(lines, Screen.lastTerminal, Screen.lastWorld);
 	}
-
+	
+	/**
+	 * Shows Eventlog
+	 */
 	public static void showEventLog() {
 		Screen.putText(Screen.eventLog);
 	}
 
+	/**
+	 * Prints a Text to Eventline and Console, gives possibility to not save it in Eventlog
+	 *
+	 * @param eventLine Line to be printed
+	 * @param saveInLog True, if this Message should be logged in Eventlog
+	 * @param waitForKey True, if Application should wait for Keyinput by User
+	 */
 	public static void showEventLineAndPutToConsole(String eventLine, boolean saveInLog, boolean waitForKey) {
 		Screen.redrawEventLine(eventLine, saveInLog);
 		System.out.println(eventLine);
@@ -354,6 +400,9 @@ public class Screen {
 		}
 	}
 
+	/**
+	 * Waits for a pressed Key
+	 */
 	public static void anyKey() {
 		try {
 			lastTerminal.getKey();

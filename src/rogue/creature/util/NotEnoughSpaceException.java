@@ -6,6 +6,9 @@
  */
 package rogue.creature.util;
 
+/**
+ * Gets thrown if Character has not collected enough Gold for Action
+ */
 public class NotEnoughSpaceException extends Exception {
 	public NotEnoughSpaceException() {
 		

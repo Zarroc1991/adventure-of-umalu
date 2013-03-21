@@ -23,8 +23,7 @@ import java.util.Arrays;
 import rogue.level.Screen;
 
 /**
- * TODO Delete this Class, when it is not used anymore, as instances of Monster do the same thing right now
- * @author alle
+ * Represents a Dragon
  */
 
 public class Dragon extends Monster {
@@ -62,6 +61,9 @@ public class Dragon extends Monster {
 	}
 
 	@Override
+	/**
+	 * Allows this monster to figth against the player
+	 */
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
 	        System.out.println("Ra's al Ghul greift dich an");

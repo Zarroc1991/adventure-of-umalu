@@ -28,12 +28,14 @@ public class Item {
 	private ArrayList<String> description;
 
 	/**
-	 * Describes Item is as Helmet
+	 * Describes Item is as Helmet/Armor
 	 */
 	public static final int ITEMTYPE_HEAD = 0;
 
 	/**
 	 * Describes Item as Chest Armor
+	 *
+	 * @deprecated Unused, Armor Items should use Item.ITEMTYPE_HEAD instead
 	 */
 	public static final int ITEMTYPE_BODY = 1;
 
@@ -258,19 +260,35 @@ public class Item {
 				break;
 		}
 	}
-
+	
+	/**
+	 * Sets Equipped Variable to new Value
+	 */
 	public void setEquipped(boolean equipped) {
 		this.equipped = equipped;
 	}
+	
+	/**
+	 * Decrease Durability by 1
+	 */
 	public void decreaseStability(){
 		stability--;
 		
 	}
 	
+	/**
+	 * Get current Durability Value
+	 * @return Current Durability Value
+	 */
 	public int getDurability() {
 		return stability;
 	}
 	
+	/**
+	 * Get Maximum Durability Value for this Item
+	 * 
+	 * @param Maximum Durability of Item
+	 */
 	public int getMaxDurability() {
 		return maxDurability;
 	}

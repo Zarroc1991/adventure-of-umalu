@@ -77,6 +77,9 @@ public class Orc extends Monster {
             }//act
 
 	@Override
+	/**
+	 * Allows this monster to figth against the player
+	 */
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
 	        System.out.println("Der " + name + " greift dich an");

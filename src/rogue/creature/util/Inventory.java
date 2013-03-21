@@ -289,6 +289,11 @@ public class Inventory {
 		}
     }
 
+	/**
+	 * Let user select an Item to destroy and auto add new item
+	 *
+	 * @param item New Item
+	 */
     public void fullInventoryScreen(Item item) {
         boolean loop = true;
         while (loop) {
