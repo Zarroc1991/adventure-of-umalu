@@ -114,7 +114,7 @@ public class Player extends Creature implements Camera {
 			case 'o':
 				HelpScreen.printMainHelpScreen();
 				break;
-			case 'x': // TODO Change this key
+			case 'h': // TODO Change this key
 				Screen.showEventLog();
 				term.getKey();
 				Screen.redrawMap("HP: "+this.getHitpoints());
