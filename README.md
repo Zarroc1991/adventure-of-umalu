@@ -16,6 +16,8 @@ at Softwarepraktikum Course at Freie Universität Berlin.
 
 Adventures in Umalu is currently only developed in German.
 
+Projectsite: http://26thmeusoc.github.com/adventure-of-umalu/
+
 Eine schnelle Einführung in Adventures in Umalu
 ===
 Zunächst die Dateien aus diesem Repository clonen. Wir empfehlen für den Start eclipse zu verwenden:
