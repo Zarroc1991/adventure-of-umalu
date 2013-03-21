@@ -61,18 +61,18 @@ public abstract class World extends Messenger
 	}
 
 
-	/**
-	 * Performs one tick. This will call {@code act()} on all {@code Actor} in the order specified
-	 * by the act order of the {@code World}. Any {@code Actor} whose type does not appear in the
-	 * act order does not act. Any expired {@code Actor} are removed from the {@code World}.
-	 */
+	
 	public void playertick(){
 		Player player = this.getActor(Player.class);
 		if(!player.expired()){
                  player.act();
                  }
 		}
-			
+	/**
+	 * Performs one tick. This will call {@code act()} on all {@code Actor} in the order specified
+	 * by the act order of the {@code World}. Any {@code Actor} whose type does not appear in the
+	 * act order does not act. Any expired {@code Actor} are removed from the {@code World}.
+	 */
 	public void tick()
 	{
 		for(Class<? extends Actor> cls : actOrder)
