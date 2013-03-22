@@ -7,6 +7,9 @@ package rogue.system;
  */
 import rogue.system.SystemHelper;
 
+/**
+ * Path Helperclass. Contains functions to create Several paths
+ */
 public class Path {
 
 	/**

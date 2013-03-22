@@ -16,7 +16,7 @@ import rogue.level.Screen;
 
 /**
  *
- * A Troll is a stupid Monster. He doesnt move at al, but ist very strong, and attcs you, when you are near him
+ * A Troll is a stupid Monster. He doesnt move at all, but ist very strong, and attcs you, when you are near him
  */
 public class Troll extends Monster{
 
@@ -48,6 +48,9 @@ public class Troll extends Monster{
 
 
 	@Override
+	/**
+	 * Allows this monster to figth against the player
+	 */
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
 	        System.out.println("der " + name + "greift dich an");

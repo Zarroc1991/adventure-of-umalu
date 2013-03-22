@@ -6,10 +6,27 @@
  */
 package rogue.system;
 
+/**
+ * Contains and sets global Options and Variables.
+ */
 public class SystemHelper {
+	/**
+	 * Set to true if debug parameter has been set on startup
+	 */
 	public static boolean debug = false;
+	/**
+	 * Set to true, if speedrun parameter has been set on startup
+	 */
 	public static boolean speedrun = false;
+	/**
+	 * Set to true, if Application has been started as an Applet
+	 *
+	 * @deprecated Since this Application does not support being run as an Applet, this Variable will not be set.
+	 */
 	public static boolean isApplet = false;
+	/**
+	 * Set to true, if application is run frum a Jar-File.
+	 */
 	public static boolean isJar = false;
 
 	/**

@@ -40,6 +40,9 @@ public class Unbeliever extends Monster {
     }
 
     @Override
+	/**
+	 * This Creatures has its move now
+	 */
   public void act() {
         
         for (Direction dir : Arrays.asList(Direction.values())) {
@@ -77,6 +80,9 @@ public class Unbeliever extends Monster {
             }//act
 
 	@Override
+	/**
+	 * Allows this monster to figth against the player
+	 */
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
 	        System.out.println("Der " + name + " greift dich an");
@@ -90,10 +96,10 @@ public class Unbeliever extends Monster {
 	           Random generator = new Random();
 	            int ran = generator.nextInt( 4 );
 	            switch(ran){
-	            	case 0:System.out.println("Dein Gott ist eine Illusion.");break;
-	            	case 1:System.out.println("Kremsgrdr mag dich nicht mehr.");break;//optional hier alles sichtbare l�schen
-	            	case 2:System.out.println("YOLO");break;
-	            	case 3:System.out.println("Sieh doch ein das Kremsgrdr dir nicht hilft.");break;
+	            	case 0:Screen.showEventLineAndPutToConsole("'Dein Gott ist eine Illusion.'", true, true);break;
+	            	case 1:Screen.showEventLineAndPutToConsole("'Kremsgrdr mag dich nicht mehr.'", true, true);break;//optional hier alles sichtbare l�schen
+	            	case 2:Screen.showEventLineAndPutToConsole("'YOLO'", true, true);break;
+	            	case 3:Screen.showEventLineAndPutToConsole("'Sieh doch ein das Kremsgrdr dir nicht hilft.'", true, true);break;
 		        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);

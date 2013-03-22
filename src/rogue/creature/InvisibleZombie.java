@@ -49,6 +49,9 @@ public class InvisibleZombie extends Monster{
     }
 
 	@Override
+	/**
+	 * Allows this monster to figth against the player
+	 */
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
 	        System.out.println("der " + name + "greift dich an");

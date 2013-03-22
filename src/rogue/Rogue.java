@@ -82,10 +82,11 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 				world);
 		term.getKey();
 		player.setName(CharacterCreation.getCharacterName(term, world));
-		if (SystemHelper.debug) {
+		if (!SystemHelper.debug) {
 			Screen.printLine(player.getName(),term,world);
+			term.getKey();
 		}
-		term.getKey();
+		
 		
 		//Screen.showFile(Path.generateAbsolutePath("maps/start.txt"),term,world);
 		//Zeigt Intro 
@@ -279,18 +280,6 @@ public class Rogue extends JApplet implements KeyEventDispatcher {
 					}
 					// Decrement hpCycle Counter
 					roundsToHpUp--;
-
-					// Generate a List of Monsters still on Map
-
-					Collection<Monster> monsters = world.getActorsAt(Monster.class,
-							player.pos());
-					// Has every Monster been killed?
-					if (!monsters.isEmpty()) { // Yes
-						// Stop Game
-						player.expire();
-						continue;
-					}
-
 					Screen.lastWorld = world;
 					Screen.lastTerminal = term;
 					Screen.redrawMap();

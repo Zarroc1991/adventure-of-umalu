@@ -77,6 +77,9 @@ public class Slug_fat extends Monster {
             }//act
 
 	@Override
+	/**
+	 * Allows this monster to figth against the player
+	 */
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
 	        System.out.println("Die " + name + " greift dich an");
@@ -90,10 +93,10 @@ public class Slug_fat extends Monster {
             Random generator = new Random();
             int ran = generator.nextInt( 4 );
             switch(ran){
-            	case 0:System.out.println("Ihr Schleim stinkt fürchterlich.");break;
-            	case 1:System.out.println("Sie spuckt dich voll Schleim...");break;
-            	case 2:System.out.println("Ahhh sie zieht eine Schleimspur über dich.");break;
-            	case 3:System.out.println("Sie setzt sich auf dich.");break;
+            	case 0:Screen.showEventLineAndPutToConsole("Ihr Schleim stinkt f\u00fcrchterlich.", true, true);break;
+            	case 1:Screen.showEventLineAndPutToConsole("Sie spuckt dich voll Schleim...", true, true);break;
+            	case 2:Screen.showEventLineAndPutToConsole("Ahhh sie zieht eine Schleimspur \u00fcber dich.", true, true);break;
+            	case 3:Screen.showEventLineAndPutToConsole("Sie setzt sich auf dich.", true, true);break;
 	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);

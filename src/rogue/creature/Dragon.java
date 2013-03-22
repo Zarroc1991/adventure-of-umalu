@@ -23,8 +23,7 @@ import java.util.Arrays;
 import rogue.level.Screen;
 
 /**
- * TODO Delete this Class, when it is not used anymore, as instances of Monster do the same thing right now
- * @author alle
+ * Represents a Dragon
  */
 
 public class Dragon extends Monster {
@@ -62,6 +61,9 @@ public class Dragon extends Monster {
 	}
 
 	@Override
+	/**
+	 * Allows this monster to figth against the player
+	 */
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
 	        System.out.println("Ra's al Ghul greift dich an");
@@ -75,10 +77,10 @@ public class Dragon extends Monster {
             Random generator = new Random();
             int ran = generator.nextInt( 4 );
             switch(ran){
-            	case 0:System.out.println("Er verbrennt dir den Arsch!");break;
-            	case 1:System.out.println("Eine Drachenkralle trifft dich.");break;
-            	case 2:System.out.println("Iiiihh er hat dich angefurzt.");break;
-            	case 3:System.out.println("Aua Drachenzähne sind scharf");break;
+            	case 0:Screen.showEventLineAndPutToConsole("Er verbrennt dir den Arsch!", true, true);break;
+            	case 1:Screen.showEventLineAndPutToConsole("Eine Drachenkralle trifft dich.", true, true);break;
+            	case 2:Screen.showEventLineAndPutToConsole("Iiiihh er hat dich angefurzt.", true, true);break;
+            	case 3:Screen.showEventLineAndPutToConsole("Aua Drachenz\u00e4hne sind scharf", true, true);break;
 	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);

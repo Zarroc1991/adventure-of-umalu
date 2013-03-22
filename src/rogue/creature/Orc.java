@@ -77,6 +77,9 @@ public class Orc extends Monster {
             }//act
 
 	@Override
+	/**
+	 * Allows this monster to figth against the player
+	 */
 	public void fight(Player opponent) {
 		// TODO Auto-generated method stub {
 	        System.out.println("Der " + name + " greift dich an");
@@ -90,10 +93,10 @@ public class Orc extends Monster {
 	        Random generator = new Random();
             int ran = generator.nextInt( 4 );
             switch(ran){
-            	case 0:System.out.println("Seine rießen Faust trifft dein Gesicht.");break;
-            	case 1:System.out.println("Das Ungetüm rammt dich um.");break;//optional hier alles sichtbare l�schen
-            	case 2:System.out.println("Er schleudert dich durch die Luft.");break;
-            	case 3:System.out.println("Sein Gestank lähmt dich.");break;
+            	case 0:Screen.showEventLineAndPutToConsole("Seine riesen Faust trifft dein Gesicht.", true, true);break;
+            	case 1:Screen.showEventLineAndPutToConsole("Das Unget\u00fcm rammt dich um.", true, true);break;//optional hier alles sichtbare loeschen
+            	case 2:Screen.showEventLineAndPutToConsole("Er schleudert dich durch die Luft.", true, true);break;
+            	case 3:Screen.showEventLineAndPutToConsole("Sein Gestank l\u00e4hmt dich.", true, true);break;
 	        }
 	        System.out.println("Du hast "+ abzug + " HP verloren");
 	        System.out.println("verbleibende HP: "+ opponent.hitpoints);

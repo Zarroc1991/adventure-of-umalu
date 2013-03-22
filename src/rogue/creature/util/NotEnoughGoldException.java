@@ -6,7 +6,9 @@
  */
 package rogue.creature.util;
 
-
+/**
+ * Gets thrown if Inventory has not enough Space for another item
+ */
 public class NotEnoughGoldException extends Exception {
 	public NotEnoughGoldException() {
 		

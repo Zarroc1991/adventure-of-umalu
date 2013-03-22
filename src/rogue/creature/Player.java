@@ -72,8 +72,6 @@ public class Player extends Creature implements Camera {
 
 	}
 
-
-
 	/**
 	 * Sets Charactername. Should be only called on character Creation.
 	 * 
@@ -117,7 +115,7 @@ public class Player extends Creature implements Camera {
 			case 'o':
 				HelpScreen.printMainHelpScreen();
 				break;
-			case 'x': // TODO Change this key
+			case 'h': // TODO Change this key
 				Screen.showEventLog();
 				term.getKey();
 				Screen.redrawMap("HP: "+this.getHitpoints());
@@ -134,6 +132,8 @@ public class Player extends Creature implements Camera {
 						// Fight first monster on coordinate.
 						fight((Monster) actorlist.toArray()[0]);
 						inventory.decreaseStability();
+                                                updateHP();
+                                                updateStrength();
 					} else {
 						if (world().tileAt(x() + dir.dx(), y() + dir.dy()) == ColoredChar.create('\u00a9')) {  
 							Screen.redrawEventLine("M\u00f6chtest du diesen Raum verlassen? Dr\u00fccke j f\u00fcr Ja, ansonsten verweilst du hier.", false);//Stellt fest, dass eine Tür gefunden wurde und somit eine Mapänderung erfolgt
@@ -156,14 +156,15 @@ public class Player extends Creature implements Camera {
 										move(0,0); 
 										}
 						} else {// No monster there
+							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
+								world().viewable(coord.x(), coord.y());}
+								
                                                         move(dir);
                                                         Actor itemGen= world().getActorAt(ItemGenerator.class, pos());
                                                         if(itemGen!=null){
                                                            itemGen.act();
                                                         }
-							for(Coordinate coord: getViewField()){				//macht alles sichtbar, was im Field of View ist
-								world().viewable(coord.x(), coord.y());}
-								
+						
 							
 							
 							break;
@@ -179,7 +180,7 @@ public class Player extends Creature implements Camera {
 	}
 
 	public void confirmQuit() {
-		Screen.redrawEventLine("Sicher dass Adventures in Umalu beendet werden soll? <J>a/<N>ein");
+		Screen.redrawEventLine("Sicher dass Adventures in Umalu beendet werden soll? <J>a/<N>ein",false);
 		try {
 			if (term.getKey() == 'j') {
 				expire();
@@ -222,15 +223,11 @@ public class Player extends Creature implements Camera {
         boolean opponentDied = opponent.loseHitpoints(damage);
         
         try {
+            term.getKey();
             if (opponentDied) {
                 //wait for key to continue on Status message
-                term.getKey();
                 randomlyDropItem(opponent);
-            }
-
-
-            
-
+            }       
         } catch (InterruptedException e) {
             System.out.println("!InterruptedException");
             e.printStackTrace();
@@ -313,6 +310,8 @@ public class Player extends Creature implements Camera {
                 // Zeige das Item an Stelle an i an
                 lines.add("(" + i + ") " + backpack.get(i).getName() + "[+DMG: " + backpack.get(i).getDamageBonus() + ", +HP: " + backpack.get(i).getHealthBonus()+", Dura: " + backpack.get(i).getDurability()+"/"+backpack.get(i).getMaxDurability()+"]");
             }
+			lines.add("");
+			lines.add("<q>/<i> Inventar verlassen, <o> Hilfe aufrufen");
             // TODO Add lines here.
             Screen.putText(lines);
             try {
@@ -371,6 +370,28 @@ public class Player extends Creature implements Camera {
 		System.out.println(opponent.name+" stirbt");
         //This Item drops;
         Item item = null;
+		ArrayList<String> akragonLines = new ArrayList<String>();
+		akragonLines.add("Akragon war einst ein großer Krieger, der beim ersten Auftauchen des");
+		akragonLines.add("Drachens durch die Zerst\u00f6rung der Stadt am Fuße des Berges Umalu");
+		akragonLines.add("seine Familie verlor. Seit er losgezogen ist, um Rache zu nehmen, hat");
+		akragonLines.add("niemand je wieder von ihm gehört.");
+		akragonLines.add("Das Blut an dieser Waffe scheint sehr alt zu sein.");
+		ArrayList<String> dumbaronLines = new ArrayList<String>();
+		dumbaronLines.add("Dumbaron war Akragons Neffe, der, nachdem er viele K\u00e4mpfe in fremden");
+		dumbaronLines.add("Landen bestanden hatte, zur\u00fcck nach Umalu kam nur um zu erfahren,");
+		dumbaronLines.add("dass seine Familie tot und sein Onkel verschollen war. Er zog los,");
+		dumbaronLines.add("um seinen Onkel zu finden und ward seid diesem Tag nicht mehr gesehen.");
+		ArrayList<String> kunkranLines = new ArrayList();
+		kunkranLines.add("Der legendäre Waffenschmied Kunkran schmiedete einst ein Schwert im Auftrag des");
+		kunkranLines.add("K\u00f6nigs, mit dem der Drache get\u00f6tet werden sollte, dem er diesen Namen gab. ");
+		kunkranLines.add("Jedoch war die Belohnung so gro\u00df, dass sie bei dessen Lehrling die Gier weckte.");
+		kunkranLines.add("Daher stahl dieser nicht nicht nur das Schwert bevor er seinen Meister t\u00f6tete,");
+		kunkranLines.add("sondern stellte auch billige Kopien her, die er dann teuer verkaufte bevor er aus der");
+		kunkranLines.add("Stadt verschwand.");
+		kunkranLines.add("");
+		kunkranLines.add("Sei daher vorsichtig mit diesem Schwert. Vielleicht ist es nur eine dieser Kopien,");
+		kunkranLines.add("denen die Speziallakierung fehlt, deren Geheimnis der Schmiedemeister mit ins Grab");
+		kunkranLines.add("nahm und die trotz ihrer Mächtigkeit sehr schnell bersten!");
         try {
 
             switch (opponent.typenumber) {
@@ -435,9 +456,7 @@ public class Player extends Creature implements Camera {
                         //Status message
                         Screen.redrawEventLine("Du hast ein Langschwert bekommen, druecke i, um das Inventar zu oeffnen");
                         //Wait for pressed key
-                        term.getKey();
-                        inventory.addItem(item);
-                        
+                        term.getKey(); 
                         
 
                     } else if (zufallszahl < 9) {
@@ -475,7 +494,7 @@ public class Player extends Creature implements Camera {
                         term.getKey();
                     }else if (zufallszahl < 31) {
                         //Akragons Relikt droppt zu 1/10
-                        item = new Item("Akragons Relikt", 0, Item.ITEMTYPE_SWORD, 25, 0,10);
+                        item = new Item("Akragons Relikt", 0, Item.ITEMTYPE_SWORD, 25, 0, akragonLines, 10);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Akragons Relikt bekommen, druecke i, um das Inventar zu oeffnen");
@@ -483,7 +502,7 @@ public class Player extends Creature implements Camera {
                         term.getKey();
                     }else if (zufallszahl < 36) {
                         //Dumbarons Kolossschwert droppt zu 1/12
-                        item = new Item("Dumbarons Kolossschwert", 0, Item.ITEMTYPE_SWORD, 27, 0,10);
+                        item = new Item("Dumbarons Kolossschwert", 0, Item.ITEMTYPE_SWORD, 27, 0,dumbaronLines,10);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Dumbarons Kolossschwert bekommen, druecke i, um das Inventar zu oeffnen");
@@ -499,7 +518,7 @@ public class Player extends Creature implements Camera {
 
                     if (zufallszahl < 1) {
                         //Kunkrans Drachtentöter droppt zu 1/15
-                        item = new Item("Kunkrans Drachtent\u00f6ter", 0, Item.ITEMTYPE_SWORD, 45, 0,4);
+                        item = new Item("Kunkrans Drachtent\u00f6ter", 0, Item.ITEMTYPE_SWORD, 45, 0,kunkranLines,4);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Kunkranks Drachent\u00f6 bekommen, druecke i, um das Inventar zu oeffnen");
@@ -516,7 +535,7 @@ public class Player extends Creature implements Camera {
                         term.getKey();
                     }else if (zufallszahl < 9) {
                         //Akragons Relikt droppt zu 1/5
-                        item = new Item("Akragons Relikt", 0, Item.ITEMTYPE_SWORD, 25, 0,10);
+                        item = new Item("Akragons Relikt", 0, Item.ITEMTYPE_SWORD, 25, 0, akragonLines, 10);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast Akragons Relikt bekommen, druecke i, um das Inventar zu oeffnen");
@@ -524,7 +543,7 @@ public class Player extends Creature implements Camera {
                         term.getKey();
                     }else if (zufallszahl < 12) {
                         //Dumbarons Kolossschwert droppt zu 1/5
-                        item = new Item("Dumbarons Kolossschwert", 0, Item.ITEMTYPE_SWORD, 27, 0,10);
+                        item = new Item("Dumbarons Kolossschwert", 0, Item.ITEMTYPE_SWORD, 27, 0,dumbaronLines, 10);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Dumbarons Kolossschwert bekommen, druecke i, um das Inventar zu oeffnen");
@@ -538,7 +557,7 @@ public class Player extends Creature implements Camera {
                 	int zufallszahl = random.nextInt(5);
                 	if (zufallszahl < 1) {
                         //Kunkrans Drachtentöter droppt zu 1/5
-                        item = new Item("Kunkrans Drachtent\u00f6ter", 0, Item.ITEMTYPE_SWORD, 45, 0,4);
+                        item = new Item("Kunkrans Drachtent\u00f6ter", 0, Item.ITEMTYPE_SWORD, 45, 0,kunkranLines,4);
                         inventory.addItem(item);
                         //Status message
                         Screen.redrawEventLine("Du hast ein Kunkrans Drachtent\u00f6ter bekommen, druecke i, um das Inventar zu oeffnen");

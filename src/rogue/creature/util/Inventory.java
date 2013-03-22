@@ -36,14 +36,15 @@ public class Inventory {
         this.maximumItems = maximumItems;
         backpackSpaces = new ArrayList<Item>(maximumItems);
         // Item test =
-        try {
+        /*try {
             this.addItem(new Item("TestGegenstand", 0, Item.ITEMTYPE_SWORD, 5,
                     10, 1));
         } catch (NotEnoughSpaceException e) {
             System.out.println("Nicht genug Platz");
             e.printStackTrace();
-        }
+        }*/
         wornItems = new Item[3];
+
 		ArrayList<String> loreText = new ArrayList<String>();
 		loreText.add("Deine Abenteurerr\u00fcstung geh\u00f6 war zwar blankpoliert,");
 		loreText.add("sie ist jedoch wegen der vergangenen Schlachten bereits");
@@ -51,7 +52,7 @@ public class Inventory {
         Item standardHelmet = new Item("Abenteurerr\u00fcstung", 0, Item.ITEMTYPE_HEAD,
                 0, 0, true, 1,loreText);
 		loreText = new ArrayList<String>();
-		loreText.add("Nach vielen anstrengenden K\f00e4mpfen hast du dieses Schwert erhalten");
+		loreText.add("Nach vielen anstrengenden K\u00e4mpfen hast du dieses Schwert erhalten");
 		loreText.add("aber es ist unwahrscheinlich dass es bis zum Kampf gegen den Drachen");
 		loreText.add("halten wird.");
         Item standardSword = new Item("Klinge der Rache", 0,
@@ -154,14 +155,14 @@ public class Inventory {
         if (wornItems[Item.ITEMTYPE_SWORD] != null) {
             wornItems[Item.ITEMTYPE_SWORD].decreaseStability();
             if (wornItems[Item.ITEMTYPE_SWORD].stability == 0) {
-				Screen.redrawEventLine("Dein "+ wornItems[Item.ITEMTYPE_SWORD].getName()+ " ist zunichte gegangen");
-				try {
-					Screen.lastTerminal.getKey();
-				} catch (InterruptedException e) {
-					System.out.println("!InterruptedException");
-					e.printStackTrace();
-				}
-                Item temp = wornItems[Item.ITEMTYPE_SWORD];
+		Screen.redrawEventLine("Dein "+ wornItems[Item.ITEMTYPE_SWORD].getName()+ " ist zunichte gegangen");
+		try {
+			Screen.lastTerminal.getKey();
+		} catch (InterruptedException e) {
+			System.out.println("!InterruptedException");
+			e.printStackTrace();
+		}
+		Item temp = wornItems[Item.ITEMTYPE_SWORD];
                 wornItems[Item.ITEMTYPE_SWORD] = null;
                 this.removeItem(temp);
             }
@@ -257,7 +258,9 @@ public class Inventory {
      *            Used Terminal
      */
     public void showInfo(int place, Terminal term) {
-        backpackSpaces.get(place).showItem(term, this);
+		if (backpackSpaces.size() >= place) {
+        	backpackSpaces.get(place).showItem(term, this);
+		}
     }
 
     /**
@@ -286,6 +289,11 @@ public class Inventory {
 		}
     }
 
+	/**
+	 * Let user select an Item to destroy and auto add new item
+	 *
+	 * @param item New Item
+	 */
     public void fullInventoryScreen(Item item) {
         boolean loop = true;
         while (loop) {
@@ -301,6 +309,7 @@ public class Inventory {
                         + "[+DMG: " + backpackSpaces.get(i).getDamageBonus()
                         + ", +HP: " + backpackSpaces.get(i).getHealthBonus()
                         + ", Dura: "+ backpackSpaces.get(i).getDurability()+"/"+backpackSpaces.get(i).getMaxDurability()+"]");
+
             }
             lines.add("");
             lines.add("Gefunden: " + item.getName() + " [+DMG: "
